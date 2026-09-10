@@ -24,9 +24,9 @@ function CalendarContent({ calLink }: { calLink: string }) {
     return () => { active = false; window.clearTimeout(timer); unsubscribe(); };
   }, []);
   return <div className="calendar-content">
-    <div className="calendar-status" role="status" aria-live="polite">
-      {status === "loading" ? "Loading available times…" : status === "slow" ? "The calendar is taking longer than usual. You can keep waiting or email us below." : status === "error" ? "The calendar is unavailable. Please email us below." : <span className="sr-only">Calendar ready.</span>}
-    </div>
+    {status !== "ready" ? <div className="calendar-status" role="status" aria-live="polite">
+      {status === "loading" ? "Loading available times…" : status === "slow" ? "The calendar is taking longer than usual. You can keep waiting or email us below." : "The calendar is unavailable. Please email us below."}
+    </div> : null}
     <Cal namespace={namespace} calLink={calLink} style={{ width: "100%", height: "100%", overflow: "auto" }} config={{ layout: "month_view", theme: "dark", useSlotsViewOnSmallScreen: "true" }} />
   </div>;
 }
