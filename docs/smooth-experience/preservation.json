@@ -1,0 +1,26 @@
+{
+  "historical": true,
+  "scope_note": "Historical evidence from an earlier responsive/interaction pass. It is not the final P1/P2 preservation result. See ../PRESERVATION_CHECK.json or docs/PRESERVATION_CHECK.json from project root.",
+  "baseline": "OSYSTIC_Website_Responsive_Final.zip",
+  "existing_files_checked": 162,
+  "changed_existing_files": [
+    "SHA256SUMS.txt",
+    "app/admin/content/page.tsx",
+    "app/api/careers/apply/route.ts",
+    "app/blogs/[slug]/page.tsx",
+    "app/careers/_components/CareersClient.tsx",
+    "app/components/CalBooking.tsx",
+    "app/components/Navbar.tsx",
+    "app/contact/_components/ContactForm.tsx",
+    "app/insights/page.tsx",
+    "app/layout.tsx",
+    "app/newsroom/[slug]/page.tsx",
+    "lib/resend.ts",
+    "lib/supabase.ts",
+    "next-env.d.ts"
+  ],
+  "missing_files": [],
+  "unexpected_changes": [],
+  "passed": true,
+  "note": "New frontend/docs files are not part of the original ZIP comparison. P0 Careers changes are now explicitly allowed and documented in P0_FOLLOWUP.md. next-env.d.ts and SHA256SUMS.txt are generated. This checks bytes, not browser behavior."
+}

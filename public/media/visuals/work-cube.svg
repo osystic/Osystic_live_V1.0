@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="title">
+<title id="title">OSYSTIC work cube visual</title>
+<defs><radialGradient id="r"><stop offset="0" stop-color="#3B6CFF" stop-opacity=".5"/><stop offset="1" stop-color="#3B6CFF" stop-opacity="0"/></radialGradient><filter id="glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1000" height="600" fill="#090B0F"/>
+<circle cx="500" cy="315" r="210" fill="url(#r)"/>
+<g opacity=".3" stroke="#252B34"><path d="M0 150H1000M0 300H1000M0 450H1000"/><path d="M125 0V600M250 0V600M375 0V600M500 0V600M625 0V600M750 0V600M875 0V600"/></g>
+<g filter="url(#glow)" fill="none">
+<path d="M500 135 620 205 620 345 500 415 380 345 380 205Z" stroke="#F4F7FA" stroke-width="5"/>
+<path d="M500 135V275M620 205 500 275 380 205M500 275V415" stroke="#5B82FF" stroke-width="4"/>
+</g>
+<ellipse cx="500" cy="420" rx="220" ry="62" fill="none" stroke="#3B6CFF" stroke-width="2" opacity=".55"/>
+<ellipse cx="500" cy="420" rx="160" ry="44" fill="none" stroke="#3B6CFF" stroke-width="2" opacity=".35"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">OSYSTIC capability system visual</title>
+<desc id="desc">Layered intelligent system with AI Systems, Product Engineering, and Data and Cloud.</desc>
+<defs><filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1200" height="700" fill="#090B0F"/>
+<g transform="translate(600 340)" fill="none" stroke="#3B6CFF">
+  <ellipse rx="390" ry="190" opacity=".32"/>
+  <ellipse rx="300" ry="140" opacity=".45"/>
+  <ellipse rx="215" ry="96" opacity=".62"/>
+</g>
+<g transform="translate(600 350)">
+  <path d="M-170 30 0 110 170 30 0-50Z" fill="#11151B" stroke="#252B34" stroke-width="2"/>
+  <path d="M-150-20 0 50 150-20 0-90Z" fill="#11151B" stroke="#33415A" stroke-width="2"/>
+  <path d="M-125-74 0-16 125-74 0-132Z" fill="#11151B" stroke="#5B82FF" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <path d="M0-155 38-133 38-88 0-66-38-88-38-133Z" fill="#153D95" stroke="#F4F7FA" stroke-width="3"/>
+    <path d="M0-155V-110M38-133 0-110-38-133M0-110V-66" stroke="#5B82FF" stroke-width="3"/>
+  </g>
+</g>
+<g fill="#F4F7FA" font-family="Inter,Arial,sans-serif" font-size="28">
+  <text x="600" y="72" text-anchor="middle">AI SYSTEMS</text>
+  <text x="165" y="515">PRODUCT ENGINEERING</text>
+  <text x="865" y="515">DATA &amp; CLOUD</text>
+</g>
+<g stroke="#3B6CFF" stroke-width="2" opacity=".8">
+  <path d="M600 95V175"/><path d="M330 475 440 415"/><path d="M870 475 760 415"/>
+</g>
+</svg>

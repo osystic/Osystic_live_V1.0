@@ -1,0 +1,5582 @@
+[
+  {
+    "route": "/",
+    "w": 320,
+    "h": 844,
+    "title": "AI & Software Engineering",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "273px",
+      ".capability-grid": "273px",
+      ".industry-grid": "273px",
+      ".work-grid": "273px",
+      ".workflow-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 360,
+    "h": 844,
+    "title": "AI & Software Engineering",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "313px",
+      ".capability-grid": "313px",
+      ".industry-grid": "313px",
+      ".work-grid": "313px",
+      ".workflow-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 375,
+    "h": 844,
+    "title": "AI & Software Engineering",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "328px",
+      ".capability-grid": "328px",
+      ".industry-grid": "328px",
+      ".work-grid": "328px",
+      ".workflow-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 390,
+    "h": 844,
+    "title": "AI & Software Engineering",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "343px",
+      ".capability-grid": "343px",
+      ".industry-grid": "343px",
+      ".work-grid": "343px",
+      ".workflow-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 430,
+    "h": 844,
+    "title": "AI & Software Engineering",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "383px",
+      ".capability-grid": "383px",
+      ".industry-grid": "383px",
+      ".work-grid": "383px",
+      ".workflow-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 768,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "706.906px",
+      ".capability-grid": "353.453px 353.453px",
+      ".industry-grid": "353.453px 353.453px",
+      ".work-grid": "706.906px",
+      ".workflow-grid": "235.625px 235.641px 235.641px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 820,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "755.797px",
+      ".capability-grid": "377.891px 377.906px",
+      ".industry-grid": "377.891px 377.906px",
+      ".work-grid": "367.641px 367.641px",
+      ".workflow-grid": "251.922px 251.938px 251.938px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1024,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "947.547px",
+      ".capability-grid": "473.766px 473.781px",
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.969px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1280,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "607.438px 542.359px",
+      ".capability-grid": "396.062px 396.062px 396.062px",
+      ".industry-grid": "297.047px 297.047px 297.047px 297.047px",
+      ".work-grid": "578.094px 578.094px",
+      ".workflow-grid": "198.031px 198.031px 198.031px 198.031px 198.031px 198.031px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1440,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "653.406px 583.406px",
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px",
+      ".workflow-grid": "213.328px 213.328px 213.328px 213.344px 213.328px 213.328px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1536,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "651.875px 582.047px",
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px",
+      ".workflow-grid": "213.328px 213.328px 213.328px 213.344px 213.328px 213.328px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1920,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "650.859px 581.141px",
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px",
+      ".workflow-grid": "213.328px 213.328px 213.328px 213.344px 213.328px 213.328px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 2560,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "650.859px 581.141px",
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px",
+      ".workflow-grid": "213.328px 213.328px 213.328px 213.344px 213.328px 213.328px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 3840,
+    "h": 900,
+    "title": "AI & Software Engineering",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "650.859px 581.141px",
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px",
+      ".workflow-grid": "213.328px 213.328px 213.328px 213.344px 213.328px 213.328px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/capabilities",
+    "w": 320,
+    "h": 844,
+    "title": "Capabilities | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "273px",
+      ".workflow-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 360,
+    "h": 844,
+    "title": "Capabilities | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "313px",
+      ".workflow-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 375,
+    "h": 844,
+    "title": "Capabilities | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "328px",
+      ".workflow-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 390,
+    "h": 844,
+    "title": "Capabilities | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "343px",
+      ".workflow-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 430,
+    "h": 844,
+    "title": "Capabilities | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "383px",
+      ".workflow-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 768,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "353.453px 353.453px",
+      ".workflow-grid": "235.625px 235.641px 235.641px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 820,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "377.891px 377.906px",
+      ".workflow-grid": "251.922px 251.938px 251.938px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1024,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "473.766px 473.781px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1280,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "396.062px 396.062px 396.062px",
+      ".workflow-grid": "237.625px 237.641px 237.641px 237.641px 237.625px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1440,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1536,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1920,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 2560,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 3840,
+    "h": 900,
+    "title": "Capabilities | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/contact",
+    "w": 320,
+    "h": 844,
+    "title": "Contact | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".workflow-grid": "273px",
+      ".form-grid": "231px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 360,
+    "h": 844,
+    "title": "Contact | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".workflow-grid": "313px",
+      ".form-grid": "271px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 375,
+    "h": 844,
+    "title": "Contact | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".workflow-grid": "328px",
+      ".form-grid": "286px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 390,
+    "h": 844,
+    "title": "Contact | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".workflow-grid": "343px",
+      ".form-grid": "301px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 430,
+    "h": 844,
+    "title": "Contact | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".workflow-grid": "383px",
+      ".form-grid": "341px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 768,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".workflow-grid": "353.453px 353.453px",
+      ".form-grid": "311.453px 311.453px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 820,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".workflow-grid": "377.891px 377.906px",
+      ".form-grid": "335.891px 335.906px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1024,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".workflow-grid": "473.766px 473.781px",
+      ".form-grid": "431.766px 431.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1280,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "396.062px 396.062px 396.062px",
+      ".workflow-grid": "297.047px 297.047px 297.047px 297.047px",
+      ".form-grid": "300.734px 300.734px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1440,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "320px 320px 320px 320px",
+      ".form-grid": "328.719px 328.734px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1536,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "320px 320px 320px 320px",
+      ".form-grid": "328.719px 328.734px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1920,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "320px 320px 320px 320px",
+      ".form-grid": "328.719px 328.734px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 2560,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "320px 320px 320px 320px",
+      ".form-grid": "328.719px 328.734px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 3840,
+    "h": 900,
+    "title": "Contact | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".workflow-grid": "320px 320px 320px 320px",
+      ".form-grid": "328.719px 328.734px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/careers",
+    "w": 320,
+    "h": 844,
+    "title": "Careers | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 360,
+    "h": 844,
+    "title": "Careers | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 375,
+    "h": 844,
+    "title": "Careers | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 390,
+    "h": 844,
+    "title": "Careers | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 430,
+    "h": 844,
+    "title": "Careers | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 768,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 820,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1024,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1280,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1440,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1536,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1920,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 2560,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 3840,
+    "h": 900,
+    "title": "Careers | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/about",
+    "w": 320,
+    "h": 844,
+    "title": "About | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".work-grid": "273px",
+      ".workflow-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 360,
+    "h": 844,
+    "title": "About | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".work-grid": "313px",
+      ".workflow-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 375,
+    "h": 844,
+    "title": "About | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".work-grid": "328px",
+      ".workflow-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 390,
+    "h": 844,
+    "title": "About | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".work-grid": "343px",
+      ".workflow-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 430,
+    "h": 844,
+    "title": "About | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".work-grid": "383px",
+      ".workflow-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 768,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".work-grid": "343.453px 343.453px",
+      ".workflow-grid": "235.625px 235.641px 235.641px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 820,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".work-grid": "367.641px 367.656px",
+      ".workflow-grid": "251.922px 251.938px 251.938px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1024,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1280,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "297.047px 297.047px 297.047px 297.047px",
+      ".work-grid": "578.094px 578.094px 0px",
+      ".workflow-grid": "237.625px 237.641px 237.641px 237.641px 237.625px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1440,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px 0px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1536,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px 0px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1920,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px 0px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 2560,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px 0px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 3840,
+    "h": 900,
+    "title": "About | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "624px 624px 0px",
+      ".workflow-grid": "256px 256px 256px 256px 256px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/insights",
+    "w": 320,
+    "h": 844,
+    "title": "Insights | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 360,
+    "h": 844,
+    "title": "Insights | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 375,
+    "h": 844,
+    "title": "Insights | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 390,
+    "h": 844,
+    "title": "Insights | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 430,
+    "h": 844,
+    "title": "Insights | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 768,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 820,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1024,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1280,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1440,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1536,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1920,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 2560,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 3840,
+    "h": 900,
+    "title": "Insights | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 320,
+    "h": 844,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px",
+      ".service-hero-grid": "273px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 360,
+    "h": 844,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px",
+      ".service-hero-grid": "313px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 375,
+    "h": 844,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px",
+      ".service-hero-grid": "328px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 390,
+    "h": 844,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px",
+      ".service-hero-grid": "343px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 430,
+    "h": 844,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px",
+      ".service-hero-grid": "383px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 768,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px",
+      ".service-hero-grid": "706.906px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 820,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px",
+      ".service-hero-grid": "755.797px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1024,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1280,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px",
+      ".service-hero-grid": "678.375px 471.406px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1440,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "729.719px 507.078px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1536,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "728px 505.906px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1920,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 2560,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 3840,
+    "h": 900,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 320,
+    "h": 844,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px",
+      ".service-hero-grid": "273px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 360,
+    "h": 844,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px",
+      ".service-hero-grid": "313px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 375,
+    "h": 844,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px",
+      ".service-hero-grid": "328px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 390,
+    "h": 844,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px",
+      ".service-hero-grid": "343px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 430,
+    "h": 844,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px",
+      ".service-hero-grid": "383px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 768,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px",
+      ".service-hero-grid": "706.906px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 820,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px",
+      ".service-hero-grid": "755.797px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1024,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1280,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px",
+      ".service-hero-grid": "678.375px 471.406px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1440,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "729.719px 507.078px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1536,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "728px 505.906px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1920,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 2560,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 3840,
+    "h": 900,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 320,
+    "h": 844,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px",
+      ".service-hero-grid": "273px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 360,
+    "h": 844,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px",
+      ".service-hero-grid": "313px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 375,
+    "h": 844,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px",
+      ".service-hero-grid": "328px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 390,
+    "h": 844,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px",
+      ".service-hero-grid": "343px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 430,
+    "h": 844,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px",
+      ".service-hero-grid": "383px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 768,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px",
+      ".service-hero-grid": "706.906px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 820,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px",
+      ".service-hero-grid": "755.797px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1024,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1280,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px",
+      ".service-hero-grid": "678.375px 471.406px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1440,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "729.719px 507.078px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1536,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "728px 505.906px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1920,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 2560,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 3840,
+    "h": 900,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px",
+      ".service-hero-grid": "726.875px 505.109px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/industries",
+    "w": 320,
+    "h": 844,
+    "title": "Industries | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".work-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 360,
+    "h": 844,
+    "title": "Industries | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".work-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 375,
+    "h": 844,
+    "title": "Industries | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".work-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 390,
+    "h": 844,
+    "title": "Industries | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".work-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 430,
+    "h": 844,
+    "title": "Industries | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".work-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 768,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".work-grid": "343.453px 343.453px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 820,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".work-grid": "367.641px 367.656px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1024,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1280,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "297.047px 297.047px 297.047px 297.047px",
+      ".work-grid": "374.719px 374.734px 374.719px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1440,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1536,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1920,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 2560,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 3840,
+    "h": 900,
+    "title": "Industries | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 320,
+    "h": 844,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".work-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 360,
+    "h": 844,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".work-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 375,
+    "h": 844,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".work-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 390,
+    "h": 844,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".work-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 430,
+    "h": 844,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".work-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 768,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".work-grid": "343.453px 343.453px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 820,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".work-grid": "367.641px 367.656px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1024,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1280,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "396.062px 396.062px 396.062px",
+      ".work-grid": "374.719px 374.734px 374.719px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1440,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1536,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1920,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 2560,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 3840,
+    "h": 900,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".work-grid": "405.328px 405.328px 405.344px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/case-studies",
+    "w": 320,
+    "h": 844,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 360,
+    "h": 844,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 375,
+    "h": 844,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 390,
+    "h": 844,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 430,
+    "h": 844,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 768,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 820,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1024,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1280,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "297.047px 297.047px 297.047px 297.047px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1440,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1536,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1920,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 2560,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 3840,
+    "h": 900,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "320px 320px 320px 320px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/leadership",
+    "w": 320,
+    "h": 844,
+    "title": "Leadership | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 360,
+    "h": 844,
+    "title": "Leadership | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 375,
+    "h": 844,
+    "title": "Leadership | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 390,
+    "h": 844,
+    "title": "Leadership | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 430,
+    "h": 844,
+    "title": "Leadership | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 768,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "706.906px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 820,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "367.641px 367.656px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1024,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1280,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "578.094px 578.094px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1440,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "624px 624px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1536,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "624px 624px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1920,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "624px 624px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 2560,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "624px 624px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 3840,
+    "h": 900,
+    "title": "Leadership | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "624px 624px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/trust",
+    "w": 320,
+    "h": 844,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "273px",
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 360,
+    "h": 844,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "313px",
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 375,
+    "h": 844,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "328px",
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 390,
+    "h": 844,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "343px",
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 430,
+    "h": 844,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "383px",
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 768,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "353.453px 353.453px",
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 820,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "377.891px 377.906px",
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1024,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1280,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "396.062px 396.062px 396.062px",
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1440,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1536,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1920,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 2560,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 3840,
+    "h": 900,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "426.656px 426.672px 426.656px",
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/privacy",
+    "w": 320,
+    "h": 844,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 360,
+    "h": 844,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 375,
+    "h": 844,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 390,
+    "h": 844,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 430,
+    "h": 844,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 768,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 820,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1024,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1280,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1440,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1536,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1920,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 2560,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 3840,
+    "h": 900,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/terms",
+    "w": 320,
+    "h": 844,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 360,
+    "h": 844,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 375,
+    "h": 844,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 390,
+    "h": 844,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 430,
+    "h": 844,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 768,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 820,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1024,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1280,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1440,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1536,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1920,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 2560,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 3840,
+    "h": 900,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/support",
+    "w": 320,
+    "h": 844,
+    "title": "Support | OSYSTIC",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 360,
+    "h": 844,
+    "title": "Support | OSYSTIC",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 375,
+    "h": 844,
+    "title": "Support | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 390,
+    "h": 844,
+    "title": "Support | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 430,
+    "h": 844,
+    "title": "Support | OSYSTIC",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 768,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 820,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1024,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1280,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1440,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1536,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1920,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 2560,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 3840,
+    "h": 900,
+    "title": "Support | OSYSTIC",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/unauthorized",
+    "w": 320,
+    "h": 844,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 305,
+    "scroll": 305,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "273px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 360,
+    "h": 844,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 345,
+    "scroll": 345,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "313px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 375,
+    "h": 844,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "328px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 390,
+    "h": 844,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "159.5px 159.5px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 430,
+    "h": 844,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 415,
+    "scroll": 415,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "179.5px 179.5px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 768,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 753,
+    "scroll": 753,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "214.297px 214.297px 214.297px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 820,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 805,
+    "scroll": 805,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "230.594px 230.594px 230.594px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1024,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1280,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1265,
+    "scroll": 1265,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "218.438px 218.438px 218.438px 218.438px 218.438px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1440,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1425,
+    "scroll": 1425,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1536,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1521,
+    "scroll": 1521,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1920,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1905,
+    "scroll": 1905,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 2560,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 2545,
+    "scroll": 2545,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 3840,
+    "h": 900,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 3825,
+    "scroll": 3825,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "171.562px 171.578px 171.562px 171.578px 171.562px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/admin/login",
+    "w": 320,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 360,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 375,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 390,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 430,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 430,
+    "scroll": 430,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 768,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 768,
+    "scroll": 768,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 820,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 820,
+    "scroll": 820,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1024,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1280,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1280,
+    "scroll": 1280,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1440,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1536,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1536,
+    "scroll": 1536,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1920,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1920,
+    "scroll": 1920,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 2560,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 2560,
+    "scroll": 2560,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 3840,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 3840,
+    "scroll": 3840,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/signup",
+    "w": 320,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 360,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 375,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 390,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 430,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 430,
+    "scroll": 430,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 768,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 768,
+    "scroll": 768,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 820,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 820,
+    "scroll": 820,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1024,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1280,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1280,
+    "scroll": 1280,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1440,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1536,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1536,
+    "scroll": 1536,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1920,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1920,
+    "scroll": 1920,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 2560,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 2560,
+    "scroll": 2560,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 3840,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 3840,
+    "scroll": 3840,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/pending",
+    "w": 320,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 320,
+    "scroll": 320,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 360,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 360,
+    "scroll": 360,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 375,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 375,
+    "scroll": 375,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 390,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 390,
+    "scroll": 390,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 430,
+    "h": 844,
+    "title": "Admin | OSYSTIC",
+    "client": 430,
+    "scroll": 430,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 768,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 768,
+    "scroll": 768,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 820,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 820,
+    "scroll": 820,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1024,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1280,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1280,
+    "scroll": 1280,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1440,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1440,
+    "scroll": 1440,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1536,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1536,
+    "scroll": 1536,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1920,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 1920,
+    "scroll": 1920,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 2560,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 2560,
+    "scroll": 2560,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 3840,
+    "h": 900,
+    "title": "Admin | OSYSTIC",
+    "client": 3840,
+    "scroll": 3840,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/",
+    "w": 667,
+    "h": 375,
+    "title": "AI & Software Engineering",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "611.969px",
+      ".capability-grid": "305.984px 305.984px",
+      ".industry-grid": "305.984px 305.984px",
+      ".work-grid": "611.969px",
+      ".workflow-grid": "203.984px 203.984px 203.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 844,
+    "h": 390,
+    "title": "AI & Software Engineering",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "778.359px",
+      ".capability-grid": "389.172px 389.188px",
+      ".industry-grid": "389.172px 389.188px",
+      ".work-grid": "378.625px 378.625px",
+      ".workflow-grid": "259.453px 259.453px 259.453px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1024,
+    "h": 768,
+    "title": "AI & Software Engineering",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "947.547px",
+      ".capability-grid": "473.766px 473.781px",
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.969px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/",
+    "w": 1180,
+    "h": 820,
+    "title": "AI & Software Engineering",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".hero-grid": "559.359px 499.438px",
+      ".capability-grid": "547.094px 547.094px",
+      ".industry-grid": "547.094px 547.094px",
+      ".work-grid": "532.344px 532.344px",
+      ".workflow-grid": "364.719px 364.734px 364.719px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Production AI and software systems, built to be owned."
+  },
+  {
+    "route": "/capabilities",
+    "w": 667,
+    "h": 375,
+    "title": "Capabilities | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "305.984px 305.984px",
+      ".workflow-grid": "203.984px 203.984px 203.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 844,
+    "h": 390,
+    "title": "Capabilities | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "389.172px 389.188px",
+      ".workflow-grid": "259.453px 259.453px 259.453px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1024,
+    "h": 768,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "473.766px 473.781px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/capabilities",
+    "w": 1180,
+    "h": 820,
+    "title": "Capabilities | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".capability-grid": "547.094px 547.094px",
+      ".workflow-grid": "364.719px 364.734px 364.719px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "End-to-end engineering for intelligent systems."
+  },
+  {
+    "route": "/contact",
+    "w": 667,
+    "h": 375,
+    "title": "Contact | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".workflow-grid": "305.984px 305.984px",
+      ".form-grid": "263.984px 263.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 844,
+    "h": 390,
+    "title": "Contact | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".workflow-grid": "389.172px 389.188px",
+      ".form-grid": "347.172px 347.188px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1024,
+    "h": 768,
+    "title": "Contact | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".workflow-grid": "473.766px 473.781px",
+      ".form-grid": "431.766px 431.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/contact",
+    "w": 1180,
+    "h": 820,
+    "title": "Contact | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".workflow-grid": "364.719px 364.734px 364.719px",
+      ".form-grid": "272.078px 272.078px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Let’s scope what you’re building."
+  },
+  {
+    "route": "/careers",
+    "w": 667,
+    "h": 375,
+    "title": "Careers | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 844,
+    "h": 390,
+    "title": "Careers | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1024,
+    "h": 768,
+    "title": "Careers | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/careers",
+    "w": 1180,
+    "h": 820,
+    "title": "Careers | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Build serious systems with OSYSTIC."
+  },
+  {
+    "route": "/about",
+    "w": 667,
+    "h": 375,
+    "title": "About | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".work-grid": "611.969px",
+      ".workflow-grid": "203.984px 203.984px 203.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 844,
+    "h": 390,
+    "title": "About | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".work-grid": "378.625px 378.641px",
+      ".workflow-grid": "259.453px 259.453px 259.453px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1024,
+    "h": 768,
+    "title": "About | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".workflow-grid": "315.844px 315.844px 315.859px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/about",
+    "w": 1180,
+    "h": 820,
+    "title": "About | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".work-grid": "532.344px 532.344px 0px",
+      ".workflow-grid": "364.719px 364.734px 364.719px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Engineering AI and software with clarity, ownership, and trust."
+  },
+  {
+    "route": "/insights",
+    "w": 667,
+    "h": 375,
+    "title": "Insights | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 844,
+    "h": 390,
+    "title": "Insights | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1024,
+    "h": 768,
+    "title": "Insights | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/insights",
+    "w": 1180,
+    "h": 820,
+    "title": "Insights | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Engineering perspective, without the noise."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 667,
+    "h": 375,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px",
+      ".service-hero-grid": "611.969px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 844,
+    "h": 390,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px",
+      ".service-hero-grid": "778.359px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1024,
+    "h": 768,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/ai-deep-learning",
+    "w": 1180,
+    "h": 820,
+    "title": "AI & Machine Learning Engineering | OSYSTIC | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px",
+      ".service-hero-grid": "624.688px 434.094px"
+    },
+    "h1": "AI systems built for the environment they must operate in."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 667,
+    "h": 375,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px",
+      ".service-hero-grid": "611.969px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 844,
+    "h": 390,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px",
+      ".service-hero-grid": "778.359px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1024,
+    "h": 768,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/engineering/backend",
+    "w": 1180,
+    "h": 820,
+    "title": "Backend Development & API Services | OSYSTIC | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px",
+      ".service-hero-grid": "624.688px 434.094px"
+    },
+    "h1": "Backends built for production load, failures, and visibility."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 667,
+    "h": 375,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px",
+      ".service-hero-grid": "611.969px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 844,
+    "h": 390,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px",
+      ".service-hero-grid": "778.359px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1024,
+    "h": 768,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px",
+      ".service-hero-grid": "947.547px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/services/data-cloud/data",
+    "w": 1180,
+    "h": 820,
+    "title": "Data Infrastructure Services | OSYSTIC | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px",
+      ".service-hero-grid": "624.688px 434.094px"
+    },
+    "h1": "Data infrastructure the rest of the organisation can build on."
+  },
+  {
+    "route": "/industries",
+    "w": 667,
+    "h": 375,
+    "title": "Industries | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".work-grid": "611.969px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 844,
+    "h": 390,
+    "title": "Industries | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".work-grid": "378.625px 378.641px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1024,
+    "h": 768,
+    "title": "Industries | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries",
+    "w": 1180,
+    "h": 820,
+    "title": "Industries | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".work-grid": "345.062px 345.062px 345.062px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Domain context changes the engineering decisions."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 667,
+    "h": 375,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".work-grid": "611.969px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 844,
+    "h": 390,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".work-grid": "378.625px 378.641px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1024,
+    "h": 768,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/industries/finance",
+    "w": 1180,
+    "h": 820,
+    "title": "Banking & Finance Engineering | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".work-grid": "345.062px 345.062px 345.062px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "AI for fraud, credit, and compliance at scale."
+  },
+  {
+    "route": "/case-studies",
+    "w": 667,
+    "h": 375,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 844,
+    "h": 390,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1024,
+    "h": 768,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/case-studies",
+    "w": 1180,
+    "h": 820,
+    "title": "Work & Case Studies | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Real systems. Measurable impact."
+  },
+  {
+    "route": "/leadership",
+    "w": 667,
+    "h": 375,
+    "title": "Leadership | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "611.969px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 844,
+    "h": 390,
+    "title": "Leadership | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "378.625px 378.641px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1024,
+    "h": 768,
+    "title": "Leadership | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "460.969px 460.984px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/leadership",
+    "w": 1180,
+    "h": 820,
+    "title": "Leadership | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".work-grid": "532.344px 532.344px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Founder-led. Engineering-led."
+  },
+  {
+    "route": "/trust",
+    "w": 667,
+    "h": 375,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "305.984px 305.984px",
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 844,
+    "h": 390,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "389.172px 389.188px",
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1024,
+    "h": 768,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "473.766px 473.781px",
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/trust",
+    "w": 1180,
+    "h": 820,
+    "title": "Trust & Security | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".industry-grid": "547.094px 547.094px",
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Security claims should be precise and verifiable."
+  },
+  {
+    "route": "/privacy",
+    "w": 667,
+    "h": 375,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 844,
+    "h": 390,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1024,
+    "h": 768,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/privacy",
+    "w": 1180,
+    "h": 820,
+    "title": "Privacy Policy | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Privacy Policy."
+  },
+  {
+    "route": "/terms",
+    "w": 667,
+    "h": 375,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 844,
+    "h": 390,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1024,
+    "h": 768,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/terms",
+    "w": 1180,
+    "h": 820,
+    "title": "Terms of Use | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Terms of Use."
+  },
+  {
+    "route": "/support",
+    "w": 667,
+    "h": 375,
+    "title": "Support | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 844,
+    "h": 390,
+    "title": "Support | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1024,
+    "h": 768,
+    "title": "Support | OSYSTIC",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/support",
+    "w": 1180,
+    "h": 820,
+    "title": "Support | OSYSTIC",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Support with clear ownership."
+  },
+  {
+    "route": "/unauthorized",
+    "w": 667,
+    "h": 375,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "182.656px 182.656px 182.656px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 844,
+    "h": 390,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "238.109px 238.125px 238.125px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1024,
+    "h": 768,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1009,
+    "scroll": 1009,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "294.516px 294.516px 294.516px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/unauthorized",
+    "w": 1180,
+    "h": 820,
+    "title": "OSYSTIC | AI & Software Engineering",
+    "client": 1165,
+    "scroll": 1165,
+    "overflow": false,
+    "offenders": [],
+    "grids": {
+      ".footer-links-grid": "199.625px 199.641px 199.641px 199.641px 199.625px"
+    },
+    "h1": "Access Denied"
+  },
+  {
+    "route": "/admin/login",
+    "w": 667,
+    "h": 375,
+    "title": "Admin | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 844,
+    "h": 390,
+    "title": "Admin | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1024,
+    "h": 768,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/login",
+    "w": 1180,
+    "h": 820,
+    "title": "Admin | OSYSTIC",
+    "client": 1180,
+    "scroll": 1180,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Sign in"
+  },
+  {
+    "route": "/admin/signup",
+    "w": 667,
+    "h": 375,
+    "title": "Admin | OSYSTIC",
+    "client": 667,
+    "scroll": 667,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 844,
+    "h": 390,
+    "title": "Admin | OSYSTIC",
+    "client": 844,
+    "scroll": 844,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1024,
+    "h": 768,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/signup",
+    "w": 1180,
+    "h": 820,
+    "title": "Admin | OSYSTIC",
+    "client": 1180,
+    "scroll": 1180,
+    "overflow": false,
+    "offenders": [],
+    "grids": {}
+  },
+  {
+    "route": "/admin/pending",
+    "w": 667,
+    "h": 375,
+    "title": "Admin | OSYSTIC",
+    "client": 652,
+    "scroll": 652,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 844,
+    "h": 390,
+    "title": "Admin | OSYSTIC",
+    "client": 829,
+    "scroll": 829,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1024,
+    "h": 768,
+    "title": "Admin | OSYSTIC",
+    "client": 1024,
+    "scroll": 1024,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  },
+  {
+    "route": "/admin/pending",
+    "w": 1180,
+    "h": 820,
+    "title": "Admin | OSYSTIC",
+    "client": 1180,
+    "scroll": 1180,
+    "overflow": false,
+    "offenders": [],
+    "grids": {},
+    "h1": "Pending Approval"
+  }
+]

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">OSYSTIC system architecture visual</title>
+<desc id="desc">A central orchestration node connected to data sources, agent layer, system services and deployment.</desc>
+<defs>
+  <radialGradient id="g" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#3B6CFF" stop-opacity=".42"/>
+    <stop offset="100%" stop-color="#3B6CFF" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="700" fill="#090B0F"/>
+<g opacity=".28" stroke="#252B34" stroke-width="1">
+  <path d="M0 140H1200M0 280H1200M0 420H1200M0 560H1200"/>
+  <path d="M200 0V700M400 0V700M600 0V700M800 0V700M1000 0V700"/>
+</g>
+<circle cx="600" cy="350" r="190" fill="url(#g)"/>
+<g stroke="#3B6CFF" stroke-width="3" fill="none" opacity=".95">
+  <path d="M600 350L300 160M600 350L900 160M600 350L300 540M600 350L900 540"/>
+</g>
+<g fill="#11151B" stroke="#5B82FF" stroke-width="2">
+  <rect x="214" y="90" rx="16" width="172" height="132"/>
+  <rect x="814" y="90" rx="16" width="172" height="132"/>
+  <rect x="214" y="478" rx="16" width="172" height="132"/>
+  <rect x="814" y="478" rx="16" width="172" height="132"/>
+</g>
+<g fill="#F4F7FA" font-family="Inter, Arial, sans-serif" text-anchor="middle">
+  <text x="300" y="185" font-size="26">DATA SOURCES</text>
+  <text x="900" y="185" font-size="26">AGENT LAYER</text>
+  <text x="300" y="575" font-size="26">SYSTEM SERVICES</text>
+  <text x="900" y="575" font-size="26">DEPLOYMENT</text>
+</g>
+<g transform="translate(600 350)" filter="url(#glow)">
+  <ellipse rx="126" ry="52" fill="#11151B" stroke="#3B6CFF" stroke-width="2"/>
+  <path d="M0-70 42-46 42 2 0 26-42 2-42-46Z" fill="none" stroke="#F4F7FA" stroke-width="4"/>
+  <path d="M0-70V-20M42-46 0-20-42-46M0-20V26" stroke="#5B82FF" stroke-width="3" fill="none"/>
+  <text x="0" y="110" fill="#F4F7FA" font-family="Inter, Arial" font-size="28" text-anchor="middle">ORCHESTRATION</text>
+</g>
+</svg>
