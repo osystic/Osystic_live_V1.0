@@ -42,7 +42,12 @@ export default function ContactForm() {
         body: JSON.stringify(form),
       });
       const data = await response.json().catch(() => null);
-      if (!response.ok) throw new Error(response.status === 429 ? "Too many attempts. Please wait a few minutes before trying again." : "Unable to submit your inquiry. Your details are still here; please try again or email hello@osystic.com.");
+      if (!response.ok) {
+        const fallback = response.status === 429
+          ? "Too many attempts. Please wait a few minutes before trying again."
+          : "Unable to submit your inquiry. Your details are still here; please try again or email hello@osystic.com.";
+        throw new Error(typeof data?.error === "string" && data.error ? data.error : fallback);
+      }
       if (!data?.success) throw new Error("We could not confirm receipt. Please email hello@osystic.com before submitting again.");
       setStatus("success");
       setMessage("Thanks. Your project inquiry has been received. We will review the technical context and respond by email.");
