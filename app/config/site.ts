@@ -19,7 +19,7 @@ export const siteConfig = {
     { label: "Capabilities", href: "/capabilities" },
     { label: "Industries", href: "/industries" },
     { label: "Insights", href: "/insights" },
-    { label: "Company", href: "/about" },
+    // { label: "Company", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
 } as const;
