@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
         else setError(data?.error || "Login failed");
         return;
       }
-      router.push("/admin/content");
+      router.push("/admin");
     } catch {
       if (controller.signal.aborted) return;
       setError("Something went wrong. Please try again.");

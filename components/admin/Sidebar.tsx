@@ -9,7 +9,7 @@ import {
   Users, Briefcase, Settings, ChevronDown, ChevronRight, Menu, X,
   Newspaper, GraduationCap, TrendingUp, Banknote, HandCoins,
   ClipboardList, FileCheck, CircleDollarSign, ArrowLeftRight,
-  Scale, Tags, FolderOpen,
+  Scale, Tags, FolderOpen, LayoutGrid, Sparkles,
 } from "lucide-react";
 
 interface NavItem {
@@ -27,6 +27,7 @@ const NAV_GROUPS: NavGroup[] = [
   {
     title: "Overview",
     items: [
+      { label: "Modules", href: "/admin", icon: <LayoutGrid size={18} /> },
       { label: "Dashboard", href: "/admin/dashboard", icon: <LayoutDashboard size={18} /> },
     ],
   },
@@ -92,6 +93,7 @@ const NAV_GROUPS: NavGroup[] = [
   {
     title: "Management",
     items: [
+      { label: "Case Studies Generate", href: "/admin/case-studies", icon: <Sparkles size={18} /> },
       { label: "Content", href: "/admin/content", icon: <Newspaper size={18} /> },
       { label: "Careers", href: "/admin/careers", icon: <GraduationCap size={18} /> },
       { label: "Settings", href: "/admin/settings", icon: <Settings size={18} /> },

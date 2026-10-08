@@ -65,7 +65,8 @@ export default async function proxy(request: NextRequest) {
   const protectedPath =
     pathname.startsWith("/admin") ||
     pathname.startsWith("/api/admin/content") ||
-    pathname.startsWith("/api/admin/finance");
+    pathname.startsWith("/api/admin/finance") ||
+    pathname.startsWith("/api/admin/case-studies");
   if (!protectedPath) return NextResponse.next();
 
   const token = request.cookies.get("admin-auth-token")?.value;
@@ -81,5 +82,5 @@ export default async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/content/:path*", "/api/admin/finance/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/content/:path*", "/api/admin/finance/:path*", "/api/admin/case-studies/:path*"],
 };

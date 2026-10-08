@@ -133,6 +133,13 @@ CAL_EVENT_TYPE_SLUG=discovery-call
 NEXT_PUBLIC_CALCOM_USERNAME="visiongen-q7aj1r"
 CAL_API_KEY=cal_live_ee0b01d319cae86a8b4295fcf8cf2f86
 CAL_TIMEZONE=Asia/Karachi
+
+# ── AI Case Study Generator ──
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
+# Optional: raises GitHub API rate limits during repository analysis
+GITHUB_TOKEN=
+# Optional: override the default model (gemini-3.5-flash-lite)
+GEMINI_MODEL=
 ```
 
 ### Key Configuration Notes
@@ -143,6 +150,8 @@ CAL_TIMEZONE=Asia/Karachi
 | `ADMIN_JWT_SECRET` | Must be 32+ characters. Used for JWT signing |
 | `ADMIN_JWT_SECRET` | **Change this in production!** Generate with: `openssl rand -base64 48` |
 | `RESEND_API_KEY` | Get from [resend.com](https://resend.com) |
+| `GEMINI_API_KEY` | Required for AI case study generation. Get from [aistudio.google.com](https://aistudio.google.com/apikey) |
+| `GITHUB_TOKEN` | Optional. Raises GitHub API rate limits for repository analysis |
 | `CAL_API_KEY` | Cal.com API key for booking integration |
 
 ### Access Restriction

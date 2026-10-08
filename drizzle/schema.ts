@@ -288,6 +288,20 @@ export const caseStudies = sqliteTable("case_studies", {
 /* ══════════════════════════════════════════════════════════
    PROJECT MANAGEMENT — PROJECTS (internal)
 ════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   AI-GENERATED CASE STUDIES (admin generator module)
+══════════════════════════════════════════════════════════ */
+export const aiCaseStudies = sqliteTable("ai_case_studies", {
+  id:               text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  githubUrl:        text("github_url").notNull().unique(),
+  projectTitle:     text("project_title"),
+  generatedContent: text("generated_content").notNull(),
+  analysis:         text("analysis"),
+  publishedId:      text("published_id"),
+  createdAt:        text("created_at").default("(datetime('now'))"),
+  updatedAt:        text("updated_at").default("(datetime('now'))"),
+});
+
 export const projects = sqliteTable("projects", {
   id:          text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
   name:        text("name").notNull(),
@@ -393,6 +407,7 @@ export type Expense          = typeof expenses.$inferSelect;
 export type Payroll          = typeof payroll.$inferSelect;
 export type Blog             = typeof blogs.$inferSelect;
 export type CaseStudy        = typeof caseStudies.$inferSelect;
+export type AiCaseStudy      = typeof aiCaseStudies.$inferSelect;
 export type NewsItem         = typeof newsroom.$inferSelect;
 export type PortfolioProject = typeof portfolioProjects.$inferSelect;
 export type Project          = typeof projects.$inferSelect;
