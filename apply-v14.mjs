@@ -62,4 +62,14 @@ if (fs.existsSync(capabilityFile)) {
   fs.writeFileSync(capabilityFile, source);
 }
 
-console.log("OSYSTIC v1.4.1 deployment source applied with production type fixes.");
+const careersFile = "app/careers/_components/CareersClient.tsx";
+if (fs.existsSync(careersFile)) {
+  let source = fs.readFileSync(careersFile, "utf8");
+  source = source.replace(
+    '<h1 style={{ fontSize: "clamp(26px,3.5vw,38px)", fontWeight: 800, letterSpacing: "-0.04em", color: BLK, margin: "0 0 8px", fontFamily: FONT }}>\n                Application\n              </h1>',
+    '<h2 style={{ fontSize: "clamp(26px,3.5vw,38px)", fontWeight: 800, letterSpacing: "-0.04em", color: BLK, margin: "0 0 8px", fontFamily: FONT }}>\n                Application\n              </h2>',
+  );
+  fs.writeFileSync(careersFile, source);
+}
+
+console.log("OSYSTIC v1.4.1 deployment source applied with production type + semantic fixes.");
