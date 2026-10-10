@@ -27,4 +27,39 @@ for (const target of [
   if (fs.existsSync(target)) fs.rmSync(target, { recursive: true, force: true });
 }
 
-console.log("OSYSTIC v1.4.1 deployment source applied.");
+const capabilityFile = "app/components/home/HomeCapabilitiesExperience.tsx";
+if (fs.existsSync(capabilityFile)) {
+  let source = fs.readFileSync(capabilityFile, "utf8");
+  source = source.replace(
+    `      if (!sectionRef.current || reducedMotion) return;
+
+      const media = gsap.matchMedia();
+
+      media.add("(min-width: 1025px)", () => {
+        const intro = sectionRef.current?.querySelector(".future-capabilities-intro");
+        const consoleShell = stageRef.current?.querySelector(".future-capability-console");
+        const bridge = sectionRef.current?.querySelector(".future-capabilities-handoff");
+        const energy = sectionRef.current?.querySelector(".future-capability-energy");
+
+        gsap.set(intro, { y: 42, opacity: 0 });`,
+    `      const section = sectionRef.current;
+      const stage = stageRef.current;
+      if (!section || !stage || reducedMotion) return;
+
+      const media = gsap.matchMedia();
+
+      media.add("(min-width: 1025px)", () => {
+        const intro = section.querySelector(".future-capabilities-intro");
+        const consoleShell = stage.querySelector(".future-capability-console");
+        const bridge = section.querySelector(".future-capabilities-handoff");
+        const energy = section.querySelector(".future-capability-energy");
+
+        if (!intro || !consoleShell || !bridge || !energy) return;
+
+        gsap.set(intro, { y: 42, opacity: 0 });`,
+  );
+  source = source.replaceAll("trigger: sectionRef.current,", "trigger: section,");
+  fs.writeFileSync(capabilityFile, source);
+}
+
+console.log("OSYSTIC v1.4.1 deployment source applied with production type fixes.");
