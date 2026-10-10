@@ -1,5 +1,5 @@
 {
-  "installCommand": "node apply-v14.mjs && npm install && (npm audit fix || true) && npm audit --omit=dev",
+  "installCommand": "node apply-v14.mjs && node -e \"const {DatabaseSync}=require('node:sqlite');const db=new DatabaseSync('local.db',{readOnly:true});const row=db.prepare(\\\"SELECT COUNT(*) AS c FROM sqlite_master WHERE type='table' AND name='admin_users'\\\").get();if(!row||Number(row.c)!==1){console.error('Admin DB schema missing');process.exit(1)}console.log('Admin DB schema present');db.close()\" && npm install && (npm audit fix || true) && npm audit --omit=dev",
   "buildCommand": "npm run build",
   "framework": "nextjs"
 }
