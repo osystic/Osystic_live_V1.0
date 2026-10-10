@@ -624,3 +624,203 @@
   .fp-founder-monogram{width:105px;height:105px;font-size:28px}
   .fp-founder-identity>strong{font-size:29px}
 }
+
+/* ==========================================================================
+   v1.4.3 industry context systems
+   Each sector uses a distinct operating-model diagram rather than a reskinned
+   shared orbit. All visuals remain descriptive, not outcome claims.
+   ========================================================================== */
+.fp-sector-visual{
+  min-height:500px;
+  overflow:hidden;
+  clip-path:none!important;
+  background:
+    linear-gradient(rgba(123,148,201,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(123,148,201,.035) 1px,transparent 1px),
+    radial-gradient(circle at 58% 44%,color-mix(in srgb,var(--industry-accent) 9%,transparent),transparent 42%),
+    #0a0f17!important;
+  background-size:42px 42px,42px 42px,auto,auto!important;
+}
+.fp-sector-visual:before,.fp-sector-visual:after{content:none!important}
+.fp-sector-visual .fp-sector-head{position:relative;z-index:7}
+.fp-sector-visual .fp-sector-signals{z-index:7}
+.fp-sector-visual small{font:600 7px/1.35 var(--font-geist-mono);letter-spacing:.07em;color:#65748d}
+
+/* Finance: transaction/risk ledger */
+.fp-finance-ledger{
+  position:absolute;inset:65px 24px 85px;
+  display:grid;grid-template-columns:minmax(0,1fr) 154px minmax(0,1fr);
+  grid-template-rows:1fr 1fr;gap:14px 18px;align-items:center;
+}
+.fp-finance-risk-core{
+  grid-column:2;grid-row:1/3;
+  width:154px;height:154px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  color:var(--industry-accent);
+  border:1px solid color-mix(in srgb,var(--industry-accent) 35%,#25324b);
+  background:radial-gradient(circle, color-mix(in srgb,var(--industry-accent) 15%,#0b111b),#0a0f17 70%);
+  box-shadow:0 0 45px color-mix(in srgb,var(--industry-accent) 16%,transparent);
+  position:relative;z-index:3;
+}
+.fp-finance-risk-core:before,.fp-finance-risk-core:after{
+  content:"";position:absolute;border-radius:50%;border:1px solid color-mix(in srgb,var(--industry-accent) 18%,transparent)
+}
+.fp-finance-risk-core:before{inset:-22px}.fp-finance-risk-core:after{inset:-43px;border-style:dashed}
+.fp-finance-risk-core strong{font-size:11px;letter-spacing:.1em;color:#d7dfef}
+.fp-finance-rail{
+  min-height:74px;padding:13px 14px;border:1px solid rgba(126,147,192,.13);border-radius:12px;
+  background:rgba(9,14,22,.72);display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;position:relative;z-index:2
+}
+.fp-finance-rail:nth-of-type(2),.fp-finance-rail:nth-of-type(4){text-align:right}
+.fp-finance-rail span,.fp-finance-rail b{font:650 7px var(--font-geist-mono);letter-spacing:.08em}
+.fp-finance-rail span{color:#728199}.fp-finance-rail b{color:#aab7ca}
+.fp-finance-rail i{height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--industry-accent) 60%,transparent),transparent)}
+.fp-finance-rail:nth-of-type(2) i,.fp-finance-rail:nth-of-type(4) i{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--industry-accent) 60%,transparent))}
+.fp-finance-pulse{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:var(--industry-accent);box-shadow:0 0 20px var(--industry-accent);animation:fp-sector-pulse 2.6s ease-in-out infinite}
+
+/* Manufacturing: line / inspection / QA / MES */
+.fp-manufacturing-line{position:absolute;inset:72px 24px 86px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.fp-mfg-conveyor{position:absolute;left:7%;right:7%;top:51%;height:2px;background:linear-gradient(90deg,transparent,var(--industry-accent),transparent);opacity:.38}
+.fp-mfg-conveyor i{position:absolute;width:9px;height:9px;border:1px solid color-mix(in srgb,var(--industry-accent) 60%,#26344d);transform:rotate(45deg);top:-4px;background:#0a1019}
+.fp-mfg-conveyor i:nth-child(1){left:8%}.fp-mfg-conveyor i:nth-child(2){left:25%}.fp-mfg-conveyor i:nth-child(3){left:42%}.fp-mfg-conveyor i:nth-child(4){left:59%}.fp-mfg-conveyor i:nth-child(5){left:76%}.fp-mfg-conveyor i:nth-child(6){left:92%}
+.fp-mfg-node{
+  width:108px;min-height:116px;padding:16px 10px;border:1px solid rgba(126,147,192,.17);border-radius:14px;
+  background:#0b111a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  position:relative;z-index:3;color:var(--industry-accent);box-shadow:0 15px 35px rgba(0,0,0,.16)
+}
+.fp-mfg-node b{font-size:9px;color:#d3dbea;letter-spacing:.08em}.fp-mfg-node small{text-align:center}
+.fp-mfg-node.n2,.fp-mfg-node.n3{transform:translateY(-24px)}
+.fp-mfg-quality{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  min-width:270px;padding:9px 13px;border:1px solid rgba(126,147,192,.13);border-radius:9px;
+  display:flex;justify-content:space-between;gap:16px;background:#091018
+}
+.fp-mfg-quality span,.fp-mfg-quality strong{font:650 7px var(--font-geist-mono);letter-spacing:.08em}
+.fp-mfg-quality span{color:#62728a}.fp-mfg-quality strong{color:var(--industry-accent)}
+
+/* Healthcare: interoperability mesh + human review */
+.fp-healthcare-mesh{position:absolute;inset:62px 24px 86px}
+.fp-healthcare-core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:142px;height:142px;border-radius:42% 58% 53% 47%/47% 42% 58% 53%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  color:var(--industry-accent);border:1px solid color-mix(in srgb,var(--industry-accent) 38%,#26344d);
+  background:radial-gradient(circle,color-mix(in srgb,var(--industry-accent) 18%,#0a1118),#091018 68%);
+  z-index:3
+}
+.fp-healthcare-core b{font-size:9px;letter-spacing:.08em;color:#d7e2e8}.fp-healthcare-core small{color:#6d8790}
+.fp-healthcare-orbit{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid color-mix(in srgb,var(--industry-accent) 20%,transparent)}
+.fp-healthcare-orbit.o1{width:68%;height:68%}.fp-healthcare-orbit.o2{width:92%;height:88%;border-style:dashed}
+.fp-healthcare-node{
+  position:absolute;width:104px;min-height:67px;padding:10px;border:1px solid rgba(126,147,192,.14);border-radius:12px;
+  background:#0a1118;display:grid;grid-template-columns:28px 1fr;gap:2px 7px;align-items:center;color:var(--industry-accent);z-index:4
+}
+.fp-healthcare-node svg{grid-row:1/3}.fp-healthcare-node b{font-size:8px;color:#cbd7df}.fp-healthcare-node small{font-size:6px}
+.fp-healthcare-node.ehr{left:2%;top:16%}.fp-healthcare-node.pacs{right:2%;top:15%}.fp-healthcare-node.nlp{left:6%;bottom:10%}.fp-healthcare-node.review{right:5%;bottom:9%}
+
+/* Retail: behavior -> ranking -> storefront, backed by inventory */
+.fp-retail-funnel{
+  position:absolute;inset:76px 24px 88px;display:grid;
+  grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:center;gap:8px
+}
+.fp-retail-column{
+  min-height:210px;padding:18px 12px;border:1px solid rgba(126,147,192,.14);border-radius:16px;
+  background:linear-gradient(180deg,rgba(23,15,32,.82),rgba(10,15,23,.9));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--industry-accent)
+}
+.fp-retail-column span{font:650 7px var(--font-geist-mono);color:#738099}.fp-retail-column b{font-size:10px;color:#d9dfeb}
+.fp-retail-column i{width:68%;height:4px;border-radius:10px;background:color-mix(in srgb,var(--industry-accent) 18%,#1a2230)}
+.fp-retail-column i:nth-last-child(1){width:40%}.fp-retail-column i:nth-last-child(2){width:54%}
+.fp-retail-arrow{text-align:center;color:var(--industry-accent);font:400 20px var(--font-geist-mono);opacity:.65}
+.fp-retail-stock{
+  position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:min(78%,420px);
+  display:grid;grid-template-columns:24px 1fr;gap:3px 8px;padding:9px 13px;
+  border:1px solid rgba(126,147,192,.13);border-radius:9px;background:#091018;color:var(--industry-accent)
+}
+.fp-retail-stock svg{grid-row:1/3}.fp-retail-stock span{font:650 7px var(--font-geist-mono);color:#64748a}.fp-retail-stock strong{font:650 7px var(--font-geist-mono);color:#b8c2d1}
+
+/* Logistics: route map with constraint layer */
+.fp-logistics-route{position:absolute;inset:66px 24px 88px}
+.fp-logistics-map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(217,119,6,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(217,119,6,.035) 1px,transparent 1px);background-size:28px 28px;border-radius:14px}
+.fp-logistics-route svg{position:absolute;inset:7% 4% 18%;width:92%;height:70%;overflow:visible}
+.fp-logistics-route path{fill:none;stroke:var(--industry-accent);stroke-width:2;stroke-dasharray:7 7;opacity:.55}
+.fp-log-node{
+  position:absolute;width:96px;padding:10px;border:1px solid rgba(126,147,192,.14);border-radius:11px;
+  background:#0a1018;display:grid;grid-template-columns:25px 1fr;gap:2px 6px;color:var(--industry-accent);z-index:4
+}
+.fp-log-node svg{position:static;width:17px;height:17px;grid-row:1/3}.fp-log-node b{font-size:8px;color:#d0d9e5}.fp-log-node small{font-size:6px}
+.fp-log-node.l1{left:0;bottom:17%}.fp-log-node.l2{left:30%;top:9%}.fp-log-node.l3{right:21%;bottom:25%}.fp-log-node.l4{right:0;top:6%}
+.fp-logistics-constraints{position:absolute;left:3%;right:3%;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.fp-logistics-constraints span{padding:8px 5px;border:1px solid rgba(126,147,192,.11);border-radius:8px;text-align:center;font:650 6px var(--font-geist-mono);color:#718097;background:#091018}
+
+/* Telecom: cell/radio network topology */
+.fp-telecom-network{position:absolute;inset:60px 24px 86px}
+.fp-telecom-core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:116px;height:116px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  background:#081510;color:var(--industry-accent);border:1px solid color-mix(in srgb,var(--industry-accent) 38%,#26344d);z-index:4
+}
+.fp-telecom-core b{font-size:9px;color:#d4e1dc;letter-spacing:.08em}
+.fp-telecom-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed color-mix(in srgb,var(--industry-accent) 24%,transparent)}
+.fp-telecom-ring.r1{width:44%;height:44%}.fp-telecom-ring.r2{width:68%;height:68%}.fp-telecom-ring.r3{width:91%;height:88%}
+.fp-tel-node{
+  position:absolute;width:88px;min-height:62px;padding:9px;border:1px solid rgba(126,147,192,.13);border-radius:11px;background:#09120f;
+  display:grid;grid-template-columns:23px 1fr;gap:1px 6px;color:var(--industry-accent);z-index:5
+}
+.fp-tel-node svg{grid-row:1/3}.fp-tel-node b{font-size:8px;color:#cad9d2}.fp-tel-node small{font-size:6px}
+.fp-tel-node.ran{left:3%;top:17%}.fp-tel-node.core{right:2%;top:15%}.fp-tel-node.noc{left:5%;bottom:9%}.fp-tel-node.cx{right:4%;bottom:10%}
+
+/* Education: learner-state feedback loop */
+.fp-education-path{position:absolute;inset:70px 24px 88px;display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:center}
+.fp-edu-learner{
+  height:136px;border-radius:22px;border:1px solid color-mix(in srgb,var(--industry-accent) 35%,#26344d);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--industry-accent);
+  background:radial-gradient(circle,color-mix(in srgb,var(--industry-accent) 13%,#0b1219),#091018 70%)
+}
+.fp-edu-learner b{font-size:9px;color:#d1dce3}.fp-edu-track{display:flex;align-items:center;gap:8px}
+.fp-edu-track>div{
+  min-width:0;flex:1;min-height:126px;padding:13px 8px;border:1px solid rgba(126,147,192,.13);border-radius:13px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#0a1118;color:var(--industry-accent);text-align:center
+}
+.fp-edu-track>div span{font:650 6px var(--font-geist-mono);color:#60718b}.fp-edu-track>div b{font-size:8px;color:#d0dbe3}.fp-edu-track>i{width:20px;height:1px;background:var(--industry-accent);opacity:.45}
+.fp-edu-signal{
+  position:absolute;left:145px;right:0;bottom:0;padding:9px 12px;border:1px solid rgba(126,147,192,.11);border-radius:9px;
+  display:flex;justify-content:space-between;gap:12px;background:#091018
+}
+.fp-edu-signal strong,.fp-edu-signal span{font:650 6px var(--font-geist-mono);letter-spacing:.06em}.fp-edu-signal strong{color:var(--industry-accent)}.fp-edu-signal span{color:#75839a}
+
+/* Technology: layered product/platform runtime */
+.fp-technology-stack{position:absolute;inset:64px 38px 90px;display:flex;flex-direction:column;justify-content:center;gap:9px;perspective:900px}
+.fp-tech-layer{
+  min-height:58px;padding:10px 16px;border:1px solid rgba(126,147,192,.14);border-radius:11px;
+  background:linear-gradient(90deg,#0d1420,#091018);display:grid;grid-template-columns:28px 30px 1fr auto;gap:8px;align-items:center;
+  color:var(--industry-accent);transform:rotateX(4deg);box-shadow:0 12px 24px rgba(0,0,0,.12)
+}
+.fp-tech-layer span{font:650 7px var(--font-geist-mono);color:#5f6f88}.fp-tech-layer b{font-size:9px;color:#d4dce9;letter-spacing:.06em}.fp-tech-layer small{font-size:6px}
+.fp-tech-layer.l1{margin-left:36px}.fp-tech-layer.l2{margin-left:24px}.fp-tech-layer.l3{margin-left:12px}
+.fp-tech-status{
+  margin-top:5px;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(126,147,192,.1);border-radius:8px;
+  font:650 6px var(--font-geist-mono);color:#697a94
+}
+.fp-tech-status i{width:6px;height:6px;border-radius:50%;background:#4bd39d;box-shadow:0 0 10px #4bd39d}.fp-tech-status strong{margin-left:auto;color:#9aabd0}
+
+@keyframes fp-sector-pulse{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.8)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}}
+
+@media(max-width:780px){
+  .fp-sector-visual{min-height:470px;padding:18px}
+  .fp-finance-ledger{inset:58px 14px 90px;grid-template-columns:1fr 104px 1fr;gap:8px}
+  .fp-finance-risk-core{width:104px;height:104px}.fp-finance-risk-core:before{inset:-13px}.fp-finance-risk-core:after{inset:-25px}
+  .fp-finance-risk-core strong{font-size:8px}.fp-finance-rail{padding:8px;min-height:62px}.fp-finance-rail span,.fp-finance-rail b{font-size:5.5px}
+
+  .fp-manufacturing-line{inset:66px 10px 92px;gap:7px}.fp-mfg-node{width:72px;min-height:96px;padding:10px 5px}.fp-mfg-node b{font-size:7px}.fp-mfg-quality{min-width:230px}
+  .fp-healthcare-mesh{inset:60px 10px 90px}.fp-healthcare-core{width:108px;height:108px}.fp-healthcare-node{width:82px;grid-template-columns:20px 1fr;padding:7px}.fp-healthcare-node b{font-size:6.5px}
+
+  .fp-retail-funnel{inset:66px 10px 92px;grid-template-columns:repeat(3,1fr);gap:7px}.fp-retail-arrow{display:none}.fp-retail-column{min-height:184px;padding:12px 5px}.fp-retail-column b{font-size:7px}.fp-retail-stock{width:92%}
+  .fp-logistics-route{inset:60px 10px 92px}.fp-log-node{width:76px;grid-template-columns:18px 1fr;padding:7px}.fp-log-node b{font-size:6.5px}.fp-logistics-constraints{grid-template-columns:repeat(2,1fr)}
+  .fp-telecom-network{inset:58px 10px 92px}.fp-telecom-core{width:92px;height:92px}.fp-tel-node{width:72px;grid-template-columns:18px 1fr;padding:6px}.fp-tel-node b{font-size:6.5px}
+  .fp-education-path{inset:62px 10px 92px;grid-template-columns:82px 1fr;gap:10px}.fp-edu-learner{height:110px}.fp-edu-track{gap:4px}.fp-edu-track>div{min-height:104px;padding:7px 3px}.fp-edu-track>i{width:8px}.fp-edu-signal{left:92px}.fp-edu-signal span{max-width:150px}
+  .fp-technology-stack{inset:58px 12px 92px}.fp-tech-layer{grid-template-columns:22px 24px 1fr;padding:8px}.fp-tech-layer small{grid-column:3}.fp-tech-layer.l1{margin-left:18px}.fp-tech-layer.l2{margin-left:12px}.fp-tech-layer.l3{margin-left:6px}
+}
+
+@media(prefers-reduced-motion:reduce){.fp-finance-pulse{animation:none}}
+
