@@ -132,19 +132,7 @@ export function AboutExperience() {
 
   useEffect(() => {
     if (reducedMotion || !sceneActive || sceneReady) return;
-
-    const mount = () => setSceneReady(true);
-    const idleWindow = window as typeof window & {
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-
-    if (idleWindow.requestIdleCallback) {
-      const id = idleWindow.requestIdleCallback(mount, { timeout: 700 });
-      return () => idleWindow.cancelIdleCallback?.(id);
-    }
-
-    const timer = window.setTimeout(mount, 180);
+    const timer = window.setTimeout(() => setSceneReady(true), 120);
     return () => window.clearTimeout(timer);
   }, [reducedMotion, sceneActive, sceneReady]);
 
@@ -233,7 +221,7 @@ export function AboutExperience() {
             <div ref={heroIntroRef} className={styles.heroIntro}>
               <motion.div
                 className={styles.systemLabel}
-                initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+                initial={false}
                 animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.55 }}
               >
@@ -241,14 +229,14 @@ export function AboutExperience() {
               </motion.div>
               <motion.h1
                 id="about-title"
-                initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+                initial={false}
                 animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
               >
                 Trust is not a brand promise. <em>It is an engineering property.</em>
               </motion.h1>
               <motion.p
-                initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+                initial={false}
                 animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.12 }}
               >
@@ -256,7 +244,7 @@ export function AboutExperience() {
               </motion.p>
               <motion.div
                 className={styles.heroActions}
-                initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                initial={false}
                 animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.58, delay: 0.2 }}
               >

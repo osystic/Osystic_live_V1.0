@@ -69,7 +69,6 @@
 
 .heroShell {
   position: relative;
-  width: 100%;
   min-height: calc(100svh - 76px);
   display: grid;
   grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
@@ -181,8 +180,8 @@
   min-height: 460px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(211, 223, 255, 0.88) 0 2%, rgba(91, 118, 255, 0.52) 3%, rgba(67, 91, 207, 0.13) 17%, transparent 40%),
-    repeating-radial-gradient(circle, transparent 0 18%, rgba(115, 144, 255, 0.12) 18.2% 18.4%, transparent 18.8% 27%);
+    radial-gradient(circle, rgba(139, 169, 255, 0.72) 0 0.8%, rgba(62, 99, 214, 0.26) 1.4%, rgba(21, 45, 102, 0.12) 10%, transparent 31%),
+    repeating-radial-gradient(circle, transparent 0 18%, rgba(115, 144, 255, 0.1) 18.2% 18.4%, transparent 18.8% 27%);
   filter: drop-shadow(0 0 46px rgba(73, 100, 223, 0.18));
 }
 
@@ -214,6 +213,9 @@
 .heroChapter {
   position: absolute;
   width: min(310px, 28vw);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(34px);
   padding: 16px 17px;
   border-left: 1px solid rgba(121, 151, 255, 0.42);
   background: linear-gradient(90deg, rgba(12, 18, 29, 0.7), rgba(12, 18, 29, 0));

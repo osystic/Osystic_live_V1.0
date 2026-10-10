@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Code2,
   Database,
+  LogIn,
   Menu,
   X,
 } from "lucide-react";
@@ -42,6 +43,8 @@ export default function Navbar() {
   const icons = [BrainCircuit, Code2, Database];
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const capabilitiesActive = active("/capabilities") || active("/services");
+  const clientPortalUrl = process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL?.trim() || "/contact?intent=client-portal";
+  const clientPortalExternal = /^https?:\/\//i.test(clientPortalUrl);
 
   function clearTimer() {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
@@ -182,6 +185,15 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions future-nav-actions">
+          <a
+            className="future-client-portal"
+            href={clientPortalUrl}
+            target={clientPortalExternal ? "_blank" : undefined}
+            rel={clientPortalExternal ? "noreferrer" : undefined}
+            onClick={closeMenus}
+          >
+            Client Portal <LogIn size={14} aria-hidden="true" />
+          </a>
           <div onClick={closeMenus} className="desktop-booking">
             <BookingButton className="button button-primary nav-cta future-nav-cta">
               Book a Call <ArrowRight size={15} />
@@ -270,6 +282,15 @@ export default function Navbar() {
             ))}
 
             <div className="future-mobile-actions">
+              <a
+                className="future-mobile-portal"
+                href={clientPortalUrl}
+                target={clientPortalExternal ? "_blank" : undefined}
+                rel={clientPortalExternal ? "noreferrer" : undefined}
+                onClick={closeMenus}
+              >
+                Client Portal <LogIn size={15} aria-hidden="true" />
+              </a>
               <div onClick={closeMenus}>
                 <BookingButton className="button button-primary mobile-booking-button future-mobile-booking">
                   Book a Technical Call <ArrowRight size={15} />

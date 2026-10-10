@@ -345,9 +345,9 @@ export function CareersClient() {
         {step < 4 && (
           <>
             <div style={{ marginBottom: 36 }}>
-              <h1 style={{ fontSize: "clamp(26px,3.5vw,38px)", fontWeight: 800, letterSpacing: "-0.04em", color: BLK, margin: "0 0 8px", fontFamily: FONT }}>
+              <h2 style={{ fontSize: "clamp(26px,3.5vw,38px)", fontWeight: 800, letterSpacing: "-0.04em", color: BLK, margin: "0 0 8px", fontFamily: FONT }}>
                 Application
-              </h1>
+              </h2>
               <p style={{ fontSize: 14, color: GRAY, margin: 0, fontFamily: FONT }}>
                 We review every application personally. No automated filtering.
               </p>
