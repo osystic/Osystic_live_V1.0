@@ -9,7 +9,7 @@ export default function PayrollPage() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ periodStart: "", periodEnd: "", totalGross: 0, totalDeductions: 0, totalNet: 0 });
   const [showEmpForm, setShowEmpForm] = useState(false);
-  const [empForm, setEmpForm] = useState({ employeeCode: "", name: "", email: "", department: "", designation: "", basicSalary: 0, currency: "PKR" });
+  const [empForm, setEmpForm] = useState({ employeeCode: "", name: "", email: "", department: "", designation: "", basicSalary: 0, currency: "USD" });
   const { data, isLoading } = useQuery({ queryKey: ["payroll"], queryFn: async () => { const r = await fetch("/api/admin/finance/payroll"); return r.json(); } });
 
   const computedTotalNet = form.totalGross - form.totalDeductions;
@@ -20,7 +20,7 @@ export default function PayrollPage() {
   });
 
   const createEmployee = useMutation({ mutationFn: async (f: typeof empForm) => { const r = await fetch("/api/admin/finance/payroll", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...f, action: "create_employee" }) }); if (!r.ok) throw new Error("Failed"); return r.json(); },
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["payroll"] }); setShowEmpForm(false); toast.success("Employee created"); setEmpForm({ employeeCode: "", name: "", email: "", department: "", designation: "", basicSalary: 0, currency: "PKR" }); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["payroll"] }); setShowEmpForm(false); toast.success("Employee created"); setEmpForm({ employeeCode: "", name: "", email: "", department: "", designation: "", basicSalary: 0, currency: "USD" }); },
     onError: () => toast.error("Failed"),
   });
 
@@ -65,7 +65,7 @@ export default function PayrollPage() {
             <input placeholder="Department" value={empForm.department} onChange={e => setEmpForm({ ...empForm, department: e.target.value })} className="border rounded-lg px-3 py-2" />
             <input placeholder="Designation" value={empForm.designation} onChange={e => setEmpForm({ ...empForm, designation: e.target.value })} className="border rounded-lg px-3 py-2" />
             <input type="number" placeholder="Basic Salary" value={empForm.basicSalary || ""} onChange={e => setEmpForm({ ...empForm, basicSalary: +e.target.value })} className="border rounded-lg px-3 py-2" />
-            <select value={empForm.currency} onChange={e => setEmpForm({ ...empForm, currency: e.target.value })} className="border rounded-lg px-3 py-2"><option>PKR</option><option>USD</option></select>
+            <select value={empForm.currency} onChange={e => setEmpForm({ ...empForm, currency: e.target.value })} className="border rounded-lg px-3 py-2"><option>USD</option><option>PKR</option></select>
           </div>
           <div className="flex gap-2 mt-4">
             <button onClick={() => createEmployee.mutate(empForm)} disabled={createEmployee.isPending} className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50">{createEmployee.isPending ? "Creating..." : "Create Employee"}</button>

@@ -4,16 +4,29 @@ import { sql } from "drizzle-orm";
 import { Resend } from "resend";
 import { db } from "@/lib/db";
 import { contactSubmissions } from "@/drizzle/schema";
+import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
+
+const singleLine = (max: number, min = 0) =>
+  z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+    z.string().min(min).max(max),
+  );
 
 const schema = z.object({
-  name: z.string().trim().min(2).max(100),
-  email: z.string().trim().email().max(200),
-  company: z.string().trim().max(160).optional().default(""),
-  projectType: z.string().trim().max(120).optional().default(""),
-  budget: z.string().trim().max(80).optional().default(""),
-  timeline: z.string().trim().max(80).optional().default(""),
-  message: z.string().trim().min(20).max(5000),
-  website: z.string().max(200).optional().default(""),
+  name: singleLine(100, 2),
+  email: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value).toLowerCase() : value),
+    z.string().email().max(200),
+  ),
+  company: singleLine(160).optional().default(""),
+  projectType: singleLine(120).optional().default(""),
+  budget: singleLine(80).optional().default(""),
+  timeline: singleLine(80).optional().default(""),
+  message: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeMultiline(value) : value),
+    z.string().min(20).max(5000),
+  ),
+  website: singleLine(200).optional().default(""),
 });
 
 const RATE_LIMIT = 5;

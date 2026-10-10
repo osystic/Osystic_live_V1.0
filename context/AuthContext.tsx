@@ -56,14 +56,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = getCookie('admin-auth-token');
-    if (token) {
-      const decoded = decodeJWT(token);
-      if (decoded) {
-        setUser(decoded);
-      }
-    }
-    setLoading(false);
+    let active = true;
+
+    const timer = window.setTimeout(() => {
+      if (!active) return;
+
+      const token = getCookie('admin-auth-token');
+      setUser(token ? decodeJWT(token) : null);
+      setLoading(false);
+    }, 0);
+
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
   }, []);
 
   const role = user?.role || 'developer';

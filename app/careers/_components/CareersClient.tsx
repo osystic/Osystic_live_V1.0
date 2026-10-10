@@ -370,8 +370,8 @@ export function CareersClient() {
                 <Input id="phone" label="Phone" type="tel"   required placeholder="+1 555 000 0000"   value={s1.phone} onChange={set1("phone")} error={e1.phone}/>
               </div>
               <div className="careers-two">
-                <Input id="city"    label="City"    placeholder="Karachi"       value={s1.city}    onChange={set1("city")}/>
-                <Input id="country" label="Country" required placeholder="Pakistan" value={s1.country} onChange={set1("country")} error={e1.country}/>
+                <Input id="city"    label="City"    placeholder="City"       value={s1.city}    onChange={set1("city")}/>
+                <Input id="country" label="Country" required placeholder="United States" value={s1.country} onChange={set1("country")} error={e1.country}/>
               </div>
               <div className="careers-two">
                 <Input id="linkedIn"  label="LinkedIn"  placeholder="linkedin.com/in/..." value={s1.linkedIn}  onChange={set1("linkedIn")}  hint="optional"/>

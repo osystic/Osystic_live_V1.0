@@ -73,13 +73,13 @@ export const accountSchema = z.object({
   type: z.enum(["asset", "liability", "equity", "revenue", "expense"]),
   parentId: z.string().uuid().optional(),
   description: z.string().optional(),
-  currency: z.string().default("PKR"),
+  currency: z.string().default("USD"),
 });
 
 export const journalEntrySchema = z.object({
   description: z.string().min(1, "Description is required"),
   entryDate: z.string().min(1, "Date is required"),
-  currency: z.string().default("PKR"),
+  currency: z.string().default("USD"),
   lines: z.array(z.object({
     accountId: z.string().uuid("Account is required"),
     description: z.string().optional(),

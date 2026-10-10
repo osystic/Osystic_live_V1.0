@@ -1,98 +1,38 @@
-import type { Metadata } from "next";
-import { CapabilityVisual } from "../components/marketing/TechnicalVisual";
+import { createSeoMetadata } from "@/lib/seo";
 import Link from "next/link";
-import { ArrowRight, BrainCircuit, CheckCircle2, CloudCog, Code2, Database, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ArrowRight, BrainCircuit, Braces, CloudCog, Cpu, Database, Network, ShieldCheck, Workflow } from "lucide-react";
 import { BookingButton } from "../components/CalBooking";
 import { FinalCTA } from "../components/marketing/FinalCTA";
-import { SectionHeading } from "../components/marketing/SectionHeading";
 import { capabilityGroups } from "../config/site";
+import { FutureReveal } from "../components/future/FutureReveal";
 
-export const metadata: Metadata = {
-  title: "Capabilities",
-  description: "Explore OSYSTIC capabilities across AI systems, product engineering, data engineering, cloud, MLOps, and platform delivery.",
-  alternates: { canonical: "/capabilities" },
-};
+export const metadata = createSeoMetadata({
+  title: 'Enterprise AI & Software Engineering Capabilities',
+  description: 'Explore OSYSTIC capabilities across enterprise AI systems, agentic AI, product engineering, data engineering, cloud, MLOps, LLMOps, and platform delivery.',
+  path: '/capabilities',
+  keywords: ['enterprise AI capabilities','agentic AI engineering','product engineering','data engineering','cloud engineering'],
+});
 
-const process = [
-  ["01", "Discover", "Clarify the problem, users, data, constraints, risks, and measurable success criteria."],
-  ["02", "Design", "Define architecture, interfaces, evaluation strategy, security boundaries, and delivery plan."],
-  ["03", "Build", "Engineer in visible increments with code review, testing, documentation, and technical checkpoints."],
-  ["04", "Deploy", "Release into the agreed cloud, on-premise, or edge environment with observability and handoff."],
-  ["05", "Improve", "Measure system behavior, resolve operational issues, and optimize based on real-world evidence."],
+const pillars = [
+  { key:"ai", Icon:BrainCircuit, eyebrow:"01 / AI SYSTEMS", signal:"REASON · RETRIEVE · ACT", accent:"violet" },
+  { key:"product", Icon:Braces, eyebrow:"02 / PRODUCT ENGINEERING", signal:"INTERFACE · API · DOMAIN", accent:"blue" },
+  { key:"data", Icon:Database, eyebrow:"03 / DATA & CLOUD", signal:"INGEST · MODEL · OPERATE", accent:"cyan" },
 ] as const;
 
-export default function CapabilitiesPage() {
-  return (
-    <main id="main-content">
-      <section className="page-hero">
-        <div className="container-shell page-hero-grid">
-          <div>
-            <span className="eyebrow">CAPABILITIES</span>
-            <h1>End-to-end engineering for <span className="accent">intelligent systems.</span></h1>
-            <p>From data and models to APIs, interfaces, infrastructure, and production operations, OSYSTIC can lead the engineering path without forcing your project into a predefined platform.</p>
-            <div className="page-hero-actions">
-              <BookingButton>Book a Technical Call <ArrowRight size={16} /></BookingButton>
-              <Link href="/case-studies" className="button button-secondary-dark">Explore Our Work <ArrowRight size={16} /></Link>
-            </div>
-          </div>
-          <div className="page-hero-visual">
-            <CapabilityVisual />
-          </div>
-        </div>
-      </section>
+export default function CapabilitiesPage(){
+  return <main id="main-content" className="fp-capabilities">
+    <section className="fp-cap-hero">
+      <div className="container-shell fp-cap-hero-grid">
+        <div><span className="future-kicker">CAPABILITY ATLAS / 001</span><span className="eyebrow">CAPABILITIES</span><h1>One engineering system. <span>Three operating layers.</span></h1><p>OSYSTIC combines AI, product, data, and cloud engineering around the system that must ship. The architecture is composed across layers instead of sold as disconnected services.</p><div className="page-hero-actions"><BookingButton>Book a Technical Call <ArrowRight size={16}/></BookingButton><Link href="/case-studies" className="button button-secondary-dark">See delivery evidence <ArrowRight size={16}/></Link></div></div>
+        <div className="fp-cap-atlas" aria-label="OSYSTIC capability architecture"><div className="fp-cap-atlas-core"><Cpu size={30}/><strong>OSYSTIC</strong><small>ENGINEERING SYSTEM</small></div><span className="fp-cap-orbit o1"/><span className="fp-cap-orbit o2"/><span className="fp-cap-orbit o3"/>{pillars.map(({Icon,eyebrow},i)=><div key={eyebrow} className={`fp-cap-node n${i+1}`}><Icon size={18}/><span>{eyebrow.split(" / ")[1]}</span></div>)}</div>
+      </div>
+    </section>
 
-      <section className="section section-light">
-        <div className="container-shell">
-          <SectionHeading eyebrow="CORE CAPABILITIES" title="Three engineering pillars. One delivery system." body="Capabilities are combined around the system you need to ship, not sold as disconnected technology services." />
-          <div className="capability-grid">
-            {capabilityGroups.map((group, index) => {
-              const Icon = [BrainCircuit, Code2, Database][index];
-              const anchor = index === 0 ? "ai-systems" : index === 1 ? "product-engineering" : "data-cloud";
-              return (
-                <article className="capability-card" id={anchor} key={group.title}>
-                  <div className="capability-icon"><Icon size={23} /></div>
-                  <h3>{group.title}</h3>
-                  <p>{group.description}</p>
-                  <div className="capability-links">
-                    {group.items.map(([label, href]) => <Link href={href} key={`${group.title}-${label}`}>{label}<ArrowRight size={14} /></Link>)}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+    <section className="fp-cap-atlas-section"><div className="container-shell"><div className="fp-cap-section-head"><span className="eyebrow">SYSTEM LAYERS</span><h2>Choose the layer. Follow the dependencies.</h2><p>Every layer has its own delivery surface, but production systems cross boundaries. The atlas below shows the interfaces between them.</p></div>
+      <div className="fp-cap-pillars">{capabilityGroups.map((group,index)=>{ const meta=pillars[index]; const Icon=meta.Icon; return <FutureReveal key={group.title} delay={index*.08} className={`fp-cap-pillar ${meta.accent}`}><div className="fp-cap-pillar-top"><span>{meta.eyebrow}</span><Icon size={24}/></div><h2>{group.title}</h2><p>{group.description}</p><div className="fp-cap-signal">{meta.signal}</div><div className="fp-cap-service-list">{group.items.map(([label,href],j)=><Link href={href} key={`${label}-${j}`}><span>{String(j+1).padStart(2,"0")}</span><b>{label}</b><ArrowRight size={14}/></Link>)}</div><Link className="future-inline-link" href={group.href}>Open {group.title} architecture <ArrowRight size={15}/></Link></FutureReveal>; })}</div>
+    </div></section>
 
-      <section className="section section-soft" id="process">
-        <div className="container-shell">
-          <SectionHeading eyebrow="HOW WE WORK" title="A delivery process designed to reduce uncertainty." body="Each phase should produce something your team can inspect, test, approve, or use to make the next decision." />
-          <div className="workflow-shell light-workflow-shell">
-            <div className="workflow-grid capabilities-process-grid">
-              {process.map(([number, title, body]) => (
-                <div className="workflow-step" key={number} style={{ borderColor: "var(--border)" }}>
-                  <div className="workflow-step-number">{number}</div>
-                  <h3 style={{ color: "var(--text)" }}>{title}</h3>
-                  <p style={{ color: "var(--muted)" }}>{body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-dark">
-        <div className="container-shell">
-          <SectionHeading eyebrow="BUILT ON TRUST" title="The engineering relationship should stay clear." body="Ownership, deployment, security expectations, and acceptance criteria are part of the technical scope, not hidden in a platform dependency." />
-          <div className="trust-points">
-            <div className="trust-point"><div className="trust-point-icon"><LockKeyhole size={20}/></div><div><h3>Clear ownership & handover</h3><p>Ownership, licensing, source delivery, and handover expectations are defined in the engagement terms rather than hidden in a platform dependency.</p></div></div>
-            <div className="trust-point"><div className="trust-point-icon"><CloudCog size={20}/></div><div><h3>Deployment flexibility</h3><p>Cloud, on-premise, hybrid, or edge deployment is chosen according to system requirements and constraints.</p></div></div>
-            <div className="trust-point"><div className="trust-point-icon"><ShieldCheck size={20}/></div><div><h3>Security-conscious delivery</h3><p>Access, secrets, data flow, logging, dependency risk, and operational controls are addressed as engineering concerns.</p></div></div>
-            <div className="trust-point"><div className="trust-point-icon"><CheckCircle2 size={20}/></div><div><h3>Measurable milestones</h3><p>Each phase should have explicit deliverables and acceptance criteria so progress can be evaluated before moving forward.</p></div></div>
-          </div>
-        </div>
-      </section>
-
-      <FinalCTA title="Need a capability mix that does not fit a template?" body="Most production systems span multiple disciplines. Share the actual problem and constraints, and we will help define the architecture and delivery path." />
-    </main>
-  );
+    <section className="fp-cap-dependency"><div className="container-shell fp-cap-dependency-grid"><div><span className="eyebrow">CROSS-LAYER DELIVERY</span><h2>Architecture is the contract between capabilities.</h2><p>Models need reliable data. Products need observable APIs. Cloud platforms need security boundaries. Delivery works when those dependencies are explicit from the start.</p></div><div className="fp-dependency-map"><div><BrainCircuit size={18}/><span>AI SYSTEMS</span></div><i/><div><Workflow size={18}/><span>PRODUCT</span></div><i/><div><CloudCog size={18}/><span>PLATFORM</span></div><i/><div><ShieldCheck size={18}/><span>CONTROL</span></div><i/><div><Network size={18}/><span>OPERATE</span></div></div></div></section>
+    <FinalCTA title="Need more than one capability?" body="Most production systems do. Bring the problem and constraints; we will map the engineering layers around the outcome." />
+  </main>;
 }

@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const [bill] = await db.insert(vendorBills).values({
       billNumber, vendorName: body.vendorName, vendorId: body.vendorId,
       description: body.description, billDate: body.billDate, dueDate: body.dueDate,
-      currency: body.currency || "PKR", subtotal: (body.subtotal || 0).toString(),
+      currency: body.currency || "USD", subtotal: (body.subtotal || 0).toString(),
       taxAmount: (body.taxAmount || 0).toString(), withholdingTax: (body.withholdingTax || 0).toString(),
       totalAmount: (body.totalAmount || 0).toString(), notes: body.notes,
     }).returning();

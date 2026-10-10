@@ -1,77 +1,19 @@
-import type { LucideIcon } from "lucide-react";
-import type { Metadata } from "next";
-import Image from "next/image";
-import { ArrowRight, Clock3, Mail, MapPin, SearchCheck, ShieldCheck, Waypoints } from "lucide-react";
+import { createSeoMetadata } from "@/lib/seo";
+import { ArrowRight, Mail, MapPin, TerminalSquare, ShieldCheck, Waypoints, Clock3 } from "lucide-react";
 import { BookingButton } from "../components/CalBooking";
-import { FinalCTA } from "../components/marketing/FinalCTA";
-import { SectionHeading } from "../components/marketing/SectionHeading";
 import { siteConfig } from "../config/site";
 import ContactForm from "./_components/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Tell OSYSTIC about your AI, software, data, cloud, or product engineering project and book a technical discovery call.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = createSeoMetadata({
+  title: 'Contact',
+  description: 'Talk with OSYSTIC about an enterprise AI, software, data, cloud, or product engineering initiative and route the project to the right technical discovery path.',
+  path: '/contact',
+  keywords: ['enterprise AI consulting contact','AI engineering consultation','software engineering company contact'],
+});
+const steps=[["01","DISCOVERY","Problem, users, data, current system, desired outcome."],["02","TECHNICAL REVIEW","Architecture, integrations, constraints, feasibility, delivery risk."],["03","ROADMAP","Phases, acceptance criteria, responsibilities, deployment path."],["04","PROPOSAL","A scoped commercial proposal when the work is sufficiently defined."]] as const;
 
-const steps = [
-  ["01", "Discovery Call", "We clarify the problem, users, current system, constraints, and desired outcome."],
-  ["02", "Technical Review", "We assess architecture, data, integrations, delivery risk, and feasibility."],
-  ["03", "Roadmap", "We define an implementation path, phases, acceptance criteria, and responsibilities."],
-  ["04", "Proposal", "You receive a scoped commercial proposal when the work is sufficiently defined."],
-] as const;
-
-export default function ContactPage() {
-  return (
-    <main id="main-content" className="contact-page">
-      <section className="page-hero">
-        <div className="container-shell page-hero-grid">
-          <div>
-            <span className="eyebrow">CONTACT</span>
-            <h1>Let’s scope what <span className="accent">you’re building.</span></h1>
-            <p>Share the technical context, current environment, constraints, and desired outcome. We will use that information to determine the most useful next conversation.</p>
-            <div className="page-hero-actions"><BookingButton>Book a Technical Call <ArrowRight size={16}/></BookingButton></div>
-          </div>
-          <div className="page-hero-visual">
-            <Image src="/media/visuals/contact-connectivity.webp" alt="Global engineering connectivity" fill sizes="(max-width:1024px) min(94vw,640px), 600px" style={{ objectFit:"cover",opacity:.88 }} />
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-light">
-        <div className="container-shell contact-inquiry-grid">
-          <div><SectionHeading eyebrow="PROJECT INQUIRY" title="Tell us about the system." body="The more useful technical context you provide, the less time the first conversation needs to spend on generic discovery." /><ContactForm /></div>
-          <aside className="contact-expectations">
-            <h2>What to expect</h2>
-            <div style={{ borderTop:"1px solid var(--border)" }}>
-              {([
-                [SearchCheck,"Technical review","A senior team member reviews the problem and constraints before recommending a delivery path."],
-                [ShieldCheck,"Confidential context","Do not send passwords, production keys, or customer-sensitive data through this form. High-level architecture and requirements are enough to start."],
-                [Waypoints,"Outcome-first scope","We focus on what the system must do, how success is evaluated, and where it needs to operate."],
-              ] as [LucideIcon, string, string][]).map(([Icon,title,body]) => <div className="trust-point" key={title} style={{ borderColor:"var(--border)" }}><div className="trust-point-icon" style={{ borderColor:"var(--border)" }}><Icon size={20}/></div><div><h3 style={{ color:"var(--text)" }}>{title}</h3><p style={{ color:"var(--muted)" }}>{body}</p></div></div>)}
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section className="section-tight section-soft">
-        <div className="container-shell">
-          <div className="industry-grid contact-options-grid">
-            <a className="industry-card" href={`mailto:${siteConfig.email}`}><div className="capability-icon"><Mail size={21}/></div><h3>Email</h3><p>{siteConfig.email}</p><span className="text-link">Write to us <ArrowRight size={14}/></span></a>
-            <div className="industry-card"><div className="capability-icon"><Clock3 size={21}/></div><h3>Technical call</h3><div className="contact-inline-booking"><BookingButton className="text-link">Book a Technical Call <ArrowRight size={14}/></BookingButton></div></div>
-            <div className="industry-card"><div className="capability-icon"><MapPin size={21}/></div><h3>Operations</h3><p>{siteConfig.address.line1}<br />{siteConfig.address.line2}<br />{siteConfig.address.country}<br />Local Operations: {siteConfig.localOperations}</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-light">
-        <div className="container-shell">
-          <SectionHeading eyebrow="WHAT HAPPENS NEXT" title="A clear discovery process." body="Not every inquiry needs a long sales process. The goal is to reach technical clarity quickly enough to make a useful decision." />
-          <div className="workflow-shell contact-process-shell"><div className="workflow-grid contact-process-grid">{steps.map(([number,title,body]) => <div className="workflow-step" key={number} style={{ borderColor:"var(--border)" }}><div className="workflow-step-number">{number}</div><h3 style={{ color:"var(--text)" }}>{title}</h3><p style={{ color:"var(--muted)" }}>{body}</p></div>)}</div></div>
-        </div>
-      </section>
-
-      <FinalCTA title="Prefer to start with a technical call?" body="Choose an available time to discuss your project." />
-    </main>
-  );
-}
+export default function ContactPage(){return <main id="main-content" className="fp-contact">
+  <section className="fp-contact-hero"><div className="container-shell fp-contact-hero-grid"><div><span className="future-kicker">PROJECT INTAKE / SECURE CHANNEL</span><span className="eyebrow">CONTACT</span><h1>Start with the system. <span>Not the sales script.</span></h1><p>Share the technical context, current environment, constraints, and desired outcome. The first conversation should move quickly toward architecture and feasibility.</p><div className="page-hero-actions"><BookingButton>Book a Technical Call <ArrowRight size={16}/></BookingButton><a href={`mailto:${siteConfig.email}`} className="button button-secondary-dark">Email OSYSTIC <Mail size={15}/></a></div></div><div className="fp-contact-terminal"><div className="fp-terminal-bar"><span/><span/><span/><b>OSYSTIC_PROJECT_INTAKE</b></div><code>$ initialize discovery</code><div className="fp-terminal-line"><span>system_context</span><b>required</b></div><div className="fp-terminal-line"><span>data_boundary</span><b>recommended</b></div><div className="fp-terminal-line"><span>deployment_target</span><b>optional</b></div><div className="fp-terminal-line"><span>credentials / secrets</span><b className="danger">DO NOT SEND</b></div><div className="fp-terminal-ready"><TerminalSquare size={18}/><span>READY FOR TECHNICAL CONTEXT</span></div></div></div></section>
+  <section className="fp-contact-intake"><div className="container-shell fp-contact-intake-grid"><div className="fp-contact-form-wrap"><span className="eyebrow">PROJECT INQUIRY</span><h2>Tell us what has to work.</h2><p>Useful context includes users, current architecture, data, integrations, operating environment, constraints, and how success will be evaluated.</p><ContactForm/></div><aside className="fp-intake-aside"><div><ShieldCheck size={20}/><h3>Confidential context</h3><p>High-level requirements are enough to start. Do not submit passwords, production keys, or customer-sensitive data.</p></div><div><Waypoints size={20}/><h3>Outcome-first scope</h3><p>We focus on what the system must do, where it operates, and how its behavior will be evaluated.</p></div><div><Clock3 size={20}/><h3>Technical routing</h3><p>Your project context determines whether the next step should be architecture review, discovery, estimation, or a short technical call.</p></div><div className="fp-contact-ops"><MapPin size={18}/><span>{siteConfig.address.line1}<br/>{siteConfig.address.line2}<br/>{siteConfig.address.country}</span></div></aside></div></section>
+  <section className="fp-contact-process"><div className="container-shell"><div className="fp-contact-process-head"><span className="eyebrow">WHAT HAPPENS NEXT</span><h2>A four-stage discovery path.</h2></div><div className="fp-contact-track">{steps.map(([n,t,b],i)=><div key={n}><span>{n}</span><b>{t}</b><p>{b}</p><i>{i<3?"→":"DECIDE"}</i></div>)}</div></div></section>
+</main>}

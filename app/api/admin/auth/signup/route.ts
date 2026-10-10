@@ -4,14 +4,17 @@ import bcrypt from "bcrypt";
 import { z } from "zod";
 import { adminUsers } from "@/drizzle/schema";
 import { db } from "@/lib/db";
+import { getAllowedAdminEmail } from "@/lib/admin-identity";
+import { sanitizeSingleLine } from "@/lib/input-security";
 
 const signupSchema = z.object({
-  name: z.string().trim().min(2).max(120),
+  name: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+    z.string().min(2).max(120),
+  ),
   email: z.string().email().max(254),
   password: z.string().min(12).max(128),
 });
-
-const ALLOWED_EMAIL = "OsysticArslan@osystic.com";
 
 export async function POST(req: NextRequest) {
   if (process.env.ADMIN_SIGNUP_ENABLED !== "true") {
@@ -24,9 +27,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Invalid request" }, { status: 400 });
     }
 
+    const allowedEmail = getAllowedAdminEmail();
+    if (!allowedEmail) {
+      console.error("ADMIN_ALLOWED_EMAIL is not configured.");
+      return NextResponse.json({ error: "Admin authentication is not configured." }, { status: 503 });
+    }
+
     const email = parsed.data.email.trim().toLowerCase();
-    if (email !== ALLOWED_EMAIL.toLowerCase()) {
-      return NextResponse.json({ error: "Only OsysticArslan@osystic.com is authorized." }, { status: 403 });
+    if (email !== allowedEmail) {
+      return NextResponse.json({ error: "This account is not authorized for admin access." }, { status: 403 });
     }
 
     const [existing] = await db.select({ id: adminUsers.id }).from(adminUsers).where(eq(adminUsers.email, email)).limit(1);

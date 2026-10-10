@@ -8,6 +8,9 @@
 - [ ] Confirm `SUPABASE_SERVICE_ROLE_KEY` is server-only.
 - [ ] Restrict production database network/access settings as appropriate.
 - [ ] Confirm Supabase Storage policies for careers CV uploads.
+- [ ] Verify runtime SQLite/database files are not committed or bundled with the deployment artifact.
+- [ ] Confirm state-changing `/api/*` calls reject missing/cross-site `Origin` headers.
+- [ ] Verify CSP, HSTS, DENY framing, nosniff, Referrer-Policy, and Permissions-Policy on production responses.
 
 ## 2. Environment
 
@@ -21,20 +24,22 @@ Copy `.env.example` to the deployment platform and set real values.
 - [ ] `RESEND_FROM`
 - [ ] `ADMIN_EMAIL=hello@osystic.com`
 - [ ] `ADMIN_JWT_SECRET`
+- [ ] `ADMIN_ALLOWED_EMAIL`
+- [ ] `CSRF_TRUSTED_ORIGINS` left blank unless an exact HTTPS staging frontend is required
 - [ ] `ADMIN_SIGNUP_ENABLED=false` after initial admin setup
 - [ ] `NEXT_PUBLIC_CALCOM_BOOKING_URL`
 
 ## 3. Install and validate
 
 ```bash
-npm ci
+npm install
 npm run qa:static
 npm run typecheck
 npm run lint
 npm run build
 ```
 
-Static QA, typecheck, lint, and the production build must pass before production release.
+The first networked `npm install` regenerates `package-lock.json` for the new animation/3D dependencies. Commit that generated lock, then static QA, typecheck, lint, and the production build must pass before production release.
 
 ## 4. Functional smoke test
 
@@ -54,14 +59,17 @@ Static QA, typecheck, lint, and the production build must pass before production
 
 ## 5. SEO / crawling
 
-- [ ] `https://osystic.com/robots.txt`
-- [ ] `https://osystic.com/sitemap.xml`
+- [ ] `https://www.osystic.com/robots.txt`
+- [ ] `https://www.osystic.com/sitemap.xml`
 - [ ] canonical metadata on primary pages
 - [ ] 404 page works
 - [ ] old `/book` and `/bookings` routes redirect to Contact
 - [ ] old service aliases redirect to current canonical routes
 - [ ] no broken internal links from a production crawl
 - [ ] Search Console property and sitemap submitted
+- [ ] Organization + LocalBusiness JSON-LD validates with the Albuquerque, New Mexico US address only
+- [ ] No legacy non-US company-location references or non-US company timezone remain in public source or rendered HTML
+- [ ] Open Graph/Twitter previews render the configured OSYSTIC preview image
 
 ## 6. Content approval
 

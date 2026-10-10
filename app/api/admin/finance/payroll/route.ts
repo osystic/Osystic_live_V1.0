@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         department: body.department,
         designation: body.designation,
         basicSalary: body.basicSalary,
-        currency: body.currency || "PKR",
+        currency: body.currency || "USD",
       }).returning();
       return NextResponse.json({ employee: emp }, { status: 201 });
     }

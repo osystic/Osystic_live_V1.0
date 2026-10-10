@@ -4,27 +4,67 @@ import { db } from "@/lib/db";
 import { jobApplications } from "@/drizzle/schema";
 import { deleteCVFromStorage, uploadCVToStorage } from "@/lib/supabase";
 import { sendApplicationEmails } from "@/lib/resend";
+import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
+
+const singleLine = (max: number, min = 0) =>
+  z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+    z.string().min(min).max(max),
+  );
+
+const optionalHttpsUrl = z.preprocess(
+  (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+  z.string().max(500).refine((value) => {
+    if (!value) return true;
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" && Boolean(url.hostname);
+    } catch {
+      return false;
+    }
+  }, "URL must be a valid HTTPS URL"),
+);
 
 const applicationSchema = z.object({
-  firstName: z.string().trim().min(1).max(80),
-  lastName: z.string().trim().min(1).max(80),
-  email: z.string().trim().email().max(254),
-  phone: z.string().trim().min(5).max(40),
-  city: z.string().trim().max(100).optional().default(""),
-  country: z.string().trim().min(2).max(100),
-  linkedIn: z.string().trim().max(500).optional().default("").refine((v) => !v || /^https:\/\//i.test(v), "LinkedIn URL must use HTTPS"),
-  portfolio: z.string().trim().max(500).optional().default("").refine((v) => !v || /^https:\/\//i.test(v), "Portfolio URL must use HTTPS"),
-  position: z.string().trim().min(2).max(160),
-  yearsExp: z.string().trim().min(1).max(40),
-  currentRole: z.string().trim().max(160).optional().default(""),
-  currentCompany: z.string().trim().max(160).optional().default(""),
-  coverLetter: z.string().trim().min(50).max(8000),
-  website: z.string().max(0).optional().default(""),
+  firstName: singleLine(80, 1),
+  lastName: singleLine(80, 1),
+  email: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value).toLowerCase() : value),
+    z.string().email().max(254),
+  ),
+  phone: singleLine(40, 5),
+  city: singleLine(100).optional().default(""),
+  country: singleLine(100, 2),
+  linkedIn: optionalHttpsUrl.optional().default(""),
+  portfolio: optionalHttpsUrl.optional().default(""),
+  position: singleLine(160, 2),
+  yearsExp: singleLine(40, 1),
+  currentRole: singleLine(160).optional().default(""),
+  currentCompany: singleLine(160).optional().default(""),
+  coverLetter: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeMultiline(value) : value),
+    z.string().min(50).max(8000),
+  ),
+  website: z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+    z.string().max(0),
+  ).optional().default(""),
 });
 
 const buckets = new Map<string, { count: number; reset: number }>();
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_SUBMISSIONS = 4;
+
+function validCvSignature(buffer: ArrayBuffer, mime: string) {
+  const bytes = new Uint8Array(buffer.slice(0, 8));
+  const starts = (...expected: number[]) => expected.every((value, index) => bytes[index] === value);
+  if (mime === "application/pdf") return starts(0x25, 0x50, 0x44, 0x46, 0x2d);
+  if (mime === "application/msword") return starts(0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1);
+  if (mime === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+    return starts(0x50, 0x4b, 0x03, 0x04) || starts(0x50, 0x4b, 0x05, 0x06) || starts(0x50, 0x4b, 0x07, 0x08);
+  }
+  return false;
+}
 
 function clientIp(req: NextRequest) {
   return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
@@ -32,6 +72,9 @@ function clientIp(req: NextRequest) {
 
 function rateLimited(ip: string) {
   const now = Date.now();
+  for (const [key, entry] of buckets) {
+    if (entry.reset <= now) buckets.delete(key);
+  }
   const current = buckets.get(ip);
   if (!current || current.reset <= now) {
     buckets.set(ip, { count: 1, reset: now + WINDOW_MS });
@@ -105,7 +148,7 @@ export async function POST(req: NextRequest) {
       if (Array.isArray(decoded)) {
         skills = decoded
           .filter((item): item is string => typeof item === "string")
-          .map((item) => item.trim())
+          .map((item) => sanitizeSingleLine(item))
           .filter(Boolean)
           .slice(0, 30)
           .map((item) => item.slice(0, 80));
@@ -115,6 +158,10 @@ export async function POST(req: NextRequest) {
     }
 
     const cvBuffer = await cvFile.arrayBuffer();
+    if (!validCvSignature(cvBuffer, cvFile.type)) {
+      return NextResponse.json({ error: "CV file content does not match the selected document type" }, { status: 400 });
+    }
+
     const { path: cvPath, url: cvUrl } = await uploadCVToStorage(
       cvBuffer,
       cvFile.name,
@@ -141,7 +188,7 @@ export async function POST(req: NextRequest) {
         coverLetter: data.coverLetter,
         cvUrl,
         cvPath,
-        cvFileName: cvFile.name.slice(0, 255),
+        cvFileName: sanitizeSingleLine(cvFile.name).slice(0, 255),
         cvTextContent: null,
         status: "new",
         ip,

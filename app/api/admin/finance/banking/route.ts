@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     if (!body.name || !body.type) return NextResponse.json({ error: "Name and type required" }, { status: 400 });
     const [account] = await db.insert(financialAccounts).values({
-      name: body.name, type: body.type, currency: body.currency || "PKR",
+      name: body.name, type: body.type, currency: body.currency || "USD",
       openingBalance: (body.openingBalance || 0).toString(),
       currentBalance: (body.currentBalance || 0).toString(),
       bankName: body.bankName, accountNumber: body.accountNumber,

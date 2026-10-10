@@ -1,24 +1,10 @@
-import type { Metadata } from "next";
-import { ArrowRight, Mail, MessageSquareText, ShieldCheck } from "lucide-react";
+import { createSeoMetadata } from "@/lib/seo";
+import { ArrowRight, Mail, MessageSquareText, ShieldCheck, Siren } from "lucide-react";
 import { siteConfig } from "../config/site";
-import { FinalCTA } from "../components/marketing/FinalCTA";
-
-export const metadata: Metadata = {
-  title: "Support",
-  description: "Contact OSYSTIC for project and delivery support.",
-  alternates: { canonical: "/support" },
-};
-
-const options = [
-  [MessageSquareText, "Existing engagements", "Use the delivery channel agreed for your project so context, priorities, and ownership stay clear."],
-  [ShieldCheck, "Security or operational concern", "For an active engagement, use the agreed escalation path. If you are unsure where to report it, email OSYSTIC directly."],
-  [Mail, "General support", `Email ${siteConfig.email} with the project or system name and enough context for the request to be routed correctly.`],
-] as const;
-
-export default function SupportPage() {
-  return <main id="main-content">
-    <section className="page-hero"><div className="container-shell"><span className="eyebrow">SUPPORT</span><h1>Support with <span className="accent">clear ownership.</span></h1><p>For active work, the fastest route is the communication and escalation channel agreed for your engagement. General requests can be sent to our main contact address.</p><div className="page-hero-actions"><a className="button button-primary" href={`mailto:${siteConfig.email}`}>Email OSYSTIC <ArrowRight size={15}/></a></div></div></section>
-    <section className="section section-light"><div className="container-shell"><div className="service-list-grid">{options.map(([Icon,title,body],index)=><article className="service-list-card" key={title}><div className="capability-icon"><Icon size={20}/></div><div className="service-list-number">0{index+1}</div><h2>{title}</h2><p>{body}</p></article>)}</div><p style={{marginTop:32,color:"var(--muted)",fontSize:13}}>OSYSTIC does not currently publish a public documentation portal. Any legacy <code>/docs</code> reference has been removed rather than linking to a non-existent page.</p></div></section>
-    <FinalCTA />
-  </main>;
-}
+export const metadata = createSeoMetadata({
+  title: 'Support',
+  description: 'Contact OSYSTIC for active project support, delivery routing, security escalation guidance, and general engineering support requests.',
+  path: '/support',
+  keywords: ['OSYSTIC support','enterprise engineering support'],
+});
+export default function SupportPage(){return <main id="main-content" className="fp-support"><section className="fp-support-hero"><div className="container-shell fp-support-grid"><div><span className="future-kicker">SUPPORT ROUTER / ACTIVE</span><span className="eyebrow">SUPPORT</span><h1>Route the issue to the <span>right ownership path.</span></h1><p>Active engagements should use their agreed delivery and escalation channels. General requests can be routed through OSYSTIC directly.</p><a className="button button-primary" href={`mailto:${siteConfig.email}`}>Email OSYSTIC <ArrowRight size={15}/></a></div><div className="fp-support-router"><div><MessageSquareText size={20}/><span>ACTIVE ENGAGEMENT</span><b>PROJECT CHANNEL</b></div><i/><div><Siren size={20}/><span>SECURITY / OPS</span><b>ESCALATION PATH</b></div><i/><div><Mail size={20}/><span>GENERAL</span><b>{siteConfig.email}</b></div></div></div></section><section className="fp-support-note"><div className="container-shell"><ShieldCheck size={22}/><p>Do not send credentials, production keys, or customer-sensitive information by general email. Use the secure channel agreed for your engagement when sensitive context is involved.</p></div></section></main>}

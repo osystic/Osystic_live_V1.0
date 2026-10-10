@@ -1,208 +1,45 @@
-import { TechnicalVisual } from "./TechnicalVisual";
+import type { CSSProperties } from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Check,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, Check, CloudCog, Code2, Cpu, Database, GitBranch, ShieldCheck, Workflow } from "lucide-react";
 import { BookingButton } from "../CalBooking";
 import { FinalCTA } from "./FinalCTA";
-import { SectionHeading } from "./SectionHeading";
+import { FutureReveal } from "../future/FutureReveal";
 
-export type ServiceDetailItem = {
-  title: string;
-  desc: string;
-  points?: readonly string[];
+export type ServiceDetailItem={title:string;desc:string;points?:readonly string[];learnMoreHref?:string;learnMoreLabel?:string};
+export type ServiceDetailStep={title:string;tag?:string;desc:string;checks?:readonly string[];from?:string;fromSub?:string;to?:string};
+export type ServiceDetailTech={category:string;items:readonly string[]};
+export type ServiceDetailIndustry={name:string;detail:string};
+export type ServiceDetailFaq={q:string;a:string};
+type NodeLike={id:string;label:string;sub:string;x:number;y:number;dark?:boolean};
+type EdgeLike={from:number;to:number};
+type CodeLine={type:string;content:string};
+export type ServiceDetailData={
+  slug?:string;name:string;category:string;heroH1:string;heroSub:string;tagline?:string;
+  services:readonly ServiceDetailItem[];steps?:readonly ServiceDetailStep[];techStack?:readonly ServiceDetailTech[];industries?:readonly ServiceDetailIndustry[];faqs?:readonly ServiceDetailFaq[];ctaH2?:string;ctaDesc?:string;
+  wfNodes?:readonly NodeLike[];wfEdges?:readonly EdgeLike[];pipeNodes?:readonly NodeLike[];pipeEdges?:readonly EdgeLike[];diagramTitle?:string;codeLines?:readonly CodeLine[];codeLabel?:string;
 };
 
-export type ServiceDetailStep = {
-  title: string;
-  tag?: string;
-  desc: string;
-  checks?: readonly string[];
-};
+function hash(value:string){return [...value].reduce((a,c)=>a+c.charCodeAt(0),0)}
+function Visual({data}:{data:ServiceDetailData}){
+  const nodes=data.wfNodes||data.pipeNodes; const edges=data.wfEdges||data.pipeEdges;
+  if(data.codeLines?.length){return <div className="fp-service-code"><div className="fp-code-head"><span/><span/><span/><b>{data.codeLabel||"system.ts"}</b></div><pre>{data.codeLines.slice(0,18).map((line,i)=><code key={i} className={`code-${line.type}`}>{line.content||" "}{"\n"}</code>)}</pre><div className="fp-code-status"><i/>BUILD / READY</div></div>}
+  if(nodes?.length){return <div className="fp-service-graph" aria-label={data.diagramTitle||`${data.name} architecture`}><svg viewBox="0 0 900 440" role="img">{edges?.map((e,i)=>{const a=nodes[e.from],b=nodes[e.to];return a&&b?<line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y}/>:null})}{nodes.slice(0,10).map((n,i)=><g key={n.id} transform={`translate(${n.x},${n.y})`}><circle r={n.dark?26:19}/><text y={n.dark?48:39} textAnchor="middle">{n.label}</text><text y={n.dark?64:54} textAnchor="middle" className="sub">{n.sub}</text></g>)}</svg><div className="fp-graph-pulse"><Cpu size={20}/><span>LIVE ARCHITECTURE</span></div></div>}
+  return <div className="fp-service-constellation"><span className="ring r1"/><span className="ring r2"/><div className="core"><Cpu size={32}/><b>{data.name}</b><small>PRODUCTION SYSTEM</small></div>{["INPUT","LOGIC","CONTROL","OUTPUT"].map((x,i)=><span className={`n n${i+1}`} key={x}>{x}</span>)}</div>
+}
 
-export type ServiceDetailTech = {
-  category: string;
-  items: readonly string[];
-};
-
-export type ServiceDetailIndustry = {
-  name: string;
-  detail: string;
-};
-
-export type ServiceDetailFaq = {
-  q: string;
-  a: string;
-};
-
-export type ServiceDetailData = {
-  name: string;
-  category: string;
-  heroH1: string;
-  heroSub: string;
-  services: readonly ServiceDetailItem[];
-  steps?: readonly ServiceDetailStep[];
-  techStack?: readonly ServiceDetailTech[];
-  industries?: readonly ServiceDetailIndustry[];
-  faqs?: readonly ServiceDetailFaq[];
-  ctaH2?: string;
-  ctaDesc?: string;
-};
-
-export function ServiceDetailPage({ data }: { data: ServiceDetailData }) {
-  const visibleServices = data.services.slice(0, 6);
-  const visibleSteps = data.steps?.slice(0, 5) ?? [];
-  const visibleTech = data.techStack?.slice(0, 6) ?? [];
-  const visibleIndustries = data.industries?.slice(0, 4) ?? [];
-  const visibleFaqs = data.faqs?.slice(0, 6) ?? [];
-
-  return (
-    <main id="main-content">
-      <section className="service-hero">
-        <div className="container-shell service-hero-grid">
-          <div className="service-hero-copy">
-            <div className="eyebrow">{data.category}</div>
-            <h1>{data.heroH1}</h1>
-            <p>{data.heroSub}</p>
-            <div className="page-hero-actions">
-              <BookingButton className="button button-primary">
-                Book a Technical Call <ArrowRight size={16} aria-hidden="true" />
-              </BookingButton>
-              <Link className="button button-secondary-dark" href="/case-studies">
-                Explore Our Work
-              </Link>
-            </div>
-            <div className="service-hero-note">
-              <ShieldCheck size={17} aria-hidden="true" />
-              <span>Ownership and handover terms defined per engagement. Deployment options scoped to the system. Defined delivery phases.</span>
-            </div>
-          </div>
-
-          <div className="service-hero-visual" aria-hidden="true">
-            <TechnicalVisual name={data.name} variant={data.category.toLowerCase().includes("data") || data.category.toLowerCase().includes("cloud") ? "data" : data.category.toLowerCase().includes("engineering") || data.category.toLowerCase().includes("product") ? "product" : "ai"} />
-          </div>
-        </div>
-      </section>
-
-      <section className="section service-capabilities-section">
-        <div className="container-shell">
-          <SectionHeading
-            eyebrow="What we build"
-            title={`${data.name}, engineered for production.`}
-            body="We scope around the system you actually need to operate, maintain, and operate — not a fixed vendor product or a one-size-fits-all implementation."
-          />
-          <div className="service-list-grid">
-            {visibleServices.map((service, index) => (
-              <article className="service-list-card" key={service.title}>
-                <div className="service-list-number">{String(index + 1).padStart(2, "0")}</div>
-                <h2>{service.title}</h2>
-                <p>{service.desc}</p>
-                {service.points?.length ? (
-                  <ul>
-                    {service.points.slice(0, 3).map((point) => (
-                      <li key={point}><Check size={14} aria-hidden="true" />{point}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {visibleSteps.length ? (
-        <section className="section section-dark">
-          <div className="container-shell">
-            <SectionHeading
-              eyebrow="Delivery"
-              title="A clear path from problem to production."
-              body="Each engagement is broken into defined phases with reviewable outputs. Scope can adapt, but accountability stays visible."
-            />
-            <div className="service-process-grid">
-              {visibleSteps.map((step, index) => (
-                <article className="service-process-step" key={`${step.tag ?? index}-${step.title}`}>
-                  <span className="service-process-number">{step.tag ?? String(index + 1).padStart(2, "0")}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {visibleTech.length ? (
-        <section className="section section-light service-stack-section">
-          <div className="container-shell">
-            <SectionHeading
-              eyebrow="Technology"
-              title="Tools selected for the system, not for the trend."
-              body="Technology choices follow your environment, operating constraints, team capability, and long-term ownership requirements."
-            />
-            <div className="service-tech-grid">
-              {visibleTech.map((group) => (
-                <div className="service-tech-group" key={group.category}>
-                  <h3>{group.category}</h3>
-                  <div>
-                    {group.items.slice(0, 7).map((item) => <span key={item}>{item}</span>)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {visibleIndustries.length ? (
-        <section className="section">
-          <div className="container-shell">
-            <div className="section-topline">
-              <SectionHeading
-                eyebrow="Where it fits"
-                title="Built around domain constraints."
-                body="The same technical capability can require very different controls, integrations, and operating models across industries."
-              />
-              <Link href="/industries" className="text-link">Explore industries <ArrowRight size={15} /></Link>
-            </div>
-            <div className="service-industry-grid">
-              {visibleIndustries.map((industry) => (
-                <article key={industry.name}>
-                  <h3>{industry.name}</h3>
-                  <p>{industry.detail}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {visibleFaqs.length ? (
-        <section className="section section-light">
-          <div className="container-shell service-faq-layout">
-            <SectionHeading
-              eyebrow="FAQ"
-              title="Technical questions, clear answers."
-              body="The exact architecture and delivery plan depend on your environment. These answers describe how OSYSTIC approaches the work."
-            />
-            <div className="service-faq-list">
-              {visibleFaqs.map((faq) => (
-                <details key={faq.q}>
-                  <summary>{faq.q}</summary>
-                  <p>{faq.a}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <FinalCTA
-        eyebrow="Start a project"
-        title={data.ctaH2 ?? "Have a system worth building?"}
-        body={data.ctaDesc ?? "Tell us what you are trying to achieve. We will help turn the problem into a clear technical plan."}
-      />
-    </main>
-  );
+export function ServiceDetailPage({data}:{data:ServiceDetailData}){
+  const services=data.services.slice(0,6),steps=data.steps?.slice(0,6)||[],tech=data.techStack?.slice(0,6)||[],industries=data.industries?.slice(0,4)||[],faqs=data.faqs?.slice(0,6)||[];
+  const category=data.category.toLowerCase(); const mode=category.includes("data")||category.includes("cloud")?"data":category.includes("engineering")||category.includes("product")?"product":"ai";
+  const layout=(hash(data.slug||data.name)%3)+1;
+  const style={"--service-accent":mode==="data"?"#16d9d4":mode==="product"?"#4b7cff":"#8b6cff"} as CSSProperties;
+  const ModeIcon=mode==="data"?Database:mode==="product"?Code2:Workflow;
+  return <main id="main-content" className={`fp-service fp-service-${mode} fp-service-layout-${layout}`} style={style}>
+    <section className="fp-service-hero"><div className="container-shell fp-service-hero-grid"><div><span className="future-kicker">{data.category.toUpperCase()} / SYSTEM NODE</span><span className="eyebrow">{data.name}</span><h1>{data.heroH1}</h1><p>{data.heroSub}</p><div className="page-hero-actions"><BookingButton>Book a Technical Call <ArrowRight size={16}/></BookingButton><Link href="/case-studies" className="button button-secondary-dark">Delivery evidence <ArrowRight size={15}/></Link></div><div className="fp-service-note"><ShieldCheck size={17}/><span>Ownership, deployment boundary, acceptance criteria, and handover are defined per engagement.</span></div></div><Visual data={data}/></div></section>
+    <section className="fp-service-scope"><div className="container-shell"><div className="fp-service-section-head"><span className="eyebrow">WHAT WE BUILD</span><h2>{data.name}, engineered as an operating system.</h2><p>Scope follows the real workflow, environment, failure modes, and ownership model rather than a fixed vendor package.</p></div><div className="fp-service-module-grid">{services.map((item,i)=><FutureReveal key={item.title} delay={(i%3)*.05}><article><span>0{i+1}</span><ModeIcon size={19}/><h3>{item.title}</h3><p>{item.desc}</p>{item.points?.length?<ul>{item.points.slice(0,3).map(x=><li key={x}><Check size={13}/>{x}</li>)}</ul>:null}{item.learnMoreHref?<Link href={item.learnMoreHref}>{item.learnMoreLabel||"Learn more"}<ArrowRight size={13}/></Link>:null}</article></FutureReveal>)}</div></div></section>
+    {steps.length?<section className="fp-service-delivery"><div className="container-shell"><div className="fp-service-section-head"><span className="eyebrow">DELIVERY SEQUENCE</span><h2>From unknowns to production evidence.</h2></div><div className="fp-service-timeline">{steps.map((step,i)=><div key={`${step.tag}-${step.title}`}><span>{step.tag||String(i+1).padStart(2,"0")}</span><div><h3>{step.title}</h3><p>{step.desc}</p>{step.from&&step.to?<small>{step.from} <ArrowRight size={12}/> {step.to}</small>:null}</div><i/></div>)}</div></div></section>:null}
+    {tech.length?<section className="fp-service-stack"><div className="container-shell fp-service-stack-grid"><div><span className="eyebrow">TECHNOLOGY SURFACE</span><h2>Tools selected for the system, not the trend.</h2><p>Technology follows environment, operating constraints, team ownership, and long-term maintainability.</p></div><div className="fp-stack-console">{tech.map((g,i)=><div key={g.category}><span>0{i+1}</span><b>{g.category}</b><p>{g.items.slice(0,8).join(" · ")}</p></div>)}</div></div></section>:null}
+    {industries.length?<section className="fp-service-context"><div className="container-shell"><div className="fp-service-section-head"><span className="eyebrow">WHERE IT FITS</span><h2>The same capability changes by domain.</h2></div><div className="fp-service-context-grid">{industries.map((x,i)=><article key={x.name}><span>{String(i+1).padStart(2,"0")}</span><h3>{x.name}</h3><p>{x.detail}</p></article>)}</div></div></section>:null}
+    {faqs.length?<section className="fp-service-faq"><div className="container-shell fp-service-faq-grid"><div><span className="eyebrow">TECHNICAL FAQ</span><h2>Questions worth resolving before delivery.</h2></div><div>{faqs.map((x,i)=><details key={x.q} open={i===0}><summary><span>0{i+1}</span>{x.q}<b>+</b></summary><p>{x.a}</p></details>)}</div></div></section>:null}
+    <FinalCTA title={data.ctaH2||`Need ${data.name}?`} body={data.ctaDesc||"Share the problem, current environment, constraints, and desired outcome. We will map the technical path around the system you need to own."}/>
+  </main>
 }

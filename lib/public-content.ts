@@ -14,6 +14,7 @@ export type PublicArticle = {
   tags: string[];
   category: string | null;
   publishedAt: string | null;
+  updatedAt: string | null;
   source: "blog" | "newsroom";
 };
 
@@ -32,6 +33,7 @@ export async function getPublishedBlogs(limit?: number): Promise<PublicArticle[]
       tags: JSON.parse(row.tags || "[]"),
       category: row.category,
       publishedAt: row.publishedAt ?? null,
+      updatedAt: row.updatedAt ?? null,
       source: "blog" as const,
     }));
   } catch (error) {
@@ -55,6 +57,7 @@ export async function getPublishedNews(limit?: number): Promise<PublicArticle[]>
       tags: JSON.parse(row.tags || "[]"),
       category: row.category,
       publishedAt: row.publishedAt ?? null,
+      updatedAt: row.updatedAt ?? null,
       source: "newsroom" as const,
     }));
   } catch (error) {
@@ -71,7 +74,7 @@ export async function getBlogBySlug(slug: string): Promise<PublicArticle | null>
     return {
       id: row.id, title: row.title, slug: row.slug, excerpt: row.excerpt, content: sanitizePublishedHtml(row.content),
       featuredImage: row.featuredImage && isSafePublicImage(row.featuredImage) ? row.featuredImage : null, author: row.author, tags: JSON.parse(row.tags || "[]"), category: row.category,
-      publishedAt: row.publishedAt ?? null, source: "blog",
+      publishedAt: row.publishedAt ?? null, updatedAt: row.updatedAt ?? null, source: "blog",
     };
   } catch (error) {
     console.error("Unable to load blog post:", error);
@@ -87,7 +90,7 @@ export async function getNewsBySlug(slug: string): Promise<PublicArticle | null>
     return {
       id: row.id, title: row.title, slug: row.slug, excerpt: row.excerpt, content: sanitizePublishedHtml(row.content),
       featuredImage: row.featuredImage && isSafePublicImage(row.featuredImage) ? row.featuredImage : null, author: row.author, tags: JSON.parse(row.tags || "[]"), category: row.category,
-      publishedAt: row.publishedAt ?? null, source: "newsroom",
+      publishedAt: row.publishedAt ?? null, updatedAt: row.updatedAt ?? null, source: "newsroom",
     };
   } catch (error) {
     console.error("Unable to load newsroom article:", error);

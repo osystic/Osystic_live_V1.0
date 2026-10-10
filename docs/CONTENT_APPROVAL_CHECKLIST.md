@@ -7,7 +7,8 @@ Every public claim should be verifiable before publication.
 - Brand: **OSYSTIC**
 - Address: 102 Gold Ave SW, PMB 734, Albuquerque, NM 87102, USA
 - Email: hello@osystic.com
-- Local Operations: Lahore, Pakistan
+- Business Presence: United States
+- Delivery Model: Global project delivery
 
 Do not replace these with mock cities, placeholder telephone numbers, or invented international offices.
 

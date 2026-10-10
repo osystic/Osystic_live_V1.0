@@ -1,41 +1,21 @@
-import type { Metadata } from "next";
+import { createSeoMetadata } from "@/lib/seo";
+import type { CSSProperties } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Radar, ShieldAlert, Timer, Database, Workflow } from "lucide-react";
 import { INDUSTRIES } from "../_data/industries-data";
 import { FinalCTA } from "../components/marketing/FinalCTA";
-import { SectionHeading } from "../components/marketing/SectionHeading";
-import { primaryIndustries } from "../config/site";
+import { FutureReveal } from "../components/future/FutureReveal";
 
-export const metadata: Metadata = {
-  title: "Industries",
-  description: "OSYSTIC engineering for finance, manufacturing, healthcare, technology, and other data-intensive sectors.",
-  alternates: { canonical: "/industries" },
-};
+export const metadata = createSeoMetadata({
+  title: 'Enterprise AI Engineering by Industry',
+  description: 'Explore OSYSTIC engineering for finance, manufacturing, healthcare, technology, retail, logistics, telecom, and other data-intensive operating environments.',
+  path: '/industries',
+  keywords: ['AI engineering by industry','enterprise AI solutions','industry software engineering'],
+});
 
-export default function IndustriesPage() {
-  const secondary = INDUSTRIES.filter(i => !primaryIndustries.some(p => p.href.endsWith(`/${i.slug}`)));
-  return (
-    <main id="main-content">
-      <section className="page-hero">
-        <div className="container-shell">
-          <span className="eyebrow">INDUSTRIES</span>
-          <h1 style={{ maxWidth:950 }}>Domain context changes the <span className="accent">engineering decisions.</span></h1>
-          <p style={{ maxWidth:760 }}>The same model or software architecture behaves differently when data sensitivity, latency, auditability, workflow integration, and operational risk change. Our industry pages explain the problems we are equipped to engineer around.</p>
-        </div>
-      </section>
-
-      <section className="section section-light">
-        <div className="container-shell">
-          <SectionHeading eyebrow="PRIMARY FOCUS" title="Four sectors where technical depth matters." body="These are the industries we foreground in the main navigation. Additional sector pages remain available where they provide useful context." />
-          <div className="industry-grid">
-            {primaryIndustries.map((industry,index) => <Link className="industry-card" href={industry.href} key={industry.name}><span className="industry-number">0{index+1}</span><h3>{industry.name}</h3><p>{industry.description}</p><span className="text-link">Explore industry <ArrowRight size={14}/></span></Link>)}
-          </div>
-        </div>
-      </section>
-
-      {secondary.length ? <section className="section section-soft"><div className="container-shell"><SectionHeading eyebrow="ADDITIONAL SECTORS" title="Other operating contexts we support."/><div className="work-grid sector-grid">{secondary.map(industry => <Link className="work-empty" href={`/industries/${industry.slug}`} key={industry.slug}><span className="work-kicker">INDUSTRY</span><h3>{industry.name}</h3><p>{industry.description}</p><span className="text-link" style={{ marginTop:18 }}>Learn more <ArrowRight size={14}/></span></Link>)}</div></div></section> : null}
-
-      <FinalCTA title="Have industry-specific constraints?" body="Share the workflow, data, regulatory context, infrastructure, and operating conditions. The architecture should be designed around them from the start." />
-    </main>
-  );
-}
+const factors=[[ShieldAlert,"RISK"],[Timer,"LATENCY"],[Database,"DATA"],[Workflow,"WORKFLOW"]] as const;
+export default function IndustriesPage(){return <main id="main-content" className="fp-industries">
+  <section className="fp-industries-hero"><div className="container-shell fp-industries-hero-grid"><div><span className="future-kicker">INDUSTRY INTELLIGENCE / RADAR</span><span className="eyebrow">INDUSTRIES</span><h1>Context is not a vertical label. <span>It changes the system.</span></h1><p>Data sensitivity, failure cost, response time, auditability, and workflow ownership alter engineering decisions. We start with the operating environment before selecting the architecture.</p></div><div className="fp-industry-radar"><span className="ring r1"/><span className="ring r2"/><span className="ring r3"/><span className="sweep"/><div className="core"><Radar size={28}/><b>CONTEXT</b></div>{factors.map(([Icon,label],i)=><div className={`factor f${i+1}`} key={label}><Icon size={16}/><span>{label}</span></div>)}</div></div></section>
+  <section className="fp-industry-grid-section"><div className="container-shell"><div className="fp-industry-grid-head"><span className="eyebrow">OPERATING ENVIRONMENTS</span><h2>{INDUSTRIES.length} contexts. Different constraints.</h2></div><div className="fp-industry-matrix">{INDUSTRIES.map((industry,i)=><FutureReveal key={industry.slug} delay={(i%4)*.04}><Link href={`/industries/${industry.slug}`} className="fp-industry-cell" style={{"--industry-accent":industry.accent} as CSSProperties}><div><span>{String(i+1).padStart(2,"0")}</span><b>{industry.name}</b></div><h3>{industry.tagline}</h3><p>{industry.description}</p><div className="fp-industry-signals"><span>DATA</span><i/><span>RISK</span><i/><span>OPS</span></div><span className="future-inline-link">Open environment <ArrowRight size={14}/></span></Link></FutureReveal>)}</div></div></section>
+  <FinalCTA title="Have industry-specific constraints?" body="Share the workflow, data boundaries, regulatory context, infrastructure, and operating conditions. The system should be designed around them from the start."/>
+</main>}

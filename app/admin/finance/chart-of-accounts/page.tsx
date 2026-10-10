@@ -10,7 +10,7 @@ const ACCOUNT_TYPES = ["asset", "liability", "equity", "revenue", "expense"];
 export default function ChartOfAccountsPage() {
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ code: "", name: "", type: "asset", description: "", currency: "PKR" });
+  const [form, setForm] = useState({ code: "", name: "", type: "asset", description: "", currency: "USD" });
 
   const { data, isLoading } = useQuery({
     queryKey: ["accounts"],
@@ -23,7 +23,7 @@ export default function ChartOfAccountsPage() {
       if (!r.ok) throw new Error("Failed");
       return r.json();
     },
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["accounts"] }); setShowForm(false); toast.success("Account created"); setForm({ code: "", name: "", type: "asset", description: "", currency: "PKR" }); },
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["accounts"] }); setShowForm(false); toast.success("Account created"); setForm({ code: "", name: "", type: "asset", description: "", currency: "USD" }); },
     onError: () => toast.error("Failed to create account"),
   });
 

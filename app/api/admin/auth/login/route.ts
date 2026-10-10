@@ -4,14 +4,13 @@ import bcrypt from "bcrypt";
 import { z } from "zod";
 import { adminUsers } from "@/drizzle/schema";
 import { db } from "@/lib/db";
+import { getAllowedAdminEmail } from "@/lib/admin-identity";
 import { signAdminToken } from "@/lib/admin-auth";
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
 });
-
-const ALLOWED_EMAIL = "OsysticArslan@osystic.com";
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
 const WINDOW_MS = 15 * 60 * 1000;
@@ -23,6 +22,9 @@ function clientIp(req: NextRequest) {
 
 function limited(ip: string) {
   const now = Date.now();
+  for (const [key, entry] of attempts) {
+    if (entry.resetAt <= now) attempts.delete(key);
+  }
   const entry = attempts.get(ip);
   if (!entry || entry.resetAt <= now) {
     attempts.set(ip, { count: 1, resetAt: now + WINDOW_MS });
@@ -50,9 +52,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 400 });
     }
 
+    const allowedEmail = getAllowedAdminEmail();
+    if (!allowedEmail) {
+      console.error("ADMIN_ALLOWED_EMAIL is not configured.");
+      return NextResponse.json({ error: "Admin authentication is not configured." }, { status: 503 });
+    }
+
     const email = parsed.data.email.trim().toLowerCase();
-    if (email !== ALLOWED_EMAIL.toLowerCase()) {
-      return NextResponse.json({ error: "Only OsysticArslan@osystic.com is authorized." }, { status: 403 });
+    if (email !== allowedEmail) {
+      return NextResponse.json({ error: "This account is not authorized for admin access." }, { status: 403 });
     }
 
     const [user] = await db.select().from(adminUsers).where(eq(adminUsers.email, email)).limit(1);

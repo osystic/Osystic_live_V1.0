@@ -9,11 +9,11 @@ const ACCOUNT_TYPES = ["bank", "cash", "wallet", "platform", "gateway", "card", 
 export default function BankingPage() {
   const qc = useQueryClient();
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ name: "", type: "bank", currency: "PKR", openingBalance: 0, bankName: "", accountNumber: "", swiftCode: "", iban: "" });
+  const [form, setForm] = useState({ name: "", type: "bank", currency: "USD", openingBalance: 0, bankName: "", accountNumber: "", swiftCode: "", iban: "" });
   const { data, isLoading } = useQuery({ queryKey: ["banking"], queryFn: async () => { const r = await fetch("/api/admin/finance/banking"); return r.json(); } });
 
   const create = useMutation({ mutationFn: async (f: typeof form) => { const r = await fetch("/api/admin/finance/banking", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(f) }); if (!r.ok) throw new Error("Failed"); return r.json(); },
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["banking"] }); setShowForm(false); toast.success("Account created"); setForm({ name: "", type: "bank", currency: "PKR", openingBalance: 0, bankName: "", accountNumber: "", swiftCode: "", iban: "" }); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["banking"] }); setShowForm(false); toast.success("Account created"); setForm({ name: "", type: "bank", currency: "USD", openingBalance: 0, bankName: "", accountNumber: "", swiftCode: "", iban: "" }); },
     onError: () => toast.error("Failed"),
   });
 

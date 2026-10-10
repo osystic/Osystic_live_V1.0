@@ -1,16 +1,22 @@
 export const siteConfig = {
   name: "OSYSTIC",
   legalName: "OSYSTIC",
-  url: "https://osystic.com",
+  url: "https://www.osystic.com",
+  ogImage: "/brand/osystic-og.png",
   description:
-    "OSYSTIC designs, builds, and deploys production AI systems, digital products, and data infrastructure for organizations where reliability, security, and ownership matter.",
+    "OSYSTIC is a US-based enterprise AI and software engineering company that designs, builds, and deploys production AI systems, digital products, data platforms, and cloud infrastructure.",
   email: "hello@osystic.com",
   address: {
     line1: "102 Gold Ave SW, PMB 734",
     line2: "Albuquerque, NM 87102",
-    country: "USA",
+    city: "Albuquerque",
+    region: "NM",
+    postalCode: "87102",
+    country: "United States",
+    countryCode: "US",
   },
-  localOperations: "Lahore, Pakistan",
+  businessPresence: "United States",
+  serviceArea: "Worldwide",
   social: {
     linkedin: "https://www.linkedin.com/company/osystic",
   },
@@ -19,7 +25,7 @@ export const siteConfig = {
     { label: "Capabilities", href: "/capabilities" },
     { label: "Industries", href: "/industries" },
     { label: "Insights", href: "/insights" },
-    // { label: "Company", href: "/about" },
+    { label: "Company", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
 } as const;

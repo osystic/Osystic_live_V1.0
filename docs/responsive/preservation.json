@@ -40,7 +40,6 @@
     "lib/resend.ts",
     "lib/supabase.ts",
     "next.config.ts",
-    "package-lock.json",
     "package.json",
     "proxy.ts",
     "public/brand/osystic-logo-source-dark.png",

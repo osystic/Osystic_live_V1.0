@@ -15,7 +15,7 @@ interface JournalLine {
 export default function JournalEntriesPage() {
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ description: "", entryDate: "", currency: "PKR", lines: [{ accountId: "", description: "", debit: 0, credit: 0 }, { accountId: "", description: "", debit: 0, credit: 0 }] as JournalLine[] });
+  const [form, setForm] = useState({ description: "", entryDate: "", currency: "USD", lines: [{ accountId: "", description: "", debit: 0, credit: 0 }, { accountId: "", description: "", debit: 0, credit: 0 }] as JournalLine[] });
 
   const { data, isLoading } = useQuery({
     queryKey: ["journal-entries"],

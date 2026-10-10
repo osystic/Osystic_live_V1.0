@@ -7,11 +7,11 @@ import toast from "react-hot-toast";
 export default function VendorBillsPage() {
   const qc = useQueryClient();
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ vendorName: "", description: "", billDate: "", dueDate: "", currency: "PKR", subtotal: 0, taxAmount: 0, withholdingTax: 0, totalAmount: 0, notes: "" });
+  const [form, setForm] = useState({ vendorName: "", description: "", billDate: "", dueDate: "", currency: "USD", subtotal: 0, taxAmount: 0, withholdingTax: 0, totalAmount: 0, notes: "" });
   const { data, isLoading } = useQuery({ queryKey: ["vendor-bills"], queryFn: async () => { const r = await fetch("/api/admin/finance/vendor-bills"); return r.json(); } });
 
   const create = useMutation({ mutationFn: async (f: typeof form) => { const r = await fetch("/api/admin/finance/vendor-bills", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(f) }); if (!r.ok) throw new Error("Failed"); return r.json(); },
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["vendor-bills"] }); setShowForm(false); toast.success("Bill created"); setForm({ vendorName: "", description: "", billDate: "", dueDate: "", currency: "PKR", subtotal: 0, taxAmount: 0, withholdingTax: 0, totalAmount: 0, notes: "" }); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["vendor-bills"] }); setShowForm(false); toast.success("Bill created"); setForm({ vendorName: "", description: "", billDate: "", dueDate: "", currency: "USD", subtotal: 0, taxAmount: 0, withholdingTax: 0, totalAmount: 0, notes: "" }); },
     onError: () => toast.error("Failed"),
   });
 

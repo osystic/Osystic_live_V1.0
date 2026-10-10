@@ -1,121 +1,22 @@
-import { DeliveryVisual } from "../components/marketing/TechnicalVisual";
-import type { LucideIcon } from "lucide-react";
-import type { Metadata } from "next";
+import { createSeoMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Layers3, LockKeyhole, ShieldCheck } from "lucide-react";
-import { FinalCTA } from "../components/marketing/FinalCTA";
-import { SectionHeading } from "../components/marketing/SectionHeading";
+import { ArrowRight, CheckCircle2, Layers3, LockKeyhole, Radar, ShieldCheck } from "lucide-react";
 import { fetchCaseStudies } from "./actions";
+import { FinalCTA } from "../components/marketing/FinalCTA";
+import { FutureReveal } from "../components/future/FutureReveal";
 
-export const metadata: Metadata = {
-  title: "Work & Case Studies",
-  description: "Selected OSYSTIC work across production AI, product engineering, data systems, cloud, and enterprise software.",
-  alternates: { canonical: "/case-studies" },
-};
-
-const fallbacks = [
-  "/media/visuals/diagram-work.svg",
-  "/media/visuals/diagram-work.svg",
-  "/media/visuals/diagram-cloud.svg",
-  "/media/visuals/diagram-work.svg",
-  "/media/visuals/diagram-edge.svg",
-];
-
-export default async function WorkPage() {
-  const studies = await fetchCaseStudies();
-  const featured = studies[0];
-  const rest = studies.slice(1);
-
-  return (
-    <main id="main-content">
-      <section className="page-hero">
-        <div className="container-shell page-hero-grid">
-          <div>
-            <span className="eyebrow">WORK / CASE STUDIES</span>
-            <h1>Real systems. <span className="accent">Measurable impact.</span></h1>
-            <p>We publish work only when the underlying project information is cleared for public use. Where client confidentiality applies, relevant experience can be discussed privately during discovery.</p>
-          </div>
-          <div className="page-hero-visual">
-            <DeliveryVisual />
-          </div>
-        </div>
-      </section>
-
-      {featured ? (
-        <section className="section section-light">
-          <div className="container-shell">
-            <div className="featured-work-heading"><SectionHeading eyebrow="FEATURED CASE STUDY" title={featured.title} body={featured.excerpt || featured.challenge} /></div>
-            <Link href={`/case-studies/${featured.slug}`} className="work-card featured-work">
-              <div className="work-media">
-                <Image src={featured.featuredImage || fallbacks[0]} alt="" fill sizes="(max-width:1024px) 94vw, 650px" />
-              </div>
-              <div className="work-card-body">
-                <span className="work-kicker">{featured.client}</span>
-                <h3>{featured.title}</h3>
-                <p><strong style={{ color:"var(--text)" }}>Challenge:</strong> {featured.challenge}</p>
-                <p><strong style={{ color:"var(--text)" }}>Solution:</strong> {featured.solution}</p>
-                {featured.results.length ? <div className="work-results">{featured.results.slice(0,3).map(item => <span key={item}>{item}</span>)}</div> : null}
-                <span className="text-link" style={{ marginTop:24 }}>Read case study <ArrowRight size={15}/></span>
-              </div>
-            </Link>
-          </div>
-        </section>
-      ) : (
-        <section className="section section-light">
-          <div className="container-shell">
-            <div className="work-empty confidentiality-panel">
-              <span className="eyebrow">PUBLIC CASE STUDIES</span>
-              <h3>Public case studies are being prepared.</h3>
-              <p>We publish project details and outcomes only when they are approved for public use. Relevant experience can be discussed during discovery while respecting client confidentiality.</p>
-              <Link className="text-link" href="/contact" style={{ marginTop:22 }}>Ask about relevant experience <ArrowRight size={15}/></Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {rest.length ? (
-        <section className="section section-soft">
-          <div className="container-shell">
-            <SectionHeading eyebrow="MORE WORK" title="Selected production engagements." />
-            <div className="work-grid">
-              {rest.map((study,index) => (
-                <Link className="work-card" href={`/case-studies/${study.slug}`} key={study.id}>
-                  <div className="work-media"><Image src={study.featuredImage || fallbacks[(index+1)%fallbacks.length]} alt="" fill sizes="(max-width:800px) 94vw, (min-width:1440px) 624px, 48vw" /></div>
-                  <div className="work-card-body">
-                    <span className="work-kicker">CASE STUDY</span>
-                    <h3>{study.title}</h3>
-                    <p>{study.excerpt || study.challenge}</p>
-                    {study.results.length ? <div className="work-results">{study.results.slice(0,2).map(item => <span key={item}>{item}</span>)}</div> : null}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="section section-light">
-        <div className="container-shell">
-          <SectionHeading eyebrow="EVERY ENGAGEMENT" title="A delivery model built around client control." />
-          <div className="industry-grid">
-            {([
-              [LockKeyhole,"Clear Ownership & Handover","Ownership, licensing, source delivery, and handover expectations are defined for the engagement."],
-              [Layers3,"Phased Delivery","Each phase has visible deliverables and acceptance points before the next phase begins."],
-              [ShieldCheck,"Security-Conscious Engineering","Data flow, access, secrets, observability, and deployment boundaries are addressed against the system requirements."],
-              [CheckCircle2,"Documentation & Handoff","Architecture decisions and operating knowledge can be documented so the system remains understandable after delivery."],
-            ] as [LucideIcon, string, string][]).map(([Icon,title,body],index) => (
-              <article className="industry-card" key={title}>
-                <div className="capability-icon" style={{ marginBottom:20 }}><Icon size={22}/></div>
-                <span className="industry-number">0{index+1}</span>
-                <h3 style={{ marginTop:14 }}>{title}</h3><p>{body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <FinalCTA title="Have a challenge worth solving?" body="Tell us the constraints, current system, data, and desired outcome. We can discuss relevant experience without exposing confidential client work." />
-    </main>
-  );
-}
+export const metadata = createSeoMetadata({
+  title: 'Enterprise AI & Software Case Studies',
+  description: 'Explore selected OSYSTIC case studies across production AI, product engineering, data platforms, cloud infrastructure, and enterprise software delivery.',
+  path: '/case-studies',
+  keywords: ['enterprise AI case studies','software engineering case studies','AI implementation examples'],
+});
+const fallback="/media/visuals/diagram-work.svg";
+export default async function WorkPage(){const studies=await fetchCaseStudies();const featured=studies[0];const rest=studies.slice(1);return <main id="main-content" className="fp-work-page">
+  <section className="fp-work-hero"><div className="container-shell fp-work-hero-grid"><div><span className="future-kicker">EVIDENCE LEDGER / PUBLIC WORK</span><span className="eyebrow">CASE STUDIES</span><h1>Systems are judged by <span>what survives production.</span></h1><p>We publish project information only when cleared for public use. Where confidentiality applies, relevant experience can be discussed privately during discovery.</p></div><div className="fp-evidence-radar"><span className="ring r1"/><span className="ring r2"/><div className="core"><Radar size={30}/><b>EVIDENCE</b><small>DELIVERY · OUTCOMES · HANDOFF</small></div><div className="metric m1"><span>PUBLIC</span><b>{studies.length.toString().padStart(2,"0")}</b></div><div className="metric m2"><span>STATUS</span><b>{studies.length?"LIVE":"PRIVATE"}</b></div></div></div></section>
+  {featured?<section className="fp-featured-evidence"><div className="container-shell"><div className="fp-work-section-head"><span className="eyebrow">FEATURED EVIDENCE</span><span>CASE / 001</span></div><Link href={`/case-studies/${featured.slug}`} className="fp-featured-case"><div className="fp-featured-media"><Image src={featured.featuredImage||fallback} alt="" fill sizes="(max-width:900px) 94vw, 52vw"/></div><div><span className="future-kicker">{featured.client}</span><h2>{featured.title}</h2><p>{featured.excerpt||featured.challenge}</p><div className="fp-evidence-lines"><span><b>CHALLENGE</b>{featured.challenge}</span><span><b>SOLUTION</b>{featured.solution}</span></div>{featured.results.length?<div className="fp-result-chips">{featured.results.slice(0,3).map(x=><span key={x}>{x}</span>)}</div>:null}<span className="future-inline-link">Open evidence file <ArrowRight size={15}/></span></div></Link></div></section>:<section className="fp-featured-evidence"><div className="container-shell"><div className="fp-private-evidence"><LockKeyhole size={28}/><span className="eyebrow">CLIENT CONFIDENTIALITY</span><h2>Relevant work exists beyond the public ledger.</h2><p>Many engagements involve proprietary systems, private data, or non-public product work. We discuss relevant experience without exposing confidential client information.</p><Link href="/contact" className="future-inline-link">Discuss relevant experience <ArrowRight size={15}/></Link></div></div></section>}
+  {rest.length?<section className="fp-evidence-archive"><div className="container-shell"><div className="fp-work-section-head"><span className="eyebrow">EVIDENCE ARCHIVE</span><span>{rest.length} ADDITIONAL FILES</span></div><div className="fp-evidence-grid">{rest.map((study,i)=><FutureReveal key={study.id} delay={(i%3)*.05}><Link href={`/case-studies/${study.slug}`} className="fp-evidence-card"><div className="fp-evidence-media"><Image src={study.featuredImage||fallback} alt="" fill sizes="(max-width:800px) 94vw, 32vw"/></div><div><span>CASE / {String(i+2).padStart(3,"0")}</span><h3>{study.title}</h3><p>{study.excerpt||study.challenge}</p>{study.results.length?<div>{study.results.slice(0,2).map(x=><small key={x}>{x}</small>)}</div>:null}<b>OPEN <ArrowRight size={13}/></b></div></Link></FutureReveal>)}</div></div></section>:null}
+  <section className="fp-evidence-model"><div className="container-shell"><div className="fp-work-section-head"><span className="eyebrow">EVERY ENGAGEMENT</span><span>CONTROL MODEL</span></div><div className="fp-evidence-model-grid">{[[LockKeyhole,"Ownership & handover"],[Layers3,"Phased delivery"],[ShieldCheck,"Security-conscious engineering"],[CheckCircle2,"Documentation & evidence"]].map(([Icon,title],i)=>{const I=Icon as typeof LockKeyhole;return <div key={title as string}><span>0{i+1}</span><I size={21}/><h3>{title as string}</h3></div>})}</div></div></section>
+  <FinalCTA title="Have a challenge worth solving?" body="Tell us the constraints, current system, data, and desired outcome. We can discuss relevant experience without exposing confidential client work."/>
+</main>}

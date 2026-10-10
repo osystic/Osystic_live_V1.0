@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       type: body.type,
       parentId: body.parentId,
       description: body.description,
-      currency: body.currency || "PKR",
+      currency: body.currency || "USD",
     }).returning();
     return NextResponse.json({ account }, { status: 201 });
   } catch (error) {

@@ -6,27 +6,40 @@ import { blogs, caseStudies, newsroom } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { verifyAdminToken } from "@/lib/admin-auth";
 import { isSafePublicImage, sanitizePublishedHtml } from "@/lib/content-security";
+import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
 
 const kindSchema = z.enum(["blog", "case-study", "news"]);
 const statusSchema = z.enum(["draft", "published", "archived"]);
 
+const plain = (max: number, min = 0) =>
+  z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeSingleLine(value) : value),
+    z.string().min(min).max(max),
+  );
+
+const multiline = (max: number) =>
+  z.preprocess(
+    (value) => (typeof value === "string" ? sanitizeMultiline(value) : value),
+    z.string().max(max),
+  );
+
 const articleSchema = z.object({
   id: z.string().uuid().optional(),
   kind: kindSchema,
-  title: z.string().trim().min(3).max(220),
+  title: plain(220, 3),
   slug: z.string().trim().min(3).max(220).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must use lowercase letters, numbers, and hyphens only"),
-  excerpt: z.string().max(800).optional().default(""),
+  excerpt: multiline(800).optional().default(""),
   content: z.string().min(1).max(120000),
-  author: z.string().max(160).optional().default("OSYSTIC"),
-  category: z.string().max(120).optional().default("Engineering"),
+  author: plain(160).optional().default("OSYSTIC"),
+  category: plain(120).optional().default("Engineering"),
   featuredImage: z.string().max(1600).optional().default("").refine(isSafePublicImage, "Featured image must be a site-relative path or HTTPS URL"),
   status: statusSchema.optional().default("draft"),
-  tags: z.array(z.string().max(80)).max(20).optional().default([]),
-  client: z.string().max(200).optional().default("Confidential"),
-  challenge: z.string().max(4000).optional().default(""),
-  solution: z.string().max(8000).optional().default(""),
-  results: z.array(z.string().max(500)).max(20).optional().default([]),
-  technologies: z.array(z.string().max(100)).max(30).optional().default([]),
+  tags: z.array(plain(80, 1)).max(20).optional().default([]),
+  client: plain(200).optional().default("Confidential"),
+  challenge: multiline(4000).optional().default(""),
+  solution: multiline(8000).optional().default(""),
+  results: z.array(multiline(500)).max(20).optional().default([]),
+  technologies: z.array(plain(100, 1)).max(30).optional().default([]),
 });
 
 async function authorized() {

@@ -65,6 +65,32 @@ for (const p of contentFiles) {
 }
 report("branding/claim sentinels", forbiddenHits, "no VisionGen, old email, legacy purple, or prohibited absolute claims");
 
+// US-only public localization. Currency support such as PKR is intentionally not treated as a location claim.
+const legacyLocationTerms = [
+  ["legacy city A", ["La", "hore"].join("")],
+  ["legacy country", ["Paki", "stan"].join("")],
+  ["legacy region", ["Pun", "jab"].join("")],
+  ["legacy city B", ["Kara", "chi"].join("")],
+];
+const locationPatterns = legacyLocationTerms.map(([label, value]) => [
+  label,
+  new RegExp(`\\b${value}(?:i)?\\b`, "gi"),
+]);
+locationPatterns.push(["legacy timezone", new RegExp(["Asia", ["Kara", "chi"].join("")].join("/"), "gi")]);
+const locationHits = [];
+for (const p of contentFiles) {
+  const text = read(p);
+  for (const [label, rx] of locationPatterns) {
+    rx.lastIndex = 0;
+    if (rx.test(text)) locationHits.push(`${rel(p)}: ${label}`);
+  }
+}
+const siteConfigText = read(path.join(root, "app/config/site.ts"));
+if (!siteConfigText.includes("102 Gold Ave SW, PMB 734") || !siteConfigText.includes("Albuquerque, NM 87102") || !siteConfigText.includes('countryCode: "US"')) {
+  locationHits.push("app/config/site.ts: canonical US address is incomplete or changed");
+}
+report("US-only localization", locationHits, "no legacy non-US location claims; canonical Albuquerque, New Mexico address present");
+
 // Common secret/token literals. Documented placeholder connection strings are explicitly ignored.
 const directSecretPatterns = [
   ["private key", /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/g],
@@ -221,9 +247,41 @@ if (!/ENGINEERING_SLUGS\.filter\(\(slug\)\s*=>\s*slug\s*!==\s*["']blockchain["']
 }
 for (const p of contentFiles.filter((p) => [".ts", ".tsx"].includes(path.extname(p)))) {
   const text = read(p);
-  if (/(?:metaTitle|title)\s*:\s*["'`][^"'`\n]*\|\s*OSYSTIC/.test(text)) seoFailures.push(`${rel(p)}: title already includes OSYSTIC while root metadata template appends it`);
+  if (/\b(?:metaTitle|title)\s*:\s*["'`][^"'`\n]*\|\s*OSYSTIC\b/.test(text)) seoFailures.push(`${rel(p)}: title already includes OSYSTIC while root metadata template appends it`);
 }
 report("SEO consolidation hygiene", seoFailures, "redirected aliases excluded; de-emphasized service excluded; no duplicate title suffixes");
+
+// Metadata/API coverage and core crawl surfaces for every public App Router page.
+const metadataFailures = [];
+for (const p of files.filter((p) => rel(p).startsWith("app/") && rel(p).endsWith("/page.tsx") && !rel(p).startsWith("app/admin/"))) {
+  const r = rel(p);
+  const text = read(p);
+  const inheritedUnauthorized = r === "app/unauthorized/page.tsx" && fs.existsSync(path.join(root, "app/unauthorized/layout.tsx"));
+  if (!inheritedUnauthorized && !/\b(?:metadata|generateMetadata)\b/.test(text)) metadataFailures.push(`${r}: metadata export/generator missing`);
+}
+for (const required of ["app/sitemap.ts", "app/robots.ts", "lib/seo.ts", "lib/structured-data.ts", "app/components/seo/StructuredData.tsx"]) {
+  if (!fs.existsSync(path.join(root, required))) metadataFailures.push(`${required}: required SEO surface missing`);
+}
+const layoutText = read(path.join(root, "app/layout.tsx"));
+for (const schemaName of ["organizationSchema", "localBusinessSchema", "websiteSchema"]) {
+  if (!layoutText.includes(schemaName)) metadataFailures.push(`app/layout.tsx: ${schemaName} not rendered`);
+}
+report("public metadata and structured data", metadataFailures, "all public pages expose metadata; sitemap, robots, Organization, LocalBusiness, and WebSite schema are wired");
+
+// Security-header and same-origin mutation guard regression checks.
+const securityFailures = [];
+for (const header of ["Content-Security-Policy", "Strict-Transport-Security", "X-Frame-Options", "X-Content-Type-Options", "Referrer-Policy", "Permissions-Policy"]) {
+  if (!nextConfig.includes(header)) securityFailures.push(`next.config.ts: ${header} missing`);
+}
+if (!nextConfig.includes('"frame-ancestors \'none\'"')) securityFailures.push("next.config.ts: CSP frame-ancestors 'none' missing");
+if (!nextConfig.includes('isDevelopment ? " \'unsafe-eval\'" : ""')) securityFailures.push("next.config.ts: unsafe-eval is not restricted to development");
+const proxyText = read(path.join(root, "proxy.ts"));
+if (!proxyText.includes('matcher: ["/admin/:path*", "/api/:path*"]')) securityFailures.push("proxy.ts: /api CSRF matcher missing");
+if (!proxyText.includes('request.headers.get("origin")') || !proxyText.includes("csrfRejected")) securityFailures.push("proxy.ts: Origin-based CSRF guard missing");
+for (const required of ["app/api/contact/route.ts", "app/api/careers/apply/route.ts", "lib/input-security.ts", "lib/content-security.ts"]) {
+  if (!fs.existsSync(path.join(root, required))) securityFailures.push(`${required}: validation/sanitization surface missing`);
+}
+report("enterprise security regression checks", securityFailures, "security headers, production CSP posture, CSRF origin gate, and input sanitizers are wired");
 
 // Ensure the three pillar routes are physically present.
 const pillarFailures = ["ai-systems", "product-engineering", "data-cloud"].filter((slug) => !fs.existsSync(path.join(root, `app/capabilities/${slug}/page.tsx`))).map((slug) => `pillar route missing: /capabilities/${slug}`);

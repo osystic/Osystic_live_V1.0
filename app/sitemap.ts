@@ -5,8 +5,9 @@ import { ENGINEERING_SLUGS } from "./services/engineering/_data/engineering-data
 import { DATA_CLOUD_SLUGS } from "./services/data-cloud/_data/data-cloud-data";
 import { getPublishedBlogs, getPublishedNews } from "@/lib/public-content";
 import { fetchCaseStudies } from "./case-studies/actions";
+import { siteConfig } from "./config/site";
 
-const BASE = "https://osystic.com";
+const absolute = (path: string) => new URL(path, siteConfig.url).toString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [blogs, news, cases] = await Promise.all([
@@ -16,54 +17,66 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${BASE}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${BASE}/case-studies`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE}/capabilities`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/capabilities/ai-systems`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/capabilities/product-engineering`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/capabilities/data-cloud`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/industries`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/insights`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE}/about`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE}/leadership`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/trust`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE}/careers`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE}/contact`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/support`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE}/terms`, changeFrequency: "yearly", priority: 0.3 },
+    { url: absolute("/"), changeFrequency: "weekly", priority: 1 },
+    { url: absolute("/case-studies"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absolute("/capabilities"), changeFrequency: "monthly", priority: 0.95 },
+    { url: absolute("/capabilities/ai-systems"), changeFrequency: "monthly", priority: 0.9 },
+    { url: absolute("/capabilities/product-engineering"), changeFrequency: "monthly", priority: 0.9 },
+    { url: absolute("/capabilities/data-cloud"), changeFrequency: "monthly", priority: 0.9 },
+    { url: absolute("/industries"), changeFrequency: "monthly", priority: 0.85 },
+    { url: absolute("/insights"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absolute("/about"), changeFrequency: "monthly", priority: 0.75 },
+    { url: absolute("/trust"), changeFrequency: "monthly", priority: 0.75 },
+    { url: absolute("/careers"), changeFrequency: "weekly", priority: 0.65 },
+    { url: absolute("/contact"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absolute("/support"), changeFrequency: "monthly", priority: 0.5 },
+    { url: absolute("/privacy"), changeFrequency: "yearly", priority: 0.2 },
+    { url: absolute("/terms"), changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const services: MetadataRoute.Sitemap = [
-    ...ALL_SLUGS.map((slug) => ({ url: `${BASE}/services/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
-    ...ENGINEERING_SLUGS.filter((slug) => slug !== "blockchain").map((slug) => ({ url: `${BASE}/services/engineering/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
-    ...DATA_CLOUD_SLUGS.map((slug) => ({ url: `${BASE}/services/data-cloud/${slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    { url: absolute("/services/ai-deep-learning"), changeFrequency: "monthly", priority: 0.82 },
+    ...ALL_SLUGS.filter((slug) => slug !== "ai-deep-learning").map((slug) => ({
+      url: absolute(`/services/${slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.82,
+    })),
+    ...ENGINEERING_SLUGS.filter((slug) => slug !== "blockchain").map((slug) => ({
+      url: absolute(`/services/engineering/${slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.82,
+    })),
+    ...DATA_CLOUD_SLUGS.map((slug) => ({
+      url: absolute(`/services/data-cloud/${slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.82,
+    })),
   ];
 
   const industries: MetadataRoute.Sitemap = INDUSTRIES.map((industry) => ({
-    url: `${BASE}/industries/${industry.slug}`,
+    url: absolute(`/industries/${industry.slug}`),
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.75,
   }));
 
   const dynamic: MetadataRoute.Sitemap = [
     ...blogs.map((item) => ({
-      url: `${BASE}/blogs/${item.slug}`,
-      lastModified: item.publishedAt ? new Date(item.publishedAt) : undefined,
+      url: absolute(`/blogs/${item.slug}`),
+      lastModified: item.updatedAt ? new Date(item.updatedAt) : item.publishedAt ? new Date(item.publishedAt) : undefined,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: 0.65,
     })),
     ...news.map((item) => ({
-      url: `${BASE}/newsroom/${item.slug}`,
-      lastModified: item.publishedAt ? new Date(item.publishedAt) : undefined,
+      url: absolute(`/newsroom/${item.slug}`),
+      lastModified: item.updatedAt ? new Date(item.updatedAt) : item.publishedAt ? new Date(item.publishedAt) : undefined,
       changeFrequency: "monthly" as const,
-      priority: 0.5,
+      priority: 0.55,
     })),
     ...cases.map((item) => ({
-      url: `${BASE}/case-studies/${item.slug}`,
+      url: absolute(`/case-studies/${item.slug}`),
       lastModified: item.publishedAt ? new Date(item.publishedAt) : undefined,
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: 0.82,
     })),
   ];
 

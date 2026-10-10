@@ -92,7 +92,6 @@ This installs 450+ packages including:
 - `jsonwebtoken` — JWT auth
 - `resend` — Email service
 - `chart.js` + `react-chartjs-2` — Charts
-- `jspdf` + `jspdf-autotable` — PDF generation
 - `zod` — Validation
 - `lucide-react` — Icons
 - `react-hot-toast` — Notifications
@@ -120,19 +119,19 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 DATABASE_URL=file:./local.db
 
 # ── Auth ──
-ADMIN_JWT_SECRET=cacbaRYzVv8wVOI/x0Qe4KsVubdP58ebMohgAC+XVG+uRgMDLkGUX7zTvhwTZ1jC
+ADMIN_JWT_SECRET=REPLACE_WITH_A_LONG_RANDOM_SECRET
 
 # ── Email (Resend) ──
 RESEND_API_KEY=YOUR_RESEND_API_KEY_HERE
 RESEND_FROM=Osystic <onboarding@resend.dev>
-ADMIN_EMAIL=osystic@gmail.com
+ADMIN_EMAIL=hello@osystic.com
 
 # ── Cal.com Booking ──
-CALCOM_USERNAME=visiongen
+CALCOM_USERNAME=YOUR_CALCOM_USERNAME
 CAL_EVENT_TYPE_SLUG=discovery-call
-NEXT_PUBLIC_CALCOM_USERNAME="visiongen-q7aj1r"
-CAL_API_KEY=cal_live_ee0b01d319cae86a8b4295fcf8cf2f86
-CAL_TIMEZONE=Asia/Karachi
+NEXT_PUBLIC_CALCOM_USERNAME="YOUR_CALCOM_USERNAME"
+CAL_API_KEY=YOUR_CAL_API_KEY_HERE
+CAL_TIMEZONE=America/Denver
 
 # ── AI Case Study Generator ──
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
@@ -156,30 +155,33 @@ GEMINI_MODEL=
 
 ### Access Restriction
 
-Only `OsysticArslan@osystic.com` can access the admin panel. This is enforced at 3 layers:
+Only the email configured in `ADMIN_ALLOWED_EMAIL` can access the admin panel. This is enforced at 3 layers:
 1. **Middleware** (`proxy.ts`) — Blocks unauthenticated requests
 2. **Login API** — Rejects non-allowed emails
 3. **Signup API** — Rejects non-allowed emails
 
-To change the allowed email, edit these 3 files:
-- `proxy.ts` (line 4)
-- `app/api/admin/auth/login/route.ts` (line 14)
-- `app/api/admin/auth/signup/route.ts` (line 14)
+To change the allowed admin account, set the environment variable:
+
+```env
+ADMIN_ALLOWED_EMAIL=admin@example.com
+```
+
+The proxy, login route, and signup route all read the same value through `lib/admin-identity.ts`; no source-code edit is required.
 
 ---
 
 ## 5. Database Setup
 
-The project uses **SQLite** — zero configuration required.
+The project uses **SQLite** for the current backend. Configure `DATABASE_URL` and apply the Drizzle schema before first use.
 
-### Automatic Setup
+### Database Initialization
 
-The database is created automatically when you first run the server. The file `local.db` will appear in the project root.
+The SQLite file can be created automatically by the database driver, but the application schema must be applied before first use. Keep runtime databases out of source control (`local.db`, WAL/SHM files, and `*.sqlite*` are ignored).
 
-### Manual Setup (if needed)
+### Initialize / update the schema
 
 ```bash
-# Push schema to database
+# Ensure DATABASE_URL points at your runtime SQLite file, then push the schema
 npx drizzle-kit push
 
 # Open Drizzle Studio (visual database browser)
@@ -253,7 +255,7 @@ Production server runs at: **http://localhost:3000**
 1. Start the server: `npm run dev`
 2. Open: **http://localhost:3000/admin/login**
 3. Login with:
-   - **Email:** `OsysticArslan@osystic.com`
+   - **Email:** the value configured in `ADMIN_ALLOWED_EMAIL`
    - **Password:** `Admin123!`
 
 ### Admin Pages
@@ -515,7 +517,7 @@ Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
 | `drizzle/finance-schema.ts` | Finance table definitions |
 | `drizzle.config.ts` | Drizzle Kit configuration |
 | `.env.local` | Environment variables |
-| `local.db` | SQLite database file |
+| `local.db` | Runtime SQLite database file (generated locally; do not commit) |
 
 ---
 
@@ -537,7 +539,7 @@ ADMIN_JWT_SECRET=your-secret-here-must-be-32-chars-minimum
 
 #### Tables don't exist
 ```bash
-# Push schema to database
+# Ensure DATABASE_URL points at your runtime SQLite file, then push the schema
 npx drizzle-kit push
 ```
 

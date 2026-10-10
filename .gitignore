@@ -1,5 +1,10 @@
-﻿.next/
+.next/
 node_modules/
 .env
 .env.local
 tsconfig.tsbuildinfo
+local.db
+local.db-wal
+local.db-shm
+*.sqlite
+*.sqlite3

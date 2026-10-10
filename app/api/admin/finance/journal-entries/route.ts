@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       entryDate: body.entryDate,
       totalDebit: totalDebit.toString(),
       totalCredit: totalCredit.toString(),
-      currency: body.currency || "PKR",
+      currency: body.currency || "USD",
     }).returning();
 
     for (const line of body.lines) {

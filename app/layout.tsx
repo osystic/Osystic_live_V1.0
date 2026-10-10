@@ -4,12 +4,17 @@ import "./globals.css";
 import "./premium.css";
 import "./responsive.css";
 import "./interaction.css";
+import "./future-home.css";
+import "./future-pages.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { FooterVisibility } from "./components/FooterVisibility";
 import { CalBookingProvider } from "./components/CalBooking";
+import { StructuredData } from "./components/seo/StructuredData";
 import { siteConfig } from "./config/site";
 import ChatWidget from "./chatbot/ChatWidgetLoader";
+import { DEFAULT_SEO_KEYWORDS } from "@/lib/seo";
+import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/structured-data";
 
 const geistSans = localFont({ src: "../public/fonts/Geist-Variable.woff2", variable: "--font-geist-sans", weight: "100 900", display: "swap" });
 const geistMono = localFont({ src: "../public/fonts/GeistMono-Variable.woff2", preload: false, variable: "--font-geist-mono", weight: "100 900", display: "swap" });
@@ -17,29 +22,46 @@ const geistMono = localFont({ src: "../public/fonts/GeistMono-Variable.woff2", p
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "OSYSTIC | AI & Software Engineering",
+    default: "OSYSTIC | Enterprise AI Engineering",
     template: "%s | OSYSTIC",
   },
   description: siteConfig.description,
+  keywords: [...DEFAULT_SEO_KEYWORDS],
   applicationName: "OSYSTIC",
   authors: [{ name: "OSYSTIC", url: siteConfig.url }],
   creator: "OSYSTIC",
   publisher: "OSYSTIC",
+  category: "technology",
+  classification: "Enterprise AI Engineering and Software Engineering",
+  referrer: "strict-origin-when-cross-origin",
+  formatDetection: { email: false, address: false, telephone: false },
+  alternates: { canonical: siteConfig.url },
   openGraph: {
     type: "website",
-    url: "/",
+    url: siteConfig.url,
     siteName: "OSYSTIC",
-    title: "OSYSTIC | AI & Software Engineering",
+    locale: "en_US",
+    title: "OSYSTIC | Enterprise AI Engineering",
     description: siteConfig.description,
-    images: [{ url: "/brand/osystic-og.png", width: 2400, height: 1260, alt: "OSYSTIC" }],
+    images: [{ url: siteConfig.ogImage, width: 2400, height: 1260, alt: "OSYSTIC enterprise AI engineering" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "OSYSTIC | AI & Software Engineering",
+    title: "OSYSTIC | Enterprise AI Engineering",
     description: siteConfig.description,
-    images: ["/brand/osystic-og.png"],
+    images: [siteConfig.ogImage],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -50,26 +72,13 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const organizationJsonLd = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    email: siteConfig.email,
-    logo: `${siteConfig.url}/brand/osystic-logo.png`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.address.line1,
-      addressLocality: "Albuquerque",
-      addressRegion: "NM",
-      postalCode: "87102",
-      addressCountry: "US",
-    },
-    sameAs: [siteConfig.social.linkedin],
+    "@graph": [organizationSchema(), localBusinessSchema(), websiteSchema()],
   };
 
   return (
-    <html lang="en">
+    <html lang="en-US">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <CalBookingProvider>
@@ -78,10 +87,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <FooterVisibility><Footer /></FooterVisibility>
         </CalBookingProvider>
         <ChatWidget />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
+        <StructuredData id="osystic-organization-schema" data={graph} />
       </body>
     </html>
   );

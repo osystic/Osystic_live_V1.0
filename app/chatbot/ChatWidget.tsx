@@ -72,6 +72,12 @@ function ChatWidgetInner() {
   const panelRef = useRef<HTMLDivElement>(null);
   const initialized = useRef(false);
   const isMobile = useRef(false);
+  const mounted = useRef(true);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; };
+  }, []);
 
   // Detect mobile viewport
   useEffect(() => {
@@ -91,12 +97,12 @@ function ChatWidgetInner() {
 
   // Initialize greeting on first open
   useEffect(() => {
-    if (isOpen && !initialized.current) {
-      initialized.current = true;
-      const greeting = getGreeting();
-      setMessages([greeting]);
-      setTimeout(() => inputRef.current?.focus(), 300);
-    }
+    if (!isOpen || initialized.current) return;
+    initialized.current = true;
+    const greeting = getGreeting();
+    setMessages([greeting]);
+    const timer = window.setTimeout(() => inputRef.current?.focus(), 300);
+    return () => window.clearTimeout(timer);
   }, [isOpen]);
 
   // Lock body scroll on mobile when chat is open
@@ -138,8 +144,9 @@ function ChatWidgetInner() {
       setInput("");
       setIsTyping(true);
 
-      // Simulate thinking delay
+      // Simulate thinking delay without updating an unmounted widget.
       await new Promise((r) => setTimeout(r, 600 + Math.random() * 800));
+      if (!mounted.current) return;
 
       const { message: assistantMsg, context: newContext } = processMessage(
         messageText,

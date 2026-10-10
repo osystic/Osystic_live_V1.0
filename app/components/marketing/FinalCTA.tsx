@@ -1,33 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Radio } from "lucide-react";
 import { BookingButton } from "../CalBooking";
-
-export function FinalCTA({
-  eyebrow = "START A PROJECT",
-  title = "Ready to build what’s next?",
-  body = "Tell us what you are building. We will help you define the right technical path, scope, and delivery approach.",
-}: {
-  eyebrow?: string;
-  title?: string;
-  body?: string;
-}) {
-  return (
-    <section className="section section-dark final-cta-section">
-      <div className="container-shell">
-        <div className="final-cta">
-          <div>
-            <span className="eyebrow">{eyebrow}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </div>
-          <div className="final-cta-actions">
-            <BookingButton />
-            <Link className="button button-secondary-dark" href="/contact">
-              Tell Us About Your Project <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+export function FinalCTA({eyebrow="START A PROJECT",title="Ready to build what’s next?",body="Tell us what you are building. We will help define the technical path, scope, and delivery approach.",step}:{eyebrow?:string;title?:string;body?:string;step?:string}){return <section className="fp-final-cta"><div className="container-shell"><div className="fp-final-cta-shell"><div className="fp-final-signal"><Radio size={22}/><span>{step||"OSYSTIC / PROJECT CHANNEL"}</span><b>OPEN</b></div><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2><p>{body}</p></div><div className="fp-final-actions"><BookingButton>Book a Technical Call <ArrowRight size={16}/></BookingButton><Link className="button button-secondary-dark" href="/contact">Tell us about your project <ArrowRight size={16}/></Link></div></div></div></section>}

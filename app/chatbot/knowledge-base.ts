@@ -46,7 +46,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
     ],
     category: "company",
     response:
-      "OSYSTIC has operations in Albuquerque, NM, USA (102 Gold Ave SW, PMB 734, Albuquerque, NM 87102) and local operations in Lahore, Pakistan. We serve clients globally.",
+      "OSYSTIC is a US-based company with its business address at 102 Gold Ave SW, PMB 734, Albuquerque, NM 87102, United States. We serve clients globally through distributed project delivery.",
     links: [{ label: "Contact Us", href: "/contact" }],
   },
   {
@@ -97,7 +97,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
     ],
     category: "company",
     response:
-      "OSYSTIC was founded by Shawaiz Arif, who serves as Founder & CEO. The company operates with a lean, engineering-focused team across the US and Pakistan.",
+      "OSYSTIC is a US-based, engineering-led AI and software company serving clients globally through distributed project delivery.",
     links: [{ label: "Leadership", href: "/about" }],
   },
 

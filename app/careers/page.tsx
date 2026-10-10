@@ -1,42 +1,17 @@
-import type { Metadata } from "next";
-import { ArrowRight, Code2, MapPin, Users } from "lucide-react";
+import { createSeoMetadata } from "@/lib/seo";
+import { ArrowRight, Code2, MapPin, Orbit, Terminal, Users } from "lucide-react";
 import { CareersClient } from "./_components/CareersClient";
-import { SectionHeading } from "../components/marketing/SectionHeading";
 import { siteConfig } from "../config/site";
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description: "Careers and general applications for OSYSTIC engineering and business roles.",
-  alternates: { canonical: "/careers" },
-};
+export const metadata = createSeoMetadata({
+  title: 'Careers',
+  description: 'Explore engineering and business career opportunities at OSYSTIC, a US-based enterprise AI and software engineering company serving clients globally.',
+  path: '/careers',
+  keywords: ['AI engineering careers','software engineering careers','OSYSTIC careers'],
+});
 
-export default function CareersPage() {
-  return (
-    <main id="main-content">
-      <section className="page-hero">
-        <div className="container-shell page-hero-grid">
-          <div>
-            <span className="eyebrow">CAREERS</span>
-            <h1>Build serious systems with <span className="accent">OSYSTIC.</span></h1>
-            <p>We value technical depth, ownership, clear communication, and people who can move from a problem statement to dependable delivery. Applications are reviewed against current team needs.</p>
-          </div>
-          <div className="page-hero-visual careers-hero-points">
-            <div><Code2 size={20}/><strong>Engineering depth</strong><span>AI, software, data, cloud, and product delivery.</span></div>
-            <div><Users size={20}/><strong>Ownership</strong><span>Work is organized around clear responsibility and visible delivery.</span></div>
-            <div><MapPin size={20}/><strong>Local operations</strong><span>{siteConfig.localOperations}</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-light">
-        <div className="container-shell careers-layout">
-          <div className="careers-intro">
-            <SectionHeading eyebrow="GENERAL APPLICATION" title="Tell us what you can build." body="Use the application form to share your experience, role interests, relevant skills, and CV. Submission does not imply a current vacancy or guarantee a response." />
-            <a className="text-link" href={`mailto:${siteConfig.email}`}>Questions about careers <ArrowRight size={14}/></a>
-          </div>
-          <div className="careers-form-shell"><CareersClient /></div>
-        </div>
-      </section>
-    </main>
-  );
-}
+export default function CareersPage(){return <main id="main-content" className="fp-careers">
+  <section className="fp-careers-hero"><div className="container-shell fp-careers-hero-grid"><div><span className="future-kicker">CAREERS / BUILD WITH OWNERSHIP</span><span className="eyebrow">JOIN OSYSTIC</span><h1>Build systems that have to <span>work after launch.</span></h1><p>We value technical depth, ownership, clear communication, and people who can turn ambiguity into dependable delivery.</p></div><div className="fp-career-orbit"><span className="ring a"/><span className="ring b"/><div className="core"><Orbit size={32}/><b>BUILD</b><small>SHIP · OWN · IMPROVE</small></div><div className="role r1"><Code2 size={17}/>ENGINEERING</div><div className="role r2"><Users size={17}/>DELIVERY</div><div className="role r3"><Terminal size={17}/>OPERATIONS</div></div></div></section>
+  <section className="fp-careers-values"><div className="container-shell"><div className="fp-careers-values-head"><span className="eyebrow">WORKING SIGNALS</span><h2>What matters in the room.</h2></div><div className="fp-career-signals"><div><span>01</span><Code2 size={20}/><h3>Engineering depth</h3><p>AI, software, data, cloud, and product delivery grounded in actual system behavior.</p></div><div><span>02</span><Users size={20}/><h3>Visible ownership</h3><p>Clear responsibility, direct communication, and reviewable outcomes instead of activity theatre.</p></div><div><span>03</span><MapPin size={20}/><h3>Distributed execution</h3><p>US-based company operations with distributed project collaboration across client markets and time zones.</p></div></div></div></section>
+  <section className="fp-careers-apply"><div className="container-shell fp-careers-apply-grid"><div><span className="eyebrow">GENERAL APPLICATION</span><h2>Tell us what you can build.</h2><p>Share your experience, role interests, relevant skills, and CV. Submission does not imply a current vacancy or guarantee a response.</p><a className="future-inline-link" href={`mailto:${siteConfig.email}`}>Questions about careers <ArrowRight size={14}/></a></div><div className="fp-career-form"><CareersClient/></div></div></section>
+</main>}

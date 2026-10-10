@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const [payment] = await db.insert(payments).values({
       paymentNumber, type: "vendor_payment", entityId: body.entityId,
       entityType: "vendor_bill", amount: body.amount.toString(),
-      currency: body.currency || "PKR", paymentDate: body.paymentDate,
+      currency: body.currency || "USD", paymentDate: body.paymentDate,
       paymentMethod: body.paymentMethod, reference: body.reference, notes: body.notes,
     }).returning();
     return NextResponse.json({ payment }, { status: 201 });
