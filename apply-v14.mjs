@@ -27,6 +27,16 @@ for (const target of [
   if (fs.existsSync(target)) fs.rmSync(target, { recursive: true, force: true });
 }
 
+const packageFile = "package.json";
+if (fs.existsSync(packageFile)) {
+  const pkg = JSON.parse(fs.readFileSync(packageFile, "utf8"));
+  if (pkg.dependencies) {
+    delete pkg.dependencies.jspdf;
+    delete pkg.dependencies["jspdf-autotable"];
+  }
+  fs.writeFileSync(packageFile, JSON.stringify(pkg, null, 2) + "\n");
+}
+
 const capabilityFile = "app/components/home/HomeCapabilitiesExperience.tsx";
 if (fs.existsSync(capabilityFile)) {
   let source = fs.readFileSync(capabilityFile, "utf8");
