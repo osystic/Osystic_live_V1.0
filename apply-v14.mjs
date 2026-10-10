@@ -18,7 +18,6 @@ execFileSync("unzip", ["-oq", archive, "-d", "."], { stdio: "inherit" });
 
 for (const target of [
   "package-lock.json",
-  "local.db",
   "local.db-shm",
   "local.db-wal",
   "public/team/shawaiz-arif.png",
