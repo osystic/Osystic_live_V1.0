@@ -1,5 +1,5 @@
 {
-  "installCommand": "node apply-v14.mjs && npm install && (npm audit --omit=dev || true)",
+  "installCommand": "node apply-v14.mjs && npm install && npm audit fix --omit=dev && (npm audit --omit=dev || true)",
   "buildCommand": "npm run build",
   "framework": "nextjs"
 }
