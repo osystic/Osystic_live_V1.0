@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
+import { DatabaseSync } from "node:sqlite";
 
 const apiUrl = "https://api.firestorage.ai/dev/file/shares/TjL27kaRmMLM/files/01a126ed4b8371169d29d7ac0e11c98d/download";
 
@@ -79,6 +80,19 @@ if (fs.existsSync(careersFile)) {
     '<h2 style={{ fontSize: "clamp(26px,3.5vw,38px)", fontWeight: 800, letterSpacing: "-0.04em", color: BLK, margin: "0 0 8px", fontFamily: FONT }}>\n                Application\n              </h2>',
   );
   fs.writeFileSync(careersFile, source);
+}
+
+if (!fs.existsSync("local.db")) {
+  throw new Error("Existing admin database local.db is missing from the deployment source.");
+}
+{
+  const adminDb = new DatabaseSync("local.db", { readOnly: true });
+  const row = adminDb.prepare("SELECT COUNT(*) AS c FROM sqlite_master WHERE type='table' AND name='admin_users'").get();
+  adminDb.close();
+  if (!row || Number(row.c) !== 1) {
+    throw new Error("Existing admin database is missing the admin_users schema.");
+  }
+  console.log("Existing admin database schema verified.");
 }
 
 console.log("OSYSTIC v1.4.1 deployment source applied with production type + semantic fixes.");
