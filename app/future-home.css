@@ -3308,3 +3308,57 @@
 }
 
 
+
+
+/* v1.4.2 hero corrective pass */
+.future-hero-orb-static{
+  border-color:rgba(103,139,255,.22);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(225,234,255,.95) 0 1.2%, rgba(83,116,255,.48) 1.8%, rgba(31,64,150,.12) 8%, transparent 24%),
+    radial-gradient(circle at 50% 50%, rgba(10,22,48,.94) 0 36%, rgba(20,45,103,.3) 37%, transparent 58%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 22px, rgba(95,134,255,.08) 23px 24px);
+  box-shadow:0 0 60px rgba(55,99,255,.12), inset 0 0 70px rgba(33,63,141,.15);
+}
+.future-hero-orb-static::before,
+.future-hero-orb-static::after{border-color:rgba(112,144,255,.22)}
+
+@media(max-width:1024px){
+  .future-story{min-height:auto!important}
+  .future-story-sticky{position:relative!important;top:auto!important;height:auto!important;min-height:0!important}
+}
+
+@media(max-width:700px){
+  .future-story .future-hero-shell{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+    padding-top:42px;
+    padding-bottom:40px;
+  }
+  .future-hero-copy{order:1}
+  .future-hero-visual{order:2;min-height:300px}
+  .future-hero-orbit{min-height:300px;inset:0}
+  .future-hero-telemetry{order:3}
+  .future-proof-stage{order:4;margin-top:18px}
+
+  .future-hero-copy>*,
+  .future-hero-orbit,
+  .future-hero-telemetry{
+    opacity:1!important;
+    visibility:visible!important;
+    transform:none!important;
+  }
+  .future-hero-copy h1{
+    font-size:clamp(2.45rem,12.4vw,3.45rem);
+    line-height:1.01;
+    letter-spacing:-.055em;
+  }
+  .future-hero-copy>p{font-size:14.5px;line-height:1.65}
+  .future-node-label{font-size:6.8px}
+  .future-node-label-a{left:2%;top:27%}
+  .future-node-label-b{right:2%;top:20%}
+  .future-node-label-c{left:5%;bottom:23%}
+  .future-node-label-d{right:2%;bottom:25%}
+  .future-hero-axis{opacity:.18}
+  .future-proof-heading{width:100%}
+}
