@@ -15,14 +15,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
+import { useState } from "react";
 
 const workflowStages = [
   {
@@ -106,80 +99,15 @@ const controlSignals = [
 ];
 
 export function HomeAIWorkflowExperience() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const reducedMotion = useReducedMotion();
   const active = workflowStages[activeIndex];
   const ActiveIcon = active.icon;
 
-  useGSAP(
-    () => {
-      if (reducedMotion || !sectionRef.current || !stageRef.current) return;
 
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 1025px)", () => {
-        const setStage = (index: number) => {
-          setActiveIndex((current) => (current === index ? current : index));
-        };
-
-        const trigger = ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.35,
-          onUpdate: (self) => {
-            const next = Math.min(
-              workflowStages.length - 1,
-              Math.floor(self.progress * workflowStages.length),
-            );
-            setStage(next);
-          },
-        });
-
-        gsap.fromTo(
-          ".future-ai-workflow-intro",
-          { opacity: 0.35, y: 36 },
-          {
-            opacity: 1,
-            y: 0,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 72%",
-              end: "top 28%",
-              scrub: true,
-            },
-          },
-        );
-
-        gsap.fromTo(
-          ".future-ai-runtime",
-          { opacity: 0.5, y: 42, scale: 0.975 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 58%",
-              end: "top 12%",
-              scrub: true,
-            },
-          },
-        );
-
-        return () => trigger.kill();
-      });
-
-      return () => mm.revert();
-    },
-    { scope: sectionRef, dependencies: [reducedMotion] },
-  );
 
   return (
     <section
-      ref={sectionRef}
       id="home-ai-workflow"
       className="future-ai-workflow"
       data-scroll-step="05"
@@ -189,7 +117,7 @@ export function HomeAIWorkflowExperience() {
       <div className="future-ai-workflow-glow future-ai-workflow-glow-a" aria-hidden="true" />
       <div className="future-ai-workflow-glow future-ai-workflow-glow-b" aria-hidden="true" />
 
-      <div ref={stageRef} className="future-ai-workflow-sticky">
+      <div className="future-ai-workflow-sticky">
         <div className="container-shell future-ai-workflow-shell">
           <header className="future-ai-workflow-intro">
             <div>

@@ -116,7 +116,7 @@ export function HomeHero() {
       const media = gsap.matchMedia();
 
       media.add("(min-width: 1025px)", () => {
-        gsap.set(proofRef.current, { autoAlpha: 0, y: 68, pointerEvents: "none" });
+        gsap.set(proofRef.current, { autoAlpha: 0, y: 48, pointerEvents: "none" });
         gsap.set(handoffRef.current, { autoAlpha: 0, y: 18 });
 
         const cards = gsap.utils.toArray<HTMLElement>(".future-proof-card", proofRef.current ?? undefined);
@@ -134,24 +134,24 @@ export function HomeHero() {
         });
 
         timeline
-          .to(copyRef.current, { y: -72, opacity: 0, scale: 0.97, duration: 0.28 }, 0.18)
-          .to(telemetryRef.current, { y: -34, opacity: 0, duration: 0.2 }, 0.22)
           .to(
             visualRef.current,
             {
-              xPercent: -36,
-              yPercent: -7,
-              scale: 0.73,
-              opacity: 0.56,
-              duration: 0.42,
+              xPercent: -30,
+              yPercent: -6,
+              scale: 0.76,
+              opacity: 0.58,
+              duration: 0.34,
             },
             0.22,
           )
-          .to(proofRef.current, { autoAlpha: 1, y: 0, pointerEvents: "auto", duration: 0.24 }, 0.42)
-          .to(cards, { y: 0, opacity: 1, stagger: 0.035, duration: 0.2 }, 0.46)
-          .to(handoffRef.current, { autoAlpha: 1, y: 0, duration: 0.18 }, 0.74)
-          .to(visualRef.current, { yPercent: -13, scale: 0.66, opacity: 0.34, duration: 0.2 }, 0.78)
-          .to(proofRef.current, { y: -14, duration: 0.18 }, 0.82);
+          .to(copyRef.current, { y: -56, opacity: 0, scale: 0.98, duration: 0.2 }, 0.26)
+          .to(telemetryRef.current, { y: -24, opacity: 0, duration: 0.16 }, 0.28)
+          .to(proofRef.current, { autoAlpha: 1, y: 0, pointerEvents: "auto", duration: 0.18 }, 0.30)
+          .to(cards, { y: 0, opacity: 1, stagger: 0.025, duration: 0.18 }, 0.34)
+          .to(handoffRef.current, { autoAlpha: 1, y: 0, duration: 0.16 }, 0.68)
+          .to(visualRef.current, { yPercent: -10, scale: 0.68, opacity: 0.30, duration: 0.18 }, 0.72)
+          .to(proofRef.current, { y: -10, duration: 0.16 }, 0.76);
 
         return () => {
           timeline.scrollTrigger?.kill();

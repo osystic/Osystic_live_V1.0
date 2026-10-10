@@ -3440,3 +3440,63 @@
 @media(max-width:1200px){
   .future-client-portal{display:none!important}
 }
+
+
+/* v1.4.4 visual pacing: keep the interface interactive without scroll-theatre dead zones. */
+.future-site-header{
+  background:rgba(7,11,20,.965);
+  border-bottom-color:rgba(132,154,205,.14);
+}
+.future-site-header::before{opacity:.38}
+.future-inline-link{white-space:nowrap;flex-shrink:0}
+
+@media (min-width:1025px){
+  .future-story{min-height:170svh}
+  .future-capabilities{
+    min-height:0!important;
+    padding:112px 0 116px;
+  }
+  .future-capabilities-sticky{
+    position:relative;
+    top:auto;
+    height:auto;
+    min-height:0;
+    display:block;
+  }
+  .future-capabilities-intro,
+  .future-capability-console,
+  .future-capability-energy{
+    opacity:1!important;
+    transform:none!important;
+  }
+  .future-capabilities-handoff{display:none}
+
+  .future-ai-workflow{
+    min-height:0!important;
+    padding:112px 0 118px;
+  }
+  .future-ai-workflow-sticky{
+    position:relative;
+    top:auto;
+    height:auto;
+    display:block;
+  }
+  .future-ai-workflow-intro,
+  .future-ai-runtime{
+    opacity:1!important;
+    transform:none!important;
+  }
+}
+
+/* v1.4.4 container alignment follow-up */
+@media (min-width:1025px){
+  .future-capabilities-shell,
+  .future-ai-workflow-shell{
+    width:min(calc(100% - 48px),1320px);
+    margin-inline:auto;
+  }
+}
+@media (max-width:640px){.future-inline-link{white-space:normal}}
+
+/* Remove redundant duplicated step label after static console conversion. */
+.future-capability-energy{display:none!important}

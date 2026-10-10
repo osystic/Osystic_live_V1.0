@@ -865,3 +865,73 @@
 
 /* Service hero mobile containment: every visual family must collapse to one column. */
 @media(max-width:1100px){.fp-service-hero-grid{grid-template-columns:minmax(0,1fr)}.fp-service-hero-grid>*{min-width:0}}
+
+
+/* v1.4.4 editorial composition: preserve diagrams without crop and remove dead masonry space. */
+@media (min-width:1025px){
+  .fh-insights{padding:104px 0}
+  .fh-insights-head{margin-bottom:38px}
+  .fh-insights-head>a{margin-bottom:8px;white-space:nowrap}
+  .fh-signal-grid{gap:16px}
+  .fh-signal-card{padding:16px}
+  .fh-signal-card.s1 .fh-signal-media{height:340px;min-height:0}
+  .fh-signal-card.s2{grid-template-columns:220px minmax(0,1fr);column-gap:18px}
+  .fh-signal-card.s2 .fh-signal-media{height:230px;min-height:0}
+  .fh-signal-card.s3 .fh-signal-media{height:260px;min-height:0}
+  .fh-signal-media img{object-fit:contain}
+  .fh-signal-terminal{
+    min-height:112px;
+    padding:22px;
+    grid-template-columns:28px minmax(0,1fr);
+    grid-template-rows:auto auto auto;
+    align-content:center;
+  }
+  .fh-signal-terminal>svg{grid-column:1;grid-row:1/4;align-self:start;margin-top:2px}
+  .fh-signal-terminal>span{grid-column:2;grid-row:1}
+  .fh-signal-terminal>b{grid-column:2;grid-row:2}
+  .fh-signal-terminal>small{grid-column:2;grid-row:3;min-width:0;line-height:1.5}
+
+  .fp-insight-board{padding:100px 0}
+  .fp-board-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .fp-board-card,
+  .fp-board-card:nth-child(1),
+  .fp-board-card:nth-child(2){grid-column:auto;display:flex;flex-direction:column;min-height:510px}
+  .fp-board-media,
+  .fp-board-card:nth-child(1) .fp-board-media{height:240px;min-height:240px}
+  .fp-board-media img{object-fit:contain}
+  .fp-board-card p{flex:1}
+}
+
+/* Conceptual diagrams must remain fully legible at every viewport. */
+.fh-signal-media img[src*="/media/visuals/diagram-"],
+.fp-board-media img[src*="/media/visuals/diagram-"]{
+  object-fit:contain!important;
+  object-position:center!important;
+}
+@media(max-width:780px){
+  .fp-board-media{height:auto;min-height:0;aspect-ratio:820/460}
+  .fh-signal-media{min-height:0;aspect-ratio:820/460}
+  .fh-signal-card.s2 .fh-signal-media{height:auto;min-height:0}
+}
+
+/* Mobile editorial cards: prevent intrinsic diagram ratio from widening grid tracks. */
+.fp-board-card,.fh-signal-card{min-width:0;max-width:100%}
+.fp-board-media,.fh-signal-media{width:100%;min-width:0;max-width:100%}
+@media(max-width:780px){
+  .fp-board-card:nth-child(n) .fp-board-media{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:820/460;
+  }
+  .fp-board-card>*{min-width:0;max-width:100%}
+  .fp-board-meta{min-width:0;flex-wrap:wrap}
+  .fh-signal-card.s1 .fh-signal-media,
+  .fh-signal-card.s2 .fh-signal-media,
+  .fh-signal-card.s3 .fh-signal-media{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:820/460;
+  }
+}

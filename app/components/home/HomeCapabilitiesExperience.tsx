@@ -16,15 +16,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useState } from "react";
 import { capabilityGroups } from "../../config/site";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
 
 const layerMeta = [
   {
@@ -56,79 +49,10 @@ const layerMeta = [
 const orbitIcons = [Sparkles, Binary, Braces, CloudCog, ServerCog, ShieldCheck] as const;
 
 export function HomeCapabilitiesExperience() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const reducedMotion = useReducedMotion();
 
-  useGSAP(
-    () => {
-      const section = sectionRef.current;
-      const stage = stageRef.current;
-      if (!section || !stage || reducedMotion) return;
 
-      const media = gsap.matchMedia();
-
-      media.add("(min-width: 1025px)", () => {
-        const intro = section.querySelector<HTMLElement>(".future-capabilities-intro");
-        const consoleShell = stage.querySelector<HTMLElement>(".future-capability-console");
-        const bridge = section.querySelector<HTMLElement>(".future-capabilities-handoff");
-        const energy = section.querySelector<HTMLElement>(".future-capability-energy");
-
-        if (!intro || !consoleShell || !bridge || !energy) return;
-
-        gsap.set(intro, { y: 42, opacity: 0 });
-        gsap.set(consoleShell, { y: 54, opacity: 0, scale: 0.985 });
-        gsap.set(bridge, { opacity: 0, y: 16 });
-        gsap.set(energy, { scaleX: 0, transformOrigin: "left center" });
-
-        const entrance = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 82%",
-            end: "top 28%",
-            scrub: 0.65,
-          },
-        });
-
-        entrance
-          .to(energy, { scaleX: 1, duration: 0.22, ease: "none" }, 0)
-          .to(intro, { y: 0, opacity: 1, duration: 0.28, ease: "none" }, 0.06)
-          .to(consoleShell, { y: 0, opacity: 1, scale: 1, duration: 0.34, ease: "none" }, 0.12);
-
-        let currentIndex = 0;
-        const progressTrigger = ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top top+=78",
-          end: "bottom bottom",
-          scrub: true,
-          onUpdate: self => {
-            const nextIndex = Math.min(2, Math.floor(self.progress * 3));
-            if (nextIndex !== currentIndex) {
-              currentIndex = nextIndex;
-              setActiveIndex(nextIndex);
-            }
-
-            if (bridge) {
-              gsap.set(bridge, {
-                opacity: gsap.utils.clamp(0, 1, (self.progress - 0.78) / 0.14),
-                y: gsap.utils.interpolate(16, 0, gsap.utils.clamp(0, 1, (self.progress - 0.78) / 0.14)),
-              });
-            }
-          },
-        });
-
-        return () => {
-          entrance.scrollTrigger?.kill();
-          entrance.kill();
-          progressTrigger.kill();
-        };
-      });
-
-      return () => media.revert();
-    },
-    { scope: sectionRef, dependencies: [reducedMotion] },
-  );
 
   const activeGroup = capabilityGroups[activeIndex];
   const activeMeta = layerMeta[activeIndex];
@@ -137,7 +61,6 @@ export function HomeCapabilitiesExperience() {
 
   return (
     <section
-      ref={sectionRef}
       id="home-capabilities"
       className="future-capabilities"
       data-scroll-step="04"
@@ -148,7 +71,7 @@ export function HomeCapabilitiesExperience() {
       <div className="future-capabilities-aurora future-capabilities-aurora-b" aria-hidden="true" />
       <div className="future-capability-energy" aria-hidden="true" />
 
-      <div ref={stageRef} className="future-capabilities-sticky">
+      <div className="future-capabilities-sticky">
         <div className="container-shell future-capabilities-shell">
           <div className="future-capabilities-intro">
             <div>
