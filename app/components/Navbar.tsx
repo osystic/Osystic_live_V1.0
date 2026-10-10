@@ -43,6 +43,14 @@ export default function Navbar() {
   const icons = [BrainCircuit, Code2, Database];
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const capabilitiesActive = active("/capabilities") || active("/services");
+  const approvedHome = pathname === "/";
+  const navigation = approvedHome ? [
+    { label: "Services", href: "/services" },
+    { label: "Industries", href: "/industries" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Blogs", href: "/insights" },
+    { label: "About", href: "/about" },
+  ] : [...siteConfig.navigation];
   const clientPortalUrl = process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL?.trim() || "/contact?intent=client-portal";
   const clientPortalExternal = /^https?:\/\//i.test(clientPortalUrl);
 
@@ -122,7 +130,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className={`site-header future-site-header${scrolled ? " is-scrolled" : ""}`}
+      className={`site-header future-site-header${approvedHome ? " approved-home-header" : ""}${scrolled ? " is-scrolled" : ""}`}
       ref={headerRef}
       initial={{ y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -134,11 +142,11 @@ export default function Navbar() {
       <div className="container-shell nav-shell future-nav-shell">
         <div className="future-brand-wrap" onClick={closeMenus}>
           <BrandLogo priority />
-          <span className="future-brand-status" aria-label="Systems operational"><i />LIVE</span>
+          {!approvedHome ? <span className="future-brand-status" aria-label="Systems operational"><i />LIVE</span> : null}
         </div>
 
         <nav className="desktop-nav future-desktop-nav" aria-label="Primary navigation">
-          {siteConfig.navigation.map(item => item.href === "/capabilities" ? (
+          {navigation.map(item => item.href === "/capabilities" ? (
             <div
               className="nav-capabilities"
               key={item.href}
@@ -185,15 +193,17 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions future-nav-actions">
-          <a
-            className="future-client-portal"
-            href={clientPortalUrl}
-            target={clientPortalExternal ? "_blank" : undefined}
-            rel={clientPortalExternal ? "noreferrer" : undefined}
-            onClick={closeMenus}
-          >
-            Client Portal <LogIn size={14} aria-hidden="true" />
-          </a>
+          {!approvedHome ? (
+            <a
+              className="future-client-portal"
+              href={clientPortalUrl}
+              target={clientPortalExternal ? "_blank" : undefined}
+              rel={clientPortalExternal ? "noreferrer" : undefined}
+              onClick={closeMenus}
+            >
+              Client Portal <LogIn size={14} aria-hidden="true" />
+            </a>
+          ) : null}
           <div onClick={closeMenus} className="desktop-booking">
             <BookingButton className="button button-primary nav-cta future-nav-cta">
               Book a Call <ArrowRight size={15} />
@@ -263,7 +273,7 @@ export default function Navbar() {
           </div>
 
           <nav className="container-shell mobile-nav future-mobile-nav" aria-label="Mobile navigation">
-            {siteConfig.navigation.map(item => item.href === "/capabilities" ? (
+            {navigation.map(item => item.href === "/capabilities" ? (
               <div key={item.href} className="mobile-capabilities">
                 <Link href={item.href} className={capabilitiesActive ? "active" : undefined} aria-current={active(item.href) ? "page" : undefined} onClick={closeMenus}>
                   {item.label}<NavigationFeedback /><ArrowRight size={16} />
@@ -282,15 +292,17 @@ export default function Navbar() {
             ))}
 
             <div className="future-mobile-actions">
-              <a
-                className="future-mobile-portal"
-                href={clientPortalUrl}
-                target={clientPortalExternal ? "_blank" : undefined}
-                rel={clientPortalExternal ? "noreferrer" : undefined}
-                onClick={closeMenus}
-              >
-                Client Portal <LogIn size={15} aria-hidden="true" />
-              </a>
+              {!approvedHome ? (
+                <a
+                  className="future-mobile-portal"
+                  href={clientPortalUrl}
+                  target={clientPortalExternal ? "_blank" : undefined}
+                  rel={clientPortalExternal ? "noreferrer" : undefined}
+                  onClick={closeMenus}
+                >
+                  Client Portal <LogIn size={15} aria-hidden="true" />
+                </a>
+              ) : null}
               <div onClick={closeMenus}>
                 <BookingButton className="button button-primary mobile-booking-button future-mobile-booking">
                   Book a Technical Call <ArrowRight size={15} />

@@ -3500,3 +3500,56 @@
 
 /* Remove redundant duplicated step label after static console conversion. */
 .future-capability-energy{display:none!important}
+
+
+/* Approved homepage header treatment */
+.future-site-header.approved-home-header{
+  background:rgba(5,10,19,.96);
+  border-bottom-color:rgba(115,145,211,.12);
+  box-shadow:none;
+}
+.future-site-header.approved-home-header::before{
+  opacity:.28;
+  background:radial-gradient(circle at 64% 0%,rgba(51,93,230,.12),transparent 32%);
+}
+.approved-home-header .future-nav-shell{
+  width:min(calc(100% - 64px),1240px);
+  gap:28px;
+}
+.approved-home-header .future-brand-wrap .brand-logo{
+  width:132px;
+  min-width:132px;
+}
+.approved-home-header .future-desktop-nav{
+  gap:2px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.approved-home-header .future-nav-link{
+  padding:9px 11px;
+  color:#c1cad8;
+  font-size:11px;
+  font-weight:530;
+}
+.approved-home-header .future-nav-link:hover,
+.approved-home-header .future-nav-link.active{
+  color:#fff;
+  background:transparent;
+}
+.approved-home-header .future-nav-link.active::after{
+  bottom:1px;
+  width:16px;
+}
+.approved-home-header .future-nav-cta{
+  min-height:42px;
+  padding-inline:18px;
+  border-radius:999px;
+}
+@media(max-width:1200px){
+  .approved-home-header .future-nav-shell{
+    width:min(calc(100% - 32px),1240px);
+  }
+}
