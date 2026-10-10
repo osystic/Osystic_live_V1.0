@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { caseStudies } from "@/drizzle/schema";
 import { desc, eq } from "drizzle-orm";
 import { isSafePublicImage, sanitizePublishedHtml } from "@/lib/content-security";
+import { logHandledContentStoreFailure } from "@/lib/runtime-fallback";
 
 export type PublicCaseStudy = {
   id: string;
@@ -50,7 +51,7 @@ export async function fetchCaseStudies(limit?: number): Promise<PublicCaseStudy[
     const rows = typeof limit === "number" ? await query.limit(limit) : await query;
     return rows.map(normalize);
   } catch (error) {
-    console.error("Unable to load published case studies:", error);
+    logHandledContentStoreFailure("Unable to load published case studies", error);
     return [];
   }
 }
@@ -67,7 +68,7 @@ export async function fetchCaseStudy(slug: string): Promise<PublicCaseStudy | nu
     if (!row || row.status !== "published") return null;
     return normalize(row);
   } catch (error) {
-    console.error("Unable to load case study:", error);
+    logHandledContentStoreFailure("Unable to load case study", error);
     return null;
   }
 }

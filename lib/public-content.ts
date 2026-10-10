@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { blogs, newsroom } from "@/drizzle/schema";
 import { desc, eq } from "drizzle-orm";
 import { isSafePublicImage, sanitizePublishedHtml } from "@/lib/content-security";
+import { logHandledContentStoreFailure } from "@/lib/runtime-fallback";
 
 export type PublicArticle = {
   id: string;
@@ -37,7 +38,7 @@ export async function getPublishedBlogs(limit?: number): Promise<PublicArticle[]
       source: "blog" as const,
     }));
   } catch (error) {
-    console.error("Unable to load published blog posts:", error);
+    logHandledContentStoreFailure("Unable to load published blog posts", error);
     return [];
   }
 }
@@ -61,7 +62,7 @@ export async function getPublishedNews(limit?: number): Promise<PublicArticle[]>
       source: "newsroom" as const,
     }));
   } catch (error) {
-    console.error("Unable to load published newsroom items:", error);
+    logHandledContentStoreFailure("Unable to load published newsroom items", error);
     return [];
   }
 }
@@ -77,7 +78,7 @@ export async function getBlogBySlug(slug: string): Promise<PublicArticle | null>
       publishedAt: row.publishedAt ?? null, updatedAt: row.updatedAt ?? null, source: "blog",
     };
   } catch (error) {
-    console.error("Unable to load blog post:", error);
+    logHandledContentStoreFailure("Unable to load blog post", error);
     return null;
   }
 }
@@ -93,7 +94,7 @@ export async function getNewsBySlug(slug: string): Promise<PublicArticle | null>
       publishedAt: row.publishedAt ?? null, updatedAt: row.updatedAt ?? null, source: "newsroom",
     };
   } catch (error) {
-    console.error("Unable to load newsroom article:", error);
+    logHandledContentStoreFailure("Unable to load newsroom article", error);
     return null;
   }
 }
