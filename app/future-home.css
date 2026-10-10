@@ -188,6 +188,42 @@
   border-color: rgba(119, 143, 190, 0.16);
 }
 
+/* v1.4.3 pacing pass: keep the desktop capability menu scan-friendly. */
+.future-mega-menu {
+  width: min(calc(100% - 64px), 1120px);
+  padding: 10px 12px 0;
+}
+.future-mega-eyebrow {
+  padding: 7px 18px 0;
+}
+.future-mega-eyebrow strong {
+  font-size: 12px;
+}
+.future-mega-menu .mega-columns {
+  padding: 15px 6px 12px;
+}
+.future-mega-menu .mega-group {
+  padding: 0 18px;
+}
+.future-mega-menu .mega-title {
+  gap: 9px;
+  font-size: .98rem;
+}
+.future-mega-menu .mega-group p {
+  min-height: 0;
+  margin: 8px 0 6px;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+.future-mega-menu .mega-group li a {
+  padding: 6px 0;
+  font-size: .82rem;
+}
+.future-mega-menu .mega-all {
+  padding: 12px 24px;
+  font-size: .84rem;
+}
+
 .future-mobile-menu-button {
   border-color: rgba(122, 149, 216, 0.24);
   background: rgba(15, 23, 39, 0.86);
@@ -1184,7 +1220,7 @@
    ========================================================= */
 .future-capabilities {
   position: relative;
-  min-height: 235svh;
+  min-height: 185svh;
   overflow: clip;
   isolation: isolate;
   color: #eef4ff;
@@ -2130,7 +2166,7 @@
 /* STEP 04 — HOME AI RUNTIME EXPERIENCE */
 .future-ai-workflow {
   position: relative;
-  min-height: 620vh;
+  min-height: 420vh;
   overflow: clip;
   color: #eef4ff;
   background:

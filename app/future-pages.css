@@ -387,7 +387,7 @@
   .future-footer-links>div:last-child{grid-column:1/-1}
   .future-footer-meta{align-items:flex-start;flex-direction:column;gap:10px;padding-block:12px}
   .future-footer-address{width:100%}
-  .future-footer-bottom{flex-direction:column;gap:10px;padding-top:13px;padding-bottom:15px}
+  .future-footer-bottom{flex-direction:column;gap:10px;padding-top:13px;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
   .future-footer-bottom div{flex-wrap:wrap}
 
   .fp-cap-hero,.fp-pillar-hero{padding-top:96px;padding-bottom:64px}
