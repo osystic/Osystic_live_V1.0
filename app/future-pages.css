@@ -824,3 +824,44 @@
 
 @media(prefers-reduced-motion:reduce){.fp-finance-pulse{animation:none}}
 
+
+/* Service visual families: context-specific operating models */
+.fp-service-family-hud{position:absolute;z-index:3;left:16px;right:16px;top:56px;display:flex;justify-content:space-between;gap:16px;pointer-events:none}
+.fp-service-family-hud>div:first-child{display:flex;gap:9px;align-items:center;color:var(--service-accent)}
+.fp-service-family-hud>div:first-child>span{display:flex;flex-direction:column;gap:2px}
+.fp-service-family-hud b{font:700 8px var(--font-geist-mono);letter-spacing:.11em}
+.fp-service-family-hud small{font:600 7px var(--font-geist-mono);color:#5f6f87;letter-spacing:.06em}
+.fp-service-family-hud>div:last-child{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;justify-content:flex-end}
+.fp-service-family-hud>div:last-child span{padding:5px 7px;border:1px solid var(--fp-line);border-radius:999px;color:#65758d;background:rgba(8,12,18,.72);font:600 7px var(--font-geist-mono);letter-spacing:.06em}
+.fp-service-family-hud>div:last-child i{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--service-accent);margin:0 5px 1px 0}
+.fp-service-code pre{padding-top:84px}
+.fp-service-graph>svg{padding-top:34px;box-sizing:border-box}
+.fp-service-visual-frontend{background:linear-gradient(180deg,rgba(75,124,255,.055),transparent 42%),#0b1017}
+.fp-service-visual-frontend:before{content:"";position:absolute;inset:104px 28px 58px;border:1px solid rgba(89,126,255,.18);border-radius:15px;background:linear-gradient(90deg,transparent 0 31%,rgba(91,127,255,.06) 31% 32%,transparent 32% 66%,rgba(91,127,255,.06) 66% 67%,transparent 67%),linear-gradient(180deg,transparent 0 27%,rgba(91,127,255,.06) 27% 28%,transparent 28% 72%,rgba(91,127,255,.06) 72% 73%,transparent 73%);pointer-events:none}
+.fp-service-visual-backend{background:radial-gradient(circle at 76% 70%,rgba(75,124,255,.08),transparent 30%),#0a0f16}
+.fp-service-visual-backend:before{content:"";position:absolute;left:8%;right:8%;bottom:76px;height:1px;background:linear-gradient(90deg,transparent,var(--service-accent),rgba(255,255,255,.08),var(--service-accent),transparent);box-shadow:0 -55px rgba(92,119,174,.08),0 -110px rgba(92,119,174,.05);pointer-events:none}
+.fp-service-visual-data{background:linear-gradient(180deg,rgba(22,217,212,.05),transparent 42%),#091013}
+.fp-service-visual-data circle{rx:10;fill:#0d1a1c}
+.fp-service-visual-data:before{content:"";position:absolute;left:10%;right:10%;top:46%;height:82px;border-top:1px dashed rgba(22,217,212,.2);border-bottom:1px dashed rgba(22,217,212,.12);background:linear-gradient(90deg,transparent,rgba(22,217,212,.035),transparent);pointer-events:none}
+.fp-service-visual-cloud{background:radial-gradient(ellipse at 50% 72%,rgba(22,217,212,.08),transparent 45%),#091014}
+.fp-service-visual-cloud:before{content:"REGION A     WORKLOAD PLANE     REGION B";position:absolute;left:8%;right:8%;bottom:76px;padding:9px 14px;border:1px dashed rgba(22,217,212,.18);border-radius:12px;color:#557179;font:600 7px var(--font-geist-mono);letter-spacing:.12em;text-align:center;pointer-events:none}
+.fp-service-visual-security{background:radial-gradient(circle at 50% 54%,rgba(22,217,212,.07),transparent 30%),#090f13}
+.fp-service-visual-security:before,.fp-service-visual-security:after{content:"";position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+.fp-service-visual-security:before{width:68%;height:68%;border:1px dashed rgba(22,217,212,.22)}
+.fp-service-visual-security:after{width:44%;height:44%;border:1px solid rgba(22,217,212,.12)}
+.fp-service-visual-edge{background:radial-gradient(circle at 50% 58%,rgba(139,108,255,.08),transparent 32%),#0b0d15}
+.fp-service-visual-edge:before{content:"DEVICE FLEET";position:absolute;left:50%;bottom:82px;transform:translateX(-50%);width:62%;padding:8px 10px;border-top:1px dashed rgba(139,108,255,.24);border-bottom:1px dashed rgba(139,108,255,.16);color:#635b83;font:600 7px var(--font-geist-mono);letter-spacing:.18em;text-align:center;pointer-events:none}
+.fp-service-visual-mlops{background:linear-gradient(180deg,rgba(139,108,255,.045),transparent 55%),#0b0d14}
+.fp-service-visual-mlops:before{content:"EVALUATION     RELEASE GATE     TELEMETRY";position:absolute;left:12%;right:12%;bottom:75px;padding-top:9px;border-top:1px solid rgba(139,108,255,.18);color:#665d83;font:600 7px var(--font-geist-mono);letter-spacing:.09em;text-align:center;pointer-events:none}
+.fp-service-visual-orchestration{background:radial-gradient(circle at 52% 52%,rgba(139,108,255,.08),transparent 32%),#0b0d14}
+.fp-service-visual-orchestration:before{content:"";position:absolute;inset:112px 72px 78px;border:1px dashed rgba(139,108,255,.13);border-radius:22px;transform:rotate(-2deg);pointer-events:none}
+.fp-service-family-security .fp-service-module-grid article{border-top:2px solid rgba(22,217,212,.36)}
+.fp-service-family-edge .fp-service-module-grid article:nth-child(even){transform:translateY(8px)}
+.fp-service-family-data .fp-service-timeline>div>i{background:linear-gradient(90deg,#16d9d4,transparent)}
+.fp-service-family-cloud .fp-stack-console{box-shadow:inset 0 0 0 1px rgba(22,217,212,.04)}
+.fp-service-family-frontend .fp-service-module-grid article{border-radius:12px}
+.fp-service-family-backend .fp-service-context-grid article{border-left:3px solid rgba(75,124,255,.24)}
+@media(max-width:780px){.fp-service-family-hud{top:54px;left:12px;right:12px}.fp-service-family-hud>div:last-child{display:none}.fp-service-code pre{padding-top:82px}.fp-service-visual-frontend:before{inset:104px 18px 54px}.fp-service-visual-security:before{width:82%;height:58%}.fp-service-visual-security:after{width:58%;height:36%}}
+
+/* Service hero mobile containment: every visual family must collapse to one column. */
+@media(max-width:1100px){.fp-service-hero-grid{grid-template-columns:minmax(0,1fr)}.fp-service-hero-grid>*{min-width:0}}
