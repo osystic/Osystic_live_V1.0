@@ -1,10 +1,22 @@
 "use client";
 
-import Cal from "@calcom/embed-react";
+import Cal, { getCalApi } from "@calcom/embed-react";
+import { useEffect } from "react";
 
 const namespace = "discovery-call";
 
 export default function CalendarEmbed({ calLink }: { calLink: string }) {
+  useEffect(() => {
+    getCalApi({ namespace }).then(cal => {
+      cal("ui", {
+        theme: "dark",
+        styles: {
+          body: { background: "#171717" },
+        },
+      });
+    });
+  }, []);
+
   return (
     <Cal
       namespace={namespace}
@@ -15,6 +27,7 @@ export default function CalendarEmbed({ calLink }: { calLink: string }) {
         maxWidth: "100%",
         maxHeight: "100%",
         overflow: "auto",
+        background: "#171717",
       }}
       config={{
         layout: "month_view",
