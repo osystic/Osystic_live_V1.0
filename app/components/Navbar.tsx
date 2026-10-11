@@ -11,7 +11,6 @@ import {
   ChevronDown,
   CloudCog,
   Code2,
-  Database,
   Menu,
   X,
 } from "lucide-react";
@@ -29,27 +28,21 @@ const navigation = [
 
 const serviceLinks = [
   {
-    title: "AI & Machine Learning",
-    copy: "Production AI systems, agents, evaluation, and intelligent workflows.",
+    title: "AI Systems",
+    copy: "Production AI systems that reason, retrieve, predict, perceive, and act.",
     href: "/capabilities/ai-systems",
     icon: BrainCircuit,
   },
   {
-    title: "Custom Software Development",
-    copy: "Secure product engineering across web, backend, mobile, and APIs.",
+    title: "Product Engineering",
+    copy: "Secure digital products engineered from interface to production infrastructure.",
     href: "/capabilities/product-engineering",
     icon: Code2,
   },
   {
-    title: "Data Engineering",
-    copy: "Reliable pipelines, data platforms, analytics, and AI-ready foundations.",
-    href: "/services/data-cloud/data",
-    icon: Database,
-  },
-  {
-    title: "Cloud & DevOps",
-    copy: "Cloud infrastructure, delivery automation, observability, and operations.",
-    href: "/services/devops-cloud",
+    title: "Data & Cloud",
+    copy: "Data foundations, cloud platforms, and delivery systems built for scale.",
+    href: "/capabilities/data-cloud",
     icon: CloudCog,
   },
 ] as const;
