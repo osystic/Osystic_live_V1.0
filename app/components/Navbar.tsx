@@ -4,8 +4,18 @@ import Link, { useLinkStatus } from "next/link";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, LogIn, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowRight,
+  BrainCircuit,
+  ChevronDown,
+  CloudCog,
+  Code2,
+  Database,
+  LogIn,
+  Menu,
+  X,
+} from "lucide-react";
 import { lockPageScroll } from "./scrollLock";
 import { BrandLogo } from "./BrandLogo";
 import { BookingButton } from "./CalBooking";
@@ -16,6 +26,33 @@ const navigation = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blogs", href: "/insights" },
   { label: "About", href: "/about" },
+] as const;
+
+const serviceLinks = [
+  {
+    title: "AI & Machine Learning",
+    copy: "Production AI systems, agents, evaluation, and intelligent workflows.",
+    href: "/capabilities/ai-systems",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Custom Software Development",
+    copy: "Secure product engineering across web, backend, mobile, and APIs.",
+    href: "/capabilities/product-engineering",
+    icon: Code2,
+  },
+  {
+    title: "Data Engineering",
+    copy: "Reliable pipelines, data platforms, analytics, and AI-ready foundations.",
+    href: "/services/data-cloud/data",
+    icon: Database,
+  },
+  {
+    title: "Cloud & DevOps",
+    copy: "Cloud infrastructure, delivery automation, observability, and operations.",
+    href: "/services/devops-cloud",
+    icon: CloudCog,
+  },
 ] as const;
 
 function NavigationFeedback() {
@@ -34,9 +71,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const mobileToggle = useRef<HTMLButtonElement>(null);
   const mobileDialog = useRef<HTMLDialogElement>(null);
+  const servicesTrigger = useRef<HTMLAnchorElement>(null);
+  const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const suppressServicesFocusOpen = useRef(false);
+  const servicesDismissedUntil = useRef(0);
 
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const navActive = (href: string) =>
@@ -48,8 +91,36 @@ export default function Navbar() {
     "/contact?intent=client-portal";
   const clientPortalExternal = /^https?:\/\//i.test(clientPortalUrl);
 
+  function clearServicesCloseTimer() {
+    if (!servicesCloseTimer.current) return;
+    clearTimeout(servicesCloseTimer.current);
+    servicesCloseTimer.current = null;
+  }
+
+  function openServicesMenu() {
+    clearServicesCloseTimer();
+    if (Date.now() < servicesDismissedUntil.current) return;
+    setServicesOpen(true);
+  }
+
+  function closeServicesMenu() {
+    clearServicesCloseTimer();
+    setServicesOpen(false);
+  }
+
+  function scheduleServicesClose() {
+    clearServicesCloseTimer();
+    servicesCloseTimer.current = setTimeout(() => {
+      setServicesOpen(false);
+      servicesCloseTimer.current = null;
+    }, 140);
+  }
+
   function closeMenu() {
+    servicesDismissedUntil.current = 0;
     setOpen(false);
+    setMobileServicesOpen(false);
+    closeServicesMenu();
   }
 
   useEffect(() => {
@@ -60,33 +131,65 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    return () => {
+      if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    function closeAllNavigation() {
+      if (servicesCloseTimer.current) {
+        clearTimeout(servicesCloseTimer.current);
+        servicesCloseTimer.current = null;
+      }
+      setOpen(false);
+      setMobileServicesOpen(false);
+      setServicesOpen(false);
+    }
+
     function outside(event: PointerEvent) {
       if (!headerRef.current?.contains(event.target as Node)) {
-        setOpen(false);
+        closeAllNavigation();
       }
     }
 
     function escape(event: KeyboardEvent) {
-      if (event.key !== "Escape" || !open) return;
-      setOpen(false);
-      mobileToggle.current?.focus();
+      if (event.key !== "Escape") return;
+
+      if (servicesOpen) {
+        if (servicesCloseTimer.current) {
+          clearTimeout(servicesCloseTimer.current);
+          servicesCloseTimer.current = null;
+        }
+        suppressServicesFocusOpen.current = true;
+        servicesDismissedUntil.current = Date.now() + 360;
+        setServicesOpen(false);
+        servicesTrigger.current?.focus();
+        requestAnimationFrame(() => {
+          suppressServicesFocusOpen.current = false;
+        });
+        return;
+      }
+
+      if (open) {
+        setOpen(false);
+        setMobileServicesOpen(false);
+        mobileToggle.current?.focus();
+      }
     }
 
     const breakpoint = window.matchMedia("(max-width: 1200px)");
-    function resize() {
-      setOpen(false);
-    }
 
     document.addEventListener("pointerdown", outside);
     document.addEventListener("keydown", escape);
-    breakpoint.addEventListener("change", resize);
+    breakpoint.addEventListener("change", closeAllNavigation);
 
     return () => {
       document.removeEventListener("pointerdown", outside);
       document.removeEventListener("keydown", escape);
-      breakpoint.removeEventListener("change", resize);
+      breakpoint.removeEventListener("change", closeAllNavigation);
     };
-  }, [open]);
+  }, [open, servicesOpen]);
 
   useEffect(() => {
     const dialog = mobileDialog.current;
@@ -119,7 +222,103 @@ export default function Navbar() {
         </div>
 
         <nav className="desktop-nav future-desktop-nav" aria-label="Primary navigation">
-          {navigation.map(item => (
+          <div
+            className="future-services-menu-root"
+            onMouseEnter={openServicesMenu}
+            onMouseLeave={scheduleServicesClose}
+            onFocus={() => {
+              if (!suppressServicesFocusOpen.current) openServicesMenu();
+            }}
+            onBlur={event => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                scheduleServicesClose();
+              }
+            }}
+          >
+            <Link
+              ref={servicesTrigger}
+              href="/services"
+              className={`nav-link future-nav-link future-services-trigger${navActive("/services") ? " active" : ""}`}
+              aria-current={navActive("/services") ? "page" : undefined}
+              aria-expanded={servicesOpen}
+              aria-haspopup="true"
+              aria-controls="desktop-services-mega-menu"
+              onClick={closeMenu}
+              onKeyDown={event => {
+                if (event.key !== "ArrowDown") return;
+                event.preventDefault();
+                openServicesMenu();
+                requestAnimationFrame(() => {
+                  document
+                    .querySelector<HTMLAnchorElement>("#desktop-services-mega-menu .future-services-mega-grid a")
+                    ?.focus();
+                });
+              }}
+            >
+              Services
+              <ChevronDown
+                className={`future-services-chevron${servicesOpen ? " is-open" : ""}`}
+                size={13}
+                aria-hidden="true"
+              />
+              <NavigationFeedback />
+            </Link>
+
+            <AnimatePresence>
+              {servicesOpen ? (
+                <motion.div
+                  id="desktop-services-mega-menu"
+                  className="future-services-mega-menu"
+                  aria-label="Services"
+                  initial={{ opacity: 0, y: -10, scale: 0.985 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.99 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  onMouseEnter={openServicesMenu}
+                  onMouseLeave={scheduleServicesClose}
+                >
+                  <div className="future-services-mega-head">
+                    <div>
+                      <span>ENGINEERING CAPABILITIES</span>
+                      <strong>From intelligence to production.</strong>
+                    </div>
+                    <Link href="/services" onClick={closeMenu}>
+                      All services <ArrowRight size={13} aria-hidden="true" />
+                    </Link>
+                  </div>
+
+                  <div className="future-services-mega-grid">
+                    {serviceLinks.map(item => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={navActive(item.href) ? "active" : undefined}
+                          onClick={closeMenu}
+                        >
+                          <span className="future-services-mega-icon">
+                            <Icon size={19} strokeWidth={1.55} aria-hidden="true" />
+                          </span>
+                          <span className="future-services-mega-copy">
+                            <strong>{item.title}</strong>
+                            <small>{item.copy}</small>
+                          </span>
+                          <ArrowRight
+                            className="future-services-mega-arrow"
+                            size={14}
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
+          {navigation.slice(1).map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -193,7 +392,58 @@ export default function Navbar() {
           </div>
 
           <nav className="container-shell mobile-nav future-mobile-nav" aria-label="Mobile navigation">
-            {navigation.map(item => (
+            <div className="future-mobile-services">
+              <button
+                type="button"
+                className={`future-mobile-services-toggle${navActive("/services") ? " active" : ""}`}
+                aria-expanded={mobileServicesOpen}
+                aria-controls="mobile-services-panel"
+                onClick={() => setMobileServicesOpen(value => !value)}
+              >
+                <span>Services</span>
+                <ChevronDown
+                  className={`future-mobile-services-chevron${mobileServicesOpen ? " is-open" : ""}`}
+                  size={17}
+                  aria-hidden="true"
+                />
+              </button>
+
+              <div
+                id="mobile-services-panel"
+                className={`future-mobile-services-panel${mobileServicesOpen ? " is-open" : ""}`}
+                aria-hidden={!mobileServicesOpen}
+                inert={!mobileServicesOpen}
+              >
+                <div className="future-mobile-services-inner">
+                  {serviceLinks.map(item => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={navActive(item.href) ? "active" : undefined}
+                        onClick={closeMenu}
+                      >
+                        <span className="future-mobile-services-icon">
+                          <Icon size={17} strokeWidth={1.55} aria-hidden="true" />
+                        </span>
+                        <span>{item.title}</span>
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </Link>
+                    );
+                  })}
+                  <Link
+                    href="/services"
+                    className="future-mobile-services-all"
+                    onClick={closeMenu}
+                  >
+                    View all services <ArrowRight size={14} aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {navigation.slice(1).map(item => (
               <Link
                 key={item.href}
                 href={item.href}
