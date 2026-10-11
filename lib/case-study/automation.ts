@@ -17,6 +17,7 @@ import {
   type StructuredCaseStudySummary,
 } from "./summary";
 import {
+  CASE_STUDY_GENERATOR_VERSION,
   parseStoredAnalysis,
   pushHistory,
   serializeStoredAnalysis,
@@ -88,6 +89,7 @@ function makeMetadata(input: {
   const existing = input.existing;
   return {
     schemaVersion: 2,
+    generatorVersion: CASE_STUDY_GENERATOR_VERSION,
     projectKey: input.bundle.manifest.projectKey,
     canonicalSlug: input.bundle.manifest.canonicalSlug,
     repositoryId: input.bundle.repository.id,
@@ -128,6 +130,10 @@ async function generateSummary(bundle: PublicShowcaseBundle) {
   let summary = fallback;
   let mode: "ai" | "fallback" = "fallback";
   let warning: string | null = null;
+
+  // The evidence-based deterministic generator is a first-class production path.
+  // AI is an optional editorial enhancement, not a runtime dependency.
+  if (!process.env.GEMINI_API_KEY) return { summary, mode, warning };
 
   try {
     const raw = await callGeminiJson<unknown>(buildWebsiteSummaryPrompt(bundle, fallback));
@@ -299,7 +305,12 @@ export async function syncPublicCaseStudyRepository(
     }
   }
 
-  if (existing && !options.forceGeneration && existingAutomation?.fingerprint === bundle.fingerprint) {
+  if (
+    existing &&
+    !options.forceGeneration &&
+    existingAutomation?.fingerprint === bundle.fingerprint &&
+    existingAutomation.generatorVersion === CASE_STUDY_GENERATOR_VERSION
+  ) {
     const metadata = makeMetadata({
       bundle,
       eligibility,

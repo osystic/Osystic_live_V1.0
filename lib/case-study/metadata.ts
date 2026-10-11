@@ -3,6 +3,8 @@ import type { QualityResult, SafetyResult } from "./quality";
 import type { StructuredCaseStudySummary } from "./summary";
 import type { PublicShowcaseBundle } from "./github";
 
+export const CASE_STUDY_GENERATOR_VERSION = 3;
+
 export type CaseStudyWorkflowStatus =
   | "detected"
   | "not_eligible"
@@ -27,6 +29,7 @@ export type StoredCaseStudySource = Omit<PublicShowcaseBundle, "filePaths">;
 
 export type CaseStudyAutomationMetadata = {
   schemaVersion: 2;
+  generatorVersion?: number;
   projectKey: string;
   canonicalSlug: string;
   repositoryId: number;
