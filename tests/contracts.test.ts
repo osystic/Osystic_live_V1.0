@@ -152,6 +152,37 @@ const privateRepo = evaluateRepositoryEligibility({
 assert.equal(privateRepo.eligible, false);
 assert.ok(privateRepo.reasons.some((reason) => reason.includes("public")));
 
+
+const legacyPublishedYaml = `
+schema_version: 1
+repository_class: public-case-study
+visibility: public
+portfolio:
+  eligible: true
+  status: published
+delivery:
+  status: complete
+source:
+  source_code_included: false
+`;
+const legacyPublished = normalizeShowcaseManifest(parseOsysticYaml(legacyPublishedYaml), "ES-Futures-NinjaTrader-Strategy-Case-Study");
+const legacyPublishedEligibility = evaluateRepositoryEligibility({
+  owner: "osystic", expectedOwner: "osystic", visibility: "public", archived: false,
+  repoName: "ES-Futures-NinjaTrader-Strategy-Case-Study", readme, caseStudy,
+  assetPaths: ["assets/architecture.svg"], manifest: legacyPublished,
+});
+assert.equal(legacyPublished.projectStatus, "complete");
+assert.equal(legacyPublishedEligibility.eligible, true, legacyPublishedEligibility.reasons.join(" | "));
+
+const notReadyV2 = normalizeShowcaseManifest(parseOsysticYaml(v2.replace("ready-for-review", "not-ready")), "Event-Orchestration-SaaS-Case-Study");
+const notReadyEligibility = evaluateRepositoryEligibility({
+  owner: "osystic", expectedOwner: "osystic", visibility: "public", archived: false,
+  repoName: "Event-Orchestration-SaaS-Case-Study", readme, caseStudy,
+  assetPaths: ["assets/architecture.svg"], manifest: notReadyV2,
+});
+assert.equal(notReadyEligibility.eligible, false);
+assert.ok(notReadyEligibility.reasons.some((reason) => reason.includes("website.status")));
+
 console.log("case-study contracts: PASS");
 
 import { buildFallbackStructuredSummary, summaryToMarkdown, parseSummaryMarkdown, validateStructuredSummary } from "../lib/case-study/summary";
@@ -169,6 +200,41 @@ const markdown = summaryToMarkdown(fallback);
 const roundTrip = parseSummaryMarkdown(markdown, fallback);
 assert.equal(roundTrip.challenge, fallback.challenge);
 assert.equal(validateStructuredSummary(roundTrip).valid, true, validateStructuredSummary(roundTrip).issues.join(" | "));
+
+const realHeadingCaseStudy = `
+# Example Project
+
+## Executive summary
+OSYSTIC engineered a completed system with a controlled public evidence boundary and enough detail for technical review without exposing confidential implementation material.
+
+## Problem space
+The engagement required multiple workflows, strict access boundaries, and a maintainable delivery model across a broad operational surface.
+
+## Solution architecture
+The solution separated frontend workflows, backend responsibilities, authorization, and scheduled automation into explicit engineering boundaries.
+
+## Key engineering decisions
+### 1. Keep privileged actions server-side
+### 2. Separate scheduled orchestration from interactive workflows
+### 3. Preserve explicit integration boundaries
+
+## Technology
+React · TypeScript · PostgreSQL · GitHub Actions
+
+## Outcome
+- Completed delivery passed the retained validation baseline.
+
+## Public vs. private repository boundary
+The public repository is sanitized and excludes confidential implementation source and client identity.
+`;
+const realHeadingFallback = buildFallbackStructuredSummary({
+  repoName: "Example-Project-Case-Study", readme: realHeadingCaseStudy, caseStudy: realHeadingCaseStudy,
+  assetPaths: ["assets/architecture.svg"],
+});
+assert.equal(validateStructuredSummary(realHeadingFallback).valid, true, validateStructuredSummary(realHeadingFallback).issues.join(" | "));
+assert.ok(realHeadingFallback.engineeringHighlights.length >= 2);
+assert.ok(realHeadingFallback.technologies.length >= 2);
+
 console.log("case-study summary contracts: PASS");
 
 import { validateGitHubUrl } from "../lib/case-study/validate";

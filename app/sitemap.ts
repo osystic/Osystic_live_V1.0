@@ -7,6 +7,8 @@ import { getPublishedBlogs, getPublishedNews } from "@/lib/public-content";
 import { fetchCaseStudies } from "./case-studies/actions";
 import { siteConfig } from "./config/site";
 
+export const revalidate = 300;
+
 const absolute = (path: string) => new URL(path, siteConfig.url).toString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

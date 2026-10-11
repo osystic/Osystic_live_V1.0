@@ -9,6 +9,8 @@ import { StructuredData } from "@/app/components/seo/StructuredData";
 import { createSeoMetadata } from "@/lib/seo";
 import { breadcrumbSchema, caseStudySchema } from "@/lib/structured-data";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const study = await fetchCaseStudy(slug);

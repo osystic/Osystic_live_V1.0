@@ -161,6 +161,7 @@ export function normalizeShowcaseManifest(raw: JsonMap, repoName: string): Norma
   const projectStatus =
     stringAt(raw, "project.status") ||
     stringAt(raw, "project_status") ||
+    stringAt(raw, "delivery.status") ||
     stringAt(raw, "status");
 
   const websiteEligibleRaw = getPath(raw, "website.eligible");

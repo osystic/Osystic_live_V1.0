@@ -102,35 +102,12 @@ async function ghGet<T>(pathname: string, params?: Record<string, string>): Prom
 }
 
 
-async function ghGetPublic<T>(pathname: string): Promise<T> {
-  const url = new URL(BASE_URL + pathname);
-  let response: Response;
-  try {
-    response = await fetch(url, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "OSYSTIC-CaseStudyAutomation/2.0",
-      },
-      cache: "no-store",
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-    });
-  } catch {
-    throw new GitHubError("GitHub public-repository check timed out. Please try again.", 504);
-  }
-
-  if (response.status === 404) {
-    throw new GitHubError("Only public GitHub repositories can enter the OSYSTIC case-study pipeline.", 422);
-  }
-  if (!response.ok) {
-    throw new GitHubError(`GitHub public-repository check failed (HTTP ${response.status}).`, 502);
-  }
-  const payload = await response.json() as T;
-  return payload;
-}
-
 export async function assertPublicRepository(owner: string, repo: string): Promise<GitHubRepositoryInfo> {
-  const info = await ghGetPublic<GitHubRepositoryInfo>(`/repos/${owner}/${repo}`);
+  // Repository metadata may be read with the configured token, but no tree, README,
+  // documentation, source file or asset is requested until visibility is confirmed
+  // as public. This preserves the private-project boundary without relying on the
+  // low unauthenticated GitHub API rate limit.
+  const info = await ghGet<GitHubRepositoryInfo>(`/repos/${owner}/${repo}`);
   if (info.private || String(info.visibility || "public").toLowerCase() !== "public") {
     throw new GitHubError("Only public GitHub repositories can enter the OSYSTIC case-study pipeline.", 422);
   }
@@ -266,7 +243,7 @@ async function getRawPublicFile(owner: string, repo: string, branch: string, pat
 export function getRawAssetUrl(bundle: PublicShowcaseBundle, path: string | null | undefined) {
   if (!path || path.includes("..") || path.startsWith("/")) return null;
   if (!bundle.assetPaths.includes(path)) return null;
-  return rawAssetUrl(bundle.repository.owner, bundle.repository.name, bundle.repository.defaultBranch, path);
+  return rawAssetUrl(bundle.repository.owner, bundle.repository.name, bundle.repository.headSha, path);
 }
 
 export async function fetchPublicShowcaseBundle(githubUrl: string): Promise<PublicShowcaseBundle> {

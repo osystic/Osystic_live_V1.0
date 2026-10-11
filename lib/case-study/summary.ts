@@ -89,7 +89,7 @@ function section(markdown: string, names: string[]) {
 function firstParagraph(value: string, fallback: string, max = 900) {
   const blocks = value
     .split(/\n{2,}/)
-    .map((item) => item.replace(/^[-*+]\s+/gm, "").replace(/[*_`#>]/g, "").replace(/\s+/g, " ").trim())
+    .map((item) => item.replace(/^(?:[-*+]|\d+[.)])\s+/gm, "").replace(/[*_`#>]/g, "").replace(/\s+/g, " ").trim())
     .filter(Boolean);
   const result = blocks.find((item) => item.length >= 45) || blocks[0] || fallback;
   return result.slice(0, max);
@@ -97,7 +97,7 @@ function firstParagraph(value: string, fallback: string, max = 900) {
 
 function listFromSection(value: string, limit: number) {
   const bullets = value.split(/\r?\n/)
-    .map((line) => line.match(/^\s*[-*+]\s+(.+)$/)?.[1]?.replace(/[*_`]/g, "").trim())
+    .map((line) => line.match(/^\s*(?:[-*+]|\d+[.)])\s+(.+)$/)?.[1]?.replace(/[*_`]/g, "").trim())
     .filter((item): item is string => Boolean(item));
   return [...new Set(bullets)].slice(0, limit);
 }
@@ -130,14 +130,40 @@ export function buildFallbackStructuredSummary(input: {
   technologies?: string[];
   assetPaths?: string[];
 }): StructuredCaseStudySummary {
-  const source = input.caseStudy || input.readme;
-  const overview = section(source, ["Project Overview", "What this repository is", "Overview"]);
-  const challenge = section(source, ["The engineering challenge", "Engineering challenge", "Challenge", "Problem Statement", "Problem"]);
-  const solution = section(source, ["Solution", "Solution architecture", "Architecture", "Product architecture", "Research and validation architecture", "Approach"]);
-  const engineering = section(source, ["Engineering highlights", "Implementation Highlights", "Technical overview"]);
-  const outcomes = section(source, ["Engagement outcome", "Results", "Results / Impact", "Validation evidence", "Outcome"]);
-  const technology = section(source, ["Technology", "Technology Stack", "Tech Stack"]);
-  const boundary = section(source, ["Public vs. private repository boundary", "Company showcase classification"]);
+  const sources = [input.caseStudy, input.readme].filter(Boolean);
+  const pickSection = (names: string[]) => sources.map((source) => section(source, names)).find(Boolean) || "";
+
+  const overview = pickSection(["Executive summary", "Project Overview", "What this repository is", "Context", "Overview"]);
+  const challenge = pickSection([
+    "The engineering challenge", "Engineering challenge", "Engineering challenges", "The challenge", "Challenge",
+    "Problem Statement", "Problem", "Problem space", "Client objective translated into engineering requirements",
+  ]);
+  const solution = pickSection([
+    "Solution", "Solution pattern", "Engineering response", "Solution architecture", "Architecture",
+    "Product architecture", "Research and validation architecture", "Approach", "Three-phase delivery",
+  ]);
+  const engineering = pickSection([
+    "Engineering highlights", "Implementation Highlights", "Key engineering decisions", "What this demonstrates",
+    "Engineering response", "Technical overview", "Validation strategy",
+  ]);
+  const outcomes = pickSection([
+    "Engagement outcome", "Outcome", "Results", "Results / Impact", "Validation evidence",
+    "Validation and engineering quality", "Final handover boundary",
+  ]);
+  const technology = pickSection(["Technology", "Technology Stack", "Tech Stack"]);
+  const boundary = pickSection([
+    "Public vs. private repository boundary", "Company showcase classification", "Scope boundaries",
+    "Disclosure and claims boundary", "Known limitations and non-claims",
+  ]);
+
+  let engineeringHighlights = listFromSection(engineering, 6);
+  if (engineeringHighlights.length < 2) {
+    const numberedHeadings = [...input.caseStudy.matchAll(/^###\s+\d+[.)]?\s+(.+)$/gm)]
+      .map((match) => match[1].replace(/[*_`]/g, "").trim())
+      .filter(Boolean);
+    engineeringHighlights = [...new Set([...engineeringHighlights, ...numberedHeadings])].slice(0, 6);
+  }
+  if (engineeringHighlights.length < 2) engineeringHighlights = listFromSection(challenge, 6);
 
   const detectedTech = input.technologies?.length
     ? input.technologies
@@ -146,17 +172,18 @@ export function buildFallbackStructuredSummary(input: {
   const heroVisualPath = (input.assetPaths || []).find((path) => /(?:architecture|hero|system|overview|validation).*\.(?:svg|png|jpe?g|webp)$/i.test(path))
     || (input.assetPaths || []).find((path) => /\.(?:svg|png|jpe?g|webp)$/i.test(path))
     || null;
+  const outcomeItems = listFromSection(outcomes, 5);
 
   return {
     title: titleFromRepo(input.repoName),
-    executiveSummary: firstParagraph(overview || input.readme, `A completed OSYSTIC engineering engagement documented in a sanitized public showcase repository.`, 650),
+    executiveSummary: firstParagraph(overview || input.readme, "A completed OSYSTIC engineering engagement documented in a sanitized public showcase repository.", 650),
     industry: "Technology",
     capabilities: [],
     challenge: firstParagraph(challenge, "The public case study documents a completed engineering challenge and the constraints addressed by the delivered system."),
     solution: firstParagraph(solution, "OSYSTIC delivered a controlled engineering solution documented in the public technical case study."),
-    engineeringHighlights: listFromSection(engineering, 6),
+    engineeringHighlights,
     technologies: detectedTech,
-    outcomes: listFromSection(outcomes, 5).length ? listFromSection(outcomes, 5) : [firstParagraph(outcomes, "Completed delivery with public evidence retained in the engineering case study.", 220)],
+    outcomes: outcomeItems.length ? outcomeItems : [firstParagraph(outcomes, "Completed delivery with public evidence retained in the engineering case study.", 220)],
     confidentialityNote: firstParagraph(boundary, "The public repository is sanitized and excludes confidential implementation details.", 320),
     heroVisualPath,
   };

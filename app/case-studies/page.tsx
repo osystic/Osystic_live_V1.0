@@ -6,6 +6,8 @@ import { fetchCaseStudies } from "./actions";
 import { FinalCTA } from "../components/marketing/FinalCTA";
 import { FutureReveal } from "../components/future/FutureReveal";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = createSeoMetadata({
   title: "Enterprise AI & Software Case Studies",
   description: "Explore selected OSYSTIC case studies across production AI, product engineering, data platforms, cloud infrastructure, and enterprise software delivery.",
