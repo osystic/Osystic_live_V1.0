@@ -17,7 +17,7 @@ import {
   Waypoints,
   Workflow,
 } from "lucide-react";
-import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import { Component, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -117,6 +117,19 @@ export function AboutExperience() {
   const excellenceProgressRef = useRef<HTMLDivElement>(null);
   const [sceneReady, setSceneReady] = useState(false);
   const [sceneActive, setSceneActive] = useState(true);
+
+  useLayoutEffect(() => {
+    if (window.location.hash) return;
+
+    ScrollTrigger.clearScrollMemory("manual");
+    window.scrollTo(0, 0);
+
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     const section = heroRef.current;
