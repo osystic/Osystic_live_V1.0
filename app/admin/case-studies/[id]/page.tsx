@@ -10,9 +10,11 @@ import {
   ExternalLink,
   Eye,
   GitBranch,
+  History,
   Loader2,
   Pencil,
   RefreshCw,
+  RotateCcw,
   Save,
   ShieldCheck,
   Sparkles,
@@ -58,13 +60,26 @@ type AiStudy = {
   updatedAt: string | null;
 };
 
-function automationFor(value: string | null): AutomationMeta | null {
-  if (!value) return null;
+type HistoryEntry = {
+  savedAt: string;
+  reason: string;
+  sourceSha: string | null;
+  generatedContent: string;
+  summary: StructuredSummary | null;
+};
+
+type ParsedAnalysis = {
+  automation?: AutomationMeta;
+  history?: HistoryEntry[];
+};
+
+function analysisFor(value: string | null): ParsedAnalysis {
+  if (!value) return {};
   try {
-    const parsed = JSON.parse(value) as { automation?: AutomationMeta };
-    return parsed.automation ?? null;
+    const parsed = JSON.parse(value) as ParsedAnalysis;
+    return parsed && typeof parsed === "object" ? parsed : {};
   } catch {
-    return null;
+    return {};
   }
 }
 
@@ -99,6 +114,7 @@ export default function AdminCaseStudyDetailPage() {
   const [refreshing, setRefreshing] = useState(false);
   const [applying, setApplying] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [restoring, setRestoring] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -125,7 +141,9 @@ export default function AdminCaseStudyDetailPage() {
     load();
   }, [load]);
 
-  const automation = useMemo(() => automationFor(study?.analysis ?? null), [study?.analysis]);
+  const parsedAnalysis = useMemo(() => analysisFor(study?.analysis ?? null), [study?.analysis]);
+  const automation = parsedAnalysis.automation ?? null;
+  const history = parsedAnalysis.history ?? [];
   const save = async () => {
     if (!study || saving) return;
     setSaving(true);
@@ -188,6 +206,29 @@ export default function AdminCaseStudyDetailPage() {
       setError(err instanceof Error ? err.message : "Unable to apply update");
     } finally {
       setApplying(false);
+    }
+  };
+
+  const restoreVersion = async (savedAt: string) => {
+    if (restoring || refreshing || publishing || isEditing) return;
+    setRestoring(savedAt);
+    setError("");
+    setMessage("");
+    try {
+      const response = await fetch(`/api/admin/case-studies/${id}/rollback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ savedAt }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Unable to restore history version");
+      setStudy(data.study);
+      setEditContent(data.study.generatedContent);
+      setMessage("Previous version restored to the review draft. Publish explicitly when you are ready to update the live page.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to restore history version");
+    } finally {
+      setRestoring(null);
     }
   };
 
@@ -277,6 +318,36 @@ export default function AdminCaseStudyDetailPage() {
           </div>
           <SummaryPreview summary={automation.pendingSummary} />
         </div>
+      ) : null}
+
+      {history.length ? (
+        <section className="bg-white border border-gray-200 rounded-xl p-5" aria-labelledby="case-study-history-title">
+          <div className="flex items-center gap-2 mb-4">
+            <History size={17} className="text-gray-600" />
+            <div>
+              <h2 id="case-study-history-title" className="font-semibold text-gray-900">Version history</h2>
+              <p className="text-xs text-gray-500 mt-0.5">Restoring creates a review draft only. The live page changes only after an explicit Publish action.</p>
+            </div>
+          </div>
+          <div className="divide-y divide-gray-100">
+            {history.slice(0, 10).map((entry) => (
+              <div key={`${entry.savedAt}-${entry.reason}`} className="py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="text-sm font-medium text-gray-900">{entry.reason.replaceAll("-", " ")}</div>
+                  <div className="text-xs text-gray-500 mt-0.5">{new Date(entry.savedAt).toLocaleString()} {entry.sourceSha ? `· source ${entry.sourceSha.slice(0, 8)}` : ""}</div>
+                </div>
+                <button
+                  onClick={() => restoreVersion(entry.savedAt)}
+                  disabled={Boolean(restoring) || refreshing || publishing || isEditing}
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-medium disabled:opacity-50"
+                >
+                  {restoring === entry.savedAt ? <Loader2 size={13} className="animate-spin" /> : <RotateCcw size={13} />}
+                  Restore to review draft
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
       ) : null}
 
       <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-200 min-h-[400px]">
