@@ -3,7 +3,7 @@ import type { QualityResult, SafetyResult } from "./quality";
 import type { StructuredCaseStudySummary } from "./summary";
 import type { PublicShowcaseBundle } from "./github";
 
-export const CASE_STUDY_GENERATOR_VERSION = 3;
+export const CASE_STUDY_GENERATOR_VERSION = 4;
 
 export type CaseStudyWorkflowStatus =
   | "detected"

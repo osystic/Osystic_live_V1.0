@@ -90,6 +90,8 @@ const OUTCOME_HEADINGS = [
 ];
 
 const CONFIDENTIALITY_HEADINGS = [
+  "Public disclosure note",
+  "Confidentiality boundary",
   "Disclosure boundary",
   "Scope and disclosure boundary",
   "Disclosure and claims boundary",
@@ -97,8 +99,7 @@ const CONFIDENTIALITY_HEADINGS = [
   "Public vs. private repository boundary",
   "Public/private boundary",
   "Scope boundaries",
-  "Scope and safety boundary",
-];
+ ];
 
 function toStringArray(value: unknown, limit = 12): string[] {
   if (!Array.isArray(value)) return [];
@@ -241,12 +242,27 @@ function tableHighlights(value: string, limit = 8): string[] {
 
 function proseBlocks(value: string): string[] {
   const withoutCode = (value || "").replace(/```[\s\S]*?```/g, " ");
+  const rawBlocks = withoutCode.split(/\n{2,}/).map((item) => item.trim()).filter(Boolean);
   const candidates: string[] = [];
 
-  for (const rawBlock of withoutCode.split(/\n{2,}/)) {
-    const block = rawBlock.trim();
+  for (let index = 0; index < rawBlocks.length; index += 1) {
+    const block = rawBlocks[index];
     if (!block || isImageOnly(block) || isTableBlock(block)) continue;
     if (/^#{1,6}\s+\S/.test(block) && !block.includes("\n")) continue;
+
+    const cleaned = stripMarkdown(block);
+    if (/^(technology|tech stack)\s*:/i.test(cleaned)) continue;
+
+    const nextBullets = index + 1 < rawBlocks.length ? bulletItems(rawBlocks[index + 1], 4) : [];
+    if (cleaned.length >= 18 && cleaned.length <= 90 && /:$/.test(cleaned) && nextBullets.length >= 2) {
+      const joined = nextBullets
+        .slice(0, 3)
+        .map((item) => item.replace(/[;:.]+$/, ""))
+        .join("; ");
+      candidates.push(`${cleaned} ${joined}.`);
+      index += 1;
+      continue;
+    }
 
     const bullets = bulletItems(block, 4);
     if (bullets.length >= 2) {
@@ -258,7 +274,6 @@ function proseBlocks(value: string): string[] {
       continue;
     }
 
-    const cleaned = stripMarkdown(block);
     if (cleaned.length >= 30 && !/^(architecture|technology|engineering highlights|validation evidence)$/i.test(cleaned)) {
       candidates.push(cleaned);
     }
@@ -271,12 +286,18 @@ function clip(value: string, max = 520) {
   const cleaned = stripMarkdown(value);
   if (cleaned.length <= max) return cleaned;
   const shortened = cleaned.slice(0, max);
-  const stop = Math.max(
+  const sentenceStop = Math.max(
     shortened.lastIndexOf(". "),
-    shortened.lastIndexOf("; "),
-    shortened.lastIndexOf(" "),
+    shortened.lastIndexOf("! "),
+    shortened.lastIndexOf("? "),
   );
-  return `${shortened.slice(0, stop > max * 0.7 ? stop + 1 : max).trim()}…`;
+  if (sentenceStop >= max * 0.55) return shortened.slice(0, sentenceStop + 1).trim();
+
+  const clauseStop = Math.max(shortened.lastIndexOf("; "), shortened.lastIndexOf(": "));
+  if (clauseStop >= max * 0.72) return shortened.slice(0, clauseStop + 1).trim();
+
+  const wordStop = shortened.lastIndexOf(" ");
+  return `${shortened.slice(0, wordStop > max * 0.8 ? wordStop : max).trim()}…`;
 }
 
 function firstNarrative(value: string, fallback = "", max = 520) {
@@ -428,7 +449,7 @@ function extractTechnologies(sources: string[]): string[] {
 }
 
 function extractCapabilities(sources: string[]) {
-  const section = findSectionFromSources(sources, ["Capability keywords", "Capabilities", "Relevant project types"]);
+  const section = findSectionFromSources(sources, ["Capability keywords", "Capabilities", "Relevant project types", "Engineering value demonstrated"]);
   if (!section) return [];
   const bullets = bulletItems(section.content, 8);
   const inline = inlineTechnologyList(section.content);
@@ -439,8 +460,10 @@ function extractOutcomes(sources: string[]) {
   const section = findSectionFromSources(sources, OUTCOME_HEADINGS);
   if (!section) return ["Completed delivery with public evidence retained in the engineering case study."];
 
-  const prose = proseBlocks(section.content).map((item) => clip(item, 280)).filter((item) => item.length >= 45);
-  if (prose.length) return prose.slice(0, 4);
+  const prose = proseBlocks(section.content)
+    .map((item) => clip(item, 420))
+    .filter((item) => item.length >= 45 && !/:$/.test(item));
+  if (prose.length) return prose.slice(0, 3);
   const bullets = bulletItems(section.content, 5);
   if (bullets.length) return bullets;
   const table = tableHighlights(section.content, 5);
@@ -472,7 +495,15 @@ function inferIndustry(repoName: string, sources: string[]) {
 }
 
 function extractTitle(markdown: string) {
-  return stripMarkdown(markdown.match(/^#\s+(.+)$/m)?.[1] || "");
+  const raw = stripMarkdown(markdown.match(/^#\s+(.+)$/m)?.[1] || "");
+  const cleaned = raw
+    .replace(/^case study\s*[:—-]\s*/i, "")
+    .replace(/^public engineering case study\s*[:—-]\s*/i, "")
+    .replace(/\s*[—-]\s*full case study$/i, "")
+    .replace(/\s*[—-]\s*(?:public )?engineering case study$/i, "")
+    .trim();
+  if (/^(?:full\s+)?case study$/i.test(cleaned)) return "";
+  return cleaned;
 }
 
 function cleanTitleFromRepo(repoName: string) {
@@ -513,7 +544,7 @@ export function buildFallbackStructuredSummary(input: {
   const sources = [input.caseStudy, input.readme].filter(Boolean);
   const readmeTitle = extractTitle(input.readme);
   const caseTitle = extractTitle(input.caseStudy);
-  const title = cleanTitleFromRepo(input.repoName) || caseTitle || readmeTitle || "OSYSTIC Engineering Case Study";
+  const title = caseTitle || readmeTitle || cleanTitleFromRepo(input.repoName) || "OSYSTIC Engineering Case Study";
 
   const executiveSummary = sourceNarrative(
     sources,
