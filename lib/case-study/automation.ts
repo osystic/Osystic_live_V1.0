@@ -436,7 +436,13 @@ export async function scanPublicCaseStudyRepositories(options: {
   for (const repo of repos) {
     const existing = byUrl.get(repo.html_url.toLowerCase());
     const metadata = parseStoredAnalysis(existing?.analysis).automation;
-    if (existing && metadata?.repositoryPushedAt && repo.pushed_at && metadata.repositoryPushedAt === repo.pushed_at) {
+    if (
+      existing &&
+      metadata?.repositoryPushedAt &&
+      repo.pushed_at &&
+      metadata.repositoryPushedAt === repo.pushed_at &&
+      metadata.generatorVersion === CASE_STUDY_GENERATOR_VERSION
+    ) {
       continue;
     }
     if (processed >= maxProcess) break;
