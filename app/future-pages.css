@@ -990,6 +990,8 @@
   flex:0 0 auto;
 }
 .future-footer-address-inline{
+  flex:none;
+  max-width:340px;
   margin:14px 0 12px;
   color:#8492a8;
   font-size:13px;
@@ -1032,6 +1034,9 @@
   }
   .future-footer-brand{
     max-width:520px;
+  }
+  .future-footer-links{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 }
 
