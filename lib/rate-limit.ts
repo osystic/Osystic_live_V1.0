@@ -5,8 +5,12 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import type { NextRequest } from "next/server";
 
-const url = process.env.UPSTASH_REDIS_REST_URL?.trim();
-const token = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
+const url =
+  process.env.UPSTASH_REDIS_REST_URL?.trim() ||
+  process.env.KV_REST_API_URL?.trim();
+const token =
+  process.env.UPSTASH_REDIS_REST_TOKEN?.trim() ||
+  process.env.KV_REST_API_TOKEN?.trim();
 
 const redis =
   url && token

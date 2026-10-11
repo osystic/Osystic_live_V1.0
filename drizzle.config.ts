@@ -8,8 +8,8 @@ export default defineConfig({
   schema: ["./drizzle/schema.ts", "./drizzle/finance-schema.ts"],
   out: "./drizzle/migrations",
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
-    authToken: process.env.DATABASE_AUTH_TOKEN!,
+    url: (process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL)!,
+    authToken: (process.env.TURSO_AUTH_TOKEN || process.env.DATABASE_AUTH_TOKEN)!,
   },
   verbose: true,
   strict: true,
