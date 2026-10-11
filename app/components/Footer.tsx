@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Linkedin, LogIn, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "../config/site";
-import { INDUSTRIES } from "../_data/industries-data";
 
 const footerGroups = [
   {
@@ -23,13 +22,6 @@ const footerGroups = [
       { label: "Admin Login", href: "https://www.osystic.com/admin/", admin: true },
     ],
   },
-  {
-    title: "Industries",
-    items: INDUSTRIES.map(industry => ({
-      label: industry.name,
-      href: industry.href,
-    })),
-  },
 ];
 
 export default function Footer() {
@@ -47,7 +39,6 @@ export default function Footer() {
           <div className="future-footer-address future-footer-address-inline">
             <MapPin size={14} aria-hidden="true" />
             <span>
-              <small>US BUSINESS ADDRESS</small>
               {siteConfig.address.line1}, {siteConfig.address.line2},{" "}
               {siteConfig.address.country}
             </span>
@@ -66,10 +57,7 @@ export default function Footer() {
 
         <nav className="future-footer-links" aria-label="Footer navigation">
           {footerGroups.map(group => (
-            <div
-              className={`future-footer-link-group${group.title === "Industries" ? " future-footer-link-group-industries" : ""}`}
-              key={group.title}
-            >
+            <div className="future-footer-link-group" key={group.title}>
               <h3>{group.title}</h3>
 
               {group.items.map(item =>
