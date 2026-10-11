@@ -14,6 +14,16 @@ function CalendarContent({ calLink }: { calLink: string }) {
     const failed = () => { if (active) { window.clearTimeout(timer); setStatus("error"); } };
     getCalApi({ namespace }).then(api => {
       if (!active) return;
+      api("ui", {
+        theme: "dark",
+        styles: {
+          body: { background: "#07101E" },
+          availabilityDatePicker: { background: "#0B1424", color: "#F5F8FF" },
+          enabledDateButton: { color: "#F5F8FF" },
+          disabledDateButton: { color: "#6F7F97" },
+          branding: { brandColor: "#4F73FF" },
+        },
+      });
       api("on", { action: "linkReady", callback: ready });
       api("on", { action: "linkFailed", callback: failed });
       unsubscribe = () => {
