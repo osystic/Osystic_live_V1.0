@@ -34,7 +34,7 @@ function createLimiter({
   return new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(requests, window),
-    prefix: `osystic:${prefix}`,
+    prefix: `osystic:${process.env.VERCEL_ENV || process.env.NODE_ENV || "local"}:${prefix}`,
     analytics: false,
     ephemeralCache: false,
     timeout: 0,
