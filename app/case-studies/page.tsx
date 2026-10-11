@@ -60,12 +60,7 @@ export default async function WorkPage(){
           <span className="future-kicker">{featured.client}</span>
           <h2>{featured.title}</h2>
           <p>{featured.excerpt||featured.challenge}</p>
-          <div className="fp-evidence-lines">
-            <span><b>CHALLENGE</b>{featured.challenge}</span>
-            <span><b>SOLUTION</b>{featured.solution}</span>
-          </div>
-          {featured.results.length?<div className="fp-result-chips">{featured.results.slice(0,3).map(x=><span key={x}>{x}</span>)}</div>:null}
-          <span className="future-inline-link">Open evidence file <ArrowRight size={15}/></span>
+          <span className="future-inline-link">Open case-study summary <ArrowRight size={15}/></span>
         </div>
       </Link>
     </div></section>:<section className="fp-featured-evidence"><div className="container-shell">
@@ -83,8 +78,7 @@ export default async function WorkPage(){
         <Link href={`/case-studies/${study.slug}`} className="fp-evidence-card">
           <div className="fp-evidence-media"><Image src={study.featuredImage||fallback} alt="" fill sizes="(max-width:800px) 94vw, 32vw"/></div>
           <div><span>CASE / {String(i+2).padStart(3,"0")}</span><h3>{study.title}</h3><p>{study.excerpt||study.challenge}</p>
-            {study.results.length?<div>{study.results.slice(0,2).map(x=><small key={x}>{x}</small>)}</div>:null}
-            <b>OPEN <ArrowRight size={13}/></b>
+            <b>OPEN SUMMARY <ArrowRight size={13}/></b>
           </div>
         </Link>
       </FutureReveal>)}</div>
