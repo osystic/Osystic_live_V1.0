@@ -130,6 +130,14 @@ assert.equal(legacyEligibility.eligible, true);
 assert.equal(legacyEligibility.legacy, true);
 assert.ok(legacyEligibility.warnings.length > 0);
 
+const legacyApprovedShowcase = normalizeShowcaseManifest(parseOsysticYaml(legacyYaml.replace("approved-public-showcase", "approved-showcase")), "Legacy-Approved-Case-Study");
+const legacyApprovedEligibility = evaluateRepositoryEligibility({
+  owner: "osystic", expectedOwner: "osystic", visibility: "public", archived: false,
+  repoName: "Legacy-Approved-Case-Study", readme, caseStudy, assetPaths: ["assets/architecture.svg"],
+  manifest: legacyApprovedShowcase,
+});
+assert.equal(legacyApprovedEligibility.eligible, true);
+
 const privateRepo = evaluateRepositoryEligibility({
   owner: "osystic",
   expectedOwner: "osystic",

@@ -21,6 +21,8 @@ export type RepositoryEligibilityInput = {
 };
 
 const READY_WEBSITE_STATES = new Set(["ready-for-review", "approved", "published"]);
+const LEGACY_REPOSITORY_CLASSES = new Set(["public-showcase", "public-case-study"]);
+const LEGACY_PORTFOLIO_STATUSES = new Set(["approved-public-showcase", "approved-showcase", "published"]);
 
 function statusLooksCompleted(value: string) {
   const normalized = value.toLowerCase();
@@ -29,7 +31,7 @@ function statusLooksCompleted(value: string) {
 
 function contentLooksCompleted(input: RepositoryEligibilityInput) {
   const text = `${input.readme}\n${input.caseStudy}`.toLowerCase();
-  return /\b(completed|complete and accepted|engagement was completed|delivery was completed|completed delivery)\b/.test(text);
+  return /\b(completed|complete and accepted|engagement was completed|delivery was completed|completed delivery|completed and delivered|final delivery)\b/.test(text);
 }
 
 function unsafeManifestFlags(raw: JsonMap) {
@@ -48,18 +50,38 @@ export function evaluateRepositoryEligibility(input: RepositoryEligibilityInput)
   const warnings: string[] = [];
   const manifest = input.manifest;
 
-  if (input.owner.toLowerCase() !== input.expectedOwner.toLowerCase()) reasons.push(`Repository owner must be ${input.expectedOwner}.`);
+  if (input.owner.toLowerCase() !== input.expectedOwner.toLowerCase()) {
+    reasons.push(`Repository owner must be ${input.expectedOwner}.`);
+  }
   if (input.visibility.toLowerCase() !== "public") reasons.push("Repository must be public.");
   if (input.archived) reasons.push("Archived repositories are not eligible for website publishing.");
-  if (manifest.repositoryClass !== "public-showcase") reasons.push("repository_class must be public-showcase.");
+
+  const acceptedRepositoryClasses = manifest.legacy
+    ? LEGACY_REPOSITORY_CLASSES
+    : new Set(["public-showcase"]);
+  if (!acceptedRepositoryClasses.has(manifest.repositoryClass)) {
+    reasons.push("repository_class must identify an approved public case-study showcase.");
+  }
+
   if (manifest.visibility && manifest.visibility !== "public") reasons.push("Manifest visibility must be public.");
   if (!manifest.portfolioEligible) reasons.push("portfolio.eligible must be true.");
-  if (manifest.portfolioStatus !== "approved-public-showcase") reasons.push("portfolio.status must be approved-public-showcase.");
-  if (manifest.sourceType && manifest.sourceType !== "sanitized-client-delivery") warnings.push("source.type is not sanitized-client-delivery.");
+
+  const acceptedPortfolioStatuses = manifest.legacy
+    ? LEGACY_PORTFOLIO_STATUSES
+    : new Set(["approved-public-showcase"]);
+  if (!acceptedPortfolioStatuses.has(manifest.portfolioStatus)) {
+    reasons.push("portfolio.status must indicate an approved public showcase.");
+  }
+
+  if (manifest.sourceType && manifest.sourceType !== "sanitized-client-delivery") {
+    warnings.push("source.type is not sanitized-client-delivery.");
+  }
   if (manifest.sourceCodeIncluded) reasons.push("Public showcase manifest says confidential source code is included.");
 
   const unsafeFlags = unsafeManifestFlags(manifest.raw);
-  if (unsafeFlags.length) reasons.push(`Manifest blocks publishing because these flags are true: ${unsafeFlags.join(", ")}.`);
+  if (unsafeFlags.length) {
+    reasons.push(`Manifest blocks publishing because these flags are true: ${unsafeFlags.join(", ")}.`);
+  }
 
   if (!input.readme.trim()) reasons.push("README.md is required.");
   if (!input.caseStudy.trim()) reasons.push("case-study.md is required.");
