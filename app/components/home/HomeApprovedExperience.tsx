@@ -55,17 +55,9 @@ const insights = [
 ] as const;
 
 const trustLogos = ["Microsoft", "aws", "Google Cloud", "NVIDIA", "Vercel", "docker"];
-const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } };
-
 export function HomeApprovedExperience() {
   const reducedMotion = useReducedMotion();
-  const reveal = reducedMotion ? {} : {
-    initial: "hidden" as const,
-    whileInView: "show" as const,
-    viewport: { once: true, amount: 0.18 },
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-    variants: fadeUp,
-  };
+  const reveal = {};
 
   return (
     <div className={styles.page}>
@@ -159,10 +151,10 @@ export function HomeApprovedExperience() {
                 <motion.article
                   className={styles.deliveryCard}
                   key={item.title}
-                  initial={reducedMotion ? undefined : { opacity: 0, y: 34 }}
+                  initial={undefined}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                  transition={{ duration: 0.35, delay: index * 0.025 }}
                 >
                   <div className={styles.deliveryTop}><span>{item.number}</span><Icon size={24} strokeWidth={1.5} /></div>
                   <h3>{item.title}</h3>
@@ -185,10 +177,10 @@ export function HomeApprovedExperience() {
               <motion.article
                 className={styles.workCard}
                 key={item.title}
-                initial={reducedMotion ? undefined : { opacity: 0, y: 26 }}
+                initial={undefined}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
+                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <Link href={item.href} className={styles.workMedia}>
                   <Image src={item.image} alt="" fill sizes="(max-width:760px) 92vw, 31vw" /><span>{item.tag}</span>
@@ -219,10 +211,10 @@ export function HomeApprovedExperience() {
               return (
                 <motion.div
                   key={item.title}
-                  initial={reducedMotion ? undefined : { opacity: 0, y: 24 }}
+                  initial={undefined}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.5, delay: index * 0.055 }}
+                  transition={{ duration: 0.35, delay: index * 0.02 }}
                 >
                   <Link href={item.href} className={styles.capabilityCard}>
                     <div className={styles.capabilityIcon}><Icon size={22} strokeWidth={1.45} /></div>
@@ -250,10 +242,10 @@ export function HomeApprovedExperience() {
                 <motion.article
                   className={styles.workflowStep}
                   key={item.title}
-                  initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+                  initial={undefined}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.35, delay: index * 0.04 }}
                 >
                   <div className={styles.workflowLine} aria-hidden="true" />
                   <div className={styles.workflowNumber}>{item.number}</div>
@@ -279,10 +271,10 @@ export function HomeApprovedExperience() {
             {industries.map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={reducedMotion ? undefined : { opacity: 0, y: 24, scale: 0.98 }}
+                initial={undefined}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.52, delay: index * 0.06 }}
+                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <Link href={item.href} className={styles.industryCard}>
                   <Image src={item.image} alt="" fill sizes="(max-width:760px) 75vw, 18vw" /><span>{item.title}</span>
@@ -314,10 +306,10 @@ export function HomeApprovedExperience() {
               <motion.article
                 className={styles.insightCard}
                 key={item.title}
-                initial={reducedMotion ? undefined : { opacity: 0, y: 20 }}
+                initial={undefined}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <span>{item.tag}</span><h3>{item.title}</h3><p>{item.copy}</p>
                 <Link href={item.href} className={styles.cardLink}>Read insight <ArrowRight size={13} /></Link>

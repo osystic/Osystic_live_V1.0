@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, Component, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import type { ChatMessage, ConversationContext, LeadData } from "./types";
 import { processMessage, getGreeting, createLeadMessage, createLeadConfirmation } from "./chat-engine";
 import "./chatbot.css";
@@ -472,6 +473,8 @@ function LeadCaptureForm({
    Exported with error boundary wrapper
    ═══════════════════════════════════════════════════════════ */
 export default function ChatWidget() {
+  const pathname = usePathname();
+  if (pathname === "/") return null;
   return (
     <ChatbotErrorBoundary>
       <ChatWidgetInner />

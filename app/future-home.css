@@ -3553,3 +3553,94 @@
     width:min(calc(100% - 32px),1240px);
   }
 }
+
+
+/* Approved homepage compact navigation */
+.future-site-header.approved-home-header{
+  height:62px;
+}
+.approved-home-header .future-nav-shell{
+  height:62px;
+}
+.approved-home-header .future-brand-wrap .brand-logo{
+  width:112px;
+  min-width:112px;
+}
+.approved-home-header .future-nav-link{
+  padding:7px 9px;
+  font-size:10.5px;
+}
+.approved-home-header .future-nav-cta{
+  min-height:35px;
+  padding-inline:14px;
+  font-size:10.5px;
+}
+
+/* Homepage footer: compact closing strip to match approved composition */
+body:has(main.home-page) .future-footer-main{
+  grid-template-columns:1fr;
+  gap:0;
+  padding-top:24px;
+  padding-bottom:20px;
+}
+body:has(main.home-page) .future-footer-brand{
+  max-width:none;
+  display:grid;
+  grid-template-columns:auto minmax(260px,520px) auto;
+  align-items:center;
+  gap:28px;
+}
+body:has(main.home-page) .future-footer-brandline{
+  min-width:260px;
+}
+body:has(main.home-page) .future-footer-brand>p{
+  margin:0;
+  font-size:10.5px;
+  line-height:1.55;
+}
+body:has(main.home-page) .future-footer-email{
+  font-size:10px;
+  white-space:nowrap;
+}
+body:has(main.home-page) .future-footer-links{
+  display:none;
+}
+body:has(main.home-page) .future-footer-meta{
+  min-height:36px;
+  padding-top:9px;
+  padding-bottom:9px;
+  font-size:7px;
+}
+body:has(main.home-page) .future-footer-bottom{
+  padding-top:10px;
+  padding-bottom:12px;
+}
+
+@media(max-width:780px){
+  .future-site-header.approved-home-header,
+  .approved-home-header .future-nav-shell{
+    height:64px;
+  }
+  body:has(main.home-page) .future-footer-main{
+    padding-top:24px;
+    padding-bottom:18px;
+  }
+  body:has(main.home-page) .future-footer-brand{
+    display:block;
+  }
+  body:has(main.home-page) .future-footer-brandline{
+    min-width:0;
+  }
+  body:has(main.home-page) .future-footer-brand>p{
+    margin:14px 0 12px;
+    font-size:11px;
+  }
+  body:has(main.home-page) .future-footer-meta{
+    display:none;
+  }
+  body:has(main.home-page) .future-footer-bottom{
+    padding-top:10px;
+    padding-bottom:calc(18px + env(safe-area-inset-bottom));
+    gap:8px;
+  }
+}

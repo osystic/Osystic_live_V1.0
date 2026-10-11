@@ -878,3 +878,154 @@
   transform-origin:center bottom;
 }
 .industryCard:hover img{transform:scale(1.24)}
+
+
+/* Approved-reference visual pass 2: compact desktop rhythm */
+@media (min-width:901px){
+  .hero{
+    min-height:760px;
+    padding-top:42px;
+  }
+  .heroInner{
+    min-height:440px;
+    grid-template-columns:minmax(520px,.9fr) minmax(500px,1.1fr);
+    gap:20px;
+  }
+  .heroCopy{padding-top:0}
+  .heroCopy h1{
+    max-width:600px;
+    font-size:clamp(3rem,3.65vw,3.72rem);
+    line-height:1.015;
+  }
+  .heroCopy>p{
+    max-width:520px;
+    margin-top:19px;
+    font-size:13px;
+    line-height:1.65;
+  }
+  .heroActions{margin-top:22px}
+  .primaryButton,.secondaryButton{
+    min-height:42px;
+    padding-inline:17px;
+    border-radius:10px;
+    font-size:11.5px;
+  }
+  .heroProof{margin-top:15px;font-size:9.5px}
+  .heroVisual{min-height:430px}
+  .heroScene{inset:-9% -7% -5% -5%}
+  .heroTrace{top:465px;height:100px}
+  .heroTrace:before{top:20px}
+  .heroTrace:after{top:42px}
+  .heroTrace span{top:62px}
+  .heroTrace i{top:82px}
+
+  .deliveryBand{
+    grid-template-columns:minmax(300px,.72fr) minmax(650px,1.45fr);
+    gap:32px;
+    padding:0 0 38px;
+  }
+  .deliveryIntro h2{
+    max-width:390px;
+    font-size:clamp(1.85rem,2.35vw,2.35rem);
+    line-height:1.08;
+  }
+  .deliveryCards{gap:8px}
+  .deliveryCard{
+    min-height:158px;
+    padding:14px 13px;
+  }
+  .deliveryCard h3{
+    margin:24px 0 7px;
+    font-size:11px;
+  }
+  .deliveryCard p{
+    font-size:9px;
+    line-height:1.48;
+  }
+
+  .section{padding:46px 0}
+  .workflowSection{padding:40px 0 44px}
+  .sectionHead{margin-bottom:22px}
+  .sectionHead h2,.centerHead h2{
+    font-size:clamp(1.8rem,2.35vw,2.35rem);
+    line-height:1.06;
+  }
+  .sectionHead>div>p{font-size:11px;line-height:1.55;margin-top:7px}
+  .blueEyebrow,.darkEyebrow{margin-bottom:8px}
+
+  .workGrid{gap:12px}
+  .workMedia{aspect-ratio:16/6.2}
+  .workBody{padding:11px 12px 12px}
+  .workBody h3{font-size:13px}
+  .workBody p{
+    min-height:31px;
+    margin:5px 0 9px;
+    font-size:9px;
+    line-height:1.42;
+  }
+  .cardLink,.inlineLink,.darkInlineLink{font-size:9.5px}
+
+  .capabilityGrid{gap:10px}
+  .capabilityCard{
+    min-height:112px;
+    padding:14px;
+  }
+  .capabilityIcon{width:30px;height:30px}
+  .capabilityCard h3{margin:12px 0 5px;font-size:11px}
+  .capabilityCard p{font-size:9px;line-height:1.42}
+
+  .centerHead{margin-bottom:28px}
+  .centerHead p{font-size:10px;margin-top:7px}
+  .workflowTrack{max-width:920px}
+  .workflowNumber{
+    width:29px;height:29px;
+    margin-bottom:10px;
+  }
+  .workflowLine{top:14px}
+  .workflowStep>svg{width:17px;height:17px}
+  .workflowStep h3{margin:5px 0 3px;font-size:10.5px}
+  .workflowStep p{font-size:8px;line-height:1.4}
+
+  .industryGrid{gap:7px}
+  .industryCard{min-height:145px}
+  .industryCard span{left:10px;bottom:9px;font-size:9px}
+
+  .trustSection{padding:30px 0 32px}
+  .trustSection .centerHead{margin-bottom:19px}
+  .trustSection .centerHead h2{font-size:1.8rem}
+  .logoStrip{gap:20px;max-width:900px}
+  .logoStrip span{font-size:13px}
+
+  .insightGrid{gap:12px}
+  .insightCard{
+    min-height:165px;
+    padding:16px;
+  }
+  .insightCard h3{margin:13px 0 7px;font-size:15px}
+  .insightCard p{font-size:9.5px;line-height:1.48;margin-bottom:12px}
+
+  .finalCta{padding:44px 0 48px}
+  .finalInner{
+    min-height:125px;
+    gap:44px;
+  }
+  .finalInner h2{font-size:clamp(2rem,2.75vw,2.8rem)}
+  .finalInner p{margin-top:9px;font-size:10px}
+  .finalActions{
+    min-width:0;
+    flex-direction:row;
+    align-items:center;
+  }
+  .finalActions .primaryButton,
+  .finalActions .secondaryButton{
+    width:auto;
+    white-space:nowrap;
+  }
+}
+
+@media (max-width:620px){
+  .sectionHead h2,.centerHead h2{font-size:1.95rem}
+  .workBody{padding:13px 14px 14px}
+  .capabilityCard{min-height:126px}
+  .finalInner h2{font-size:2.1rem}
+}
