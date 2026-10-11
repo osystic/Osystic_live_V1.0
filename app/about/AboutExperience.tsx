@@ -122,11 +122,13 @@ export function AboutExperience() {
     if (window.location.hash) return;
 
     ScrollTrigger.clearScrollMemory("manual");
-    window.scrollTo(0, 0);
 
-    const frame = window.requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-    });
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    };
+
+    resetScroll();
+    const frame = window.requestAnimationFrame(resetScroll);
 
     return () => window.cancelAnimationFrame(frame);
   }, []);
