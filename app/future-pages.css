@@ -130,7 +130,7 @@
   align-items:center;
   gap:7px;
   color:#687790;
-  font:650 7px/1 var(--font-geist-mono);
+  font:650 9px/1 var(--font-geist-mono);
   letter-spacing:.12em;
   white-space:nowrap;
 }
@@ -142,7 +142,7 @@
   max-width:440px;
   margin:24px 0 18px;
   color:#7f8ba0;
-  font-size:13px;
+  font-size:15px;
   line-height:1.7;
 }
 .future-footer-email{
@@ -151,7 +151,7 @@
   gap:8px;
   color:#b1bfd3;
   text-decoration:none;
-  font-size:12px;
+  font-size:14px;
   transition:color .18s ease;
 }
 .future-footer-email:hover{color:#fff}
@@ -164,7 +164,7 @@
 .future-footer-links h3{
   margin:0 0 11px;
   color:#65738b;
-  font:650 8px/1 var(--font-geist-mono);
+  font:650 10px/1 var(--font-geist-mono);
   letter-spacing:.13em;
   text-transform:uppercase;
 }
@@ -176,8 +176,8 @@
   padding:5px 0;
   color:#a0aabc;
   text-decoration:none;
-  font-size:11px;
-  line-height:1.35;
+  font-size:14px;
+  line-height:1.45;
   transition:color .18s ease,transform .18s ease;
 }
 .future-footer-links a:hover{color:#fff;transform:translateX(2px)}
@@ -202,7 +202,7 @@
   border-top:1px solid rgba(130,150,190,.11);
   border-bottom:1px solid rgba(130,150,190,.11);
   color:#6d7c94;
-  font:600 8px/1.45 var(--font-geist-mono);
+  font:600 11px/1.5 var(--font-geist-mono);
   letter-spacing:.08em;
 }
 .future-footer-meta>a{
@@ -219,18 +219,18 @@
   display:block;
   margin-bottom:3px;
   color:#56657c;
-  font:600 7px/1 var(--font-geist-mono);
+  font:600 9px/1 var(--font-geist-mono);
   letter-spacing:.11em;
 }
 .future-footer-bottom{
   padding-top:14px;
   padding-bottom:17px;
   color:#526078;
-  font:600 7px/1 var(--font-geist-mono);
-  letter-spacing:.08em;
+  font:600 11px/1.35 var(--font-geist-mono);
+  letter-spacing:.07em;
 }
 .future-footer-bottom div{gap:15px}
-.future-footer-bottom .future-admin-login{font-size:8px}
+.future-footer-bottom .future-admin-login{font-size:11px}
 
 /* Capability hub: replace repeated orbital motif with an engineering matrix. */
 .fp-cap-matrix{
