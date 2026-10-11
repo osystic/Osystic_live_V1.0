@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, Cpu, FileCheck2, Layers3 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Cpu, FileCheck2, Layers3 } from "lucide-react";
 import { fetchCaseStudy } from "../actions";
 import { FinalCTA } from "@/app/components/marketing/FinalCTA";
 import { StructuredData } from "@/app/components/seo/StructuredData";
@@ -85,7 +85,7 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ sl
             <div className="fp-case-flow">
               <article><span>01 / CHALLENGE</span><h2>What needed to change.</h2><p>{study.challenge}</p></article>
               <i aria-hidden="true" />
-              <article><span>02 / SYSTEM RESPONSE</span><h2>How the system was approached.</h2><p>{study.solution}</p></article>
+              <article><span>02 / SYSTEM RESPONSE</span><h2>How OSYSTIC approached it.</h2><p>{study.solution}</p></article>
             </div>
           </div>
         </section>
@@ -93,17 +93,34 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ sl
         {study.results.length ? (
           <section className="fp-case-results" aria-labelledby="case-results-title">
             <div className="container-shell">
-              <div className="fp-work-section-head"><span className="eyebrow" id="case-results-title">RESULTS</span><span>VERIFIED PUBLIC OUTCOMES</span></div>
+              <div className="fp-work-section-head"><span className="eyebrow" id="case-results-title">OUTCOMES</span><span>PUBLIC / EVIDENCE BACKED</span></div>
               <div className="fp-case-result-grid">{study.results.map((result, index) => <article key={result}><CheckCircle2 size={20} /><span>0{index + 1}</span><p>{result}</p></article>)}</div>
             </div>
           </section>
         ) : null}
 
-        {study.content ? (
-          <section className="fp-case-content" aria-label="Case notes">
+        {(study.content || study.githubUrl) ? (
+          <section className="fp-case-content" aria-label="Engineering highlights and technical evidence">
             <div className="container-shell fp-case-content-grid">
-              <aside><FileCheck2 size={22} /><b>CASE NOTES</b><span>PUBLIC / APPROVED</span></aside>
-              <article className="prose-shell" dangerouslySetInnerHTML={{ __html: study.content }} />
+              <aside>
+                <FileCheck2 size={22} />
+                <b>ENGINEERING EVIDENCE</b>
+                <span>EXECUTIVE SUMMARY / PUBLIC</span>
+                {study.githubUrl ? (
+                  <a href={study.githubUrl} target="_blank" rel="noopener noreferrer" className="future-inline-link">
+                    Full technical case study <ArrowUpRight size={14} />
+                  </a>
+                ) : null}
+              </aside>
+              <article className="prose-shell">
+                {study.content ? <div dangerouslySetInnerHTML={{ __html: study.content }} /> : null}
+                {study.githubUrl ? (
+                  <p>
+                    The complete sanitized engineering case study, architecture notes, validation evidence, and public technical detail are maintained in the OSYSTIC GitHub showcase repository. {" "}
+                    <a href={study.githubUrl} target="_blank" rel="noopener noreferrer">View the full engineering case study on GitHub</a>.
+                  </p>
+                ) : null}
+              </article>
             </div>
           </section>
         ) : null}

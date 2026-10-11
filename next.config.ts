@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const cmsImageHosts = [
   "images.unsplash.com",
   "res.cloudinary.com",
+  "raw.githubusercontent.com",
   ...((process.env.NEXT_PUBLIC_IMAGE_HOSTS || "")
     .split(",")
     .map((host) => host.trim().toLowerCase())
@@ -84,10 +85,7 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
+      { source: "/:path*", headers: securityHeaders },
       {
         source: "/admin/:path*",
         headers: [
@@ -95,10 +93,7 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "no-store, max-age=0" },
         ],
       },
-      {
-        source: "/api/admin/:path*",
-        headers: [{ key: "Cache-Control", value: "no-store, max-age=0" }],
-      },
+      { source: "/api/admin/:path*", headers: [{ key: "Cache-Control", value: "no-store, max-age=0" }] },
     ];
   },
 };

@@ -1,5 +1,12 @@
 import { marked } from "marked";
 import { sanitizePublishedHtml } from "@/lib/content-security";
+import { stringAt } from "./manifest";
+import { parseStoredAnalysis } from "./metadata";
+import {
+  buildFallbackStructuredSummary,
+  parseSummaryMarkdown,
+  type StructuredCaseStudySummary,
+} from "./summary";
 
 export function slugify(value: string) {
   return value
@@ -7,21 +14,7 @@ export function slugify(value: string) {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
-    .slice(0, 80) || "case-study";
-}
-
-export function parseMarkdownSections(markdown: string): Record<string, string> {
-  const sections: Record<string, string> = {};
-  const regex = /^###[ \t]+(.+)$/gm;
-  const matches = [...markdown.matchAll(regex)];
-  for (let i = 0; i < matches.length; i++) {
-    const match = matches[i];
-    const heading = (match[1] || "").trim().toLowerCase();
-    const start = (match.index ?? 0) + match[0].length;
-    const end = i + 1 < matches.length ? matches[i + 1].index ?? markdown.length : markdown.length;
-    sections[heading] = markdown.slice(start, end).trim();
-  }
-  return sections;
+    .slice(0, 96) || "case-study";
 }
 
 export function stripMarkdownInline(text: string) {
@@ -38,40 +31,41 @@ export function stripMarkdownInline(text: string) {
     .trim();
 }
 
-export function extractParagraph(text: string, maxLength = 200) {
-  const paragraphs = text
-    .split(/\n{2,}/)
-    .map((block) => stripMarkdownInline(block.replace(/^[-*+]\s+/gm, "")))
-    .filter((block) => block && !block.startsWith("|"));
-  const first = paragraphs[0] || "";
-  if (first.length <= maxLength) return first;
-  return first.slice(0, maxLength).replace(/\s+\S*$/, "") + "…";
-}
-
-export function extractBullets(text: string, limit = 12): string[] {
-  const bullets: string[] = [];
-  for (const line of text.split("\n")) {
-    const match = line.match(/^\s*[-*+]\s+(.+)$/);
-    if (!match?.[1]) continue;
-    const cleaned = stripMarkdownInline(match[1]);
-    if (cleaned) bullets.push(cleaned);
-    if (bullets.length >= limit) break;
-  }
-  return bullets;
-}
-
 export function markdownToHtml(markdown: string) {
   const html = marked.parse(markdown, { async: false, gfm: true, breaks: false }) as string;
   return sanitizePublishedHtml(html);
 }
 
-export function prettifyTitle(value: string) {
-  return value
-    .replace(/[-_]+/g, " ")
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+function publicNotesMarkdown(summary: StructuredCaseStudySummary) {
+  const sections: string[] = [];
+  if (summary.engineeringHighlights.length) {
+    sections.push("### Engineering Highlights", ...summary.engineeringHighlights.map((item) => `- ${item}`));
+  }
+  if (summary.capabilities.length) {
+    sections.push("", "### Capabilities", ...summary.capabilities.map((item) => `- ${item}`));
+  }
+  if (summary.confidentialityNote) {
+    sections.push("", "### Public Evidence Boundary", summary.confidentialityNote);
+  }
+  return sections.join("\n").trim();
+}
+
+function deriveSummary(input: {
+  projectTitle: string | null;
+  generatedContent: string;
+  analysis: string | null;
+}) {
+  const analysis = parseStoredAnalysis(input.analysis);
+  if (analysis.automation?.summary) return { summary: analysis.automation.summary, analysis };
+
+  const source = analysis.source;
+  const fallback = buildFallbackStructuredSummary({
+    repoName: source?.repository.name || input.projectTitle || "Case-Study",
+    readme: source?.readme || "",
+    caseStudy: source?.caseStudy || "",
+    assetPaths: source?.assetPaths || [],
+  });
+  return { summary: parseSummaryMarkdown(input.generatedContent, fallback), analysis };
 }
 
 export type PublicCaseStudyDraft = {
@@ -84,32 +78,36 @@ export type PublicCaseStudyDraft = {
   solution: string;
   results: string[];
   technologies: string[];
+  featuredImage: string | null;
+  githubUrl: string;
 };
 
 export function buildPublicDraft(input: {
   githubUrl: string;
   projectTitle: string | null;
   generatedContent: string;
+  analysis: string | null;
 }): PublicCaseStudyDraft {
-  const sections = parseMarkdownSections(input.generatedContent);
-  const title = prettifyTitle(input.projectTitle || input.githubUrl.split("/").pop() || "Case Study");
-  const owner = input.githubUrl.split("/")[3] || "Open Source";
-
-  const overview = sections["project overview"] || "";
-  const problem = sections["problem statement"] || "";
-  const solution = sections["solution"] || "";
-  const resultsSection = sections["results / impact"] || sections["results/impact"] || "";
-  const stackSection = sections["technology stack"] || "";
+  const { summary, analysis } = deriveSummary(input);
+  const automation = analysis.automation;
+  const source = analysis.source;
+  const clientIdentityPublic = Boolean(source?.manifest.clientIdentityPublic);
+  const rawManifest = source?.manifest.raw || {};
+  const publicClient = clientIdentityPublic
+    ? stringAt(rawManifest, "project.client") || stringAt(rawManifest, "client") || "Public Client"
+    : "Confidential Client";
 
   return {
-    title,
-    slug: slugify(title),
-    excerpt: extractParagraph(overview, 180),
-    content: markdownToHtml(input.generatedContent),
-    client: owner,
-    challenge: extractParagraph(problem, 700) || "Information not explicitly provided",
-    solution: extractParagraph(solution, 700) || "Information not explicitly provided",
-    results: extractBullets(resultsSection, 6),
-    technologies: extractBullets(stackSection, 12),
+    title: summary.title || input.projectTitle || "OSYSTIC Engineering Case Study",
+    slug: automation?.canonicalSlug || slugify(summary.title || input.projectTitle || "case-study"),
+    excerpt: summary.executiveSummary,
+    content: markdownToHtml(publicNotesMarkdown(summary)),
+    client: publicClient,
+    challenge: summary.challenge,
+    solution: summary.solution,
+    results: summary.outcomes,
+    technologies: summary.technologies,
+    featuredImage: automation?.heroVisualUrl || null,
+    githubUrl: input.githubUrl,
   };
 }

@@ -1,97 +1,75 @@
-const CASE_STUDY_PROMPT = `
-You are an expert technical writer and software architect. Your task is to write a highly professional, structured Case Study based on the provided GitHub repository analysis and user description.
+import type { PublicShowcaseBundle } from "./github";
+import type { StructuredCaseStudySummary } from "./summary";
 
-INPUT DATA PROVIDED:
-1. Repository Metadata: {{repo_data}}
-2. README Content: {{readme_content}}
-3. Technologies Detected: {{technologies}}
-4. Project Structure: {{project_structure}}
-5. Configuration/Dependencies: {{config_files}}
-6. User's Additional Description: {{user_description}}
-
-INSTRUCTIONS:
-- Write in a professional, corporate tone.
-- Use Markdown formatting (Headings, bullet points, bold text).
-- If some information is missing (e.g., empty README), intelligently infer details from the folder structure, dependencies, and repository name. If you absolutely cannot infer, write "Information not explicitly provided" but keep the structure intact.
-- Do NOT make up fake metrics (like "increased revenue by 50%"). Keep it factual to the code.
-
-Generate the Case Study with EXACTLY these sections:
-
-### Project Overview
-A compelling 2-3 paragraph summary of what this project is, its purpose, and its target audience.
-
-### Problem Statement
-What problem does this software solve? Why was this project built in the first place? (Infer from README or tech stack if not explicitly stated).
-
-### Solution
-How does this project solve the problem? What approach did the developers take?
-
-### Key Features
-List the top 5-7 core features of the software. (Use bullet points).
-
-### Technology Stack
-List the programming languages, frameworks, libraries, and tools used. Present this in a clean, readable format.
-
-### Architecture Overview
-Based on the folder structure and files, describe the architectural pattern used (e.g., MVC, Microservices, Monolith, Serverless) and how the code is organized.
-
-### Implementation Highlights
-Pick 2-3 interesting technical implementations. For example: "Uses Redis for caching to improve read speeds", or "Implements a custom middleware for authentication".
-
-### Challenges & Solutions
-Based on the tech stack and structure, identify 2 likely technical challenges the developers faced and how the current architecture solves them (e.g., "Challenge: Managing complex state -> Solution: Implemented Redux/Zustand").
-
-### Results / Impact
-What is the current status of the project? (e.g., Stars, forks, community adoption based on repo data).
-
-### Future Enhancements
-Suggest 3-4 logical next steps or features that would make sense for this project based on its current state.
-`;
-
-const REGENERATE_PROMPT = `
-Rewrite the following case study. Make it more concise, engaging, and polished. Keep the exact same Markdown structure and sections. Do not invent fake metrics.
-
-Current Case Study:
-{{current_case_study}}
-
-Repository Context: {{repo_data}}
-`;
-
-function fill(template: string, values: Record<string, string>): string {
-  let result = template;
-  for (const [key, value] of Object.entries(values)) {
-    result = result.split(`{{${key}}}`).join(value);
+function compactDocs(bundle: PublicShowcaseBundle) {
+  let remaining = 12000;
+  const output: string[] = [];
+  for (const doc of bundle.docs) {
+    if (remaining <= 0) break;
+    const slice = doc.content.slice(0, remaining);
+    output.push(`\n--- ${doc.path} ---\n${slice}`);
+    remaining -= slice.length;
   }
-  return result;
+  return output.join("\n");
 }
 
-export function buildGeneratePrompt(
-  analysis: {
-    repository: unknown;
-    readme: { content: string | null };
-    technologies: unknown;
-    project_structure: { file_structure: string };
-    configuration_files: Array<{ parsed_data: unknown }>;
-  },
-  userDescription?: string | null,
-): string {
-  return fill(CASE_STUDY_PROMPT, {
-    repo_data: JSON.stringify(analysis.repository, null, 2),
-    readme_content: (analysis.readme.content || "No README found.").slice(0, 8000),
-    technologies: JSON.stringify(analysis.technologies, null, 2),
-    project_structure: (analysis.project_structure.file_structure || "No structure found.").slice(0, 3000),
-    config_files: JSON.stringify(
-      analysis.configuration_files.map((item) => item.parsed_data).filter(Boolean),
-      null,
-      2,
-    ).slice(0, 3000),
-    user_description: userDescription || "No additional description provided.",
-  });
+export function buildWebsiteSummaryPrompt(bundle: PublicShowcaseBundle, fallback: StructuredCaseStudySummary) {
+  const clientIdentityPublic = bundle.manifest.clientIdentityPublic;
+  return `
+You are preparing the concise public website version of an OSYSTIC engineering case study.
+The complete technical case study already exists in a sanitized PUBLIC GitHub showcase repository.
+The OSYSTIC website should contain a premium executive summary, while the GitHub repository remains the full technical evidence source.
+
+NON-NEGOTIABLE RULES:
+- Use ONLY facts explicitly supported by the supplied public repository evidence.
+- Do not invent metrics, percentages, revenue impact, client identity, deployment claims, certifications, production claims, or technologies.
+- The project is complete because it passed the OSYSTIC public-showcase publication gate. Do not add "future enhancements".
+- Do not expose or infer a client identity when clientIdentityPublic is false.
+- Keep language direct, professional and suitable for an international technology company.
+- Avoid marketing hype, unsupported superlatives, and vague filler.
+- "outcomes" may contain measurable values only when the exact values are present in the evidence.
+- "heroVisualPath" must be either null or EXACTLY one path from AVAILABLE PUBLIC ASSETS.
+- Return JSON only. No Markdown fences and no explanatory text.
+
+OUTPUT JSON SHAPE:
+{
+  "title": "4-10 word project title without the words Case Study",
+  "executiveSummary": "2-3 concise sentences, approximately 220-500 characters",
+  "industry": "one concise industry/category",
+  "capabilities": ["2-6 OSYSTIC capability labels supported by evidence"],
+  "challenge": "2-4 concise sentences describing the actual technical/business challenge",
+  "solution": "2-4 concise sentences describing what OSYSTIC delivered",
+  "engineeringHighlights": ["3-6 concrete engineering highlights"],
+  "technologies": ["3-16 exact technologies explicitly present in the evidence"],
+  "outcomes": ["1-5 verified or clearly evidenced outcomes"],
+  "confidentialityNote": "one short public/private boundary statement",
+  "heroVisualPath": null
 }
 
-export function buildRegeneratePrompt(currentCaseStudy: string, repository: unknown): string {
-  return fill(REGENERATE_PROMPT, {
-    current_case_study: currentCaseStudy,
-    repo_data: JSON.stringify(repository, null, 2),
-  });
+PUBLICATION CONTEXT:
+Repository: ${bundle.repository.fullName}
+Repository URL: ${bundle.repository.htmlUrl}
+Client identity public: ${clientIdentityPublic ? "yes" : "no"}
+Project key: ${bundle.manifest.projectKey}
+Project name: ${bundle.manifest.projectName}
+Project status: ${bundle.manifest.projectStatus || "completed public showcase"}
+
+AVAILABLE PUBLIC ASSETS:
+${bundle.assetPaths.join("\n") || "None"}
+
+MANIFEST:
+${bundle.manifestText.slice(0, 9000)}
+
+README:
+${bundle.readme.slice(0, 9000)}
+
+FULL PUBLIC CASE STUDY:
+${bundle.caseStudy.slice(0, 26000)}
+
+SELECTED PUBLIC DOCS:
+${compactDocs(bundle)}
+
+DETERMINISTIC FALLBACK SUMMARY FOR ORIENTATION ONLY:
+${JSON.stringify(fallback, null, 2)}
+`;
 }

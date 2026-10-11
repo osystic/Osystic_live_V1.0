@@ -10,7 +10,7 @@ export function escapeHtml(value: string) {
 }
 
 function configuredImageHosts() {
-  const hosts = new Set(["images.unsplash.com", "res.cloudinary.com"]);
+  const hosts = new Set(["images.unsplash.com", "res.cloudinary.com", "raw.githubusercontent.com"]);
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   if (supabaseUrl) {

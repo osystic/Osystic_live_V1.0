@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AiError, callGemini } from "@/lib/case-study/gemini";
-import { buildRegeneratePrompt } from "@/lib/case-study/prompts";
-import { getAiCaseStudy, updateAiCaseStudyContent } from "@/lib/case-study/store";
+import { AiError } from "@/lib/case-study/gemini";
+import { GitHubError } from "@/lib/case-study/github";
+import { syncPublicCaseStudyRepository } from "@/lib/case-study/automation";
+import { getAiCaseStudy } from "@/lib/case-study/store";
+
+export const maxDuration = 300;
 
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -9,29 +12,18 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     const study = await getAiCaseStudy(id);
     if (!study) return NextResponse.json({ error: "Case study not found." }, { status: 404 });
 
-    let repository: unknown = { name: study.projectTitle };
-    if (study.analysis) {
-      try {
-        const parsed = JSON.parse(study.analysis) as { repository?: unknown } | null;
-        if (parsed && parsed.repository) repository = parsed.repository;
-      } catch {
-        // Fall back to the minimal repository context.
-      }
-    }
-
-    const prompt = buildRegeneratePrompt(study.generatedContent, repository);
-    const generatedContent = await callGemini(prompt);
-    const updated = await updateAiCaseStudyContent(id, generatedContent);
-
-    return NextResponse.json({ study: updated });
+    const result = await syncPublicCaseStudyRepository(study.githubUrl, { forceGeneration: true });
+    return NextResponse.json({
+      study: result.study,
+      action: result.action,
+      workflowStatus: result.workflowStatus,
+      warnings: result.warnings,
+    });
   } catch (error) {
-    if (error instanceof AiError) {
+    if (error instanceof GitHubError || error instanceof AiError) {
       return NextResponse.json({ error: error.message }, { status: error.status });
     }
-    console.error("Case study regeneration failed:", error);
-    return NextResponse.json(
-      { error: "Case study regeneration failed unexpectedly. Please try again." },
-      { status: 500 },
-    );
+    console.error("Case study GitHub refresh failed:", error);
+    return NextResponse.json({ error: "Unable to refresh this case study from GitHub." }, { status: 500 });
   }
 }
