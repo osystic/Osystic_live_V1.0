@@ -13,6 +13,14 @@ export default function CalendarEmbed({ calLink }: { calLink: string }) {
         styles: {
           body: { background: "#171717" },
         },
+        cssVarsPerTheme: {
+          dark: {
+            "--cal-spacing-6": "0.75rem",
+          },
+          light: {
+            "--cal-spacing-6": "0.75rem",
+          },
+        },
       });
     });
   }, []);
@@ -23,11 +31,13 @@ export default function CalendarEmbed({ calLink }: { calLink: string }) {
       calLink={calLink}
       style={{
         width: "min(1120px, calc(100vw - 24px))",
-        height: "min(720px, calc(100dvh - 24px))",
+        height: "min(620px, calc(100dvh - 56px))",
         maxWidth: "100%",
         maxHeight: "100%",
         overflow: "auto",
         background: "#171717",
+        borderRadius: "18px",
+        boxShadow: "0 24px 80px rgba(0, 0, 0, 0.28)",
       }}
       config={{
         layout: "month_view",
