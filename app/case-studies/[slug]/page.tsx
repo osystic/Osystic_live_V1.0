@@ -70,7 +70,7 @@ export default async function CaseStudyDetail({ params }: { params: Promise<{ sl
               </header>
               <div className="fp-case-media">
                 {study.featuredImage ? (
-                  <Image src={study.featuredImage} alt={`${study.title} project visual`} fill sizes="(max-width:900px) 94vw, 46vw" />
+                  <Image src={study.featuredImage} alt={`${study.title} project visual`} fill sizes="(max-width:900px) 94vw, 46vw" unoptimized={study.featuredImage.toLowerCase().endsWith(".svg")} />
                 ) : (
                   <div className="fp-case-placeholder" aria-label="OSYSTIC delivery system"><Cpu size={40} /><b>OSYSTIC</b><small>DELIVERY SYSTEM</small></div>
                 )}

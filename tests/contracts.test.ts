@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { parseOsysticYaml, normalizeShowcaseManifest } from "../lib/case-study/manifest";
-import { evaluateRepositoryEligibility } from "../lib/case-study/eligibility";
+import { evaluateRepositoryEligibility, semanticTitleSimilarity } from "../lib/case-study/eligibility";
 import { evaluatePublicShowcaseQuality, scanPublicShowcaseSafety } from "../lib/case-study/quality";
 
 const v2 = `
@@ -176,3 +176,7 @@ assert.equal(validateGitHubUrl("https://github.com/osystic/repo.with-dots").vali
 assert.equal(validateGitHubUrl("https://github.com/osystic/repo.git").valid, true);
 assert.equal(validateGitHubUrl("https://gitlab.com/osystic/repo").valid, false);
 console.log("case-study URL contracts: PASS");
+
+assert.ok(semanticTitleSimilarity("Event Orchestration SaaS", "Event Orchestration SaaS v2") >= 0.86);
+assert.ok(semanticTitleSimilarity("Event Orchestration SaaS", "Raspberry Pi eBPF Security") < 0.4);
+console.log("case-study duplicate similarity: PASS");

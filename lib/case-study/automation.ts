@@ -6,7 +6,7 @@ import {
   parseAndValidateUrl,
   type PublicShowcaseBundle,
 } from "./github";
-import { evaluateRepositoryEligibility } from "./eligibility";
+import { evaluateRepositoryEligibility, semanticTitleSimilarity } from "./eligibility";
 import { evaluatePublicShowcaseQuality, scanPublicShowcaseSafety } from "./quality";
 import { buildWebsiteSummaryPrompt } from "./prompts";
 import {
@@ -165,6 +165,20 @@ function baseAnalysis(existingAnalysis: StoredCaseStudyAnalysis, bundle: PublicS
   } satisfies StoredCaseStudyAnalysis;
 }
 
+async function findSemanticDuplicateCandidate(projectName: string, projectKey: string) {
+  const studies = await listAiCaseStudies();
+  let best: { study: (typeof studies)[number]; projectKey: string; score: number } | null = null;
+  for (const study of studies) {
+    const metadata = parseStoredAnalysis(study.analysis).automation;
+    if (!metadata || metadata.projectKey === projectKey) continue;
+    const score = semanticTitleSimilarity(projectName, study.projectTitle || metadata.projectKey);
+    if (score < 0.86) continue;
+    if (!best || score > best.score) best = { study, projectKey: metadata.projectKey, score };
+  }
+  return best;
+}
+
+
 export async function syncPublicCaseStudyRepository(
   githubUrl: string,
   options: { forceGeneration?: boolean; expectedOwner?: string } = {},
@@ -247,6 +261,39 @@ export async function syncPublicCaseStudyRepository(
           study: updated,
           workflowStatus: "possible_duplicate",
           warnings: [`A case study already exists for project key ${bundle.manifest.projectKey}.`],
+        };
+      }
+    }
+
+    const semanticDuplicate = await findSemanticDuplicateCandidate(
+      bundle.manifest.projectName,
+      bundle.manifest.projectKey,
+    );
+    if (semanticDuplicate) {
+      const duplicateAnalysis = parseStoredAnalysis(semanticDuplicate.study.analysis);
+      if (duplicateAnalysis.automation) {
+        duplicateAnalysis.automation = {
+          ...duplicateAnalysis.automation,
+          workflowStatus: "possible_duplicate",
+          duplicateCandidate: {
+            repositoryId: bundle.repository.id,
+            repositoryUrl: bundle.repository.htmlUrl,
+            repositoryFullName: bundle.repository.fullName,
+            detectedAt: new Date().toISOString(),
+            existingStudyId: semanticDuplicate.study.id,
+            existingProjectKey: semanticDuplicate.projectKey,
+            similarity: Math.round(semanticDuplicate.score * 1000) / 1000,
+          },
+          lastSyncedAt: new Date().toISOString(),
+        };
+        const updated = await updateAiCaseStudy(semanticDuplicate.study.id, { analysis: duplicateAnalysis });
+        return {
+          action: "possible_duplicate",
+          study: updated,
+          workflowStatus: "possible_duplicate",
+          warnings: [
+            `Possible duplicate of ${semanticDuplicate.projectKey} (${Math.round(semanticDuplicate.score * 100)}% title similarity).`,
+          ],
         };
       }
     }

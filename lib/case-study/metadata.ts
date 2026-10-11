@@ -57,6 +57,9 @@ export type CaseStudyAutomationMetadata = {
     repositoryUrl: string;
     repositoryFullName: string;
     detectedAt: string;
+    existingStudyId?: string;
+    existingProjectKey?: string;
+    similarity?: number;
   } | null;
 };
 

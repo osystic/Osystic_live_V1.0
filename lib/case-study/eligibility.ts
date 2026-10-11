@@ -105,3 +105,22 @@ export function evaluateRepositoryEligibility(input: RepositoryEligibilityInput)
 
   return { eligible: reasons.length === 0, legacy: manifest.legacy, reasons, warnings };
 }
+
+export function semanticTitleSimilarity(left: string, right: string) {
+  const tokens = (value: string) => new Set(
+    value.toLowerCase()
+      .replace(/case[- ]?study/g, " ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(/\s+/)
+      .filter((token) => token.length >= 3 && !["the", "and", "for", "with", "osystic"].includes(token)),
+  );
+
+  const a = tokens(left);
+  const b = tokens(right);
+  if (!a.size || !b.size) return 0;
+  const intersection = [...a].filter((token) => b.has(token)).length;
+  const union = new Set([...a, ...b]).size;
+  const jaccard = union ? intersection / union : 0;
+  const containment = intersection / Math.min(a.size, b.size);
+  return Math.max(jaccard, containment * 0.92);
+}
