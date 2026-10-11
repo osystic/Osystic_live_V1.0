@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, LogIn, Menu, X } from "lucide-react";
 import { lockPageScroll } from "./scrollLock";
 import { BrandLogo } from "./BrandLogo";
 import { BookingButton } from "./CalBooking";
@@ -43,6 +43,10 @@ export default function Navbar() {
     href === "/services"
       ? active("/services") || active("/capabilities")
       : active(href);
+  const clientPortalUrl =
+    process.env.NEXT_PUBLIC_CLIENT_PORTAL_URL?.trim() ||
+    "/contact?intent=client-portal";
+  const clientPortalExternal = /^https?:\/\//i.test(clientPortalUrl);
 
   function closeMenu() {
     setOpen(false);
@@ -130,6 +134,16 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions future-nav-actions">
+          <a
+            className="future-client-portal"
+            href={clientPortalUrl}
+            target={clientPortalExternal ? "_blank" : undefined}
+            rel={clientPortalExternal ? "noreferrer" : undefined}
+            onClick={closeMenu}
+          >
+            Client Portal <LogIn size={14} aria-hidden="true" />
+          </a>
+
           <div onClick={closeMenu} className="desktop-booking">
             <BookingButton className="button button-primary nav-cta future-nav-cta">
               Book a Call <ArrowRight size={15} />
@@ -194,6 +208,16 @@ export default function Navbar() {
             ))}
 
             <div className="future-mobile-actions">
+              <a
+                className="future-mobile-portal"
+                href={clientPortalUrl}
+                target={clientPortalExternal ? "_blank" : undefined}
+                rel={clientPortalExternal ? "noreferrer" : undefined}
+                onClick={closeMenu}
+              >
+                Client Portal <LogIn size={15} aria-hidden="true" />
+              </a>
+
               <div onClick={closeMenu}>
                 <BookingButton className="button button-primary mobile-booking-button future-mobile-booking">
                   Book a Technical Call <ArrowRight size={15} />

@@ -37,7 +37,7 @@ OSYSTIC is a full-stack Next.js 16 application serving as the company website fo
 | Framework | Next.js 16 (App Router, Turbopack) |
 | Language | TypeScript (strict mode) |
 | UI | React 19, Tailwind CSS 4 |
-| Database | SQLite via better-sqlite3 |
+| Database | Turso / libSQL via @libsql/client |
 | ORM | Drizzle ORM |
 | Auth | Custom JWT (HMAC-SHA256) |
 | State | React Query (TanStack) |
@@ -86,7 +86,7 @@ npm install
 This installs 450+ packages including:
 - `next` — Framework
 - `react` / `react-dom` — UI library
-- `drizzle-orm` + `better-sqlite3` — Database
+- `drizzle-orm` + `@libsql/client` — Turso/libSQL database
 - `@tanstack/react-query` — Data fetching
 - `bcrypt` — Password hashing
 - `jsonwebtoken` — JWT auth
@@ -115,8 +115,9 @@ The `.env.local` file is pre-configured. Here's what each variable does:
 # ── Site ──
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# ── Database (SQLite) ──
-DATABASE_URL=file:./local.db
+# ── Database (Turso / libSQL) ──
+DATABASE_URL=libsql://YOUR_DATABASE.turso.io
+DATABASE_AUTH_TOKEN=YOUR_TURSO_AUTH_TOKEN
 
 # ── Auth ──
 ADMIN_JWT_SECRET=REPLACE_WITH_A_LONG_RANDOM_SECRET
@@ -145,7 +146,8 @@ GEMINI_MODEL=
 
 | Variable | Notes |
 |----------|-------|
-| `DATABASE_URL` | SQLite file path. Default: `file:./local.db` |
+| `DATABASE_URL` | Remote Turso/libSQL database URL, e.g. `libsql://YOUR_DATABASE.turso.io` |
+| `DATABASE_AUTH_TOKEN` | Turso database authentication token |
 | `ADMIN_JWT_SECRET` | Must be 32+ characters. Used for JWT signing |
 | `ADMIN_JWT_SECRET` | **Change this in production!** Generate with: `openssl rand -base64 48` |
 | `RESEND_API_KEY` | Get from [resend.com](https://resend.com) |
@@ -172,17 +174,17 @@ The proxy, login route, and signup route all read the same value through `lib/ad
 
 ## 5. Database Setup
 
-The project uses **SQLite** for the current backend. Configure `DATABASE_URL` and apply the Drizzle schema before first use.
+The project uses **Turso/libSQL**, a remote SQLite-compatible database suitable for Vercel/serverless deployments. Configure `DATABASE_URL` and `DATABASE_AUTH_TOKEN`, then apply the versioned Drizzle migrations before first use.
 
 ### Database Initialization
 
-The SQLite file can be created automatically by the database driver, but the application schema must be applied before first use. Keep runtime databases out of source control (`local.db`, WAL/SHM files, and `*.sqlite*` are ignored).
+Create the Turso database and credentials outside the repository. The application never creates schema objects at runtime; all tables and indexes are created through versioned migrations.
 
 ### Initialize / update the schema
 
 ```bash
-# Ensure DATABASE_URL points at your runtime SQLite file, then push the schema
-npx drizzle-kit push
+# Apply committed migrations to the configured Turso database
+npm run db:migrate
 
 # Open Drizzle Studio (visual database browser)
 npx drizzle-kit studio
@@ -190,7 +192,7 @@ npx drizzle-kit studio
 
 ### Database Tables
 
-**53 tables** across 5 groups:
+**54 tables** across the application and finance domains:
 
 | Group | Tables | Purpose |
 |-------|--------|---------|
@@ -200,15 +202,15 @@ npx drizzle-kit studio
 | Audit | `audit_audit_log` | Activity logging |
 | Workflow | `finance_approval_requests`, `finance_notifications` | Approvals & alerts |
 
-### Reset Database
+### Initialize a fresh Turso database
+
+Create a new Turso database, configure its URL/token, then run:
 
 ```bash
-# Delete the database file
-rm local.db
-
-# Recreate from schema
-npx drizzle-kit push
+npm run db:migrate
 ```
+
+Do not reset a production database by deleting local files; Turso data lifecycle operations must be performed deliberately against the remote database.
 
 ---
 
@@ -425,7 +427,7 @@ All `/api/admin/*` endpoints require a valid JWT token in the `admin-auth-token`
 ### Request Flow
 
 ```
-Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
+Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → Turso/libSQL
                 ↓
          JWT validation
          Email restriction
@@ -462,11 +464,11 @@ Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
 │   ├── AuthContext.tsx           # JWT auth context
 │   └── PermissionContext.tsx     # Permission codes
 ├── drizzle/
-│   ├── schema.ts                # OSYSTIC tables (SQLite)
-│   ├── finance-schema.ts        # Finance tables (SQLite)
+│   ├── schema.ts                # OSYSTIC tables (Turso/libSQL-compatible)
+│   ├── finance-schema.ts        # Finance tables (Turso/libSQL-compatible)
 │   └── migrations/              # SQL migrations
 ├── lib/
-│   ├── db.ts                    # SQLite database connection
+│   ├── db.ts                    # Turso/libSQL database connection
 │   ├── admin-auth.ts            # JWT sign/verify
 │   ├── finance/                 # Finance helpers
 │   └── ...                      # Other utilities
@@ -474,7 +476,6 @@ Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
 │   └── QueryProvider.tsx        # React Query provider
 ├── proxy.ts                     # Middleware (auth + routing)
 ├── drizzle.config.ts            # Drizzle Kit config
-├── local.db                     # SQLite database (auto-created)
 └── .env.local                   # Environment variables
 ```
 
@@ -511,13 +512,12 @@ Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
 | File | Purpose |
 |------|---------|
 | `proxy.ts` | Middleware — auth, email restriction, routing |
-| `lib/db.ts` | SQLite database connection |
+| `lib/db.ts` | Turso/libSQL database connection |
 | `lib/admin-auth.ts` | JWT token operations |
 | `drizzle/schema.ts` | OSYSTIC table definitions |
 | `drizzle/finance-schema.ts` | Finance table definitions |
 | `drizzle.config.ts` | Drizzle Kit configuration |
 | `.env.local` | Environment variables |
-| `local.db` | Runtime SQLite database file (generated locally; do not commit) |
 
 ---
 
@@ -527,8 +527,9 @@ Browser → proxy.ts (middleware) → Route Handler → Drizzle ORM → SQLite
 
 #### "DATABASE_URL is not set"
 ```bash
-# Ensure .env.local exists and contains:
-DATABASE_URL=file:./local.db
+# Ensure .env.local contains Turso credentials:
+DATABASE_URL=libsql://YOUR_DATABASE.turso.io
+DATABASE_AUTH_TOKEN=YOUR_TURSO_AUTH_TOKEN
 ```
 
 #### "ADMIN_JWT_SECRET is missing or too short"
@@ -539,8 +540,8 @@ ADMIN_JWT_SECRET=your-secret-here-must-be-32-chars-minimum
 
 #### Tables don't exist
 ```bash
-# Ensure DATABASE_URL points at your runtime SQLite file, then push the schema
-npx drizzle-kit push
+# Apply committed migrations to the configured Turso database
+npm run db:migrate
 ```
 
 #### Build fails with TypeScript errors
@@ -563,28 +564,16 @@ taskkill /PID <PID> /F
 lsof -ti:3000 | xargs kill -9
 ```
 
-#### Database is locked
-```bash
-# Only one process can write to SQLite at a time
-# Kill all node processes and restart
-taskkill /F /IM node.exe   # Windows
-pkill node                  # macOS/Linux
-```
+#### Database connectivity errors
 
-### Reset Everything
+Verify `DATABASE_URL` uses the Turso/libSQL endpoint and `DATABASE_AUTH_TOKEN` is valid for that database. Do not use a `file:` URL.
+
+### Reinstall the application
 
 ```bash
-# Delete database
-rm local.db
-
-# Reinstall dependencies
-rm -rf node_modules
+rm -rf node_modules .next
 npm install
-
-# Push schema
-npx drizzle-kit push
-
-# Start fresh
+npm run db:migrate
 npm run dev
 ```
 
@@ -597,11 +586,11 @@ npx tsc --noEmit
 # Lint
 npm run lint
 
-# Browse database visually
-npx drizzle-kit studio
+# Generate a SQL migration after schema changes
+npm run db:generate
 
-# Generate SQL migration
-npx drizzle-kit generate
+# Apply committed migrations
+npm run db:migrate
 
 # Check server logs
 # Look at terminal where npm run dev is running
@@ -614,7 +603,7 @@ npx drizzle-kit generate
 For issues or questions, check:
 - Server terminal output for error messages
 - Browser Developer Console (F12) for client errors
-- `local.db` can be opened with any SQLite browser
+- Turso dashboard/CLI for database connectivity and migration state
 
 ---
 

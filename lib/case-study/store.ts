@@ -2,28 +2,11 @@ import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { aiCaseStudies, caseStudies } from "@/drizzle/schema";
 
-export async function ensureAiCaseStudiesTable() {
-  await db.run(sql`
-    CREATE TABLE IF NOT EXISTS ai_case_studies (
-      id TEXT PRIMARY KEY,
-      github_url TEXT NOT NULL UNIQUE,
-      project_title TEXT,
-      generated_content TEXT NOT NULL,
-      analysis TEXT,
-      published_id TEXT,
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
-    )
-  `);
-}
-
 export async function listAiCaseStudies() {
-  await ensureAiCaseStudiesTable();
   return db.select().from(aiCaseStudies).orderBy(desc(aiCaseStudies.createdAt));
 }
 
 export async function getAiCaseStudy(id: string) {
-  await ensureAiCaseStudiesTable();
   const rows = await db.select().from(aiCaseStudies).where(eq(aiCaseStudies.id, id)).limit(1);
   return rows[0] ?? null;
 }
@@ -34,7 +17,6 @@ export async function upsertAiCaseStudy(input: {
   generatedContent: string;
   analysis: unknown;
 }) {
-  await ensureAiCaseStudiesTable();
   const existing = await db
     .select()
     .from(aiCaseStudies)
@@ -69,7 +51,6 @@ export async function upsertAiCaseStudy(input: {
 }
 
 export async function updateAiCaseStudyContent(id: string, generatedContent: string) {
-  await ensureAiCaseStudiesTable();
   await db
     .update(aiCaseStudies)
     .set({ generatedContent, updatedAt: sql`(datetime('now'))` })
@@ -78,7 +59,6 @@ export async function updateAiCaseStudyContent(id: string, generatedContent: str
 }
 
 export async function setAiCaseStudyPublishedId(id: string, publishedId: string | null) {
-  await ensureAiCaseStudiesTable();
   await db
     .update(aiCaseStudies)
     .set({ publishedId, updatedAt: sql`(datetime('now'))` })

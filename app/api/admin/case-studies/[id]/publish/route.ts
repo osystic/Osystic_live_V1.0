@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { aiCaseStudies, caseStudies } from "@/drizzle/schema";
 import { buildPublicDraft } from "@/lib/case-study/publish";
-import { ensureAiCaseStudiesTable, setAiCaseStudyPublishedId } from "@/lib/case-study/store";
+import { setAiCaseStudyPublishedId } from "@/lib/case-study/store";
 
 async function uniqueSlug(base: string, excludeId?: string) {
   let slug = base;
@@ -23,7 +23,6 @@ async function uniqueSlug(base: string, excludeId?: string) {
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    await ensureAiCaseStudiesTable();
     const { id } = await params;
     const study = await db.select().from(aiCaseStudies).where(eq(aiCaseStudies.id, id)).limit(1);
     const record = study[0];

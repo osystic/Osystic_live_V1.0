@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { sql } from "drizzle-orm";
 import { Resend } from "resend";
 import { db } from "@/lib/db";
 import { contactSubmissions } from "@/drizzle/schema";
@@ -58,23 +57,6 @@ function recordAttempt(ip: string) {
 
 function clientIp(req: NextRequest) {
   return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-}
-
-async function ensureContactTable() {
-  await db.run(sql`
-    CREATE TABLE IF NOT EXISTS contact_submissions (
-      id TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      company TEXT,
-      service TEXT,
-      message TEXT NOT NULL,
-      status TEXT DEFAULT 'new',
-      ip TEXT,
-      user_agent TEXT,
-      created_at TEXT DEFAULT (datetime('now'))
-    )
-  `);
 }
 
 async function sendContactEmail(data: {
@@ -146,7 +128,6 @@ export async function POST(req: NextRequest) {
 
     let saved = false;
     try {
-      await ensureContactTable();
       await db.insert(contactSubmissions).values({
         name: data.name,
         email: data.email.toLowerCase(),

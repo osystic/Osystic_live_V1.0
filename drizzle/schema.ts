@@ -1,11 +1,12 @@
 /* ══════════════════════════════════════════════════════════
-   drizzle/schema.ts  —  SQLite Schema
+   drizzle/schema.ts  —  Turso/libSQL-compatible SQLite schema
    OSYSTIC — application tables
 ════════════════════════════════════════════════════════════ */
 
 import {
   sqliteTable, text, integer, real,
 } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
 
 /* ══════════════════════════════════════════════════════════
    BOOKING SLOTS  — admin defines available times
@@ -16,7 +17,7 @@ export const bookingSlots = sqliteTable("booking_slots", {
   time:      text("time").notNull(),
   duration:  integer("duration").default(30),
   available: integer("available", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -40,8 +41,8 @@ export const bookings = sqliteTable("bookings", {
   meetingLink:   text("meeting_link"),
   adminNotes:    text("admin_notes"),
   ip:            text("ip"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
-  updatedAt:     text("updated_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:     text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -57,8 +58,8 @@ export const jobs = sqliteTable("jobs", {
   requirements: text("requirements").default("[]"),
   niceToHave:   text("nice_to_have").default("[]"),
   isActive:     integer("is_active", { mode: "boolean" }).default(true),
-  createdAt:    text("created_at").default("(datetime('now'))"),
-  updatedAt:    text("updated_at").default("(datetime('now'))"),
+  createdAt:    text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:    text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -88,8 +89,8 @@ export const jobApplications = sqliteTable("job_applications", {
   status:         text("status").default("new"),
   adminNotes:     text("admin_notes"),
   ip:             text("ip"),
-  createdAt:      text("created_at").default("(datetime('now'))"),
-  updatedAt:      text("updated_at").default("(datetime('now'))"),
+  createdAt:      text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:      text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -105,7 +106,7 @@ export const contactSubmissions = sqliteTable("contact_submissions", {
   status:    text("status").default("new"),
   ip:        text("ip"),
   userAgent: text("user_agent"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -125,8 +126,8 @@ export const adminUsers = sqliteTable("admin_users", {
   mfaSecret:   text("mfa_secret"),
   lastLoginAt: text("last_login_at"),
   createdBy:   text("created_by"),
-  createdAt:   text("created_at").default("(datetime('now'))"),
-  updatedAt:   text("updated_at").default("(datetime('now'))"),
+  createdAt:   text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:   text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -153,8 +154,8 @@ export const financeProjects = sqliteTable("finance_projects", {
   startDate:      text("start_date"),
   endDate:        text("end_date"),
   notes:          text("notes"),
-  createdAt:      text("created_at").default("(datetime('now'))"),
-  updatedAt:      text("updated_at").default("(datetime('now'))"),
+  createdAt:      text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:      text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -179,8 +180,8 @@ export const invoices = sqliteTable("invoices", {
   bankAccount:    text("bank_account"),
   bankSwift:      text("bank_swift"),
   signatory:      text("signatory"),
-  createdAt:      text("created_at").default("(datetime('now'))"),
-  updatedAt:      text("updated_at").default("(datetime('now'))"),
+  createdAt:      text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:      text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -201,7 +202,7 @@ export const income = sqliteTable("income", {
   netUSD:      real("net_usd"),
   method:      text("method"),
   notes:       text("notes"),
-  createdAt:   text("created_at").default("(datetime('now'))"),
+  createdAt:   text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -220,7 +221,7 @@ export const expenses = sqliteTable("expenses", {
   rate:        real("rate").default(1),
   amountUSD:   real("amount_usd"),
   ref:         text("ref"),
-  createdAt:   text("created_at").default("(datetime('now'))"),
+  createdAt:   text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -240,7 +241,7 @@ export const payroll = sqliteTable("payroll", {
   method:        text("method"),
   status:        text("status").default("Pending"),
   notes:         text("notes"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -259,8 +260,8 @@ export const blogs = sqliteTable("blogs", {
   status:        text("status").default("draft"),
   viewCount:     integer("view_count").default(0),
   publishedAt:   text("published_at"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
-  updatedAt:     text("updated_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:     text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -281,8 +282,8 @@ export const caseStudies = sqliteTable("case_studies", {
   status:        text("status").default("draft"),
   viewCount:     integer("view_count").default(0),
   publishedAt:   text("published_at"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
-  updatedAt:     text("updated_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:     text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -298,8 +299,8 @@ export const aiCaseStudies = sqliteTable("ai_case_studies", {
   generatedContent: text("generated_content").notNull(),
   analysis:         text("analysis"),
   publishedId:      text("published_id"),
-  createdAt:        text("created_at").default("(datetime('now'))"),
-  updatedAt:        text("updated_at").default("(datetime('now'))"),
+  createdAt:        text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:        text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const projects = sqliteTable("projects", {
@@ -315,8 +316,8 @@ export const projects = sqliteTable("projects", {
   assignedTo:  text("assigned_to").default("[]"),
   tags:        text("tags").default("[]"),
   createdBy:   text("created_by").references(() => adminUsers.id),
-  createdAt:   text("created_at").default("(datetime('now'))"),
-  updatedAt:   text("updated_at").default("(datetime('now'))"),
+  createdAt:   text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:   text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -335,8 +336,8 @@ export const newsroom = sqliteTable("newsroom", {
   status:        text("status").default("draft"),
   viewCount:     integer("view_count").default(0),
   publishedAt:   text("published_at"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
-  updatedAt:     text("updated_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:     text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -359,8 +360,8 @@ export const portfolioProjects = sqliteTable("portfolio_projects", {
   featured:      integer("featured", { mode: "boolean" }).default(false),
   order:         integer("order").default(0),
   publishedAt:   text("published_at"),
-  createdAt:     text("created_at").default("(datetime('now'))"),
-  updatedAt:     text("updated_at").default("(datetime('now'))"),
+  createdAt:     text("created_at").default(sql`(datetime('now'))`),
+  updatedAt:     text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════

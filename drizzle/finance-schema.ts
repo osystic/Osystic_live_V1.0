@@ -1,12 +1,13 @@
 /* ══════════════════════════════════════════════════════════
    drizzle/finance-schema.ts
-   Finance Management System — SQLite Schema
+   Finance Management System — Turso/libSQL-compatible SQLite schema
    Merged from Javeria-5091/Finance-Management-System
 ════════════════════════════════════════════════════════════ */
 
 import {
   sqliteTable, text, integer, real, index, uniqueIndex,
 } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
 
 /* ══════════════════════════════════════════════════════════
    CORE — ORGANISATIONS
@@ -16,8 +17,8 @@ export const organisations = sqliteTable("organisations", {
   name: text("name").notNull(),
   slug: text("slug").notNull().unique(),
   settings: text("settings").default("{}"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -28,7 +29,7 @@ export const roles = sqliteTable("finance_roles", {
   name: text("name").notNull(),
   description: text("description"),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 export const permissions = sqliteTable("finance_permissions", {
@@ -56,7 +57,7 @@ export const userRoles = sqliteTable("finance_user_roles", {
   effectiveFrom: text("effective_from").default("(date('now'))"),
   effectiveTo: text("effective_to"),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -73,8 +74,8 @@ export const accounts = sqliteTable("finance_accounts", {
   description: text("description"),
   currency: text("currency").default("USD"),
   openingBalance: real("opening_balance").default(0),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 }, (t) => [
   uniqueIndex("finance_accounts_code_org_idx").on(t.code, t.organisationId),
 ]);
@@ -89,7 +90,7 @@ export const fiscalYears = sqliteTable("finance_fiscal_years", {
   endDate: text("end_date").notNull(),
   organisationId: text("organisation_id").references(() => organisations.id),
   isOpen: integer("is_open", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 export const fiscalPeriods = sqliteTable("finance_fiscal_periods", {
@@ -102,7 +103,7 @@ export const fiscalPeriods = sqliteTable("finance_fiscal_periods", {
   organisationId: text("organisation_id").references(() => organisations.id),
   closedBy: text("closed_by"),
   closedAt: text("closed_at"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -127,8 +128,8 @@ export const journalEntries = sqliteTable("finance_journal_entries", {
   approvedAt: text("approved_at"),
   rejectionReason: text("rejection_reason"),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const journalLines = sqliteTable("finance_journal_lines", {
@@ -141,7 +142,7 @@ export const journalLines = sqliteTable("finance_journal_lines", {
   currency: text("currency").default("USD"),
   exchangeRate: real("exchange_rate").default(1),
   baseAmount: real("base_amount"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -169,8 +170,8 @@ export const financeInvoices = sqliteTable("finance_invoices", {
   organisationId: text("organisation_id").references(() => organisations.id),
   notes: text("notes"),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const invoiceLines = sqliteTable("finance_invoice_lines", {
@@ -183,7 +184,7 @@ export const invoiceLines = sqliteTable("finance_invoice_lines", {
   taxRate: real("tax_rate").default(0),
   taxAmount: real("tax_amount").default(0),
   accountId: text("account_id"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -201,8 +202,8 @@ export const vendors = sqliteTable("finance_vendors", {
   paymentTerms: text("payment_terms").default("Net 30"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const vendorBills = sqliteTable("finance_vendor_bills", {
@@ -225,8 +226,8 @@ export const vendorBills = sqliteTable("finance_vendor_bills", {
   organisationId: text("organisation_id").references(() => organisations.id),
   notes: text("notes"),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const vendorBillLines = sqliteTable("finance_vendor_bill_lines", {
@@ -239,7 +240,7 @@ export const vendorBillLines = sqliteTable("finance_vendor_bill_lines", {
   taxRate: real("tax_rate").default(0),
   taxAmount: real("tax_amount").default(0),
   accountId: text("account_id"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -263,8 +264,8 @@ export const payments = sqliteTable("finance_payments", {
   journalEntryId: text("journal_entry_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const paymentAllocations = sqliteTable("finance_payment_allocations", {
@@ -272,7 +273,7 @@ export const paymentAllocations = sqliteTable("finance_payment_allocations", {
   paymentId: text("payment_id").references(() => payments.id),
   invoiceId: text("invoice_id"),
   amount: real("amount").notNull(),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -291,8 +292,8 @@ export const creditNotes = sqliteTable("finance_credit_notes", {
   journalEntryId: text("journal_entry_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -312,8 +313,8 @@ export const financialAccounts = sqliteTable("finance_financial_accounts", {
   iban: text("iban"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const bankTransfers = sqliteTable("finance_bank_transfers", {
@@ -329,8 +330,8 @@ export const bankTransfers = sqliteTable("finance_bank_transfers", {
   status: text("status").default("DRAFT"),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -351,8 +352,8 @@ export const budgets = sqliteTable("finance_budgets", {
   status: text("status").default("DRAFT"),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const budgetLines = sqliteTable("finance_budget_lines", {
@@ -365,7 +366,7 @@ export const budgetLines = sqliteTable("finance_budget_lines", {
   committedAmount: real("committed_amount").default(0),
   actualAmount: real("actual_amount").default(0),
   forecastAmount: real("forecast_amount").default(0),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -383,8 +384,8 @@ export const financeClients = sqliteTable("finance_clients", {
   paymentTerms: text("payment_terms").default("Net 30"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -407,8 +408,8 @@ export const fixedAssets = sqliteTable("finance_fixed_assets", {
   accountId: text("account_id"),
   depreciationAccountId: text("depreciation_account_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const depreciationEntries = sqliteTable("finance_depreciation_entries", {
@@ -418,7 +419,7 @@ export const depreciationEntries = sqliteTable("finance_depreciation_entries", {
   amount: real("amount").notNull(),
   journalEntryId: text("journal_entry_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -432,7 +433,7 @@ export const taxConfig = sqliteTable("finance_tax_config", {
   accountId: text("account_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 export const taxEntries = sqliteTable("finance_tax_entries", {
@@ -445,7 +446,7 @@ export const taxEntries = sqliteTable("finance_tax_entries", {
   status: text("status").default("pending"),
   periodId: text("period_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -462,8 +463,8 @@ export const employees = sqliteTable("finance_employees", {
   currency: text("currency").default("USD"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const payrollRuns = sqliteTable("finance_payroll_runs", {
@@ -477,8 +478,8 @@ export const payrollRuns = sqliteTable("finance_payroll_runs", {
   totalNet: real("total_net").default(0),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 export const payrollLines = sqliteTable("finance_payroll_lines", {
@@ -490,7 +491,7 @@ export const payrollLines = sqliteTable("finance_payroll_lines", {
   deductions: real("deductions").default(0),
   netPay: real("net_pay").notNull(),
   currency: text("currency").default("USD"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -503,7 +504,7 @@ export const exchangeRates = sqliteTable("finance_exchange_rates", {
   rate: real("rate").notNull(),
   effectiveDate: text("effective_date").notNull(),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -520,7 +521,7 @@ export const financeNotifications = sqliteTable("finance_notifications", {
   entityType: text("entity_type"),
   entityId: text("entity_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -557,7 +558,7 @@ export const auditLog = sqliteTable("audit_audit_log", {
   amountCurrency: text("amount_currency"),
   prevHash: text("prev_hash"),
   entryHash: text("entry_hash"),
-  createdAt: text("created_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
 }, (t) => [
   index("audit_log_org_idx").on(t.organisationId),
   index("audit_log_user_idx").on(t.userId),
@@ -581,8 +582,8 @@ export const subscriptions = sqliteTable("finance_subscriptions", {
   accountId: text("account_id"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -600,8 +601,8 @@ export const contractors = sqliteTable("finance_contractors", {
   department: text("department"),
   organisationId: text("organisation_id").references(() => organisations.id),
   isActive: integer("is_active", { mode: "boolean" }).default(true),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -619,8 +620,8 @@ export const commissions = sqliteTable("finance_commissions", {
   status: text("status").default("DRAFT"),
   organisationId: text("organisation_id").references(() => organisations.id),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -634,8 +635,8 @@ export const approvalRequests = sqliteTable("finance_approval_requests", {
   status: text("status").default("PENDING"),
   currentStep: integer("current_step").default(1),
   createdBy: text("created_by"),
-  createdAt: text("created_at").default("(datetime('now'))"),
-  updatedAt: text("updated_at").default("(datetime('now'))"),
+  createdAt: text("created_at").default(sql`(datetime('now'))`),
+  updatedAt: text("updated_at").default(sql`(datetime('now'))`),
 });
 
 /* ══════════════════════════════════════════════════════════
