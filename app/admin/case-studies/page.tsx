@@ -71,15 +71,17 @@ export default function AdminCaseStudiesPage() {
 
   const counts = useMemo(() => {
     let published = 0;
+    let review = 0;
     let updates = 0;
     let blocked = 0;
     for (const item of items) {
       const status = automationFor(item.analysis)?.workflowStatus;
       if (item.publishedId) published += 1;
+      if (status === "needs_review") review += 1;
       if (status === "update_available") updates += 1;
       if (status === "blocked" || status === "not_eligible" || status === "fact_check_required") blocked += 1;
     }
-    return { published, updates, blocked };
+    return { published, review, updates, blocked };
   }, [items]);
 
   const scan = async () => {
@@ -133,8 +135,9 @@ export default function AdminCaseStudiesPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
         <div className="bg-white border border-gray-200 rounded-xl p-4"><span className="text-xs uppercase tracking-wide text-gray-500">Published</span><b className="block text-2xl text-gray-900 mt-1">{counts.published}</b></div>
+        <div className="bg-white border border-gray-200 rounded-xl p-4"><span className="text-xs uppercase tracking-wide text-gray-500">Awaiting review</span><b className="block text-2xl text-gray-900 mt-1">{counts.review}</b></div>
         <div className="bg-white border border-gray-200 rounded-xl p-4"><span className="text-xs uppercase tracking-wide text-gray-500">Updates waiting</span><b className="block text-2xl text-gray-900 mt-1">{counts.updates}</b></div>
         <div className="bg-white border border-gray-200 rounded-xl p-4"><span className="text-xs uppercase tracking-wide text-gray-500">Needs attention</span><b className="block text-2xl text-gray-900 mt-1">{counts.blocked}</b></div>
       </div>

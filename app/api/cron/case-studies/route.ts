@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   if (!authorized(request)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
-    const result = await scanPublicCaseStudyRepositories({ maxProcess: 4, generateNew: true });
+    const result = await scanPublicCaseStudyRepositories({ maxProcess: 10, generateNew: true });
     return NextResponse.json({ ok: true, ...result });
   } catch (error) {
     console.error("Scheduled GitHub case-study scan failed:", error);
