@@ -12,168 +12,33 @@ button:disabled { cursor: wait; }
 .route-state { min-height:calc(100svh - var(--header-height));display:flex;align-items:center; }
 .route-state h1 { font-size:clamp(2rem,5vw,3.5rem); }
 .route-state p { max-width:42rem; }
-.cal-dialog { position:fixed;inset:0;width:100%;max-width:100%;height:100vh;height:100dvh;max-height:100dvh;margin:0;border:0;background:transparent;padding:0;color:#f1f4f8; }
+.cal-dialog {
+  position:fixed;
+  inset:0;
+  width:100%;
+  max-width:none;
+  height:100vh;
+  height:100dvh;
+  max-height:100dvh;
+  margin:0;
+  border:0;
+  padding:12px;
+  background:transparent;
+  overflow:visible;
+  color:#f1f4f8;
+}
 .cal-dialog:not([open]) { display:none; }
-.cal-dialog[open] { display:flex;align-items:flex-start;justify-content:center; }
-.cal-dialog::backdrop { background:#05070cd9; }
-.cal-dialog .cal-modal-panel { max-height:100%;padding:0; }
-.calendar-content { height:100%;display:flex;flex-direction:column;min-height:0; }
-.calendar-content>div:last-child { flex:1;min-height:0; }
-.cal-embed-wrap { padding-top:10px;box-sizing:border-box; }
-.calendar-status { flex:0 0 6rem;height:6rem;overflow:auto;padding:.75rem 1rem;font-size:.875rem;line-height:1.5;color:#c5cfdd; }
-.calendar-help { flex-shrink:0;margin:0;padding:.75rem 1rem;font-size:.875rem;border-top:1px solid #2a323e; }
-.calendar-help a { display:inline-flex;align-items:center;min-height:44px;text-decoration:underline; }
-.careers-application h2[tabindex] { scroll-margin-top:calc(var(--header-height) + 1rem); }
-@media (hover:none) { .button:hover,.work-card:hover,.industry-card:hover,.capability-card:hover { transform:none; }.button:hover svg,.text-link:hover svg,.work-card:hover img { transform:none; } }
-@media (max-width:640px), (max-height:500px) and (orientation:landscape) { .cal-dialog { padding:0; }.cal-dialog .cal-modal-panel { padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }.calendar-status { font-size:.8125rem; }.calendar-help { padding:.25rem 1rem; } }
-@media (prefers-reduced-motion:reduce) { .button:active:not(:disabled) { transform:none; } }
-
-@media(max-height:500px) and (orientation:landscape) { .calendar-status { flex-basis:3.5rem;height:3.5rem; } }
-
-
-/* Booking modal: OSYSTIC-aligned edge-to-edge Cal embed */
-.cal-dialog[open]{
+.cal-dialog[open] {
+  display:flex;
   align-items:center;
   justify-content:center;
-  padding:4px;
 }
-.cal-dialog::backdrop{
-  background:rgba(3,7,14,.88);
-  backdrop-filter:blur(16px);
+.cal-dialog::backdrop {
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
-.cal-dialog .cal-modal-panel{
-  width:min(1240px,calc(100vw - 8px));
-  height:min(700px,calc(100dvh - 32px));
-  min-height:0;
-  max-height:calc(100dvh - 32px);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  border:1px solid rgba(112,143,211,.25);
-  border-radius:18px;
-  background:#07101e;
-  box-shadow:0 30px 110px rgba(0,0,0,.58),0 0 0 1px rgba(63,97,186,.06);
-}
-.cal-dialog .cal-modal-head{
-  flex:0 0 auto;
-  min-height:82px;
-  height:82px;
-  padding:0 24px;
-  border-bottom:1px solid rgba(112,143,211,.18);
-  background:linear-gradient(180deg,#091321 0%,#07101e 100%);
-}
-.cal-dialog .cal-modal-head h2{
-  margin-top:8px;
-  color:#f5f8ff;
-}
-.cal-dialog .cal-modal-head .eyebrow{
-  color:#6f8fff;
-}
-.cal-dialog .cal-modal-head .icon-button{
-  border-color:rgba(112,143,211,.24);
-  background:#0c1726;
-  color:#cbd6e7;
-}
-.cal-dialog .cal-modal-head .icon-button:hover{
-  background:#111f35;
-  border-color:rgba(98,129,255,.48);
-  color:#fff;
-}
-.cal-embed-wrap{
-  flex:1 1 auto;
-  min-width:0;
-  min-height:0;
-  height:auto;
-  padding:0!important;
-  overflow:hidden!important;
-  background:#07101e;
-}
-.calendar-content{
-  width:100%;
-  height:100%;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  background:#07101e;
-}
-.calendar-content>div:last-child{
-  flex:1 1 auto;
-  width:100%;
-  height:100%;
-  min-height:0;
-  overflow:hidden;
-  background:#07101e;
-}
-.cal-embed-wrap cal-inline,
-.cal-embed-wrap .cal-inline-container{
-  display:block;
-  width:100%;
-  height:100%;
-  min-height:100%;
-  background:#07101e;
-}
-.cal-embed-wrap iframe,
-.cal-embed-wrap iframe.cal-embed{
-  display:block!important;
-  width:100%!important;
-  max-width:none!important;
-  height:100%!important;
-  min-height:100%!important;
-  max-height:none!important;
-  margin:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:#07101e!important;
-}
-.calendar-status{
-  position:absolute;
-  z-index:2;
-  inset:82px 0 auto 0;
-  width:100%;
-  height:auto;
-  min-height:44px;
-  padding:12px 18px;
-  border-bottom:1px solid rgba(112,143,211,.14);
-  background:rgba(7,16,30,.96);
-  color:#aebbd0;
-}
-.calendar-help{
-  flex:0 0 auto;
-  min-height:48px;
-  margin:0;
-  padding:0 18px;
-  display:flex;
-  align-items:center;
-  gap:4px;
-  border-top:1px solid rgba(112,143,211,.18);
-  background:#07101e;
-  color:#8f9db2;
-  font-size:12px;
-}
-.calendar-help a{
-  min-height:0;
-  color:#d9e3ff;
-  text-decoration-color:#526fd1;
-}
-@media(max-width:760px){
-  .cal-dialog[open]{padding:0}
-  .cal-dialog .cal-modal-panel{
-    width:100vw;
-    height:100dvh;
-    max-height:100dvh;
-    border:0;
-    border-radius:0;
-  }
-  .cal-dialog .cal-modal-head{
-    height:72px;
-    min-height:72px;
-    padding:0 16px;
-  }
-  .calendar-status{inset:72px 0 auto 0}
-  .calendar-help{
-    min-height:44px;
-    padding-inline:14px;
-    font-size:11px;
-  }
-}
+
+.careers-application h2[tabindex] { scroll-margin-top:calc(var(--header-height) + 1rem); }
+@media (hover:none) { .button:hover,.work-card:hover,.industry-card:hover,.capability-card:hover { transform:none; }.button:hover svg,.text-link:hover svg,.work-card:hover img { transform:none; } }
+@media (prefers-reduced-motion:reduce) { .button:active:not(:disabled) { transform:none; } }

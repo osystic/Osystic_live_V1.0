@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { lockPageScroll } from "./scrollLock";
 import {
-  Component,
   createContext,
   useCallback,
   useContext,
@@ -12,7 +11,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { X } from "lucide-react";
 
 type BookingContextValue = { openBooking: () => void };
 const BookingContext = createContext<BookingContextValue | null>(null);
@@ -24,23 +22,14 @@ function normalizeCalLink(value: string) {
     .replace(/^\/+|\/+$/g, "");
 }
 
-class CalendarBoundary extends Component<{ children: React.ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() { return { failed: true }; }
-  render() {
-    return this.state.failed ? <p className="calendar-status" role="status">The calendar could not load. Please use the email link below.</p> : this.props.children;
-  }
-}
-
 const Calendar = dynamic(() => import("./CalendarEmbed"), {
   ssr: false,
-  loading: () => <div className="calendar-status" role="status">Loading calendar…</div>,
+  loading: () => null,
 });
 
 export function CalBookingProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDialogElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
   const configured = process.env.NEXT_PUBLIC_CALCOM_BOOKING_URL || "";
   const calLink = normalizeCalLink(configured);
   const openBooking = useCallback(() => setOpen(true), []);
@@ -55,7 +44,7 @@ export function CalBookingProvider({ children }: { children: React.ReactNode }) 
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     panel.showModal();
     const unlock = lockPageScroll();
-    closeRef.current?.focus({ preventScroll: true });
+    panel.focus({ preventScroll: true });
     return () => {
       panel.close();
       unlock();
@@ -68,41 +57,20 @@ export function CalBookingProvider({ children }: { children: React.ReactNode }) 
     <BookingContext.Provider value={value}>
       {children}
       {open ? (
-        <dialog ref={panelRef} className="cal-dialog" onCancel={event => { event.preventDefault(); closeBooking(); }}
-          onClick={event => { if (event.target === event.currentTarget) closeBooking(); }}
-          aria-labelledby="cal-booking-title" aria-describedby="cal-booking-description">
-          <div
-            className="cal-modal-panel"
-          >
-            <div className="cal-modal-head">
-              <div>
-                <span className="eyebrow">TECHNICAL DISCOVERY</span>
-                <h2 id="cal-booking-title">Book a Technical Call</h2>
-                <p id="cal-booking-description" className="sr-only">
-                  Choose an available time for a technical discovery call with OSYSTIC.
-                </p>
-              </div>
-              <button
-                ref={closeRef}
-                className="icon-button"
-                aria-label="Close booking dialog"
-                onClick={closeBooking}
-              >
-                <X size={20} />
-              </button>
-            </div>
-            {calLink ? (
-              <div className="cal-embed-wrap">
-                <CalendarBoundary><Calendar calLink={calLink} /></CalendarBoundary>
-              </div>
-            ) : (
-              <div className="cal-not-configured">
-                <p>The booking calendar is not configured yet.</p>
-                <a href="mailto:hello@osystic.com">Email hello@osystic.com</a>
-              </div>
-            )}
-            {calLink ? <p className="calendar-help">Prefer email? <a href="mailto:hello@osystic.com">hello@osystic.com</a></p> : null}
-          </div>
+        <dialog
+          ref={panelRef}
+          className="cal-dialog"
+          tabIndex={-1}
+          aria-label="Book a technical call"
+          onCancel={event => {
+            event.preventDefault();
+            closeBooking();
+          }}
+          onClick={event => {
+            if (event.target === event.currentTarget) closeBooking();
+          }}
+        >
+          {calLink ? <Calendar calLink={calLink} /> : null}
         </dialog>
       ) : null}
     </BookingContext.Provider>
