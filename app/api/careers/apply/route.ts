@@ -5,6 +5,7 @@ import { jobApplications } from "@/drizzle/schema";
 import { deleteCVFromStorage, uploadCVToStorage } from "@/lib/supabase";
 import { sendApplicationEmails } from "@/lib/resend";
 import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
+import { careersLimiter, clientRateLimitId, consumeRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
 
 const singleLine = (max: number, min = 0) =>
   z.preprocess(
@@ -51,10 +52,6 @@ const applicationSchema = z.object({
   ).optional().default(""),
 });
 
-const buckets = new Map<string, { count: number; reset: number }>();
-const WINDOW_MS = 60 * 60 * 1000;
-const MAX_SUBMISSIONS = 4;
-
 function validCvSignature(buffer: ArrayBuffer, mime: string) {
   const bytes = new Uint8Array(buffer.slice(0, 8));
   const starts = (...expected: number[]) => expected.every((value, index) => bytes[index] === value);
@@ -66,25 +63,6 @@ function validCvSignature(buffer: ArrayBuffer, mime: string) {
   return false;
 }
 
-function clientIp(req: NextRequest) {
-  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-}
-
-function rateLimited(ip: string) {
-  const now = Date.now();
-  for (const [key, entry] of buckets) {
-    if (entry.reset <= now) buckets.delete(key);
-  }
-  const current = buckets.get(ip);
-  if (!current || current.reset <= now) {
-    buckets.set(ip, { count: 1, reset: now + WINDOW_MS });
-    return false;
-  }
-  current.count += 1;
-  buckets.set(ip, current);
-  return current.count > MAX_SUBMISSIONS;
-}
-
 export async function POST(req: NextRequest) {
   try {
     if (!process.env.DATABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -92,10 +70,22 @@ export async function POST(req: NextRequest) {
     }
     const declaredLength = Number(req.headers.get("content-length"));
     if (declaredLength > 6 * 1024 * 1024) return NextResponse.json({ error: "Application upload is too large" }, { status: 413 });
-    const ip = clientIp(req);
-    if (rateLimited(ip)) {
-      return NextResponse.json({ error: "Too many applications from this connection. Please try again later." }, { status: 429 });
+    const rateId = clientRateLimitId(req);
+    const rate = await consumeRateLimit(careersLimiter, rateId);
+    if (rate.unavailable) {
+      return NextResponse.json(
+        { error: "Applications are temporarily unavailable. Please try again later." },
+        { status: 503 },
+      );
     }
+    if (!rate.success) {
+      return NextResponse.json(
+        { error: "Too many applications from this connection. Please try again later." },
+        { status: 429, headers: rateLimitHeaders(rate) },
+      );
+    }
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") || "unknown";
 
     const fd = await req.formData();
     const getText = (key: string) => {

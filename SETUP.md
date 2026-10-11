@@ -119,6 +119,10 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 DATABASE_URL=libsql://YOUR_DATABASE.turso.io
 DATABASE_AUTH_TOKEN=YOUR_TURSO_AUTH_TOKEN
 
+# ── Distributed rate limiting (Upstash Redis) ──
+UPSTASH_REDIS_REST_URL=https://YOUR_DATABASE.upstash.io
+UPSTASH_REDIS_REST_TOKEN=YOUR_UPSTASH_REST_TOKEN
+
 # ── Auth ──
 ADMIN_JWT_SECRET=REPLACE_WITH_A_LONG_RANDOM_SECRET
 
@@ -148,6 +152,8 @@ GEMINI_MODEL=
 |----------|-------|
 | `DATABASE_URL` | Remote Turso/libSQL database URL, e.g. `libsql://YOUR_DATABASE.turso.io` |
 | `DATABASE_AUTH_TOKEN` | Turso database authentication token |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST endpoint used by distributed rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token; required in production for Admin Login, Contact, and Careers limits |
 | `ADMIN_JWT_SECRET` | Must be 32+ characters. Used for JWT signing |
 | `ADMIN_JWT_SECRET` | **Change this in production!** Generate with: `openssl rand -base64 48` |
 | `RESEND_API_KEY` | Get from [resend.com](https://resend.com) |

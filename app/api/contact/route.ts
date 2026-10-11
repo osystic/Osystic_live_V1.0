@@ -4,6 +4,7 @@ import { Resend } from "resend";
 import { db } from "@/lib/db";
 import { contactSubmissions } from "@/drizzle/schema";
 import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
+import { clientRateLimitId, consumeRateLimit, contactLimiter, rateLimitHeaders } from "@/lib/rate-limit";
 
 const singleLine = (max: number, min = 0) =>
   z.preprocess(
@@ -27,37 +28,6 @@ const schema = z.object({
   ),
   website: singleLine(200).optional().default(""),
 });
-
-const RATE_LIMIT = 5;
-const RATE_WINDOW_MS = 10 * 60 * 1000;
-const buckets = new Map<string, { count: number; reset: number }>();
-
-function pruneBuckets(now: number) {
-  for (const [key, value] of buckets) {
-    if (value.reset < now) buckets.delete(key);
-  }
-}
-
-function isRateLimited(ip: string) {
-  const now = Date.now();
-  pruneBuckets(now);
-  const existing = buckets.get(ip);
-  return Boolean(existing && existing.reset >= now && existing.count >= RATE_LIMIT);
-}
-
-function recordAttempt(ip: string) {
-  const now = Date.now();
-  const existing = buckets.get(ip);
-  if (!existing || existing.reset < now) {
-    buckets.set(ip, { count: 1, reset: now + RATE_WINDOW_MS });
-  } else {
-    existing.count += 1;
-  }
-}
-
-function clientIp(req: NextRequest) {
-  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-}
 
 async function sendContactEmail(data: {
   name: string;
@@ -93,13 +63,23 @@ async function sendContactEmail(data: {
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = clientIp(req);
-    if (isRateLimited(ip)) {
+    const rateId = clientRateLimitId(req);
+    const rate = await consumeRateLimit(contactLimiter, rateId);
+    if (rate.unavailable) {
       return NextResponse.json(
-        { error: "Too many submissions. Please wait a few minutes before trying again." },
-        { status: 429 },
+        { error: "Inquiry submissions are temporarily unavailable. Please email hello@osystic.com." },
+        { status: 503 },
       );
     }
+    if (!rate.success) {
+      return NextResponse.json(
+        { error: "Too many submissions. Please wait a few minutes before trying again." },
+        { status: 429, headers: rateLimitHeaders(rate) },
+      );
+    }
+
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") || "unknown";
 
     let body: unknown;
     try {
@@ -163,7 +143,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    recordAttempt(ip);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Contact submission failed:", error);

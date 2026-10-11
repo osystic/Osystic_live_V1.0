@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { payrollLines, payrollRuns, employees } from "@/drizzle/finance-schema";
+import { payrollRuns, employees } from "@/drizzle/finance-schema";
 
 export async function GET() {
   try {

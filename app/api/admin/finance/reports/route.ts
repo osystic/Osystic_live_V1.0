@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { financeInvoices, payments, journalLines, accounts } from "@/drizzle/finance-schema";
+import { financeInvoices, payments } from "@/drizzle/finance-schema";
 import { expenses } from "@/drizzle/schema";
-import { eq, sql, sum } from "drizzle-orm";
+import { sql, sum } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
   try {

@@ -6,39 +6,26 @@ import { adminUsers } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { getAllowedAdminEmail } from "@/lib/admin-identity";
 import { signAdminToken } from "@/lib/admin-auth";
+import { adminLoginLimiter, clientRateLimitId, consumeRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
 });
 
-const attempts = new Map<string, { count: number; resetAt: number }>();
-const WINDOW_MS = 15 * 60 * 1000;
-const MAX_ATTEMPTS = 8;
-
-function clientIp(req: NextRequest) {
-  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-}
-
-function limited(ip: string) {
-  const now = Date.now();
-  for (const [key, entry] of attempts) {
-    if (entry.resetAt <= now) attempts.delete(key);
-  }
-  const entry = attempts.get(ip);
-  if (!entry || entry.resetAt <= now) {
-    attempts.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return false;
-  }
-  entry.count += 1;
-  attempts.set(ip, entry);
-  return entry.count > MAX_ATTEMPTS;
-}
-
 export async function POST(req: NextRequest) {
-  const ip = clientIp(req);
-  if (limited(ip)) {
-    return NextResponse.json({ error: "Too many sign-in attempts. Please try again later." }, { status: 429 });
+  const rate = await consumeRateLimit(adminLoginLimiter, clientRateLimitId(req));
+  if (rate.unavailable) {
+    return NextResponse.json(
+      { error: "Admin authentication is temporarily unavailable. Please try again shortly." },
+      { status: 503 },
+    );
+  }
+  if (!rate.success) {
+    return NextResponse.json(
+      { error: "Too many sign-in attempts. Please try again later." },
+      { status: 429, headers: rateLimitHeaders(rate) },
+    );
   }
 
   try {
@@ -93,7 +80,6 @@ export async function POST(req: NextRequest) {
       maxAge: 7 * 24 * 60 * 60,
       path: "/",
     });
-    attempts.delete(ip);
     return response;
   } catch (error) {
     console.error("Admin login failed", error);

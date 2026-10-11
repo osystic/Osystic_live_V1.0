@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, FileText, TrendingUp, TrendingDown } from "lucide-react";
+import { BarChart3, TrendingUp, TrendingDown } from "lucide-react";
 
 export default function ReportsPage() {
   const { data: pnl, isLoading: pnlLoading } = useQuery({ queryKey: ["report-pnl"], queryFn: async () => { const r = await fetch("/api/admin/finance/reports?type=pnl"); return r.json(); } });

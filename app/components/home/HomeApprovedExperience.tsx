@@ -1,14 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import type { CSSProperties } from "react";
 import {
   ArrowRight, BrainCircuit, CloudCog, Code2, Database, LockKeyhole,
   Layers3, ShieldCheck, Search, PenTool, Boxes, Rocket, Bot,
 } from "lucide-react";
 import { BookingButton } from "../CalBooking";
+import { HeroReveal } from "./Reveal";
 import styles from "./HomeApprovedExperience.module.css";
 
 const delivery = [
@@ -56,9 +54,6 @@ const insights = [
 
 const trustLogos = ["Microsoft", "aws", "Google Cloud", "NVIDIA", "Vercel", "docker"];
 export function HomeApprovedExperience() {
-  const reducedMotion = useReducedMotion();
-  const reveal = {};
-
   return (
     <div className={styles.page}>
       <section className={styles.hero} aria-labelledby="approved-home-title">
@@ -66,7 +61,7 @@ export function HomeApprovedExperience() {
         <div className={styles.heroGlow} aria-hidden="true" />
 
         <div className={styles.heroInner}>
-          <motion.div className={styles.heroCopy} {...reveal}>
+          <div className={styles.heroCopy}>
             <div className={styles.eyebrow}>AI & SOFTWARE ENGINEERING</div>
             <h1 id="approved-home-title">
               Production AI and<br />
@@ -78,14 +73,9 @@ export function HomeApprovedExperience() {
               <Link href="/case-studies" className={styles.secondaryButton}>Explore Our Work <ArrowRight size={15} /></Link>
             </div>
             <div className={styles.heroProof}><ShieldCheck size={14} /> Engineering-led delivery <span>•</span> No platform lock-in.</div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className={styles.heroVisual}
-            initial={reducedMotion ? undefined : { opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <HeroReveal className={styles.heroVisual}>
             <div className={styles.heroScene} aria-hidden="true">
               <div className={styles.networkGlow} />
               <svg className={styles.networkSvg} viewBox="0 0 620 620">
@@ -134,7 +124,7 @@ export function HomeApprovedExperience() {
             <span className={[styles.heroLabel, styles.labelB].join(" ")}>MODELS & AGENTS</span>
             <span className={[styles.heroLabel, styles.labelC].join(" ")}>BUSINESS LOGIC</span>
             <span className={[styles.heroLabel, styles.labelD].join(" ")}>DEPLOY ANYWHERE</span>
-          </motion.div>
+          </HeroReveal>
         </div>
 
         <div className={styles.heroTrace} aria-hidden="true"><span /><i /></div>
@@ -145,21 +135,17 @@ export function HomeApprovedExperience() {
             <h2>The system moves. The engineering discipline <span>stays connected.</span></h2>
           </div>
           <div className={styles.deliveryCards}>
-            {delivery.map((item, index) => {
+            {delivery.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.article
+                <article
                   className={styles.deliveryCard}
                   key={item.title}
-                  initial={undefined}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.35, delay: index * 0.025 }}
                 >
                   <div className={styles.deliveryTop}><span>{item.number}</span><Icon size={24} strokeWidth={1.5} /></div>
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
-                </motion.article>
+                </article>
               );
             })}
           </div>
@@ -168,19 +154,15 @@ export function HomeApprovedExperience() {
 
       <section className={[styles.section, styles.light].join(" ")} id="selected-work">
         <div className={styles.sectionShell}>
-          <motion.div className={styles.sectionHead} {...reveal}>
+          <div className={styles.sectionHead}>
             <div><div className={styles.blueEyebrow}>SELECTED WORK</div><h2>Real systems. Real outcomes.</h2></div>
             <Link href="/case-studies" className={styles.inlineLink}>View all case studies <ArrowRight size={14} /></Link>
-          </motion.div>
+          </div>
           <div className={styles.workGrid}>
-            {selectedWork.map((item, index) => (
-              <motion.article
+            {selectedWork.map((item) => (
+              <article
                 className={styles.workCard}
                 key={item.title}
-                initial={undefined}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.18 }}
-                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <Link href={item.href} className={styles.workMedia}>
                   <Image src={item.image} alt="" fill sizes="(max-width:760px) 92vw, 31vw" /><span>{item.tag}</span>
@@ -189,7 +171,7 @@ export function HomeApprovedExperience() {
                   <h3>{item.title}</h3><p>{item.copy}</p>
                   <Link href={item.href} className={styles.cardLink}>View Case Study <ArrowRight size={13} /></Link>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
         </div>
@@ -197,31 +179,27 @@ export function HomeApprovedExperience() {
 
       <section className={[styles.section, styles.dark].join(" ")}>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.sectionHead} {...reveal}>
+          <div className={styles.sectionHead}>
             <div>
               <div className={styles.darkEyebrow}>WHAT WE DO</div>
               <h2>Our Capabilities</h2>
               <p>End-to-end engineering capabilities to design, build, and deploy production-ready AI and software systems.</p>
             </div>
             <Link href="/capabilities" className={styles.darkInlineLink}>View all services <ArrowRight size={14} /></Link>
-          </motion.div>
+          </div>
           <div className={styles.capabilityGrid}>
-            {capabilities.map((item, index) => {
+            {capabilities.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.div
+                <div
                   key={item.title}
-                  initial={undefined}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.35, delay: index * 0.02 }}
                 >
                   <Link href={item.href} className={styles.capabilityCard}>
                     <div className={styles.capabilityIcon}><Icon size={22} strokeWidth={1.45} /></div>
                     <ArrowRight size={14} className={styles.capabilityArrow} />
                     <h3>{item.title}</h3><p>{item.copy}</p>
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -230,27 +208,23 @@ export function HomeApprovedExperience() {
 
       <section className={[styles.section, styles.workflowSection].join(" ")}>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.centerHead} {...reveal}>
+          <div className={styles.centerHead}>
             <div className={styles.blueEyebrow}>OUR PROCESS</div>
             <h2>Our AI Development Workflow</h2>
             <p>A proven methodology from concept to deployment, ensuring successful AI implementation.</p>
-          </motion.div>
+          </div>
           <div className={styles.workflowTrack}>
-            {workflow.map((item, index) => {
+            {workflow.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.article
+                <article
                   className={styles.workflowStep}
                   key={item.title}
-                  initial={undefined}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.35, delay: index * 0.04 }}
                 >
                   <div className={styles.workflowLine} aria-hidden="true" />
                   <div className={styles.workflowNumber}>{item.number}</div>
                   <Icon size={20} /><h3>{item.title}</h3><p>{item.copy}</p>
-                </motion.article>
+                </article>
               );
             })}
           </div>
@@ -259,27 +233,23 @@ export function HomeApprovedExperience() {
 
       <section className={[styles.section, styles.dark].join(" ")}>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.sectionHead} {...reveal}>
+          <div className={styles.sectionHead}>
             <div>
               <div className={styles.darkEyebrow}>INDUSTRY EXPERTISE</div>
               <h2>Industries We Serve</h2>
               <p>Deep domain knowledge across multiple industries, delivering specialized solutions for unique challenges.</p>
             </div>
             <Link href="/industries" className={styles.darkInlineLink}>View all industries <ArrowRight size={14} /></Link>
-          </motion.div>
+          </div>
           <div className={styles.industryGrid}>
-            {industries.map((item, index) => (
-              <motion.div
+            {industries.map((item) => (
+              <div
                 key={item.title}
-                initial={undefined}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <Link href={item.href} className={styles.industryCard}>
                   <Image src={item.image} alt="" fill sizes="(max-width:760px) 75vw, 18vw" /><span>{item.title}</span>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -287,33 +257,29 @@ export function HomeApprovedExperience() {
 
       <section className={styles.trustSection}>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.centerHead} {...reveal}>
+          <div className={styles.centerHead}>
             <div className={styles.blueEyebrow}>TECHNOLOGY ECOSYSTEM</div>
             <h2>Built with leading platforms and tools.</h2>
-          </motion.div>
+          </div>
           <div className={styles.logoStrip} aria-label="Technology ecosystem">{trustLogos.map((logo) => <span key={logo}>{logo}</span>)}</div>
         </div>
       </section>
 
       <section className={[styles.section, styles.insightsSection].join(" ")}>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.sectionHead} {...reveal}>
+          <div className={styles.sectionHead}>
             <div><div className={styles.blueEyebrow}>INSIGHTS / BLOGS</div><h2>Technical perspective without the noise.</h2></div>
             <Link href="/insights" className={styles.inlineLink}>View all insights <ArrowRight size={14} /></Link>
-          </motion.div>
+          </div>
           <div className={styles.insightGrid}>
-            {insights.map((item, index) => (
-              <motion.article
+            {insights.map((item) => (
+              <article
                 className={styles.insightCard}
                 key={item.title}
-                initial={undefined}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.35, delay: index * 0.025 }}
               >
                 <span>{item.tag}</span><h3>{item.title}</h3><p>{item.copy}</p>
                 <Link href={item.href} className={styles.cardLink}>Read insight <ArrowRight size={13} /></Link>
-              </motion.article>
+              </article>
             ))}
           </div>
         </div>
@@ -337,13 +303,13 @@ export function HomeApprovedExperience() {
           </svg>
         </div>
         <div className={styles.sectionShell}>
-          <motion.div className={styles.finalInner} {...reveal}>
+          <div className={styles.finalInner}>
             <div><h2>Ready to build what’s next?</h2><p>Let’s discuss your project and explore how we can help you achieve your goals with AI and modern software engineering.</p></div>
             <div className={styles.finalActions}>
               <BookingButton className={styles.primaryButton}>Book a Technical Call <ArrowRight size={15} /></BookingButton>
               <Link href="/capabilities" className={styles.secondaryButton}>Explore Our Services <ArrowRight size={15} /></Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

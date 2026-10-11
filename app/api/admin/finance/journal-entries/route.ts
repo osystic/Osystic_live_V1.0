@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { journalEntries, journalLines } from "@/drizzle/finance-schema";
-import { eq } from "drizzle-orm";
 
 export async function GET() {
   try {

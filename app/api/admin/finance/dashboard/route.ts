@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { financeInvoices, payments, vendorBills, financeClients } from "@/drizzle/finance-schema";
+import { financeInvoices, payments, vendorBills } from "@/drizzle/finance-schema";
 import { eq, sql, sum } from "drizzle-orm";
 
 export async function GET() {

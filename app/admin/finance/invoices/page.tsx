@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Plus, FileText, Eye, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function InvoicesPage() {

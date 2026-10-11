@@ -6,7 +6,7 @@ import { useState } from "react";
 import {
   LayoutDashboard, BookOpen, FileText, Landmark, Calculator,
   Receipt, CreditCard, Wallet, Building2, PiggyBank, BarChart3,
-  Users, Briefcase, Settings, ChevronDown, ChevronRight, Menu, X,
+  Users, Settings, ChevronDown, ChevronRight, Menu, X,
   Newspaper, GraduationCap, TrendingUp, Banknote, HandCoins,
   ClipboardList, FileCheck, CircleDollarSign, ArrowLeftRight,
   Scale, Tags, FolderOpen, LayoutGrid, Sparkles,
