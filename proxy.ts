@@ -109,6 +109,7 @@ export default async function proxy(request: NextRequest) {
 
   const protectedPath =
     pathname.startsWith("/admin") ||
+    pathname.startsWith("/case-studies/preview/") ||
     pathname.startsWith("/api/admin/content") ||
     pathname.startsWith("/api/admin/finance") ||
     pathname.startsWith("/api/admin/case-studies") ||
@@ -129,5 +130,5 @@ export default async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/:path*"],
+  matcher: ["/admin/:path*", "/api/:path*", "/case-studies/preview/:path*"],
 };

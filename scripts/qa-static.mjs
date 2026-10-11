@@ -276,7 +276,8 @@ for (const header of ["Content-Security-Policy", "Strict-Transport-Security", "X
 if (!nextConfig.includes('"frame-ancestors \'none\'"')) securityFailures.push("next.config.ts: CSP frame-ancestors 'none' missing");
 if (!nextConfig.includes('isDevelopment ? " \'unsafe-eval\'" : ""')) securityFailures.push("next.config.ts: unsafe-eval is not restricted to development");
 const proxyText = read(path.join(root, "proxy.ts"));
-if (!proxyText.includes('matcher: ["/admin/:path*", "/api/:path*"]')) securityFailures.push("proxy.ts: /api CSRF matcher missing");
+if (!proxyText.includes('"/admin/:path*"') || !proxyText.includes('"/api/:path*"')) securityFailures.push("proxy.ts: admin/API security matchers missing");
+if (!proxyText.includes('"/case-studies/preview/:path*"')) securityFailures.push("proxy.ts: protected case-study preview matcher missing");
 if (!proxyText.includes('request.headers.get("origin")') || !proxyText.includes("csrfRejected")) securityFailures.push("proxy.ts: Origin-based CSRF guard missing");
 for (const required of ["app/api/contact/route.ts", "app/api/careers/apply/route.ts", "lib/input-security.ts", "lib/content-security.ts"]) {
   if (!fs.existsSync(path.join(root, required))) securityFailures.push(`${required}: validation/sanitization surface missing`);

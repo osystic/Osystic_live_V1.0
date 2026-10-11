@@ -287,6 +287,9 @@ export default function AdminCaseStudyDetailPage() {
         </div>
 
         <div className="flex flex-wrap gap-2 shrink-0">
+          <Link href={`/case-studies/preview/${id}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-100 rounded-lg text-sm font-medium transition">
+            <ExternalLink size={14} /> Preview website page
+          </Link>
           <button onClick={() => { setIsEditing(!isEditing); setEditContent(study.generatedContent); setError(""); setMessage(""); }} disabled={refreshing || publishing} className="inline-flex items-center gap-1.5 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-sm font-medium transition disabled:opacity-50">{isEditing ? <X size={14} /> : <Pencil size={14} />}{isEditing ? "Cancel" : "Edit"}</button>
           <button onClick={refresh} disabled={refreshing || isEditing || publishing} className="inline-flex items-center gap-1.5 px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-sm font-medium transition disabled:opacity-50">{refreshing ? <><Loader2 size={14} className="animate-spin" /> Refreshing…</> : <><RefreshCw size={14} /> Refresh from GitHub</>}</button>
           <button onClick={publishToggle} disabled={publishing || refreshing || isEditing} className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition disabled:opacity-50 ${isPublished ? "bg-gray-100 hover:bg-gray-200 text-gray-800" : "bg-emerald-600 hover:bg-emerald-700 text-white"}`}>{publishing ? <><Loader2 size={14} className="animate-spin" /> Saving…</> : isPublished ? "Unpublish" : <><Eye size={14} /> Publish</>}</button>
