@@ -1,20 +1,36 @@
 import Link from "next/link";
 import { ArrowUpRight, Linkedin, LogIn, Mail, MapPin } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
-import { capabilityGroups, siteConfig } from "../config/site";
+import { siteConfig } from "../config/site";
 
 const footerGroups = [
   {
     title: "Capabilities",
-    items: capabilityGroups.map(group => [group.title, group.href]),
+    items: [
+      { label: "AI & Machine Learning", href: "/capabilities/ai-systems" },
+      { label: "Data Engineering", href: "/services/data-cloud/data" },
+      { label: "Cloud & DevOps", href: "/services/devops-cloud" },
+      { label: "Custom Software", href: "/capabilities/product-engineering" },
+    ],
   },
   {
     title: "Company",
-    items: [["About","/about"],["Industries","/industries"],["Trust & Security","/trust"],["Careers","/careers"]],
+    items: [
+      { label: "About Us", href: "/about" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
+      { label: "Admin Login", href: "https://www.osystic.com/admin/", admin: true },
+    ],
   },
   {
-    title: "Explore",
-    items: [["Case Studies","/case-studies"],["Insights","/insights"],["Contact","/contact"],["Support","/support"]],
+    title: "Industries",
+    items: [
+      { label: "Financial Services", href: "/industries/finance" },
+      { label: "Healthcare", href: "/industries/healthcare" },
+      { label: "Manufacturing", href: "/industries/manufacturing" },
+      { label: "Technology", href: "/industries/technology" },
+    ],
   },
 ] as const;
 
@@ -33,10 +49,20 @@ export default function Footer(){
       </div>
 
       <nav className="future-footer-links" aria-label="Footer navigation">
-        {footerGroups.map(group=><div key={group.title}>
-          <h3>{group.title}</h3>
-          {group.items.map(([label,href])=><Link href={href} key={href}>{label}<ArrowUpRight size={10}/></Link>)}
-        </div>)}
+        {footerGroups.map(group => (
+          <div className="future-footer-link-group" key={group.title}>
+            <h3>{group.title}</h3>
+            {group.items.map(item => ("admin" in item && item.admin) ? (
+              <a className="future-footer-admin-link" href={item.href} key={item.href}>
+                {item.label}<LogIn size={11} aria-hidden="true"/>
+              </a>
+            ) : (
+              <Link href={item.href} key={item.href}>
+                {item.label}<ArrowUpRight size={10} aria-hidden="true"/>
+              </Link>
+            ))}
+          </div>
+        ))}
       </nav>
     </div>
 
@@ -54,7 +80,6 @@ export default function Footer(){
       <div>
         <Link href="/privacy">PRIVACY</Link>
         <Link href="/terms">TERMS</Link>
-        <a className="future-admin-login" href="https://www.osystic.com/admin/"><LogIn size={11}/>ADMIN LOGIN</a>
       </div>
     </div>
   </footer>;

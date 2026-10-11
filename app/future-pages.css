@@ -111,13 +111,13 @@
 }
 .future-footer-main{
   display:grid;
-  grid-template-columns:minmax(300px,.95fr) minmax(520px,1.05fr);
-  gap:72px;
+  grid-template-columns:minmax(270px,.82fr) minmax(620px,1.38fr);
+  gap:64px;
   align-items:start;
   padding-top:46px;
   padding-bottom:34px;
 }
-.future-footer-brand{max-width:470px}
+.future-footer-brand{max-width:420px}
 .future-footer-brandline{
   display:flex;
   align-items:center;
@@ -158,9 +158,9 @@
 .future-footer-links{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:34px;
+  gap:40px;
 }
-.future-footer-links>div{display:flex;flex-direction:column;gap:4px}
+.future-footer-links>div{display:flex;flex-direction:column;gap:4px;min-width:0}
 .future-footer-links h3{
   margin:0 0 11px;
   color:#65738b;
@@ -180,7 +180,18 @@
   line-height:1.35;
   transition:color .18s ease,transform .18s ease;
 }
-.future-footer-links a:hover{color:#eef3ff;transform:translateX(2px)}
+.future-footer-links a:hover{color:#fff;transform:translateX(2px)}
+.future-footer-admin-link{
+  color:#9da9bc!important;
+}
+.future-footer-admin-link svg{
+  color:#70819d;
+  transition:color .18s ease;
+}
+.future-footer-admin-link:hover{
+  color:#fff!important;
+}
+.future-footer-admin-link:hover svg{color:#9eb4ff}
 .future-footer-meta{
   min-height:46px;
   display:flex;
