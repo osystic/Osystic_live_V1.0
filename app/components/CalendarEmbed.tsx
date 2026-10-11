@@ -15,10 +15,10 @@ export default function CalendarEmbed({ calLink }: { calLink: string }) {
         },
         cssVarsPerTheme: {
           dark: {
-            "--cal-spacing-6": "0.75rem",
+            "--cal-spacing-6": "0.5rem",
           },
           light: {
-            "--cal-spacing-6": "0.75rem",
+            "--cal-spacing-6": "0.5rem",
           },
         },
       });
@@ -31,7 +31,7 @@ export default function CalendarEmbed({ calLink }: { calLink: string }) {
       calLink={calLink}
       style={{
         width: "min(1120px, calc(100vw - 24px))",
-        height: "min(620px, calc(100dvh - 56px))",
+        height: "min(560px, calc(100dvh - 40px))",
         maxWidth: "100%",
         maxHeight: "100%",
         overflow: "auto",
