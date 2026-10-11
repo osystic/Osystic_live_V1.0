@@ -1,0 +1,8 @@
+"use client";
+import { motion,useReducedMotion } from "framer-motion";
+import { AlertTriangle,FileText,History,Scale,ShieldCheck } from "lucide-react";
+import styles from "./insurance-risk.module.css";
+const evidence=[[FileText,"SUBMISSION","COMPLETE",styles.ev1],[History,"LOSS HISTORY","REVIEWED",styles.ev2],[ShieldCheck,"APPETITE","PARTIAL FIT",styles.ev3]] as const;
+export function UnderwritingDecisionDesk(){const reduce=useReducedMotion();return <motion.div className={styles.desk} initial={reduce?false:{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:reduce?0:.7}}>
+  <div className={styles.deskHead}><span>UNDERWRITING WORKSPACE</span><b>UW-240184</b></div><div className={styles.deskBody}><div className={styles.sheet}><small>SUBMISSION DOSSIER</small><h3>Meridian Industrial Holdings</h3><p>COMMERCIAL PROPERTY / NEW BUSINESS</p><div className={styles.lines}><i/><i/><i/><i/><i/></div></div><div className={styles.risk}><small>DECISION SUPPORT</small><div><i/><span>68</span></div><p><b>RISK INDICATOR</b><strong>REFER</strong></p></div>{evidence.map(([Icon,label,value,cls],i)=><motion.div key={label} className={`${styles.ev} ${cls}`} initial={reduce?false:{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:reduce?0:.35+i*.12}}><Icon size={14}/><span>{label}<b>{value}</b></span></motion.div>)}<div className={styles.decision}><Scale size={17}/><span>RECOMMENDATION</span><strong>REFER TO SENIOR UNDERWRITER</strong><p>Concentration exceeds automated authority.</p><small><AlertTriangle size={12}/> HUMAN DECISION REQUIRED</small></div></div><div className={styles.deskFoot}>EVIDENCE ATTACHED <span>AUDIT RECORD ACTIVE</span></div>
+</motion.div>}

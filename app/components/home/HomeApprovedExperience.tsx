@@ -6,6 +6,7 @@ import {
   Layers3, ShieldCheck, Search, PenTool, Boxes, Rocket, Bot,
 } from "lucide-react";
 import { BookingButton } from "../CalBooking";
+import { INDUSTRIES } from "../../_data/industries-data";
 import { HeroReveal } from "./Reveal";
 import styles from "./HomeApprovedExperience.module.css";
 
@@ -38,13 +39,6 @@ const workflow = [
   { number: "04", title: "Deploy", copy: "Launch, validate, and support adoption.", icon: Rocket },
 ] as const;
 
-const industries = [
-  { title: "Financial Services", image: "/media/work/financial-research.webp", href: "/industries/finance" },
-  { title: "Healthcare", image: "/media/work/clinical-workflow.webp", href: "/industries/healthcare" },
-  { title: "Manufacturing", image: "/media/work/predictive-maintenance.webp", href: "/industries/manufacturing" },
-  { title: "Retail & E-commerce", image: "/media/work/edge-ai.webp", href: "/industries" },
-  { title: "Technology", image: "/media/work/cloud-modernization.webp", href: "/industries/technology" },
-] as const;
 
 const insights = [
   { tag: "AI SYSTEMS", title: "Building reliable agentic systems beyond the demo", copy: "Guardrails, evaluation, tool permissions, observability, and production ownership.", href: "/insights" },
@@ -242,12 +236,17 @@ export function HomeApprovedExperience() {
             <Link href="/industries" className={styles.darkInlineLink}>View all industries <ArrowRight size={14} /></Link>
           </div>
           <div className={styles.industryGrid}>
-            {industries.map((item) => (
-              <div
-                key={item.title}
-              >
-                <Link href={item.href} className={styles.industryCard}>
-                  <Image src={item.image} alt="" fill sizes="(max-width:760px) 75vw, 18vw" /><span>{item.title}</span>
+            {INDUSTRIES.map((item, index) => (
+              <div key={item.slug}>
+                <Link
+                  href={item.href}
+                  className={styles.industryCard}
+                  style={{ "--industry-accent": item.accent } as CSSProperties}
+                >
+                  <span className={styles.industryNumber}>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item.name}</strong>
+                  <small>{item.tagline}</small>
+                  <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               </div>
             ))}

@@ -1,9 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
    industries-data.ts
-   Single source of truth for all 8 industry sub-pages.
+   Single source of truth for all 12 industry experiences.
    Used by:
-     — app/industries/[slug]/page.tsx  (metadata + JSON-LD)
-     — IndustriesCarousel.tsx          (home page cards)
+     — app/industries/[slug]/page.tsx  (8 legacy dynamic routes)
+     — 4 bespoke static industry routes
+     — industry index + homepage discovery surfaces
    No fake numbers, no fabricated case study results.
 ═══════════════════════════════════════════════════════════════ */
 
@@ -19,6 +20,8 @@ export interface IndustryChallenge {
 
 export interface Industry {
   slug:        string;
+  href:        string;           // canonical route; bespoke routes stay explicit
+  routeKind:   "dynamic" | "bespoke";
   name:        string;
   tagline:     string;           // one-line hero sub-heading
   description: string;           // ~2 sentence intro for meta + hero
@@ -33,6 +36,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "healthcare",
+    href:        "/industries/healthcare",
+    routeKind:   "dynamic",
     name:        "Healthcare",
     tagline:     "AI for clinical intelligence and diagnostic support.",
     description: "OSYSTIC builds AI systems for healthcare teams — from medical imaging pipelines to clinical NLP and patient risk models deployed inside your existing infrastructure.",
@@ -56,6 +61,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "finance",
+    href:        "/industries/finance",
+    routeKind:   "dynamic",
     name:        "Banking & Finance",
     tagline:     "AI for fraud, credit, and compliance at scale.",
     description: "OSYSTIC builds machine learning systems for financial services teams — fraud detection, credit scoring, trading signal generation, and document processing automation.",
@@ -79,6 +86,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "manufacturing",
+    href:        "/industries/manufacturing",
+    routeKind:   "dynamic",
     name:        "Manufacturing",
     tagline:     "AI for quality, maintenance, and operational efficiency.",
     description: "OSYSTIC builds computer vision and predictive ML systems for manufacturing teams — visual defect inspection, equipment failure prediction, and demand-driven production planning.",
@@ -102,6 +111,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "retail",
+    href:        "/industries/retail",
+    routeKind:   "dynamic",
     name:        "Retail & E-Commerce",
     tagline:     "AI for personalisation, inventory, and customer intelligence.",
     description: "OSYSTIC builds recommendation engines, demand forecasting systems, and visual search tools for retail and e-commerce teams working on personalization, forecasting, visual search, and operational decision support.",
@@ -125,6 +136,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "logistics",
+    href:        "/industries/logistics",
+    routeKind:   "dynamic",
     name:        "Logistics",
     tagline:     "AI for routing, prediction, and warehouse intelligence.",
     description: "OSYSTIC builds optimisation and forecasting systems for logistics and supply chain teams — route optimisation, delivery time prediction, warehouse automation, and demand sensing.",
@@ -148,6 +161,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "telecom",
+    href:        "/industries/telecom",
+    routeKind:   "dynamic",
     name:        "Telecommunications",
     tagline:     "AI for network intelligence, churn, and customer operations.",
     description: "OSYSTIC builds anomaly detection, churn prediction, and NLP systems for telecommunications teams managing large subscriber bases and complex network infrastructure.",
@@ -171,6 +186,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "education",
+    href:        "/industries/education",
+    routeKind:   "dynamic",
     name:        "Education",
     tagline:     "AI for personalised learning and institutional intelligence.",
     description: "OSYSTIC builds personalised learning systems, automated assessment tools, and engagement analytics for education platforms and institutions.",
@@ -194,6 +211,8 @@ export const INDUSTRIES: Industry[] = [
   /* ────────────────────────────────── */
   {
     slug:        "technology",
+    href:        "/industries/technology",
+    routeKind:   "dynamic",
     name:        "Technology",
     tagline:     "AI and engineering for software products and platforms.",
     description: "OSYSTIC builds AI features, developer tooling, and platform infrastructure for software companies — from LLM-powered product features to data pipelines and SaaS architecture.",
@@ -213,6 +232,102 @@ export const INDUSTRIES: Industry[] = [
     ],
     relatedSlugs: ["finance", "healthcare", "retail"],
   },
+  /* ────────────────────────────────── */
+  {
+    slug:        "energy-utilities",
+    href:        "/industries/energy-utilities",
+    routeKind:   "bespoke",
+    name:        "Energy & Utilities",
+    tagline:     "Grid intelligence, edge AI, and software for critical infrastructure.",
+    description: "OSYSTIC engineers grid intelligence, edge AI, predictive asset systems, OT integrations, and cloud data platforms for energy and utility operators.",
+    accent:      "#16B89A",
+    heroDesc:    "Energy systems combine critical infrastructure, operational technology, field assets, telemetry, edge compute, and enterprise software. We engineer intelligence around explicit control boundaries, reliability constraints, and operator workflows.",
+    challenges: [
+      { title: "Operational data fragmentation", desc: "Grid, asset, field, and enterprise data often live across separate systems with different latency, ownership, and security boundaries." },
+      { title: "Asset reliability at scale", desc: "Large fleets of physical assets generate early warning signals that are difficult to prioritize with static thresholds alone." },
+      { title: "OT and AI trust boundaries", desc: "Decision support, operator review, and machine control require deliberately different authority and failure-handling models." },
+    ],
+    solutions: [
+      { title: "Grid forecasting", desc: "Forecast load, generation, renewable variability, and operating constraints from continuously updated system state." },
+      { title: "Predictive asset intelligence", desc: "Combine telemetry, inspections, maintenance history, and operating conditions to surface emerging failure signatures." },
+      { title: "Edge AI", desc: "Run selected inference close to field assets where latency, connectivity, resilience, or data movement require it." },
+      { title: "OT / IT integration", desc: "Connect historians, operational telemetry, enterprise data, and cloud platforms without flattening control boundaries." },
+    ],
+    relatedSlugs: ["manufacturing", "logistics", "technology"],
+  },
+
+  /* ────────────────────────────────── */
+  {
+    slug:        "aerospace-defense",
+    href:        "/industries/aerospace-defense",
+    routeKind:   "bespoke",
+    name:        "Aerospace & Defense",
+    tagline:     "Secure AI, mission software, sensor fusion, and controlled compute.",
+    description: "OSYSTIC engineers secure AI, simulation platforms, sensor fusion systems, mission software, sovereign data systems, and edge deployment architectures for aerospace and defense environments.",
+    accent:      "#718FFF",
+    heroDesc:    "Aerospace and defense systems operate across constrained compute, sensitive data, intermittent connectivity, simulation-heavy engineering, and high-consequence workflows. Architecture must preserve provenance, authority, and operability across the mission thread.",
+    challenges: [
+      { title: "Multi-source operational context", desc: "Telemetry, imagery, geospatial feeds, platform state, and software events need correlation without losing source provenance." },
+      { title: "Controlled deployment environments", desc: "Sensitive data, model artifacts, runtime dependencies, and update paths may need to remain inside approved infrastructure." },
+      { title: "Verification before deployment", desc: "Rare, costly, or unsafe operating conditions require simulation, synthetic data, replay, and measurable evaluation." },
+    ],
+    solutions: [
+      { title: "Sensor and data fusion", desc: "Correlate multi-modal operational sources into coherent, provenance-aware machine context." },
+      { title: "Simulation and digital engineering", desc: "Build scenario environments, synthetic data pipelines, and digital twins for controlled evaluation." },
+      { title: "Secure decision-support AI", desc: "Engineer explainable intelligence workflows with policy, confidence, and operator review boundaries." },
+      { title: "Edge deployment", desc: "Run selected workloads near the platform when bandwidth, latency, sovereignty, or resilience demand local execution." },
+    ],
+    relatedSlugs: ["technology", "manufacturing", "logistics"],
+  },
+
+  /* ────────────────────────────────── */
+  {
+    slug:        "automotive-mobility",
+    href:        "/industries/automotive-mobility",
+    routeKind:   "bespoke",
+    name:        "Automotive & Mobility",
+    tagline:     "Software-defined vehicles, connected fleets, ADAS, and mobility platforms.",
+    description: "OSYSTIC engineers software-defined vehicle platforms, ADAS and AI systems, connected fleet infrastructure, telemetry pipelines, OTA delivery architecture, and digital twins for modern mobility companies.",
+    accent:      "#29B7DB",
+    heroDesc:    "Modern vehicles are becoming distributed software platforms. Vehicle state, edge compute, cloud services, OTA delivery, telemetry, fleet operations, and AI lifecycle controls must evolve as one coherent engineering system.",
+    challenges: [
+      { title: "Software and hardware coupling", desc: "Product software becomes expensive to evolve when applications are tightly bound to vehicle hardware and domain controllers." },
+      { title: "Fleet-scale software lifecycle", desc: "OTA rollout requires vehicle eligibility, staged cohorts, observability, rollback, artifact provenance, and version-aware support." },
+      { title: "High-volume telemetry", desc: "Connected fleets produce operational signals that need normalization, streaming, historical context, and engineering ownership." },
+    ],
+    solutions: [
+      { title: "Software-defined vehicle platforms", desc: "Service layers, middleware, APIs, observability, and lifecycle systems for evolving vehicle software." },
+      { title: "ADAS and AI engineering", desc: "Perception tooling, model evaluation, scenario analysis, and inference infrastructure for vehicle intelligence." },
+      { title: "Connected fleet platforms", desc: "Telemetry, identity, health, fleet state, maintenance, and operational decision systems." },
+      { title: "OTA and digital twins", desc: "Staged software delivery, rollback controls, version provenance, simulation, replay, and synchronized vehicle-state models." },
+    ],
+    relatedSlugs: ["manufacturing", "logistics", "technology"],
+  },
+
+  /* ────────────────────────────────── */
+  {
+    slug:        "insurance-risk",
+    href:        "/industries/insurance-risk",
+    routeKind:   "bespoke",
+    name:        "Insurance & Risk",
+    tagline:     "Underwriting intelligence, claims automation, actuarial risk, and governed AI.",
+    description: "OSYSTIC engineers underwriting intelligence, claims automation, actuarial analytics, fraud detection, document intelligence, and governed AI workflows for insurers and risk organizations.",
+    accent:      "#7F91CC",
+    heroDesc:    "Insurance workflows combine document-heavy evidence, statistical models, business rules, regulated decisions, specialist judgment, and customer-sensitive data. AI must accelerate preparation and triage without hiding the evidence or authority behind material decisions.",
+    challenges: [
+      { title: "Fragmented underwriting evidence", desc: "Submissions, schedules, loss runs, external data, pricing rules, and authority constraints are often reconciled manually." },
+      { title: "Claims document volume", desc: "Forms, invoices, statements, images, reports, and policy terms create slow evidence assembly and review cycles." },
+      { title: "Governed decision-making", desc: "Risk and claims recommendations need model provenance, evidence, confidence, business rules, and human accountability." },
+    ],
+    solutions: [
+      { title: "Underwriting intelligence", desc: "Submission extraction, risk context, appetite checks, decision support, and reviewable underwriting dossiers." },
+      { title: "Claims automation", desc: "Document intelligence, evidence reconciliation, severity signals, workflow routing, and adjuster review packages." },
+      { title: "Actuarial and fraud analytics", desc: "Portfolio risk views, pricing support, emerging-risk signals, anomaly detection, and investigation triage." },
+      { title: "Agentic document workflows", desc: "Controlled AI agents for reading, extracting, reasoning, routing, and recording insurance operations with explicit approval boundaries." },
+    ],
+    relatedSlugs: ["finance", "healthcare", "technology"],
+  },
+
 ];
 
 /* Helper — find by slug */
@@ -221,4 +336,8 @@ export function getIndustry(slug: string): Industry | undefined {
 }
 
 /* All slugs — used by generateStaticParams */
-export const ALL_SLUGS = INDUSTRIES.map(ind => ind.slug);
+export const ALL_SLUGS = INDUSTRIES.filter(ind => ind.routeKind === "dynamic").map(ind => ind.slug);
+
+export function getIndustryHref(industry: Industry): string {
+  return industry.href;
+}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Linkedin, LogIn, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "../config/site";
+import { INDUSTRIES } from "../_data/industries-data";
 
 const footerGroups = [
   {
@@ -24,14 +25,12 @@ const footerGroups = [
   },
   {
     title: "Industries",
-    items: [
-      { label: "Financial Services", href: "/industries/finance" },
-      { label: "Healthcare", href: "/industries/healthcare" },
-      { label: "Manufacturing", href: "/industries/manufacturing" },
-      { label: "Technology", href: "/industries/technology" },
-    ],
+    items: INDUSTRIES.map(industry => ({
+      label: industry.name,
+      href: industry.href,
+    })),
   },
-] as const;
+];
 
 export default function Footer() {
   return (
@@ -40,10 +39,7 @@ export default function Footer() {
         <div className="future-footer-brand">
           <div className="future-footer-wordmark">OSYSTIC</div>
 
-          <a
-            className="future-footer-email"
-            href={`mailto:${siteConfig.email}`}
-          >
+          <a className="future-footer-email" href={`mailto:${siteConfig.email}`}>
             <Mail size={14} aria-hidden="true" />
             {siteConfig.email}
           </a>
@@ -68,13 +64,10 @@ export default function Footer() {
           </a>
         </div>
 
-        <nav
-          className="future-footer-links"
-          aria-label="Footer navigation"
-        >
+        <nav className="future-footer-links" aria-label="Footer navigation">
           {footerGroups.map(group => (
             <div
-              className="future-footer-link-group"
+              className={`future-footer-link-group${group.title === "Industries" ? " future-footer-link-group-industries" : ""}`}
               key={group.title}
             >
               <h3>{group.title}</h3>
@@ -92,10 +85,7 @@ export default function Footer() {
                 ) : (
                   <Link href={item.href} key={item.href}>
                     {item.label}
-                    <ArrowUpRight
-                      size={10}
-                      aria-hidden="true"
-                    />
+                    <ArrowUpRight size={10} aria-hidden="true" />
                   </Link>
                 ),
               )}
@@ -105,9 +95,7 @@ export default function Footer() {
       </div>
 
       <div className="container-shell future-footer-bottom">
-        <span>
-          © {new Date().getFullYear()} OSYSTIC. ALL RIGHTS RESERVED.
-        </span>
+        <span>© {new Date().getFullYear()} OSYSTIC. ALL RIGHTS RESERVED.</span>
 
         <div>
           <Link href="/privacy">PRIVACY</Link>

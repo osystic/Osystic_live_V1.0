@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const industries: MetadataRoute.Sitemap = INDUSTRIES.map((industry) => ({
-    url: absolute(`/industries/${industry.slug}`),
+    url: absolute(industry.href),
     changeFrequency: "monthly" as const,
     priority: 0.75,
   }));
