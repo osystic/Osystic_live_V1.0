@@ -11,6 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { X } from "lucide-react";
 
 type BookingContextValue = { openBooking: () => void };
 const BookingContext = createContext<BookingContextValue | null>(null);
@@ -71,6 +72,14 @@ export function CalBookingProvider({ children }: { children: React.ReactNode }) 
           }}
         >
           {calLink ? <Calendar calLink={calLink} /> : null}
+          <button
+            type="button"
+            className="cal-dialog-close"
+            aria-label="Close booking dialog"
+            onClick={closeBooking}
+          >
+            <X size={18} aria-hidden="true" />
+          </button>
         </dialog>
       ) : null}
     </BookingContext.Provider>

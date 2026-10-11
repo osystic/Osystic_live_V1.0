@@ -38,6 +38,24 @@ button:disabled { cursor: wait; }
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
+.cal-dialog-close {
+  position:absolute;
+  z-index:3;
+  top:14px;
+  right:14px;
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:999px;
+  background:rgba(6,10,18,.72);
+  color:#eef3ff;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.cal-dialog-close:hover { background:rgba(6,10,18,.9); }
 
 .careers-application h2[tabindex] { scroll-margin-top:calc(var(--header-height) + 1rem); }
 @media (hover:none) { .button:hover,.work-card:hover,.industry-card:hover,.capability-card:hover { transform:none; }.button:hover svg,.text-link:hover svg,.work-card:hover img { transform:none; } }
