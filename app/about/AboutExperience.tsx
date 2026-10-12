@@ -110,9 +110,6 @@ const leadershipSlots = [
 export function AboutExperience() {
   const reducedMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
-  const heroIntroRef = useRef<HTMLDivElement>(null);
-  const heroSceneRef = useRef<HTMLDivElement>(null);
-  const heroChaptersRef = useRef<HTMLDivElement>(null);
   const excellenceRef = useRef<HTMLElement>(null);
   const excellenceProgressRef = useRef<HTMLDivElement>(null);
   const [sceneReady, setSceneReady] = useState(false);
@@ -157,30 +154,6 @@ export function AboutExperience() {
       const media = gsap.matchMedia();
 
       media.add("(min-width: 1025px)", () => {
-        const chapterNodes = gsap.utils.toArray<HTMLElement>(`.${styles.heroChapter}`, heroChaptersRef.current ?? undefined);
-        gsap.set(chapterNodes, { autoAlpha: 0, y: 34 });
-
-        const heroTimeline = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top+=76",
-            end: "bottom bottom",
-            scrub: 0.85,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        heroTimeline
-          .to(heroIntroRef.current, { y: -68, opacity: 0.12, scale: 0.96, duration: 0.26 }, 0.14)
-          .to(heroSceneRef.current, { scale: 0.86, xPercent: -7, yPercent: -2, duration: 0.34 }, 0.18)
-          .to(chapterNodes[0], { autoAlpha: 1, y: 0, duration: 0.18 }, 0.34)
-          .to(chapterNodes[0], { opacity: 0.34, duration: 0.14 }, 0.49)
-          .to(chapterNodes[1], { autoAlpha: 1, y: 0, duration: 0.18 }, 0.5)
-          .to(chapterNodes[1], { opacity: 0.34, duration: 0.14 }, 0.66)
-          .to(chapterNodes[2], { autoAlpha: 1, y: 0, duration: 0.18 }, 0.67)
-          .to(heroSceneRef.current, { scale: 0.77, opacity: 0.68, duration: 0.18 }, 0.78);
-
         const stageNodes = gsap.utils.toArray<HTMLElement>(`.${styles.excellenceStage}`, excellenceRef.current ?? undefined);
         gsap.set(excellenceProgressRef.current, { scaleY: 0, transformOrigin: "top center" });
         gsap.to(excellenceProgressRef.current, {
@@ -213,10 +186,6 @@ export function AboutExperience() {
           );
         });
 
-        return () => {
-          heroTimeline.scrollTrigger?.kill();
-          heroTimeline.kill();
-        };
       });
 
       return () => media.revert();
@@ -233,7 +202,7 @@ export function AboutExperience() {
           <div className={styles.heroGlowB} aria-hidden="true" />
 
           <div className={`container-shell ${styles.heroShell}`}>
-            <div ref={heroIntroRef} className={styles.heroIntro}>
+            <div className={styles.heroIntro}>
               <motion.div
                 className={styles.systemLabel}
                 initial={false}
@@ -272,7 +241,7 @@ export function AboutExperience() {
               </motion.div>
             </div>
 
-            <div ref={heroSceneRef} className={styles.networkStage} aria-label="Interactive global trust and scale network">
+            <div className={styles.networkStage} aria-label="Interactive global trust and scale network">
               <div className={styles.networkCanvas}>
                 {sceneReady ? (
                   <About3DBoundary>
@@ -288,7 +257,7 @@ export function AboutExperience() {
               <div className={`${styles.nodeTag} ${styles.nodeTagD}`}>GLOBAL / DELIVERY</div>
             </div>
 
-            <div ref={heroChaptersRef} className={styles.heroChapters} aria-label="OSYSTIC company narrative">
+            <div className={styles.heroChapters} aria-label="OSYSTIC company narrative">
               <article className={styles.heroChapter}>
                 <span>01 / VISION</span>
                 <strong>Capability should remain with the client.</strong>
