@@ -47,6 +47,20 @@ const insights = [
 ] as const;
 
 const trustLogos = ["Microsoft", "aws", "Google Cloud", "NVIDIA", "Vercel", "docker"];
+
+const featuredIndustryConfig = [
+  { slug: "healthcare", copy: "Clinical AI, diagnostics, and secure health systems." },
+  { slug: "finance", copy: "Fraud, risk, compliance, and financial intelligence." },
+  { slug: "manufacturing", copy: "Quality, predictive maintenance, and production intelligence." },
+  { slug: "retail", copy: "Personalisation, inventory, and customer intelligence." },
+  { slug: "energy-utilities", copy: "Grid intelligence, edge AI, and critical infrastructure." },
+  { slug: "automotive-mobility", copy: "Connected mobility, ADAS, and software-defined platforms." },
+] as const;
+
+const featuredIndustries = featuredIndustryConfig.flatMap(({ slug, copy }) => {
+  const industry = INDUSTRIES.find((item) => item.slug === slug);
+  return industry ? [{ ...industry, homeCopy: copy }] : [];
+});
 export function HomeApprovedExperience() {
   return (
     <div className={styles.page}>
@@ -231,24 +245,26 @@ export function HomeApprovedExperience() {
             <div>
               <div className={styles.darkEyebrow}>INDUSTRY EXPERTISE</div>
               <h2>Industries We Serve</h2>
-              <p>Deep domain knowledge across multiple industries, delivering specialized solutions for unique challenges.</p>
+              <p>Selected sectors where AI, software, and operational complexity create meaningful engineering opportunities.</p>
             </div>
-            <Link href="/industries" className={styles.darkInlineLink}>View all industries <ArrowRight size={14} /></Link>
+            <Link href="/industries" className={styles.industryExploreLink}>
+              <span>Explore all industries <ArrowRight size={14} /></span>
+              <small>{INDUSTRIES.length} sectors</small>
+            </Link>
           </div>
           <div className={styles.industryGrid}>
-            {INDUSTRIES.map((item, index) => (
-              <div key={item.slug}>
-                <Link
-                  href={item.href}
-                  className={styles.industryCard}
-                  style={{ "--industry-accent": item.accent } as CSSProperties}
-                >
-                  <span className={styles.industryNumber}>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.name}</strong>
-                  <small>{item.tagline}</small>
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Link>
-              </div>
+            {featuredIndustries.map((item, index) => (
+              <Link
+                key={item.slug}
+                href={item.href}
+                className={styles.industryCard}
+                style={{ "--industry-accent": item.accent } as CSSProperties}
+              >
+                <span className={styles.industryNumber}>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.name}</strong>
+                <small>{item.homeCopy}</small>
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
             ))}
           </div>
         </div>
