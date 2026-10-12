@@ -522,19 +522,21 @@
 .industryExploreLink svg{transition:transform .2s ease}
 .industryExploreLink:hover svg{transform:translateX(3px)}
 
+.industriesSection{padding:46px 0 44px}
+.industriesSection .sectionHead{margin-bottom:16px}
 .industryGrid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
+  gap:8px;
 }
 .industryCard{
   --industry-accent:#5f7fff;
   position:relative;
-  min-height:148px;
+  min-height:108px;
   display:flex;
   flex-direction:column;
   overflow:hidden;
-  padding:16px 17px 17px;
+  padding:13px 15px 13px;
   border:1px solid rgba(111,139,196,.22);
   border-radius:10px;
   color:#eef4ff;
@@ -549,8 +551,8 @@
   content:"";
   position:absolute;
   left:0;
-  top:17px;
-  bottom:17px;
+  top:13px;
+  bottom:13px;
   width:2px;
   border-radius:999px;
   background:var(--industry-accent);
@@ -570,25 +572,25 @@
   letter-spacing:.1em;
 }
 .industryCard strong{
-  margin-top:auto;
+  margin-top:19px;
   color:#f4f7ff;
-  font-size:13.5px;
+  font-size:13px;
   line-height:1.2;
 }
 .industryCard small{
   max-width:320px;
-  margin-top:6px;
+  margin-top:4px;
   color:#8291a8;
-  font-size:9px;
-  line-height:1.4;
+  font-size:8.7px;
+  line-height:1.35;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 .industryCard>svg{
   position:absolute;
-  right:15px;
-  top:15px;
+  right:13px;
+  top:13px;
   color:#7897e9;
   transition:transform .2s ease,color .2s ease;
 }
@@ -770,8 +772,11 @@
   .workflowTrack{grid-template-columns:1fr 1fr;gap:30px 0}
   .workflowStep{padding-inline:12px}
   .workflowStep p{font-size:8.8px}
-  .industryGrid{grid-template-columns:1fr;gap:8px}
-  .industryCard{min-height:126px;padding:15px 16px}
+  .industryGrid{grid-template-columns:1fr;gap:7px}
+  .industriesSection{padding:38px 0 36px}
+  .industriesSection .sectionHead{margin-bottom:14px}
+  .industryCard{min-height:100px;padding:12px 14px}
+  .industryCard strong{margin-top:17px}
   .industryCard small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .industryExploreLink{align-items:flex-start}
   .logoStrip{grid-template-columns:repeat(2,1fr)}
@@ -1036,8 +1041,9 @@
   .workflowStep h3{margin:5px 0 3px;font-size:10.5px}
   .workflowStep p{font-size:8px;line-height:1.4}
 
-  .industryGrid{gap:8px}
-  .industryCard{min-height:138px}
+  .industryGrid{gap:7px}
+  .industryCard{min-height:104px}
+  .industryCard strong{margin-top:18px}
 
   .trustSection{padding:30px 0 32px}
   .trustSection .centerHead{margin-bottom:19px}

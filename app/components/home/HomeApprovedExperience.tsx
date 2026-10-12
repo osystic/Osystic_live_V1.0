@@ -239,7 +239,7 @@ export function HomeApprovedExperience() {
         </div>
       </section>
 
-      <section className={[styles.section, styles.dark].join(" ")}>
+      <section className={[styles.section, styles.dark, styles.industriesSection].join(" ")}>
         <div className={styles.sectionShell}>
           <div className={styles.sectionHead}>
             <div>
