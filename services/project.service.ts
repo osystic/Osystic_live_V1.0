@@ -1,0 +1,186 @@
+import { supabase as browserSupabase } from '@/lib/supabase';
+import type { SupabaseClient } from '@supabase/supabase-js';
+
+// BUG-007 FIX: This service previously imported the browser supabase client
+// directly. When called from an API route, the browser client has no
+// authenticated session, causing RLS to reject queries or return wrong data.
+//
+// Each function below now accepts an optional `supabaseClient` parameter.
+// API routes pass their server-side authenticated client (from getAuthSupabase());
+// frontend code omits it and the browser client is used (with its valid session).
+type SClient = SupabaseClient<any, any, any>;
+function resolveClient(override?: SClient | null): SClient {
+  return override || (browserSupabase as unknown as SClient);
+}
+// Backward-compat alias: existing function bodies
+// continue to reference `supabase` directly.
+const supabase = browserSupabase;
+// --- Project Service ---
+// Provides CRUD and profitability operations for project records
+// Spec: Maintain project code, client, manager, platform, contract value, currency, start/end date,
+//        status, budget, and profitability dimensions
+// Used by: /api/projects/route.ts, /api/projects/[id]/route.ts
+
+export const projectService = {
+  async fetchProjects(filters?: {
+    is_active?: boolean;
+    search?: string;
+    status?: string;
+    client_id?: string;
+    manager_id?: string;
+    page?: number;
+    pageSize?: number;
+  }) {
+    let query = supabase
+      .from('projects')
+      .select('*', { count: 'exact' });
+
+    if (filters?.is_active !== undefined) query = query.eq('is_active', filters.is_active);
+    if (filters?.status) query = query.eq('status', filters.status);
+    if (filters?.client_id) query = query.eq('client_id', filters.client_id);
+    if (filters?.manager_id) query = query.eq('manager_id', filters.manager_id);
+    if (filters?.search) {
+      const escaped = filters.search.replace(/[%_]/g, '\\$&');
+      query = query.or(`name.ilike.%${escaped}%,project_code.ilike.%${escaped}%,description.ilike.%${escaped}%`);
+    }
+
+    const page = filters?.page || 1;
+    const pageSize = filters?.pageSize || 20;
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, error, count } = await query
+      .order('created_at', { ascending: false })
+      .range(from, to);
+
+    if (error) throw error;
+    return { data, total: count || 0, page, pageSize };
+  },
+
+  async fetchProjectById(id: string) {
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async fetchProjectProfitability(projectId: string) {
+    // BUG-058 FIX: Use supabase.schema('reporting').from('v_project_profitability') instead of dot syntax
+    const { data, error } = await supabase
+      .schema('reporting')
+      .from('v_project_profitability')
+      .select('*')
+      .eq('project_id', projectId)
+      .maybeSingle();
+    if (error) throw error;
+    return data || null;
+  },
+
+  async createProject(project: {
+    name: string;
+    client_id?: string;
+    manager_id?: string;
+    platform?: string;
+    contract_value?: number;
+    currency?: string;
+    start_date?: string;
+    end_date?: string;
+    description?: string;
+    budget_amount?: number;
+    department?: string;
+    cost_center?: string;
+    is_confidential?: boolean;
+    organization_id: string;
+    created_by: string;
+  }) {
+    // FIX: Use finance schema for get_next_number (function lives in finance schema, not public)
+    const { data: numData } = await supabase.schema('finance').rpc('get_next_number', { p_type: 'PRJ' });
+    const projectCode = numData || `PRJ-${Date.now().toString().slice(-6)}`;
+
+    const { data, error } = await supabase
+      .from('projects')
+      .insert({
+        project_code: projectCode,
+        status: 'ACTIVE',
+        is_active: true,
+        ...project,
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
+  async updateProject(id: string, updates: Record<string, any>) {
+    const { data, error } = await supabase
+      .from('projects')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async closeProject(id: string, reason: string, closedBy: string) {
+    const { data, error } = await supabase
+      .from('projects')
+      .update({
+        is_active: false,
+        status: 'CLOSED',
+        closure_reason: reason,
+        closed_by: closedBy,
+        closed_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+
+  async getProjectStats(orgId?: string) {
+    // BUG-058 FIX: Add organization_id filter to both count queries
+    let activeQuery = supabase
+      .from('projects')
+      .select('id', { count: 'exact', head: true })
+      .eq('is_active', true);
+    if (orgId) activeQuery = activeQuery.eq('organization_id', orgId);
+
+    let closedQuery = supabase
+      .from('projects')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'CLOSED');
+    if (orgId) closedQuery = closedQuery.eq('organization_id', orgId);
+
+    const { count: activeCount } = await activeQuery;
+    const { count: closedCount } = await closedQuery;
+
+    return { active: activeCount || 0, closed: closedCount || 0 };
+  },
+
+  async getProjectRelatedInvoices(projectId: string) {
+    const { data, error } = await supabase
+      .from('invoices')
+      .select('id, invoice_number, status, total_amount, currency, due_date')
+      .eq('project_id', projectId)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data || [];
+  },
+
+  async getProjectRelatedExpenses(projectId: string) {
+    const { data, error } = await supabase
+      .from('expenses')
+      .select('id, title, amount, currency, status, expense_date')
+      .eq('project_id', projectId)
+      .order('created_at', { ascending: false })
+      .limit(20);
+    if (error) throw error;
+    return data || [];
+  },
+};

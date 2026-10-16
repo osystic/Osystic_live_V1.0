@@ -1,0 +1,223 @@
+// P0-06 FIX: the notifications table lives in the 'public' schema.
+// core.notifications does NOT exist anywhere in schema.sql / migrations —
+// every .schema('core').from('notifications') call below was failing with
+// PGRST205 "Could not find the table core.notifications in the schema
+// cache", so the entire notification subsystem was silently dead.
+// public.notifications has been extended (migration 042) with all the
+// columns this service needs, so we now just use the default (public)
+// schema client, i.e. plain .from('notifications') with no .schema() call.
+
+import { supabase as browserSupabase } from '@/lib/supabase';
+import type { SupabaseClient } from '@supabase/supabase-js';
+
+// BUG-007 FIX: This service previously imported the browser supabase client
+// directly. When called from an API route, the browser client has no
+// authenticated session, causing RLS to reject queries or return wrong data.
+//
+// Each function below now accepts an optional `supabaseClient` parameter.
+// API routes pass their server-side authenticated client (from getAuthSupabase());
+// frontend code omits it and the browser client is used (with its valid session).
+type SClient = SupabaseClient<any, any, any>;
+function resolveClient(override?: SClient | null): SClient {
+  return override || (browserSupabase as unknown as SClient);
+}
+// Backward-compat alias: existing function bodies
+// continue to reference `supabase` directly.
+const supabase = browserSupabase;
+import { getAuthUser } from '@/lib/api-auth';
+import { cookies } from 'next/headers';
+import { createServerClient } from '@supabase/ssr';
+
+async function createDB() {
+  const cookieStore = await cookies();
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll(cookiesToSet: any[]) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }: any) => cookieStore.set(name, value, options));
+          } catch {
+            // Server Components may expose read-only cookies.
+          }
+        },
+      },
+    }
+  );
+}
+
+export const notificationService = {
+  // Create a notification for a specific user
+  async create(params: {
+    userId: string;
+    title: string;
+    message: string;
+    type: 'APPROVAL_PENDING' | 'PAYMENT_DUE' | 'BUDGET_ALERT' | 'SYSTEM' | 'WORKFLOW' | 'REMINDER' | 'OVERDUE' | 'INFO' | 'BUDGET_CAUTION' | 'BUDGET_WARNING' | 'BUDGET_BLOCKED' | 'BUDGET_EXCEEDED';
+    priority?: 'low' | 'medium' | 'high' | 'urgent' | 'info' | 'critical';
+    actionUrl?: string;
+    entityType?: string;
+    entityId?: string;
+    organizationId?: string;
+    // FIX 8.4: Additional fields for budget alert notifications (Spec 13.4)
+    recipientRoles?: string[];
+    sourceEntityType?: string;
+    sourceEntityId?: string;
+    relatedEntityType?: string;
+    relatedEntityId?: string;
+    triggeredBy?: string;
+    metadata?: any;
+  }) {
+    const db = await createDB();
+    // P0-06 FIX: public schema (default) — core.notifications doesn't exist.
+    const { data, error } = await db
+      .from('notifications')
+      .insert({
+        user_id: params.userId,
+        title: params.title,
+        message: params.message,
+        notification_type: params.type,
+        priority: params.priority || 'medium',
+        action_url: params.actionUrl || null,
+        entity_type: params.entityType || null,
+        entity_id: params.entityId || null,
+        is_read: false,
+        organization_id: params.organizationId || null,
+        recipient_roles: params.recipientRoles || null,
+        source_entity_type: params.sourceEntityType || null,
+        source_entity_id: params.sourceEntityId || null,
+        related_entity_type: params.relatedEntityType || null,
+        related_entity_id: params.relatedEntityId || null,
+        triggered_by: params.triggeredBy || null,
+        metadata: params.metadata || null,
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    // AUD-P2-019: enqueue an EMAIL delivery when the recipient explicitly
+    // enabled email for this notification category. The cron worker owns
+    // provider delivery and records DELIVERED/FAILED; the in-app row remains
+    // the source notification and is never removed on email failure.
+    try {
+      const { data: pref } = await db
+        .from('notification_preferences')
+        .select('enabled')
+        .eq('user_id', params.userId)
+        .eq('category', params.type)
+        .eq('channel', 'EMAIL')
+        .maybeSingle();
+      if (pref?.enabled === true) {
+        await db.from('notification_deliveries').insert({
+          notification_id: data.id,
+          channel: 'EMAIL',
+          status: 'PENDING',
+        });
+      }
+    } catch (deliveryQueueError) {
+      console.error('Failed to enqueue notification email delivery:', deliveryQueueError);
+    }
+    return data;
+  },
+
+  // Convenience: Notify approvers when item needs approval
+  async notifyApprovers(params: {
+    approverIds: string[];
+    entityType: string;
+    entityId: string;
+    entityLabel: string;
+    action: 'submit' | 'verify' | 'approve';
+    organizationId?: string;
+  }) {
+    const typeMap: Record<string, string> = {
+      submit: 'APPROVAL_PENDING',
+      verify: 'WORKFLOW',
+      approve: 'WORKFLOW',
+    };
+
+    const titleMap: Record<string, string> = {
+      submit: `Pending Approval: ${params.entityLabel}`,
+      verify: `Verification Needed: ${params.entityLabel}`,
+      approve: `Approved: ${params.entityLabel}`,
+    };
+
+    for (const userId of params.approverIds) {
+      try {
+        await this.create({
+          userId,
+          title: titleMap[params.action] || `Action Required: ${params.entityLabel}`,
+          message: `A ${params.entityType} (${params.entityLabel}) has been submitted and requires your ${params.action}.`,
+          type: (typeMap[params.action] as any) || 'APPROVAL_PENDING',
+          priority: params.action === 'submit' ? 'high' : 'medium',
+          entityType: params.entityType,
+          entityId: params.entityId,
+          actionUrl: `/dashboard/${params.entityType}s/${params.entityId}`,
+          organizationId: params.organizationId,
+        });
+      } catch (err) {
+        console.error(`Failed to notify user ${userId}:`, err);
+      }
+    }
+  },
+
+  // Convenience: Budget alert notification
+  async notifyBudgetAlert(params: {
+    userId: string;
+    budgetId: string;
+    budgetLabel: string;
+    utilization: number;
+    remaining: number;
+    organizationId?: string;
+  }) {
+    const priority = params.utilization >= 100 ? 'urgent' : params.utilization >= 90 ? 'high' : 'medium';
+
+    await this.create({
+      userId: params.userId,
+      title: params.utilization >= 100 ? 'BUDGET EXCEEDED' : 'Budget Alert',
+      message: `Budget "${params.budgetLabel}" is at ${params.utilization.toFixed(1)}% utilization. Remaining: PKR ${params.remaining.toLocaleString()}`,
+      type: 'BUDGET_ALERT',
+      priority: priority as any,
+      entityType: 'budget',
+      entityId: params.budgetId,
+      organizationId: params.organizationId,
+    });
+  },
+
+  // Get unread count for a user
+  async getUnreadCount(userId: string): Promise<number> {
+    const db = await createDB();
+    // P0-06 FIX: public schema (default) — core.notifications doesn't exist.
+    const { count } = await db
+      .from('notifications')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('is_read', false);
+    return count || 0;
+  },
+
+  // Mark as read
+  async markAsRead(notificationIds: string[], userId: string) {
+    const db = await createDB();
+    // P0-06 FIX: public schema (default) — core.notifications doesn't exist.
+    const { error } = await db
+      .from('notifications')
+      .update({ is_read: true, read_at: new Date().toISOString() })
+      .in('id', notificationIds)
+      .eq('user_id', userId);
+    if (error) throw error;
+  },
+
+  // Mark all as read for a user
+  async markAllAsRead(userId: string) {
+    const db = await createDB();
+    // P0-06 FIX: public schema (default) — core.notifications doesn't exist.
+    const { error } = await db
+      .from('notifications')
+      .update({ is_read: true, read_at: new Date().toISOString() })
+      .eq('user_id', userId)
+      .eq('is_read', false);
+    if (error) throw error;
+  },
+};

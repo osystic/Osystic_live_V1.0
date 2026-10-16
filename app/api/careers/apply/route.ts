@@ -1,8 +1,9 @@
 import { after, NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { createClient } from "@supabase/supabase-js";
 import { db } from "@/lib/db";
 import { jobApplications } from "@/drizzle/schema";
-import { deleteCVFromStorage, uploadCVToStorage } from "@/lib/supabase";
+import { CV_BUCKET, uploadCVToStorage, deleteCVFromStorage } from "@/lib/supabase/server";
 import { sendApplicationEmails } from "@/lib/resend";
 import { sanitizeMultiline, sanitizeSingleLine } from "@/lib/input-security";
 import { careersLimiter, clientRateLimitId, consumeRateLimit, rateLimitHeaders } from "@/lib/rate-limit";
@@ -152,12 +153,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "CV file content does not match the selected document type" }, { status: 400 });
     }
 
-    const { path: cvPath, url: cvUrl } = await uploadCVToStorage(
-      cvBuffer,
-      cvFile.name,
-      cvFile.type,
-      `${data.firstName}-${data.lastName}`,
+    const storageUserId = `${data.firstName}-${data.lastName}-${Date.now()}`;
+    const { path: cvPath, error: cvError } = await uploadCVToStorage(cvFile, storageUserId, cvFile.name);
+    if (cvError) {
+      return NextResponse.json({ error: "Failed to upload CV" }, { status: 500 });
+    }
+
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
+    );
+    const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin.storage
+      .from("career-cvs")
+      .createSignedUrl(cvPath, 60 * 60 * 24 * 365);
+    const cvUrl = signedUrlData?.signedUrl || "";
 
     const [inserted] = await db
       .insert(jobApplications)

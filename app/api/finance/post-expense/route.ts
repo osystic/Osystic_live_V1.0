@@ -1,0 +1,406 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getAuthSupabase } from '@/lib/api-auth';
+import { requirePermission } from '@/lib/api-auth';
+import { enforceMFA } from '@/lib/mfa-middleware';
+import { checkBudgetForTransaction, createBudgetAlertNotifications } from '@/services/budget-check.service';
+import { postExpenseSchema, validateBody, validateExchangeRate } from '@/lib/validations';
+ 
+function getData<T = any>(res: any): T | null {
+  return res?.data ?? null;
+}
+ 
+export async function POST(req: NextRequest) {
+  // ─── AUTH CHECK ───
+  // FIXED: Use APPROVE permission, not CREATE — posting to GL requires approval-level access
+  const auth = await requirePermission('EXPENSE_APPROVE');
+  if (auth instanceof NextResponse) return auth;
+  // H3 FIX: Enforce MFA for financial posting
+  const mfaCheck = await enforceMFA(auth);
+  if (mfaCheck) return mfaCheck;
+  const { supabase } = await getAuthSupabase(req);
+ 
+  const orgId = auth.orgId;
+  if (!orgId) {
+    return NextResponse.json({ error: 'Organization ID not found' }, { status: 400 });
+  }
+ 
+  try {
+    // P0 FIX: Zod input validation
+    const rawBody = await req.json();
+    const validation = validateBody(postExpenseSchema, rawBody);
+    if (!validation.success) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+    const { expenseId, force_budget_override } = validation.data;
+ 
+    // 1. Fetch expense (with org isolation)
+    const expense = getData(await supabase
+      .from("expenses")
+      .select("*")
+      .eq("id", expenseId)
+      .eq("organization_id", orgId)
+      .single());
+    if (!expense) {
+      return NextResponse.json({ error: 'Expense not found' }, { status: 404 });
+    }
+    if (expense.status !== 'APPROVED') {
+      return NextResponse.json({ error: 'Only APPROVED expenses can be posted. Current: ' + expense.status }, { status: 400 });
+    }
+
+    // BUG-008 FIX (High): Spec 13.1 requires correct PKR consolidation. A non-PKR
+    // expense with no exchange rate silently defaults to 1.0 below, producing
+    // wrong PKR amounts in the GL. Reject before posting if rate is missing.
+    const rateError = validateExchangeRate(expense.currency, expense.exchange_rate);
+    if (rateError) {
+      return NextResponse.json({ error: rateError }, { status: 400 });
+    }
+
+    // 2. Already posted? (Idempotency check)
+    const existingJournal = getData(await supabase
+      .schema('finance').from('journal_entries')
+      .select('id, reference')
+      .eq('source_type', 'EXPENSE')
+      .eq('source_id', expenseId)
+      .maybeSingle());
+    if (existingJournal) {
+      return NextResponse.json({
+        error: 'Already posted to GL',
+        journalId: existingJournal.id,
+        reference: existingJournal.reference,
+      }, { status: 400 });
+    }
+ 
+    // ─── BUDGET CHECK (Spec 5.4: Warn or block transactions exceeding budget) ───
+    // Check budget before posting to GL. If HARD_BLOCK policy is active and budget
+    // is exceeded, the transaction is rejected unless force_budget_override is provided
+    // by a CEO or FINANCE_HEAD.
+    // AP-04 FIX: budgets are PKR-only (public.budgets has no currency
+    // column) but expense.amount is in the expense's own currency
+    // (expense.currency). Passing the raw foreign-currency amount here
+    // compared e.g. a USD spend directly against a PKR budget ceiling as
+    // if 1 USD == 1 PKR. Convert to base currency first using the
+    // exchange_rate already validated above (validateExchangeRate
+    // guarantees a real rate for any non-PKR currency), then tell
+    // checkBudgetForTransaction the amount is now PKR.
+    const budgetAmountPKR = Number(expense.amount) * Number(expense.exchange_rate || 1);
+    const budgetCheck = await checkBudgetForTransaction({
+      project_id: expense.project_id || undefined,
+      department: expense.department || undefined,
+      category: expense.category || undefined,
+      amount: budgetAmountPKR,
+      currency: 'PKR',
+      organization_id: orgId,
+      // BUG-007 FIX: pass server-side authenticated supabase client so budget
+      // checks run with the correct RLS context (browser client has no
+      // session in server context).
+      supabaseClient: supabase,
+    });
+ 
+    // Create budget threshold alert notifications (Spec 13.4)
+    if (budgetCheck.notifications && budgetCheck.notifications.length > 0) {
+      await createBudgetAlertNotifications(
+        budgetCheck.notifications,
+        orgId,
+        auth.userId,
+        expenseId,
+        supabase,
+      );
+    }
+ 
+    // Enforce budget block (unless overridden by authorized role)
+    if (budgetCheck.blocked) {
+      // BUG-026 FIX: Removed 'Admin' from override roles — per spec Appendix A,
+      // Technical Admin has NO finance data access.
+      if (force_budget_override && ['CEO', 'FINANCE_HEAD'].includes(auth.role)) {
+        // Allow with override — log the override in audit
+        try {
+          await supabase.schema('audit').rpc('log_action', {
+            p_user_id: auth.userId,
+            p_action: 'BUDGET_OVERRIDE',
+            p_entity_type: 'expense',
+            p_entity_id: expenseId,
+            p_description: `Budget override on expense posting by ${auth.role}. Budget was exceeded but posting allowed.`,
+            p_previous_status: 'APPROVED',
+            p_new_status: 'APPROVED',
+            p_source_module: 'budget',
+            p_severity: 'high',
+            p_new_values: {
+              budget_checks: budgetCheck.checks.map(c => ({
+                budget_id: c.budget_id,
+                warning_level: c.warning_level,
+                utilization_after: c.utilization_after,
+              })),
+              override_by: auth.userId,
+              override_role: auth.role,
+              expense_amount: expense.amount,
+            },
+          });
+        } catch (overrideAuditErr: any) {
+          console.error('Budget override audit log failed:', overrideAuditErr);
+        }
+      } else {
+        // BLOCKED — return budget check results with 422 status
+        return NextResponse.json({
+          error: 'Transaction blocked: exceeds budget limit',
+          allowed: false,
+          blocked: true,
+          warning: budgetCheck.warning,
+          enforcement_mode: budgetCheck.enforcement_mode,
+          budget_checks: budgetCheck.checks,
+          message: budgetCheck.message,
+          hint: 'CEO or FINANCE_HEAD can override by passing force_budget_override: true',
+        }, { status: 422 });
+      }
+    }
+ 
+    // BUG-020 FIX: Open period with org filter
+    // 3. Open period
+    let auditLogFailed = false;
+    const period = getData(await supabase
+      .schema('finance').from('accounting_periods')
+      .select('id')
+      .eq('status', 'OPEN')
+      .eq('organization_id', orgId)
+      .order('start_date', { ascending: false })
+      .limit(1)
+      .single());
+    if (!period) {
+      return NextResponse.json({ error: 'No OPEN accounting period found' }, { status: 400 });
+    }
+ 
+    // 4. Find expense account (BUG-013 FIX, High: deterministic account
+    // resolution). Root cause: `expense.category` is free text (no FK to
+    // chart_of_accounts — Spec 10.5 calls for "Foreign keys, not free text"
+    // but the current schema has no category→account mapping table, so a
+    // full FK-based fix would need a schema change + expense-form change
+    // out of scope for this minimal remediation). Within that constraint,
+    // the previous implementation had two real problems this fixes:
+    //   1. `.ilike('name', '%category%').limit(1).single()` — a broad
+    //      substring match with NO ORDER BY. If two accounts both contain
+    //      the substring (e.g. "Travel" matches "Travel Expenses" AND
+    //      "Travel & Entertainment"), Postgres may return either one in
+    //      arbitrary/index order, so which GL account a given expense
+    //      category posts to could vary nondeterministically between
+    //      requests — a real financial-correctness risk.
+    //   2. On no match, it silently fell back to "any active
+    //      OPERATING_EXPENSE account", which could mispost an expense to a
+    //      completely unrelated account with no signal to the user.
+    // Fix: try an exact (case-insensitive) name match first — deterministic
+    // for the common case of a well-maintained COA. If that's ambiguous or
+    // absent, fall back to substring match ordered by `code` (deterministic,
+    // not query-plan-dependent) and surface a warning in the response so the
+    // caller can see the category wasn't a clean match rather than silently
+    // guessing.
+    let expenseAccountId: string | null = null;
+    let accountResolutionWarning: string | null = null;
+    if (expense.account_id) {
+      const selected = getData(await supabase.schema('finance').from('chart_of_accounts').select('id,code,name').eq('id', expense.account_id).eq('organization_id', orgId).eq('is_active', true).maybeSingle());
+      if (selected) expenseAccountId = selected.id;
+    }
+    if (!expenseAccountId && expense.category) {
+      const escapedCategory = expense.category.replace(/[%_]/g, '\\$&');
+
+      const exactMatches = (await supabase
+        .schema('finance').from('chart_of_accounts')
+        .select('id, code, name')
+        .eq('account_type', 'OPERATING_EXPENSE')
+        .eq('is_active', true)
+        .eq('organization_id', auth.orgId)
+        .ilike('name', escapedCategory) // exact match, case-insensitive, no wildcards
+        .order('code', { ascending: true })).data ?? [];
+
+      if (exactMatches.length === 1) {
+        expenseAccountId = exactMatches[0].id;
+      } else if (exactMatches.length > 1) {
+        expenseAccountId = exactMatches[0].id;
+        accountResolutionWarning = `Category "${expense.category}" exactly matched ${exactMatches.length} active expense accounts (${exactMatches.map((a: any) => a.code).join(', ')}); posted to ${exactMatches[0].code} deterministically (lowest code). Consider renaming duplicate accounts.`;
+      } else {
+        const substringMatches = (await supabase
+          .schema('finance').from('chart_of_accounts')
+          .select('id, code, name')
+          .eq('account_type', 'OPERATING_EXPENSE')
+          .eq('is_active', true)
+          .eq('organization_id', auth.orgId)
+          .ilike('name', `%${escapedCategory}%`)
+          .order('code', { ascending: true })).data ?? [];
+
+        if (substringMatches.length >= 1) {
+          expenseAccountId = substringMatches[0].id;
+          if (substringMatches.length > 1) {
+            accountResolutionWarning = `Category "${expense.category}" did not exactly match any account name; partially matched ${substringMatches.length} accounts (${substringMatches.map((a: any) => a.code).join(', ')}), posted to ${substringMatches[0].code} deterministically (lowest code). Consider adding an exact-named account for this category.`;
+          } else {
+            accountResolutionWarning = `Category "${expense.category}" did not exactly match any account name; posted to closest partial match ${substringMatches[0].code} (${substringMatches[0].name}).`;
+          }
+        }
+      }
+    }
+ 
+    if (!expenseAccountId) {
+      const opex = getData(await supabase
+        .schema('finance').from('chart_of_accounts')
+        .select('id, code, name')
+        .eq('account_type', 'OPERATING_EXPENSE')
+        .eq('is_active', true)
+        .eq('organization_id', orgId)
+        .order('code', { ascending: true })
+        .limit(1)
+        .maybeSingle());
+      expenseAccountId = opex?.id || null;
+      if (opex) {
+        accountResolutionWarning = `No expense account matched category "${expense.category || '(none)'}"; posted to default expense account ${opex.code} (${opex.name}). Please verify or correct the category.`;
+      }
+    }
+ 
+    // 5. Payable / Liability account
+    const payableAccount = getData(await supabase
+      .schema('finance').from('chart_of_accounts')
+      .select('id, code, name')
+      .eq('account_type', 'LIABILITY')
+      .eq('is_active', true)
+      .eq('organization_id', auth.orgId)
+      .like('code', '21%')
+      .order('code', { ascending: true })
+      .limit(1)
+      .single());
+ 
+    let fallbackLiability = null;
+    if (!payableAccount) {
+      fallbackLiability = getData(await supabase
+        .schema('finance').from('chart_of_accounts')
+        .select('id, code, name')
+        .eq('account_type', 'LIABILITY')
+        .eq('is_active', true)
+        .eq('organization_id', auth.orgId)
+        .limit(1)
+        .single());
+    }
+ 
+    const creditAccountId = payableAccount?.id || fallbackLiability?.id;
+ 
+    if (!expenseAccountId || !creditAccountId) {
+      return NextResponse.json({
+        error: 'Required accounts not found. Set up OPERATING_EXPENSE and LIABILITY accounts.'
+      }, { status: 400 });
+    }
+ 
+    // F-P1-15: if approved split coding exists, post each approved allocation
+    // to its selected account/project/cost center instead of guessing from the
+    // free-text category. A split must reconcile exactly to the expense total.
+    const { data: allocations, error: allocErr } = await supabase.schema('finance').from('expense_allocations')
+      .select('account_id,project_id,department_id,cost_center_id,amount,base_amount,description,line_number')
+      .eq('expense_id', expenseId).eq('organization_id', orgId).order('line_number');
+    if (allocErr) return NextResponse.json({ error: 'Failed to load expense split coding: ' + allocErr.message }, { status: 500 });
+    const splitTotal = (allocations || []).reduce((n: number, a: any) => n + Number(a.amount || 0), 0);
+    const hasValidSplit = (allocations || []).length > 0 && Math.abs(splitTotal - Number(expense.amount || 0)) < 0.01;
+    if ((allocations || []).length > 0 && !hasValidSplit) {
+      return NextResponse.json({ error: `Expense split coding total (${splitTotal.toFixed(2)}) must equal expense amount (${Number(expense.amount || 0).toFixed(2)}).` }, { status: 409 });
+    }
+
+    // 6-9. Post via GL engine (BUG-001 FIX: use RPC with CORRECT signature)
+    // The RPC creates header + lines + sets POSTED status atomically.
+    // Previous code manually inserted header+lines then called RPC with wrong params.
+    const journalLines = hasValidSplit
+      ? [
+          ...(allocations || []).map((a: any) => ({
+            account_id: a.account_id,
+            debit_amount: Number(a.amount || 0),
+            credit_amount: 0,
+            description: a.description || `Expense: ${expense.title} — split ${a.line_number}`,
+            project_id: a.project_id || null,
+            department_id: a.department_id || null,
+          })),
+          { account_id: creditAccountId, debit_amount: 0, credit_amount: Number(expense.amount), description: `Payable for: ${expense.title}` },
+        ]
+      : [
+          { account_id: expenseAccountId, debit_amount: expense.amount, credit_amount: 0, description: `Expense: ${expense.title}` },
+          { account_id: creditAccountId, debit_amount: 0, credit_amount: expense.amount, description: `Payable for: ${expense.title}` },
+        ];
+ 
+    // BUG-002 FIX (Critical): use .schema('finance').rpc('post_journal_entry', ...)
+    // — passing 'finance.post_journal_entry' as the rpc() name string is NOT
+    // schema-qualified; PostgREST treats the entire dotted string as the
+    // function name and fails to find it in the default (public) schema.
+    // BUG-001 FIX: p_lines is `jsonb` in the SQL signature — passing
+    // JSON.stringify(journalLines) double-encodes it (PostgREST binds a
+    // jsonb *scalar string*, and jsonb_array_length(p_lines) inside the
+    // function then fails with "cannot get array length of a scalar").
+    // Pass the array directly, same as the already-correct
+    // post-vendor-bill route.
+    // FND-FIN-001 FIX (Spec §11.3): previously post_journal_entry created the
+    // journal and a SEPARATE .update() below marked the expense POSTED — two
+    // independent PostgREST calls with no transactional link. A failure
+    // between them left a committed journal with the expense still
+    // status=APPROVED / journal_entry_id=NULL, which reverse_expense_atomic
+    // (requires status='POSTED' AND journal_entry_id IS NOT NULL) could never
+    // reverse. Both steps now happen inside a single SECURITY DEFINER RPC
+    // (finance.post_expense_atomic, see
+    // supabase/migrations/P2/P2_005_atomic_gl_posting_and_profit_distribution_lockdown.sql),
+    // so a failure partway through rolls back the journal insert too.
+    const { data: postResult, error: postErr } = await supabase.schema('finance').rpc('post_expense_atomic', {
+      p_expense_id: expenseId,
+      p_period_id: period.id,
+      p_transaction_date: expense.expense_date,
+      p_description: `Expense: ${expense.title}${expense.category ? ` [${expense.category}]` : ''}`,
+      p_lines: journalLines,
+      p_currency: expense.currency || 'PKR',
+      p_exchange_rate: expense.exchange_rate || 1,
+      p_project_id: expense.project_id || null,
+    });
+
+    if (postErr || !postResult?.journal_id) {
+      return NextResponse.json({ error: 'GL posting failed: ' + (postErr?.message || 'Unknown error') }, { status: 500 });
+    }
+
+    const journal = { id: postResult.journal_id, reference: postResult.reference };
+    const reference = journal.reference || `JE-EX-${journal.id}`;
+ 
+    // FIX: Use RPC for correct audit columns
+    try {
+      await supabase.schema('audit').rpc('log_action', {
+        p_user_id: auth.userId,
+        p_action: 'EXPENSE_POSTED',
+        p_entity_type: 'expense',
+        p_entity_id: expenseId,
+        p_description: `Posted expense to GL: ${reference}`,
+        p_previous_status: 'APPROVED',
+        p_new_status: 'POSTED',
+        p_source_module: 'expense',
+        p_severity: 'high',
+        p_new_values: {
+          reference,
+          amount: expense.amount,
+          journal_id: journal.id,
+          budget_warning: budgetCheck.warning,
+          budget_overridden: !!force_budget_override,
+        },
+        p_related_journal_id: journal.id,
+      });
+    } catch (auditErr: any) {
+      // BUG-023 FIX (partial — audit-failure visibility): a failed audit
+      // write for a P0 financial posting must not just vanish into a
+      // server log that nobody watches (Spec 8.1: "every action... must be
+      // attributable"). We deliberately do NOT fail/roll back the posting
+      // here — the GL entry is already correctly posted and reverting a
+      // successful financial posting because a *logging* call failed would
+      // be worse (Spec: posted entries are immutable; a synthetic rollback
+      // here would itself need a reversal entry). Instead the failure is
+      // surfaced to the caller via `audit_log_warning` below so it is at
+      // least visible to the user/ops rather than silently swallowed.
+      console.error('Audit log failed for expense post:', auditErr);
+      auditLogFailed = true;
+    }
+ 
+    return NextResponse.json({
+      success: true,
+      journalId: journal.id,
+      reference,
+      message: `Posted ${reference}`,
+      budget_check: budgetCheck.blocked ? { overridden: true } : { warning: budgetCheck.warning, checks: budgetCheck.checks.length },
+      account_resolution_warning: accountResolutionWarning,
+      audit_log_warning: auditLogFailed ? 'Posting succeeded but the audit log entry failed to write. Please notify an administrator.' : undefined,
+    });
+ 
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
