@@ -194,7 +194,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className={`site-header future-site-header approved-home-header${scrolled ? " is-scrolled" : ""}`}
+      className={`site-header future-site-header approved-home-header${pathname === "/" ? " is-home" : ""}${scrolled ? " is-scrolled" : ""}`}
       ref={headerRef}
       initial={{ y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
