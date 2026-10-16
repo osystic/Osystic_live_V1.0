@@ -163,7 +163,6 @@ export async function POST(req: NextRequest) {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
-    );
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin.storage
       .from("career-cvs")
       .createSignedUrl(cvPath, 60 * 60 * 24 * 365);
