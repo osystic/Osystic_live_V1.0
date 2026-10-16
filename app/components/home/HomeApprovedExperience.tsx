@@ -66,147 +66,161 @@ const featuredIndustries = featuredIndustryConfig.flatMap(({ slug, copy }) => {
 export function HomeApprovedExperience() {
   return (
     <div className={styles.page}>
-      <section className={styles.heroNext} aria-labelledby="approved-home-title">
-        <div className={styles.heroBackdrop} aria-hidden="true" />
-        <div className={styles.heroGridFine} aria-hidden="true" />
+      <section className={styles.heroCinematic} aria-labelledby="approved-home-title">
+        <div className={styles.heroCinematicGrid} aria-hidden="true" />
+        <div className={styles.heroCinematicGlow} aria-hidden="true" />
 
-        <div className={styles.heroShellNext}>
-          <div className={styles.heroCopyNext}>
-            <div className={styles.heroKickerNext}>
-              <span />
-              ENTERPRISE AI & SOFTWARE ENGINEERING
+        <div className={styles.robotScene} aria-hidden="true">
+          <div className={styles.robotHalo} />
+          <div className={styles.robotScan} />
+          <svg className={styles.robotSvg} viewBox="0 0 760 760" role="presentation">
+            <defs>
+              <linearGradient id="robotMetal" x1="0" x2="1">
+                <stop offset="0" stopColor="#0f1d31" />
+                <stop offset=".48" stopColor="#243a5f" />
+                <stop offset="1" stopColor="#0a1424" />
+              </linearGradient>
+              <linearGradient id="robotEdge" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#9ab3ff" stopOpacity=".78" />
+                <stop offset=".5" stopColor="#567cf1" stopOpacity=".44" />
+                <stop offset="1" stopColor="#2f56c9" stopOpacity=".08" />
+              </linearGradient>
+              <radialGradient id="robotFaceGlow">
+                <stop offset="0" stopColor="#89a8ff" stopOpacity=".3" />
+                <stop offset=".55" stopColor="#3c68db" stopOpacity=".08" />
+                <stop offset="1" stopColor="#1b3e8f" stopOpacity="0" />
+              </radialGradient>
+              <filter id="eyeGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="7" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <g className={styles.robotOrbitBack}>
+              <ellipse cx="402" cy="345" rx="246" ry="98" transform="rotate(-16 402 345)" />
+              <ellipse cx="402" cy="345" rx="232" ry="76" transform="rotate(52 402 345)" />
+              <ellipse cx="402" cy="345" rx="205" ry="60" transform="rotate(108 402 345)" />
+            </g>
+
+            <circle className={styles.robotAmbient} cx="408" cy="326" r="245" fill="url(#robotFaceGlow)" />
+
+            <g className={styles.robotBust}>
+              <path className={styles.robotShoulderBack} d="M130 718C160 620 247 575 319 558L493 558C568 577 653 624 681 718Z" />
+              <path className={styles.robotShoulderPanel} d="M174 718C210 637 275 610 331 594L472 594C529 610 593 638 636 718Z" />
+              <path className={styles.robotNeckBack} d="M330 492L475 492L500 602L302 602Z" />
+              <path className={styles.robotNeckCore} d="M355 493L448 493L462 578L341 578Z" />
+
+              <path
+                className={styles.robotHeadOuter}
+                fill="url(#robotMetal)"
+                d="M274 191L332 132L443 121L512 171L545 264L525 400L470 492L395 527L321 491L270 405L250 281Z"
+              />
+              <path className={styles.robotHeadEdge} d="M274 191L332 132L443 121L512 171L545 264L525 400L470 492L395 527L321 491L270 405L250 281Z" />
+              <path className={styles.robotFacePlate} d="M302 213L349 174L434 166L486 203L508 274L493 375L454 446L398 476L340 447L300 381L282 284Z" />
+              <path className={styles.robotForeheadPlate} d="M324 205L357 180L430 174L470 203L445 238L351 240Z" />
+              <path className={styles.robotCheekLeft} d="M299 307L349 282L366 350L333 412L302 378Z" />
+              <path className={styles.robotCheekRight} d="M492 306L443 282L426 350L460 412L492 377Z" />
+              <path className={styles.robotJaw} d="M334 416L397 447L459 415L447 462L398 491L347 462Z" />
+
+              <path className={styles.robotTempleLeft} d="M252 268L286 247L298 331L278 389L255 361Z" />
+              <path className={styles.robotTempleRight} d="M542 268L510 246L499 331L519 390L541 360Z" />
+
+              <path className={styles.robotEyeSocketLeft} d="M317 264L374 252L382 284L327 291Z" />
+              <path className={styles.robotEyeSocketRight} d="M416 253L474 264L465 291L410 284Z" />
+              <path className={styles.robotEyeGlow} filter="url(#eyeGlow)" d="M329 273L370 265L374 276L334 282Z" />
+              <path className={styles.robotEyeGlow} filter="url(#eyeGlow)" d="M421 265L462 273L457 282L417 276Z" />
+
+              <path className={styles.robotNoseBridge} d="M385 251L409 251L422 356L398 375L374 356Z" />
+              <path className={styles.robotMouthSlot} d="M355 397L397 408L439 397L428 416L397 423L366 416Z" />
+
+              <g className={styles.robotCircuitLines}>
+                <path d="M332 210L301 182L272 184" />
+                <path d="M462 213L500 187L530 192" />
+                <path d="M298 347L255 371L228 371" />
+                <path d="M493 347L535 372L567 372" />
+                <path d="M337 452L309 500L273 511" />
+                <path d="M457 451L486 500L523 511" />
+                <path d="M353 174L341 143L314 126" />
+                <path d="M440 173L452 142L480 126" />
+              </g>
+
+              <g className={styles.robotNodes}>
+                <circle cx="272" cy="184" r="3" />
+                <circle cx="530" cy="192" r="3" />
+                <circle cx="228" cy="371" r="3" />
+                <circle cx="567" cy="372" r="3" />
+                <circle cx="273" cy="511" r="3" />
+                <circle cx="523" cy="511" r="3" />
+                <circle cx="314" cy="126" r="3" />
+                <circle cx="480" cy="126" r="3" />
+              </g>
+            </g>
+
+            <g className={styles.robotHud}>
+              <path d="M150 280H230" />
+              <path d="M565 238H651" />
+              <path d="M575 466H665" />
+              <circle cx="150" cy="280" r="3" />
+              <circle cx="651" cy="238" r="3" />
+              <circle cx="665" cy="466" r="3" />
+            </g>
+          </svg>
+
+          <div className={[styles.robotTag, styles.robotTagA].join(" ")}>
+            <span>01</span><strong>MODELS / AGENTS</strong>
+          </div>
+          <div className={[styles.robotTag, styles.robotTagB].join(" ")}>
+            <span>02</span><strong>DATA / SYSTEMS</strong>
+          </div>
+          <div className={[styles.robotTag, styles.robotTagC].join(" ")}>
+            <span>03</span><strong>DEPLOYMENT / CONTROL</strong>
+          </div>
+        </div>
+
+        <div className={styles.heroCinematicShell}>
+          <div className={styles.heroCinematicCopy}>
+            <div className={styles.heroCinematicKicker}>
+              <span /> ENTERPRISE AI & SOFTWARE ENGINEERING
             </div>
 
             <h1 id="approved-home-title">
-              Production AI and software systems, <span>built to be owned.</span>
+              Production AI.<br />
+              Software systems.<br />
+              <span>Built to be owned.</span>
             </h1>
 
-            <p className={styles.heroLeadNext}>
-              OSYSTIC engineers AI systems, digital products, and data platforms for organizations
-              that need production reliability, deployment flexibility, and long-term technical ownership.
+            <p>
+              OSYSTIC engineers production AI, digital products, and data platforms for organizations
+              that need reliability, deployment flexibility, and long-term technical control.
             </p>
 
-            <div className={styles.heroActionsNext}>
-              <BookingButton className={styles.heroPrimaryNext}>
+            <div className={styles.heroCinematicActions}>
+              <BookingButton className={styles.heroCinematicPrimary}>
                 Book a Technical Call <ArrowRight size={15} />
               </BookingButton>
-              <Link href="/case-studies" className={styles.heroSecondaryNext}>
+              <Link href="/case-studies" className={styles.heroCinematicSecondary}>
                 Explore Our Work <ArrowRight size={15} />
               </Link>
             </div>
 
-            <div className={styles.heroAssuranceNext}>
+            <div className={styles.heroCinematicProof}>
               <span><ShieldCheck size={13} /> Engineering-led delivery</span>
               <i />
-              <span>Explicit handover</span>
+              <span>Cloud / On-Prem / Edge</span>
               <i />
-              <span>No platform lock-in</span>
+              <span>Clear ownership & handover</span>
             </div>
           </div>
-
-          <HeroReveal className={styles.blueprintWrap}>
-            <div className={styles.blueprintTopbar}>
-              <div>
-                <span className={styles.blueprintDot} />
-                OSYSTIC / SYSTEM_BLUEPRINT
-              </div>
-              <strong>PRODUCTION / READY</strong>
-            </div>
-
-            <div className={styles.blueprintBody}>
-              <div className={styles.blueprintFlow}>
-                <div className={styles.blueprintLayer}>
-                  <span className={styles.blueprintNumber}>01</span>
-                  <div className={styles.blueprintIcon}><Database size={17} strokeWidth={1.45} /></div>
-                  <div>
-                    <small>DATA & CONTEXT</small>
-                    <strong>Operational inputs</strong>
-                    <p>APIs, applications, documents, events, and business data.</p>
-                  </div>
-                  <b>CONNECTED</b>
-                </div>
-                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
-
-                <div className={styles.blueprintLayer}>
-                  <span className={styles.blueprintNumber}>02</span>
-                  <div className={styles.blueprintIcon}><BrainCircuit size={17} strokeWidth={1.45} /></div>
-                  <div>
-                    <small>INTELLIGENCE</small>
-                    <strong>Models & agents</strong>
-                    <p>Reasoning, retrieval, prediction, orchestration, and automation.</p>
-                  </div>
-                  <b>CONTROLLED</b>
-                </div>
-                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
-
-                <div className={styles.blueprintLayer}>
-                  <span className={styles.blueprintNumber}>03</span>
-                  <div className={styles.blueprintIcon}><Code2 size={17} strokeWidth={1.45} /></div>
-                  <div>
-                    <small>PRODUCT LAYER</small>
-                    <strong>Logic & experience</strong>
-                    <p>Business rules, workflows, interfaces, services, and integrations.</p>
-                  </div>
-                  <b>REVIEWABLE</b>
-                </div>
-                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
-
-                <div className={styles.blueprintLayer}>
-                  <span className={styles.blueprintNumber}>04</span>
-                  <div className={styles.blueprintIcon}><CloudCog size={17} strokeWidth={1.45} /></div>
-                  <div>
-                    <small>RUNTIME</small>
-                    <strong>Deploy where required</strong>
-                    <p>Cloud, on-premise, hybrid, and edge environments.</p>
-                  </div>
-                  <b>OPERABLE</b>
-                </div>
-              </div>
-
-              <aside className={styles.blueprintControls}>
-                <div className={styles.controlsHead}>
-                  <span>DELIVERY CONTROLS</span>
-                  <i />
-                </div>
-                <div>
-                  <span>Security by design</span>
-                  <strong>ACTIVE</strong>
-                </div>
-                <div>
-                  <span>Observability</span>
-                  <strong>DEFINED</strong>
-                </div>
-                <div>
-                  <span>Source handover</span>
-                  <strong>INCLUDED</strong>
-                </div>
-                <div>
-                  <span>Deployment model</span>
-                  <strong>FLEXIBLE</strong>
-                </div>
-                <div className={styles.controlsFooter}>
-                  <small>OWNERSHIP STATE</small>
-                  <b>CLIENT-CONTROLLED</b>
-                </div>
-              </aside>
-            </div>
-          </HeroReveal>
         </div>
 
-        <div className={styles.heroPrinciples}>
-          {delivery.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div className={styles.heroPrinciple} key={item.title}>
-                <span>{item.number}</span>
-                <Icon size={18} strokeWidth={1.4} />
-                <div>
-                  <strong>{item.title}</strong>
-                  <p>{item.copy}</p>
-                </div>
-              </div>
-            );
-          })}
+        <div className={styles.heroCinematicRail}>
+          <div><span>01</span><strong>PRODUCTION AI</strong><small>Models, agents, retrieval, automation</small></div>
+          <div><span>02</span><strong>PRODUCT ENGINEERING</strong><small>Applications, APIs, platforms, workflows</small></div>
+          <div><span>03</span><strong>DATA & CLOUD</strong><small>Pipelines, infrastructure, deployment</small></div>
+          <div><span>04</span><strong>OWNERSHIP</strong><small>Source, access, documentation, handover</small></div>
         </div>
       </section>
 
