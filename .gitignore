@@ -11,3 +11,6 @@ local.db-shm
 
 # Supabase migration chunk files (generated locally, source of truth is the finance repo)
 supabase/*.sql
+
+# Local dev database
+local.dev.db*
