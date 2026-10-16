@@ -15,6 +15,8 @@ import { siteConfig } from "./config/site";
 import ChatWidget from "./chatbot/ChatWidgetLoader";
 import { DEFAULT_SEO_KEYWORDS } from "@/lib/seo";
 import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/structured-data";
+import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const geistSans = localFont({ src: "../public/fonts/Geist-Variable.woff2", variable: "--font-geist-sans", weight: "100 900", display: "swap" });
 const geistMono = localFont({ src: "../public/fonts/GeistMono-Variable.woff2", preload: false, variable: "--font-geist-mono", weight: "100 900", display: "swap" });
@@ -81,11 +83,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en-US">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <CalBookingProvider>
-          <Navbar />
-          {children}
-          <FooterVisibility><Footer /></FooterVisibility>
-        </CalBookingProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <CalBookingProvider>
+              <Navbar />
+              {children}
+              <FooterVisibility><Footer /></FooterVisibility>
+            </CalBookingProvider>
+          </ThemeProvider>
+        </AuthProvider>
         <ChatWidget />
         <StructuredData id="osystic-organization-schema" data={graph} />
       </body>

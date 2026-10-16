@@ -8,3 +8,6 @@ local.db-wal
 local.db-shm
 *.sqlite
 *.sqlite3
+
+# Supabase migration chunk files (generated locally, source of truth is the finance repo)
+supabase/*.sql

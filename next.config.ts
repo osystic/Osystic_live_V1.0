@@ -61,7 +61,8 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   poweredByHeader: false,
   reactStrictMode: true,
-  productionBrowserSourceMaps: false,
+productionBrowserSourceMaps: false,
+  serverExternalPackages: ["libpg-query"],
   images: {
     remotePatterns: uniqueImageHosts.map((hostname) => ({
       protocol: "https" as const,
