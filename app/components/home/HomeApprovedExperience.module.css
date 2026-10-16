@@ -449,8 +449,8 @@
 .workflowTrack{
   position:relative;
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  max-width:980px;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  max-width:1180px;
   margin:0 auto;
   gap:0;
 }
@@ -496,6 +496,20 @@
   font-size:9.5px;
   line-height:1.48;
 }
+.workflowLink{
+  width:max-content;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:28px auto 0;
+  color:#4773ff;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:680;
+}
+.workflowLink svg{transition:transform .2s ease}
+.workflowLink:hover svg{transform:translateX(3px)}
+
 
 .industryExploreLink{
   display:flex;
@@ -737,8 +751,8 @@
   .deliveryCards{grid-template-columns:repeat(2,1fr)}
   .workGrid,.capabilityGrid,.insightGrid{grid-template-columns:1fr 1fr}
   .industryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .workflowTrack{grid-template-columns:repeat(2,1fr);gap:30px 0}
-  .workflowStep:nth-child(2) .workflowLine{display:none}
+  .workflowTrack{grid-template-columns:repeat(3,1fr);gap:30px 0}
+  .workflowStep:nth-child(3n) .workflowLine{display:none}
   .logoStrip{grid-template-columns:repeat(3,1fr);row-gap:24px}
   .finalInner{grid-template-columns:1fr;gap:28px}
   .finalActions{max-width:320px}
@@ -771,6 +785,9 @@
   .capabilityCard{min-height:138px}
   .workflowTrack{grid-template-columns:1fr 1fr;gap:30px 0}
   .workflowStep{padding-inline:12px}
+  .workflowStep:nth-child(3n) .workflowLine{display:block}
+  .workflowStep:nth-child(2n) .workflowLine,
+  .workflowStep:last-child .workflowLine{display:none}
   .workflowStep p{font-size:8.8px}
   .industryGrid{grid-template-columns:1fr;gap:7px}
   .industriesSection{padding:38px 0 36px}
