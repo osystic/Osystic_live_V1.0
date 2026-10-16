@@ -8,7 +8,7 @@
 .hero{
   position:relative;
   overflow:hidden;
-  padding:104px 0 92px;
+  padding:88px 0 96px;
   color:#f5f7ff;
   background:
     radial-gradient(circle at 82% 30%,rgba(62,97,222,.2),transparent 28%),
@@ -37,26 +37,26 @@
 .kicker{
   display:block;
   width:max-content;
-  margin-bottom:22px;
-  color:#7194ff;
-  font:700 9px/1 var(--font-geist-mono),monospace;
-  letter-spacing:.15em;
+  margin-bottom:16px;
+  color:#6f7d93;
+  font:600 10px/1.2 var(--font-geist-mono),monospace;
+  letter-spacing:.16em;
 }
 .heroCopy h1{
-  max-width:790px;
-  margin:18px 0 0;
-  font-size:clamp(3.6rem,6vw,6.7rem);
-  line-height:.92;
-  letter-spacing:-.062em;
+  max-width:900px;
+  margin:18px 0 24px;
+  font-size:clamp(48px,5.7vw,86px);
+  line-height:.98;
+  letter-spacing:-.065em;
   font-weight:680;
 }
 .heroCopy h1 span{color:#6f91ff}
 .heroCopy>p{
-  max-width:660px;
-  margin:28px 0 0;
-  color:#a6b3c6;
+  max-width:720px;
+  margin:0;
+  color:#929eb2;
   font-size:16px;
-  line-height:1.72;
+  line-height:1.8;
 }
 .heroActions{
   display:flex;
@@ -127,7 +127,7 @@
 .visibilitySection,
 .gatesSection,
 .changeSection,
-.ownershipSection{padding:92px 0}
+.ownershipSection{padding:110px 0}
 .principles{background:#f7f9fc}
 .lifecycleSection{background:#fff;border-block:1px solid var(--hww-border)}
 .visibilitySection{
@@ -149,20 +149,20 @@
 .sectionHeading h2,
 .visibilityGrid h2,
 .ownershipHead h2{
-  margin:13px 0 0;
-  font-size:clamp(2.5rem,4vw,4.3rem);
-  line-height:1;
-  letter-spacing:-.052em;
-  font-weight:670;
+  margin:14px 0 0;
+  font-size:clamp(38px,4vw,62px);
+  line-height:1.04;
+  letter-spacing:-.055em;
+  font-weight:650;
 }
 .sectionHeading>p,
 .visibilityGrid>div>p,
 .ownershipHead>p{
-  max-width:680px;
+  max-width:690px;
   margin:18px 0 0;
-  color:#6c7a8d;
-  font-size:15px;
-  line-height:1.7;
+  color:#69758a;
+  font-size:16px;
+  line-height:1.75;
 }
 .visibilityGrid>div>p,
 .ownershipHead>p{color:#91a0b5}
@@ -438,11 +438,11 @@
   .gate:nth-child(-n+4){border-bottom:1px solid var(--hww-border)}
 }
 @media (max-width:720px){
-  .hero{padding:82px 0 68px}
-  .heroCopy h1{font-size:clamp(3rem,15vw,4.6rem)}
+  .hero{padding:76px 0 80px}
+  .heroCopy h1{font-size:clamp(42px,12vw,62px)}
   .heroActions{display:grid}
   .heroActions :global(.button){width:100%}
-  .principles,.lifecycleSection,.visibilitySection,.gatesSection,.changeSection,.ownershipSection{padding:68px 0}
+  .principles,.lifecycleSection,.visibilitySection,.gatesSection,.changeSection,.ownershipSection{padding:80px 0}
   .principleGrid,.lifecycleGrid,.ownershipGrid{grid-template-columns:1fr}
   .principleCard,.ownershipCard{min-height:210px}
   .lifecycleCard{min-height:330px}
