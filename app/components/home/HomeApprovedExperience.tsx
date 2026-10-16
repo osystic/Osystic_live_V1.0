@@ -66,99 +66,147 @@ const featuredIndustries = featuredIndustryConfig.flatMap(({ slug, copy }) => {
 export function HomeApprovedExperience() {
   return (
     <div className={styles.page}>
-      <section className={styles.hero} aria-labelledby="approved-home-title">
-        <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={styles.heroGlow} aria-hidden="true" />
+      <section className={styles.heroNext} aria-labelledby="approved-home-title">
+        <div className={styles.heroBackdrop} aria-hidden="true" />
+        <div className={styles.heroGridFine} aria-hidden="true" />
 
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <div className={styles.eyebrow}>AI & SOFTWARE ENGINEERING</div>
-            <h1 id="approved-home-title">
-              Production AI and<br />
-              software systems, <span>built to be owned.</span>
-            </h1>
-            <p>OSYSTIC designs, builds, and deploys AI systems, digital products, and data infrastructure for organizations where reliability, security, and long-term ownership matter.</p>
-            <div className={styles.heroActions}>
-              <BookingButton className={styles.primaryButton}>Book a Technical Call <ArrowRight size={15} /></BookingButton>
-              <Link href="/case-studies" className={styles.secondaryButton}>Explore Our Work <ArrowRight size={15} /></Link>
+        <div className={styles.heroShellNext}>
+          <div className={styles.heroCopyNext}>
+            <div className={styles.heroKickerNext}>
+              <span />
+              ENTERPRISE AI & SOFTWARE ENGINEERING
             </div>
-            <div className={styles.heroProof}><ShieldCheck size={14} /> Engineering-led delivery <span>•</span> No platform lock-in.</div>
+
+            <h1 id="approved-home-title">
+              Production AI and software systems, <span>built to be owned.</span>
+            </h1>
+
+            <p className={styles.heroLeadNext}>
+              OSYSTIC engineers AI systems, digital products, and data platforms for organizations
+              that need production reliability, deployment flexibility, and long-term technical ownership.
+            </p>
+
+            <div className={styles.heroActionsNext}>
+              <BookingButton className={styles.heroPrimaryNext}>
+                Book a Technical Call <ArrowRight size={15} />
+              </BookingButton>
+              <Link href="/case-studies" className={styles.heroSecondaryNext}>
+                Explore Our Work <ArrowRight size={15} />
+              </Link>
+            </div>
+
+            <div className={styles.heroAssuranceNext}>
+              <span><ShieldCheck size={13} /> Engineering-led delivery</span>
+              <i />
+              <span>Explicit handover</span>
+              <i />
+              <span>No platform lock-in</span>
+            </div>
           </div>
 
-          <HeroReveal className={styles.heroVisual}>
-            <div className={styles.heroScene} aria-hidden="true">
-              <div className={styles.networkGlow} />
-              <svg className={styles.networkSvg} viewBox="0 0 620 620">
-                <defs>
-                  <radialGradient id="coreGlow">
-                    <stop offset="0" stopColor="#ffffff" />
-                    <stop offset=".16" stopColor="#9db7ff" />
-                    <stop offset=".48" stopColor="#557cff" stopOpacity=".65" />
-                    <stop offset="1" stopColor="#2955dd" stopOpacity="0" />
-                  </radialGradient>
-                  <linearGradient id="meshStroke" x1="0" x2="1">
-                    <stop offset="0" stopColor="#5576ff" stopOpacity=".28" />
-                    <stop offset=".5" stopColor="#dbe4ff" stopOpacity=".9" />
-                    <stop offset="1" stopColor="#5576ff" stopOpacity=".28" />
-                  </linearGradient>
-                </defs>
-                <g className={styles.orbitGroup}>
-                  <ellipse cx="310" cy="310" rx="210" ry="78" transform="rotate(-18 310 310)" />
-                  <ellipse cx="310" cy="310" rx="212" ry="83" transform="rotate(55 310 310)" />
-                  <ellipse cx="310" cy="310" rx="196" ry="68" transform="rotate(112 310 310)" />
-                </g>
-                <g className={styles.meshGroup}>
-                  <polygon points="310,116 441,165 500,291 447,431 310,505 174,444 119,310 175,170" />
-                  <polygon points="310,148 405,188 470,281 433,392 317,470 205,418 151,311 203,207" />
-                  <polygon points="310,182 390,223 433,310 388,398 307,432 225,391 188,307 232,224" />
-                  <path d="M310 116L310 505M119 310L500 291M175 170L447 431M441 165L174 444M203 207L433 392M151 311L470 281M225 391L390 223" />
-                  <path d="M310 148L433 392L205 418L405 188L151 311L317 470L203 207L470 281L225 391L310 148" />
-                </g>
-                <g className={styles.nodeGroup}>
-                  {[
-                    [310,116,7],[441,165,6],[500,291,8],[447,431,6],[310,505,7],[174,444,6],[119,310,8],[175,170,6],
-                    [310,148,4],[405,188,5],[470,281,4],[433,392,5],[317,470,4],[205,418,5],[151,311,4],[203,207,5],
-                    [310,182,4],[390,223,4],[433,310,5],[388,398,4],[307,432,4],[225,391,5],[188,307,4],[232,224,4]
-                  ].map(([cx,cy,r],i)=><circle key={i} cx={cx} cy={cy} r={r} />)}
-                </g>
-                <circle className={styles.coreHalo} cx="310" cy="310" r="98" />
-                <circle className={styles.coreHaloSoft} cx="310" cy="310" r="144" />
-                <circle className={styles.corePoint} cx="310" cy="310" r="42" fill="url(#coreGlow)" />
-                <circle className={styles.coreWhite} cx="310" cy="310" r="5" />
-              </svg>
-              <div className={styles.particleField}>
-                {Array.from({ length: 34 }).map((_, index) => <i key={index} style={{ "--i": index } as CSSProperties} />)}
+          <HeroReveal className={styles.blueprintWrap}>
+            <div className={styles.blueprintTopbar}>
+              <div>
+                <span className={styles.blueprintDot} />
+                OSYSTIC / SYSTEM_BLUEPRINT
               </div>
+              <strong>PRODUCTION / READY</strong>
             </div>
-            <span className={[styles.heroLabel, styles.labelA].join(" ")}>DATA & APIs</span>
-            <span className={[styles.heroLabel, styles.labelB].join(" ")}>MODELS & AGENTS</span>
-            <span className={[styles.heroLabel, styles.labelC].join(" ")}>BUSINESS LOGIC</span>
-            <span className={[styles.heroLabel, styles.labelD].join(" ")}>DEPLOY ANYWHERE</span>
+
+            <div className={styles.blueprintBody}>
+              <div className={styles.blueprintFlow}>
+                <div className={styles.blueprintLayer}>
+                  <span className={styles.blueprintNumber}>01</span>
+                  <div className={styles.blueprintIcon}><Database size={17} strokeWidth={1.45} /></div>
+                  <div>
+                    <small>DATA & CONTEXT</small>
+                    <strong>Operational inputs</strong>
+                    <p>APIs, applications, documents, events, and business data.</p>
+                  </div>
+                  <b>CONNECTED</b>
+                </div>
+                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
+
+                <div className={styles.blueprintLayer}>
+                  <span className={styles.blueprintNumber}>02</span>
+                  <div className={styles.blueprintIcon}><BrainCircuit size={17} strokeWidth={1.45} /></div>
+                  <div>
+                    <small>INTELLIGENCE</small>
+                    <strong>Models & agents</strong>
+                    <p>Reasoning, retrieval, prediction, orchestration, and automation.</p>
+                  </div>
+                  <b>CONTROLLED</b>
+                </div>
+                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
+
+                <div className={styles.blueprintLayer}>
+                  <span className={styles.blueprintNumber}>03</span>
+                  <div className={styles.blueprintIcon}><Code2 size={17} strokeWidth={1.45} /></div>
+                  <div>
+                    <small>PRODUCT LAYER</small>
+                    <strong>Logic & experience</strong>
+                    <p>Business rules, workflows, interfaces, services, and integrations.</p>
+                  </div>
+                  <b>REVIEWABLE</b>
+                </div>
+                <div className={styles.blueprintConnector} aria-hidden="true"><i /></div>
+
+                <div className={styles.blueprintLayer}>
+                  <span className={styles.blueprintNumber}>04</span>
+                  <div className={styles.blueprintIcon}><CloudCog size={17} strokeWidth={1.45} /></div>
+                  <div>
+                    <small>RUNTIME</small>
+                    <strong>Deploy where required</strong>
+                    <p>Cloud, on-premise, hybrid, and edge environments.</p>
+                  </div>
+                  <b>OPERABLE</b>
+                </div>
+              </div>
+
+              <aside className={styles.blueprintControls}>
+                <div className={styles.controlsHead}>
+                  <span>DELIVERY CONTROLS</span>
+                  <i />
+                </div>
+                <div>
+                  <span>Security by design</span>
+                  <strong>ACTIVE</strong>
+                </div>
+                <div>
+                  <span>Observability</span>
+                  <strong>DEFINED</strong>
+                </div>
+                <div>
+                  <span>Source handover</span>
+                  <strong>INCLUDED</strong>
+                </div>
+                <div>
+                  <span>Deployment model</span>
+                  <strong>FLEXIBLE</strong>
+                </div>
+                <div className={styles.controlsFooter}>
+                  <small>OWNERSHIP STATE</small>
+                  <b>CLIENT-CONTROLLED</b>
+                </div>
+              </aside>
+            </div>
           </HeroReveal>
         </div>
 
-        <div className={styles.heroTrace} aria-hidden="true"><span /><i /></div>
-
-        <div className={styles.deliveryBand}>
-          <div className={styles.deliveryIntro}>
-            <div className={styles.eyebrow}>FROM INTELLIGENCE TO DELIVERY</div>
-            <h2>The system moves. The engineering discipline <span>stays connected.</span></h2>
-          </div>
-          <div className={styles.deliveryCards}>
-            {delivery.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article
-                  className={styles.deliveryCard}
-                  key={item.title}
-                >
-                  <div className={styles.deliveryTop}><span>{item.number}</span><Icon size={24} strokeWidth={1.5} /></div>
-                  <h3>{item.title}</h3>
+        <div className={styles.heroPrinciples}>
+          {delivery.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div className={styles.heroPrinciple} key={item.title}>
+                <span>{item.number}</span>
+                <Icon size={18} strokeWidth={1.4} />
+                <div>
+                  <strong>{item.title}</strong>
                   <p>{item.copy}</p>
-                </article>
-              );
-            })}
-          </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
