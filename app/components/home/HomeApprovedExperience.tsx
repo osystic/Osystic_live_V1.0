@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
   ArrowRight, BrainCircuit, CloudCog, Code2, Database, LockKeyhole,
-  Layers3, ShieldCheck, Search, PenTool, Boxes, Rocket, Bot,
+  Layers3, ShieldCheck, Search, Boxes, Rocket, Bot,
 } from "lucide-react";
 import { BookingButton } from "../CalBooking";
 import { INDUSTRIES } from "../../_data/industries-data";
@@ -33,10 +33,12 @@ const capabilities = [
 ] as const;
 
 const workflow = [
-  { number: "01", title: "Discover", copy: "Understand your needs and define objectives.", icon: Search },
-  { number: "02", title: "Design", copy: "Architect the solution and plan implementation.", icon: PenTool },
-  { number: "03", title: "Build", copy: "Develop and iterate with continuous feedback.", icon: Boxes },
-  { number: "04", title: "Deploy", copy: "Launch, validate, and support adoption.", icon: Rocket },
+  { number: "01", title: "Discover & Define", copy: "Clarify objectives, constraints, risks, and acceptance criteria.", icon: Search },
+  { number: "02", title: "Architect & Plan", copy: "Define system boundaries, delivery stages, and review points.", icon: Layers3 },
+  { number: "03", title: "Build", copy: "Ship working increments with visible decisions and feedback.", icon: Boxes },
+  { number: "04", title: "Validate", copy: "Test behavior, edge cases, security, and operational readiness.", icon: ShieldCheck },
+  { number: "05", title: "Release", copy: "Move through UAT and production approval with explicit state.", icon: Rocket },
+  { number: "06", title: "Handover", copy: "Transfer source, context, access, and operational ownership.", icon: LockKeyhole },
 ] as const;
 
 
@@ -217,9 +219,9 @@ export function HomeApprovedExperience() {
       <section className={[styles.section, styles.workflowSection].join(" ")}>
         <div className={styles.sectionShell}>
           <div className={styles.centerHead}>
-            <div className={styles.blueEyebrow}>OUR PROCESS</div>
-            <h2>Our AI Development Workflow</h2>
-            <p>A proven methodology from concept to deployment, ensuring successful AI implementation.</p>
+            <div className={styles.blueEyebrow}>HOW WE WORK</div>
+            <h2>Engineering delivery with explicit checkpoints.</h2>
+            <p>Scope, technical decisions, acceptance criteria, and ownership remain visible throughout the engagement.</p>
           </div>
           <div className={styles.workflowTrack}>
             {workflow.map((item) => {
@@ -236,6 +238,9 @@ export function HomeApprovedExperience() {
               );
             })}
           </div>
+          <Link href="/how-we-work" className={styles.workflowLink}>
+            Explore how we work <ArrowRight size={14} />
+          </Link>
         </div>
       </section>
 

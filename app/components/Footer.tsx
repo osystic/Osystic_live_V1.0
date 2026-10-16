@@ -16,6 +16,7 @@ const footerGroups = [
     title: "Company",
     items: [
       { label: "About Us", href: "/about" },
+      { label: "How We Work", href: "/how-we-work" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
