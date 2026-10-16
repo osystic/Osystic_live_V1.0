@@ -14,3 +14,4 @@ supabase/*.sql
 
 # Local dev database
 local.dev.db*
+.env.prod

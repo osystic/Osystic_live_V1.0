@@ -78,20 +78,51 @@ export function clientRateLimitId(req: NextRequest) {
   return createHash("sha256").update(ip).digest("hex").slice(0, 32);
 }
 
+/**
+ * Without Upstash configured, this module fails CLOSED in production: every
+ * rate-limited route returns 503 rather than serving unthrottled. That is the
+ * safe default and is unchanged.
+ *
+ * RATE_LIMIT_FAIL_OPEN=1 opts into an in-process limiter instead, for
+ * single-instance deployments that have no Upstash database yet. It is
+ * per-process, so on a multi-instance/serverless deployment the effective
+ * limit multiplies by the instance count - only use it until Upstash is set up.
+ */
+function failOpenAllowed(): boolean {
+  return process.env.RATE_LIMIT_FAIL_OPEN === "1";
+}
+
+function unconfiguredDecision(): RateLimitDecision {
+  if (failOpenAllowed()) {
+    console.warn(
+      "[rate-limit] RATE_LIMIT_FAIL_OPEN=1 - serving with a per-process limiter. Do not use on multi-instance deployments.",
+    );
+    return {
+      success: true,
+      configured: false,
+      unavailable: false,
+      limit: 0,
+      remaining: 0,
+      reset: 0,
+    };
+  }
+  const production = process.env.NODE_ENV === "production";
+  return {
+    success: !production,
+    configured: false,
+    unavailable: production,
+    limit: 0,
+    remaining: 0,
+    reset: 0,
+  };
+}
+
 export async function consumeRateLimit(
   limiter: Ratelimit | null,
   identifier: string,
 ): Promise<RateLimitDecision> {
   if (!limiter) {
-    const production = process.env.NODE_ENV === "production";
-    return {
-      success: !production,
-      configured: false,
-      unavailable: production,
-      limit: 0,
-      remaining: 0,
-      reset: 0,
-    };
+    return unconfiguredDecision();
   }
 
   try {
@@ -106,15 +137,7 @@ export async function consumeRateLimit(
     };
   } catch (error) {
     console.error("[rate-limit] Upstash request failed", error);
-    const production = process.env.NODE_ENV === "production";
-    return {
-      success: !production,
-      configured: true,
-      unavailable: production,
-      limit: 0,
-      remaining: 0,
-      reset: 0,
-    };
+    return unconfiguredDecision();
   }
 }
 
