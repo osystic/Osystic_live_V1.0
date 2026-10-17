@@ -5,9 +5,16 @@ import { ArrowRight, Landmark, Sparkles, Users } from "lucide-react";
 
 const modules = [
   {
+    title: "Finance Management System",
+    description: "Accounting, invoicing, payroll, budgets, tax and financial reporting.",
+    href: "/dashboard",
+    icon: Landmark,
+    accent: "bg-blue-50 text-blue-600 border-blue-100",
+  },
+  {
     title: "EMS",
     description: "Employee records, payroll runs and people operations.",
-    href: "/admin/finance/payroll",
+    href: "/dashboard/payroll",
     icon: Users,
     accent: "bg-emerald-50 text-emerald-600 border-emerald-100",
   },
@@ -17,13 +24,6 @@ const modules = [
     href: "/admin/case-studies",
     icon: Sparkles,
     accent: "bg-violet-50 text-violet-600 border-violet-100",
-  },
-  {
-    title: "Finance Management System",
-    description: "Accounting, invoicing, budgets, reporting and financial dashboards.",
-    href: "/admin/dashboard",
-    icon: Landmark,
-    accent: "bg-blue-50 text-blue-600 border-blue-100",
   },
 ];
 

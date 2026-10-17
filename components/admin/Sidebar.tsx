@@ -4,12 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard, BookOpen, FileText, Landmark, Calculator,
-  Receipt, CreditCard, Wallet, Building2, PiggyBank, BarChart3,
-  Users, Settings, ChevronDown, ChevronRight, Menu, X,
-  Newspaper, GraduationCap, TrendingUp, Banknote, HandCoins,
-  ClipboardList, FileCheck, CircleDollarSign, ArrowLeftRight,
-  Scale, Tags, FolderOpen, LayoutGrid, Sparkles,
+  LayoutDashboard, Landmark, Settings, ChevronDown, ChevronRight,
+  Menu, X, Newspaper, GraduationCap, LayoutGrid, Sparkles,
 } from "lucide-react";
 
 interface NavItem {
@@ -32,62 +28,9 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    title: "Accounting",
+    title: "Finance System",
     items: [
-      { label: "Chart of Accounts", href: "/admin/finance/chart-of-accounts", icon: <BookOpen size={18} /> },
-      { label: "Journal Entries", href: "/admin/finance/journal-entries", icon: <FileText size={18} /> },
-      { label: "General Ledger", href: "/admin/finance/general-ledger", icon: <Landmark size={18} /> },
-      { label: "Trial Balance", href: "/admin/finance/trial-balance", icon: <Calculator size={18} /> },
-      { label: "Fiscal Calendar", href: "/admin/finance/fiscal-calendar", icon: <ClipboardList size={18} /> },
-    ],
-  },
-  {
-    title: "Receivables",
-    items: [
-      { label: "Invoices", href: "/admin/finance/invoices", icon: <Receipt size={18} /> },
-      { label: "Payments", href: "/admin/finance/payments", icon: <CreditCard size={18} /> },
-      { label: "Credit Notes", href: "/admin/finance/credit-notes", icon: <FileCheck size={18} /> },
-    ],
-  },
-  {
-    title: "Payables",
-    items: [
-      { label: "Vendors", href: "/admin/finance/vendors", icon: <Building2 size={18} /> },
-      { label: "Vendor Bills", href: "/admin/finance/vendor-bills", icon: <ClipboardList size={18} /> },
-      { label: "Vendor Payments", href: "/admin/finance/vendor-payments", icon: <Wallet size={18} /> },
-    ],
-  },
-  {
-    title: "Operations",
-    items: [
-      { label: "Banking", href: "/admin/finance/banking", icon: <Landmark size={18} /> },
-      { label: "Expenses", href: "/admin/finance/expenses", icon: <CircleDollarSign size={18} /> },
-      { label: "Income", href: "/admin/finance/income", icon: <TrendingUp size={18} /> },
-      { label: "Transfers", href: "/admin/finance/transfers", icon: <ArrowLeftRight size={18} /> },
-    ],
-  },
-  {
-    title: "People & Assets",
-    items: [
-      { label: "Payroll", href: "/admin/finance/payroll", icon: <Banknote size={18} /> },
-      { label: "Fixed Assets", href: "/admin/finance/fixed-assets", icon: <PiggyBank size={18} /> },
-      { label: "Contractors", href: "/admin/finance/contractors", icon: <HandCoins size={18} /> },
-      { label: "Commissions", href: "/admin/finance/commissions", icon: <Tags size={18} /> },
-    ],
-  },
-  {
-    title: "Planning",
-    items: [
-      { label: "Budgets", href: "/admin/finance/budgets", icon: <BarChart3 size={18} /> },
-      { label: "Clients", href: "/admin/finance/clients", icon: <Users size={18} /> },
-      { label: "Subscriptions", href: "/admin/finance/subscriptions", icon: <FolderOpen size={18} /> },
-    ],
-  },
-  {
-    title: "Compliance",
-    items: [
-      { label: "Tax", href: "/admin/finance/tax", icon: <Scale size={18} /> },
-      { label: "Reports", href: "/admin/finance/reports", icon: <BarChart3 size={18} /> },
+      { label: "Open Finance", href: "/dashboard", icon: <Landmark size={18} /> },
     ],
   },
   {
